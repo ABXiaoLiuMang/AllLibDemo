@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item type="id" name="mRecyclerView" />
+    <item type="id" name="titleBar" />
+    <item type="id" name="tvRefresh" />
+
+</resources>

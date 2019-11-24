@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.KeyValueActivity">
+
+    <include layout="@layout/toolbar_style_layout"/>
+
+
+    <com.dale.framework.view.ValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:ketTextColor="@color/colorPrimary"
+        app:keyImg="@mipmap/bank_icon_abc"
+        app:keyImgSizes="@dimen/dp_25"
+        app:keyText="标题"
+        app:valueHintColor="@color/cardview_dark_background"
+        app:valueHintText="@string/srl_component_falsify"
+        app:valueImg="@drawable/ic_right_arraw"
+        app:valueText="吱吱吱" />
+
+    <com.dale.framework.view.ValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:keyImg="@mipmap/bank_icon_abc"
+        app:keyText="标题"
+        app:valueHintColor="@color/cardview_dark_background"
+        app:valueHintText="@string/srl_component_falsify"
+        app:valueImg="@drawable/ic_right_arraw"
+        app:valueText="吱吱吱" />
+
+    <com.dale.framework.view.ValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:keyImg="@mipmap/bank_icon_abc"
+        app:keyText="标题"
+        app:valueHintText="@string/srl_component_falsify"
+        app:valueText="吱吱吱" />
+
+    <com.dale.framework.view.ValueView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:keyImg="@mipmap/bank_icon_abc"
+        app:keyText="标题">
+
+        <ImageView
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/dp_15"
+            android:src="@drawable/shape_tan_bg" />
+
+    </com.dale.framework.view.ValueView>
+
+</LinearLayout>

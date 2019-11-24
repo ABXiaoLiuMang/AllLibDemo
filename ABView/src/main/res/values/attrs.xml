@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="DashView">
+        <attr name="dashWidth" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="lineColor" format="color" />
+        <attr name="dashOrientation" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CornerLabelView">
+        <attr name="side_length" format="dimension" />
+        <attr name="margin_lean_side" format="dimension" />
+        <attr name="bg_color" format="color" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <attr name="textCornerLabel" format="string" />
+        <attr name="position">
+            <enum name="right_top" value="0" />
+            <enum name="right_bottom" value="1" />
+            <enum name="left_bottom" value="2" />
+            <enum name="left_top" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="LabelTextView">
+        <attr name="backgroundColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="numColor" format="color" />
+        <attr name="textLabel" format="string" />
+        <attr name="num" format="string" />
+        <attr name="numSize" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="labelTopPadding" format="dimension" />
+        <attr name="labelCenterPadding" format="dimension" />
+        <attr name="labelBottomPadding" format="dimension" />
+        <attr name="numStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+        <attr name="textStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+        <attr name="direction">
+            <enum name="leftTop" value="-45" />
+            <enum name="rightTop" value="45" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="autoWrap">
+        <attr name="horizontalSpace" format="dimension" />
+        <attr name="verticalSpace" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="slideswitch">
+        <attr name="themeColor" format="color" />
+        <attr name="isOpen" format="boolean" />
+        <attr name="shape">
+            <enum name="rect" value="1" />
+            <enum name="circle" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!--自定义隐藏/显示密码的的EditText-->
+    <declare-styleable name="PassWordEditText">
+        <attr name="hideDrawable" format="reference"/>
+        <attr name="showDrawable" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="XBanner">
+        <attr name="isAutoPlay" format="boolean" />
+        <attr name="isHandLoop" format="boolean" />
+        <attr name="AutoPlayTime" format="integer|reference" />
+        <attr name="pointNormal" format="reference" />
+        <attr name="pointSelect" format="reference" />
+        <attr name="indicatorDrawable" format="reference" />
+        <attr name="pointsVisibility" format="boolean" />
+        <attr name="isTipsMarquee" format="boolean" />
+        <attr name="pointsPosition" format="enum">
+            <enum name="LEFT" value="0" />
+            <enum name="CENTER" value="1" />
+            <enum name="RIGHT" value="2" />
+        </attr>
+        <attr name="pointsContainerBackground" format="reference|color" />
+        <attr name="pointContainerPosition" format="enum">
+            <enum name="TOP" value="10" />
+            <enum name="BOTTOM" value="12" />
+        </attr>
+        <!-- 指示点容器左右内间距 -->
+        <attr name="pointContainerLeftRightPadding" format="dimension" />
+        <!-- 指示点上下内间距 -->
+        <attr name="pointTopBottomPadding" format="dimension" />
+        <!-- 指示点左右内间距 -->
+        <attr name="pointLeftRightPadding" format="dimension" />
+        <!-- 提示文案的文字颜色 -->
+        <attr name="tipTextColor" format="reference|color" />
+        <!-- 提示文案的文字大小 -->
+        <attr name="tipTextSize" format="dimension" />
+        <!--是否是数字指示器-->
+        <attr name="isShowNumberIndicator" format="boolean" />
+        <!-- 数字指示器背景 -->
+        <attr name="numberIndicatorBacgroud" format="reference" />
+        <!-- 当只有一页数据时是否显示指示器，默认值为false -->
+        <attr name="isShowIndicatorOnlyOne" format="boolean" />
+        <!-- 图片切换速度 -->
+        <attr name="pageChangeDuration" format="integer" />
+        <!--图片轮播框架展占位图-->
+        <attr name="placeholderDrawable" format="reference" />
+        <!--是否开启一屏显示多个模式 默认不开启-->
+        <attr name="isClipChildrenMode" format="boolean" />
+        <!--一屏显示多个左右间距-->
+        <attr name="clipChildrenLeftRightMargin" format="dimension" />
+        <!--一屏显示多个上下间距-->
+        <attr name="clipChildrenTopBottomMargin" format="dimension" />
+        <!--设置viewpager间距-->
+        <attr name="viewpagerMargin" format="dimension" />
+        <!--少于三张是否支持一屏多显模式-->
+        <attr name="isClipChildrenModeLessThree" format="boolean" />
+        <!--是否展示提示文案-->
+        <attr name="isShowTips" format="boolean" />
+        <!--banner轮播区域底部margin-->
+        <attr name="bannerBottomMargin" format="dimension" />
+        <!--设置viewPager ClipChildren-->
+        <attr name="viewPagerClipChildren" format="boolean" />
+        <!-- 占位图缩放模式 -->
+        <attr name="android:scaleType" />
+    </declare-styleable>
+
+    <declare-styleable name="SmoothCheckBox">
+        <attr name="duration" format="integer"/>
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="color_tick" format="color"/>
+        <attr name="color_checked" format="color"/>
+        <attr name="color_unchecked" format="color"/>
+        <attr name="color_unchecked_stroke" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ReplyBgView">
+        <attr name="Replygravity">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="top" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="replybv_color" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="offset" format="dimension" />
+        <attr name="trgWidth" format="dimension" />
+        <attr name="trgHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentView">
+        <attr name="segmentv_titles" format="string" />
+        <attr name="segmentv_colorMain" format="color" />
+        <attr name="segmentv_colorSub" format="color" />
+        <attr name="segmentv_textSize" format="dimension" />
+        <attr name="segmentv_radius" format="dimension" />
+        <attr name="segmentv_divideWidth" format="dimension" />
+        <attr name="segmentv_borderWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowLayout">
+        <attr name="shadowed" format="boolean" />
+        <attr name="shadowDistance" format="dimension" />
+        <attr name="shadowAngle" format="integer" />
+        <attr name="shadowRadius" format="dimension" />
+        <attr name="shadowColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ScratchCard">
+        <attr name="CardText" format="string" />
+        <attr name="CardTextColor" format="color" />
+        <attr name="CardTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CouponStyle">
+        <attr name="vertical_style">
+            <enum name="none" value="0"/>
+            <enum name="circle" value="1" />
+            <enum name="triangle" value="2"/>
+        </attr>
+        <attr name="horizontal_style">
+            <enum name="none" value="0"/>
+            <enum name="circle" value="1" />
+            <enum name="triangle" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SplashTextView">
+        <attr name="millisText" format="integer|reference" />
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dale.libdemo"
+    tools:ignore="UniquePermission">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!-- iBeancon功能所需权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 个推3.0电子围栏功能所需权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
+
+    <application
+        android:name="com.dale.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+
+
+        <activity android:name="com.dale.framework_demo.ui.KeyValueActivity" />
+        <activity android:name="com.dale.framework_demo.ui.ScrollActivity" />
+        <activity android:name="com.dale.framework_demo.ui.TabMYBaseActivity" />
+
+        <activity android:name="com.dale.framework_demo.MainActivity" />
+
+        <activity android:name="com.dale.DemoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name="com.dale.push_demo.PushActivity" />
+
+        <activity android:name="com.dale.location_demo.LocationActivity" />
+
+        <activity android:name="com.dale.net_demo.NetActivity" />
+
+
+        <activity android:name="com.dale.zxing_demo.ZxingActivity" />
+        <activity android:name="com.dale.zxing_demo.TestScanActivity" />
+        <activity android:name="com.dale.zxing_demo.MytestActivity" />
+        <activity android:name="com.dale.zxing_demo.TestGeneratectivity" />
+
+
+        <activity android:name="com.dale.image_demo.lzy.ImagePickerActivity" />
+        <activity android:name="com.dale.image_demo.lzy.wxdemo.WxDemoActivity" />
+        <activity android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity" android:theme="@style/ImagePickerThemeFullScreen"/>
+
+
+        <activity android:name="com.dale.popup_demo.PopupDemoActivity" />
+        <activity android:name="com.dale.popup_demo.PopupMainActivity" />
+
+        <activity android:name="com.dale.agentweb_demo.AgentMainActivity" />
+
+
+        <!--推送必须start-->
+        <provider
+            android:name="cn.jpush.android.service.DataProvider"
+            android:authorities="${applicationId}.DataProvider"
+            android:exported="false"
+            android:process=":pushcore"
+            tools:replace="android:authorities" />
+
+        <provider
+            android:name="cn.jpush.android.service.DownloadProvider"
+            android:authorities="${applicationId}.DownloadProvider"
+            android:exported="true"
+            tools:replace="android:authorities" />
+
+        <receiver
+            android:name="com.dale.push_demo.MyPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+
+        <!--推送必须end-->
+
+        <!--百度地图start-->
+        <meta-data
+            android:value="com.baidu.lbsapi.API_KEY"
+            android:name="bzpOsFbglaLttH4FMdG4brvPrNnPGChq"/>
+        <!--百度地图end-->
+
+    </application>
+
+</manifest>

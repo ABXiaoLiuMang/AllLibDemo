@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+
+if ("true" == pushLib){
+    apply plugin: 'com.novoda.bintray-release'
+}
+
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+        disable 'PrivateResource'
+    }
+
+    defaultConfig {
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    //系统库
+    compileOnly rootDependencies["appcompat"]
+    compileOnly project(path: ':utilslib')
+
+    api 'cn.jiguang.sdk:jpush:3.3.6'  // 此处以JPush 3.3.2 版本为例。
+    api 'cn.jiguang.sdk:jcore:2.1.4'  // 此处以JCore 2.0.1 版本为例。
+}
+
+
+if ("true" == pushLib){
+    publish {
+        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+        groupId = 'com.dale.push'  //jcenter上的路径
+        artifactId = 'ABPush'  //项目名称
+        publishVersion = '2.0.0'    //版本号
+        desc = 'ABPush'
+        website = 'https://github.com/ABXiaoLiuMang/ABPush'
+        licences = 'Apache-2.0'
+    }
+}

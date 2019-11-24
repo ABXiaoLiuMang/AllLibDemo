@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_topbar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="50dp"
+        android:gravity="center"
+        android:text="@string/pickerview_cancel"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0.0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/pickerview_topbar_title"
+        android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+    <TextView
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="50dp"
+        android:gravity="center"
+        android:text="@string/pickerview_submit"
+        android:textSize="17sp" />
+</LinearLayout>

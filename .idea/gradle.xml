@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ABBaseAdapter" />
+            <option value="$PROJECT_DIR$/ABFrameWork" />
+            <option value="$PROJECT_DIR$/ABLocation" />
+            <option value="$PROJECT_DIR$/ABNetLib" />
+            <option value="$PROJECT_DIR$/ABPush" />
+            <option value="$PROJECT_DIR$/ABRefreshView" />
+            <option value="$PROJECT_DIR$/ABView" />
+            <option value="$PROJECT_DIR$/ABZxing" />
+            <option value="$PROJECT_DIR$/PickerviewLib" />
+            <option value="$PROJECT_DIR$/PopupLib" />
+            <option value="$PROJECT_DIR$/XWebView" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/imagelib" />
+            <option value="$PROJECT_DIR$/utilslib" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
