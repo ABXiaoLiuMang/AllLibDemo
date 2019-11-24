@@ -74,7 +74,7 @@ if ("true" == imageLib){
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
         groupId = 'com.dale.image'  //jcenter上的路径
         artifactId = 'ABImagePicker'  //项目名称
-        publishVersion = '2.0.0'    //版本号
+        publishVersion = '2.0.0-beta01'    //版本号
         desc = 'ABImagePicker'
         website = 'https://github.com/ABXiaoLiuMang/ImagePicker'
         licences = 'Apache-2.0'

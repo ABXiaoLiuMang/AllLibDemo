@@ -69,7 +69,7 @@ if ("true" == xpopupLib){
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
         groupId = 'com.dale.xpopup'  //jcenter上的路径
         artifactId = 'ABXpopup'  //项目名称
-        publishVersion = '2.0.0'    //版本号
+        publishVersion = '2.0.0-beta01'    //版本号
         desc = 'ABXpopup'
         website = 'https://github.com/ABXiaoLiuMang/ABXpopup'
         licences = 'Apache-2.0'
