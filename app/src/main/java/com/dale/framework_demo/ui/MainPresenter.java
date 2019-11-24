@@ -21,32 +21,32 @@ public class MainPresenter extends BasePresenter<MainContract.IView> implements 
     public void onCreate(){
         super.onCreate();
 //        initRequest();
-        LogUtils.d("Dream","onCreate MainPresenter");
+        LogUtils.d("onCreate MainPresenter");
     }
 
     public void onStart(){
         super.onStart();
-        LogUtils.d("Dream","onStart MainPresenter");
+        LogUtils.d("onStart MainPresenter");
     }
 
     public void onResume(){
         super.onResume();
-        LogUtils.d("Dream","onResume MainPresenter");
+        LogUtils.d("onResume MainPresenter");
     }
 
     public void onPause(){
         super.onPause();
-        LogUtils.d("Dream","onPause MainPresenter");
+        LogUtils.d("onPause MainPresenter");
     }
 
     public void onStop(){
         super.onStop();
-        LogUtils.d("Dream","onStop MainPresenter");
+        LogUtils.d("onStop MainPresenter");
     }
 
     public void onDestroy(){
         super.onDestroy();
-        LogUtils.d("Dream","onDestroy MainPresenter");
+        LogUtils.d("onDestroy MainPresenter");
     }
 
 

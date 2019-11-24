@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.core.content.FileProvider;
 
 import com.dale.utils.AppException;
+import com.dale.utils.LogUtils;
 import com.dale.utils.SPUtils;
 import com.dale.utils.TopActivityManager;
 

@@ -14,6 +14,7 @@ import com.dale.location_demo.MyOnLocationListener;
 import com.dale.net.NetSdk;
 import com.dale.net.manager.NetConfig;
 import com.dale.push.PushSdk;
+import com.dale.utils.LogUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -49,10 +50,13 @@ public class App extends ABApplication {
     public void onCreate() {
         super.onCreate();
 
+        LogUtils.isDebug(true);
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
+
 
         LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
 
@@ -79,20 +83,6 @@ public class App extends ABApplication {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-
-    //图标选择框架用到
-    public static DisplayImageOptions imageLoaderOptions = new DisplayImageOptions.Builder()//
-            .showImageOnLoading(R.drawable.ic_default_image)         //设置图片在下载期间显示的图片
-            .showImageForEmptyUri(R.drawable.ic_default_image)       //设置图片Uri为空或是错误的时候显示的图片
-            .showImageOnFail(R.drawable.ic_default_image)            //设置图片加载/解码过程中错误时候显示的图片
-            .cacheInMemory(true)                                //设置下载的图片是否缓存在内存中
-            .cacheOnDisk(true)                                  //设置下载的图片是否缓存在SD卡中
-            .build();                                           //构建完成
-
-    public static ImageOptions xUtilsOptions = new ImageOptions.Builder()//
-            .setIgnoreGif(false)                                //是否忽略GIF格式的图片
-            .setImageScaleType(ImageView.ScaleType.FIT_CENTER)  //缩放模式
-            .setLoadingDrawableId(R.drawable.ic_default_image)       //下载中显示的图片
-            .setFailureDrawableId(R.drawable.ic_default_image)       //下载失败显示的图片
-            .build();                                           //得到ImageOptions对象
 }
+
+

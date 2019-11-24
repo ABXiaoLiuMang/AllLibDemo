@@ -2,14 +2,9 @@ package com.dale.utils;
 
 import android.content.Context;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,9 +14,6 @@ import java.util.Date;
  * 应用程序异常类：用于捕获异常和提示错误信息
  */
 public class AppException extends Exception implements UncaughtExceptionHandler {
-
-    private static String strLogPath = "/log/dale/";//异常日志保存路径
-    private static String errorlog = "errorlog.txt";
 
     /**
      * 系统默认的UncaughtException处理类
@@ -33,60 +25,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         mContext = ctx;
         this.mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
-
-    /**
-     * 保存异常日志
-     *
-     * @param excp
-     */
-    public void saveErrorLog(Exception excp) {
-
-        String savePath = "";
-        String logFilePath = "";
-        FileWriter fw = null;
-        PrintWriter pw = null;
-        try {
-            //判断是否挂载了SD卡
-
-            if (SDCardUtils.isSDCardEnable()) {
-                savePath = SDCardUtils.getSDCardPath() + strLogPath;
-                File file = new File(savePath);
-
-                if (!file.exists()) {
-                    file.mkdirs();
-                }
-                logFilePath = savePath + errorlog;
-            }
-            //没有挂载SD卡，无法写文件
-            if (logFilePath == "") {
-                return;
-            }
-            File logFile = new File(logFilePath);
-            if (!logFile.exists()) {
-                logFile.createNewFile();
-            }
-            fw = new FileWriter(logFile, true);
-            pw = new PrintWriter(fw);
-            pw.println("<<<<<" + "Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ">>>");
-            excp.printStackTrace(pw);
-            pw.close();
-            fw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (pw != null) {
-                pw.close();
-            }
-            if (fw != null) {
-                try {
-                    fw.close();
-                } catch (IOException e) {
-                }
-            }
-        }
-
-    }
-
     /**
      * 获取APP异常崩溃处理对象
      *
@@ -123,13 +61,8 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
             return false;
         }
 
-        final String crashReport = getCrashReport(mContext, ex);
-        Log.e("ErrTag","->" + crashReport);
-//        final String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + strLogPath;
-//        String fileName = android.os.Build.MODEL + "_" + android.os.Build.VERSION.RELEASE
-//                + ".txt";
-//        writeFile(savePath + fileName, crashReport, false);
-
+        final String crashReport = getCrashReport(ex);
+        Log.e("Dream","程序闪退:->" + crashReport);
         //显示异常信息&发送报告
         new Thread() {
             public void run() {
@@ -149,9 +82,9 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      * @param ex
      * @return
      */
-    private String getCrashReport(Context context, Throwable ex) {
+    private String getCrashReport(Throwable ex) {
         StringBuffer exceptionStr = new StringBuffer();
-        exceptionStr.append("<<<<<" + "Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ">>>");
+        exceptionStr.append("Date: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         exceptionStr.append("Android: " + android.os.Build.VERSION.RELEASE + "(" + android.os.Build.MODEL + ")\n");
         exceptionStr.append("Exception: " + ex + "\n");
         StackTraceElement[] elements = ex.getStackTrace();
@@ -160,63 +93,4 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         }
         return exceptionStr.toString();
     }
-    /**
-    *
-    * @param filePath
-    *  Environment.getExternalStorageDirectory().getAbsolutePath()+/filename1/filename2/aaa.txt
-    * @param content
-    * @param append
-    * @return
-    */
-   public static boolean writeFile(String filePath, String content, boolean append) {
-       if (TextUtils.isEmpty(content)) {
-           return false;
-       }
-
-       FileWriter fileWriter = null;
-       try {
-           makeDirs(filePath);
-           fileWriter = new FileWriter(filePath, append);
-           fileWriter.write(content);
-           fileWriter.close();
-           return true;
-       }
-       catch (IOException e) {
-           throw new RuntimeException("IOException occurred. ", e);
-       } finally {
-           if (fileWriter != null) {
-               try {
-                   fileWriter.close();
-               } catch (IOException e) {
-                   throw new RuntimeException("IOException occurred. ", e);
-               }
-           }
-       }
-   }
-   /**
-    * 创建目录
-    * @param filePath
-    * @return
-    */
-   public static boolean makeDirs(String filePath) {
-       String folderName = getFolderName(filePath);
-       if (TextUtils.isEmpty(folderName)) {
-           return false;
-       }
-
-       File folder = new File(folderName);
-       return (folder.exists() && folder.isDirectory()) ? true : folder.mkdirs();
-   }
-   /**
-    * 根据文件夹路径名字
-    * @param filePath
-    * @return
-    */
-   public static String getFolderName(String filePath) {
-       if (TextUtils.isEmpty(filePath)) {
-           return filePath;
-       }
-       int filePosi = filePath.lastIndexOf(File.separator);
-       return (filePosi == -1) ? "" : filePath.substring(0, filePosi);
-   }
 }
