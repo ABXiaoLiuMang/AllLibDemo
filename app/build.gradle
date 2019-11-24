@@ -131,6 +131,8 @@ dependencies {
     implementation project(path: ':ABFrameWork')
 
 
+
+
     //图片选择框架用到的四个
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'org.xutils:xutils:3.3.36'
@@ -140,4 +142,21 @@ dependencies {
     implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     implementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
     implementation 'com.lxj:statelayout:1.0.5'
+
+
+
+//    implementation rootDependencies["AB_Adapter"]
+//    implementation rootDependencies["AB_FrameWork"]
+//    implementation rootDependencies["AB_Location"]
+//    implementation rootDependencies["AB_NetX"]
+//    implementation rootDependencies["AB_Push"]
+//    implementation rootDependencies["AB_RefreshView"]
+//    implementation rootDependencies["AB_View"]
+//    implementation rootDependencies["AB_Zxing"]
+//    implementation rootDependencies["AB_ImagePicker"]
+//    implementation rootDependencies["AB_Pickerview"]
+//    implementation rootDependencies["AB_Xpopup"]
+//    implementation rootDependencies["AB_UtilsX"]
+//    implementation rootDependencies["AB_WebView"]
+
 }
