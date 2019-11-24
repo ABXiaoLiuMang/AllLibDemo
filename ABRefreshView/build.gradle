@@ -51,11 +51,11 @@ dependencies {
 if ("true" == refreshLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.scwang.smartrefresh'  //jcenter上的路径
-        artifactId = 'ABRefreshViewX'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABRefreshViewX'
-        website = 'https://github.com/ABXiaoLiuMang/RefreshLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_RefreshView'  //项目名称
+        publishVersion = refreshLib_version    //版本号
+        desc = 'AB_RefreshView'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABRefreshView'
         licences = 'Apache-2.0'
     }
 }

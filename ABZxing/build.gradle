@@ -61,11 +61,11 @@ dependencies {
 if ("true" == zxingLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.zxing'  //jcenter上的路径
-        artifactId = 'ABZxing'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABZxing'
-        website = 'https://github.com/ABXiaoLiuMang/ABZxingLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_Zxing'  //项目名称
+        publishVersion = zxingLib_version    //版本号
+        desc = 'AB_Zxing'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABZxing'
         licences = 'Apache-2.0'
     }
 }

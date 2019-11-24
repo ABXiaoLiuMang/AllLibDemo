@@ -2,7 +2,7 @@
 
 - 引入方式
 
-​  implementation 'com.dale.push:ABPush:xxxxx'
+​  implementation 'com.dale.x:AB_Push:1.0.0-beta01'
 
 - 此外必须依赖：
 

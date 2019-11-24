@@ -53,11 +53,11 @@ dependencies {
 if ("true" == adapterLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.chad.adapter'  //jcenter上的路径
-        artifactId = 'ABBaseAdapterX'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABBaseAdapterX'
-        website = 'https://github.com/ABXiaoLiuMang/AdApterLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_Adapter'  //项目名称
+        publishVersion = adapterLib_version    //版本号
+        desc = 'AB_Adapter'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABBaseAdapter'
         licences = 'Apache-2.0'
     }
 }

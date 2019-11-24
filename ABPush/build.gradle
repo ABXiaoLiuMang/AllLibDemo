@@ -64,11 +64,11 @@ dependencies {
 if ("true" == pushLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.push'  //jcenter上的路径
-        artifactId = 'ABPush'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABPush'
-        website = 'https://github.com/ABXiaoLiuMang/ABPush'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_Push'  //项目名称
+        publishVersion = pushLib_version    //版本号
+        desc = 'AB_Push'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABPush'
         licences = 'Apache-2.0'
     }
 }

@@ -53,11 +53,11 @@ dependencies {
 if ("true" == netLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.net'  //jcenter上的路径
-        artifactId = 'ABNetX'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABNetX'
-        website = 'https://github.com/ABXiaoLiuMang/NetLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_NetX'  //项目名称
+        publishVersion = netLib_version    //版本号
+        desc = 'AB_NetX'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABNetLib'
         licences = 'Apache-2.0'
     }
 }

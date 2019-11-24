@@ -59,11 +59,11 @@ dependencies {
 if ("true" == pickerLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.pickerview'  //jcenter上的路径
-        artifactId = 'ABPickerview'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABPickerview'
-        website = 'https://github.com/ABXiaoLiuMang/Pickerview'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_Pickerview'  //项目名称
+        publishVersion = pickerLib_version    //版本号
+        desc = 'AB_Pickerview'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/PickerviewLib'
         licences = 'Apache-2.0'
     }
 }

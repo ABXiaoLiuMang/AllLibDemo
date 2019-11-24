@@ -57,11 +57,11 @@ dependencies {
 if ("true" == utilLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.mty.utils'  //jcenter上的路径
-        artifactId = 'ABUtilsX'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABUtilsX'
-        website = 'https://github.com/ABXiaoLiuMang/UtilsLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_UtilsX'  //项目名称
+        publishVersion = utilLib_version    //版本号
+        desc = 'AB_UtilsX'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/utilslib'
         licences = 'Apache-2.0'
     }
 }

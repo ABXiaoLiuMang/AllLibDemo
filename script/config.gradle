@@ -57,6 +57,20 @@ ext {
             webviewSonic           : 'com.tencent.sonic:sdk:3.1.0',
 
 
+            AB_Adapter             : 'com.dale.x:AB_Adapter:1.0.0-beta01',
+            AB_FrameWork           : 'com.dale.x:AB_FrameWork:1.0.0-beta01',
+            AB_Location            : 'com.dale.x:AB_Location:1.0.0-beta01',
+            AB_NetX                : 'com.dale.x:AB_NetX:1.0.0-beta01',
+            AB_Push                : 'com.dale.x:AB_Push:1.0.0-beta01',
+            AB_RefreshView         : 'com.dale.x:AB_RefreshView:1.0.0-beta01',
+            AB_View                : 'com.dale.x:AB_View:1.0.0-beta01',
+            AB_Zxing               : 'com.dale.x:AB_Zxing:1.0.0-beta01',
+            AB_ImagePicker         : 'com.dale.x:AB_ImagePicker:1.0.0-beta01',
+            AB_Pickerview          : 'com.dale.x:AB_Pickerview:1.0.0-beta01',
+            AB_Xpopup              : 'com.dale.x:AB_Xpopup:1.0.0-beta01',
+            AB_UtilsX              : 'com.dale.x:AB_UtilsX:1.0.0-beta01',
+            AB_WebView             : 'com.dale.x:AB_WebView:1.0.0-beta01',
+
     ]
 
 

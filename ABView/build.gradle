@@ -58,11 +58,11 @@ dependencies {
 if ("true" == viewLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.view'  //jcenter上的路径
-        artifactId = 'ABView'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABView'
-        website = 'https://github.com/ABXiaoLiuMang/ABView'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_View'  //项目名称
+        publishVersion = viewLib_version    //版本号
+        desc = 'AB_View'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABView'
         licences = 'Apache-2.0'
     }
 }

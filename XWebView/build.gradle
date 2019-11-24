@@ -60,11 +60,11 @@ dependencies {
 if ("true" == webviewLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.webview'  //jcenter上的路径
-        artifactId = 'ABWebView'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABWebView'
-        website = 'https://github.com/ABXiaoLiuMang/ABWebView'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_WebView'  //项目名称
+        publishVersion = webviewLib_version    //版本号
+        desc = 'AB_WebView'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/XWebView'
         licences = 'Apache-2.0'
     }
 }

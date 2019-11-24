@@ -86,11 +86,11 @@ dependencies {
 if ("true" == frameLib){
     publish {
         userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.framework'  //jcenter上的路径
-        artifactId = 'ABFrameWork'  //项目名称
-        publishVersion = '2.0.0-beta01'    //版本号
-        desc = 'ABFrameWork'
-        website = 'https://github.com/ABXiaoLiuMang/ABFrameWorkLib'
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_FrameWork'  //项目名称
+        publishVersion = frameLib_version    //版本号
+        desc = 'AB_FrameWork'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABFrameWork'
         licences = 'Apache-2.0'
     }
 }
