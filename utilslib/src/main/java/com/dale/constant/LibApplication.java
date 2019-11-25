@@ -6,8 +6,10 @@ import androidx.core.content.FileProvider;
 
 import com.dale.utils.AppException;
 import com.dale.utils.LogUtils;
+import com.dale.utils.MMKVUtil;
 import com.dale.utils.SPUtils;
 import com.dale.utils.TopActivityManager;
+import com.tencent.mmkv.MMKV;
 
 
 public final class LibApplication {
@@ -24,6 +26,7 @@ public final class LibApplication {
         Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler(sApplication));
         TopActivityManager.getInstance().init(sApplication);
         SPUtils.getInstance(app);
+        MMKVUtil.init(app);
     }
 
 
