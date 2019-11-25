@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import com.dale.net.Constant;
 import com.dale.net.NetSdk;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -121,9 +125,6 @@ public class HttpLogger implements Interceptor {
         //这里不能直接使用response.body().string()的方式输出日志
         //因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一个新的response给应用层处理
         ResponseBody responseBody = response.peekBody(1024 * 1024);
-        logBuffer.append("接收响应[");
-        logBuffer.append(response.request().url());
-        logBuffer.append("]:\n");
         logBuffer.append("请求所花时间:");
         logBuffer.append((t2 - t1) / 1e6d);
         logBuffer.append("\n");
@@ -144,22 +145,17 @@ public class HttpLogger implements Interceptor {
         logBuffer.append("响应状态码:");
         logBuffer.append(response.code());
         logBuffer.append("\n");
-        logBuffer.append("\n 返回数据:\n");
+        logBuffer.append("返回数据:");
         String body = "";
         if (isUTF_8Body) {
             body = unicodeToUTF_8(responseBody.string());
         }
-        logBuffer.append(body != null && body.length() > 2800 * 2 ? body.substring(0, 2800 * 2) + ",未完..." : body);
-        logBuffer.append("\n*****************end");
-        logBuffer.append(request.method());
-        logBuffer.append(" ");
-        logBuffer.append(request.url());
-        logBuffer.append(" ");
-        logBuffer.append(protocol);
-        logBuffer.append("*********************");
-
-        Log.d(Constant.LOG_TAG,logBuffer.toString());
-
+        body = parseJson(body);
+        logBuffer.append(body.length() > 3200 ? body.substring(0, 3200) + ",未完..." : body);
+        logBuffer.append("\n");
+        logBuffer.append("** end **");
+        String log = logBuffer.toString();
+        Log.d(Constant.LOG_TAG,log);
         return response;
     }
 
@@ -221,5 +217,33 @@ public class HttpLogger implements Interceptor {
         }
         return out.toString();
     }
+
+
+    private static String parseJson(String msg) {
+        String message;
+        try {
+            if (msg.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(msg);
+                message = jsonObject.toString(4);//最重要的方法，就一行，返回格式化的json字符串，其中的数字4是缩进字符数
+            } else if (msg.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(msg);
+                message = jsonArray.toString(4);
+            } else {
+                message = msg;
+            }
+        } catch (JSONException e) {
+            message = msg;
+        }
+        message = LINE_SEPARATOR + message;
+        String[] lines = message.split(LINE_SEPARATOR);
+        StringBuffer logBuffer = new StringBuffer();
+        for (String line : lines) {
+            logBuffer.append(line);
+            logBuffer.append("\n");
+        }
+        return logBuffer.toString();
+    }
+
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 }
 

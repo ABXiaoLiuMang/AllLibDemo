@@ -113,6 +113,7 @@ dependencies {
     implementation rootDependencies["glide"]
     implementation rootDependencies["webviewSonic"]
     implementation rootDependencies["multidex"]
+    implementation rootDependencies["mmkv"]
 
 
     implementation project(path: ':ABPush') //非必须
