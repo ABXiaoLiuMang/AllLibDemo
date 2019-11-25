@@ -1,6 +1,7 @@
 package com.dale;
 
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -58,23 +59,27 @@ public class App extends ABApplication {
         LeakCanary.install(this);
 
 
-        LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
+        if(isMainProcess()){
+            LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
 
-        PushSdk.ins().initSDK(this);
-
-
-        NetConfig config = NetSdk.config(this)
-                .baseUrl(ApiService.API_HOST)
-                .setModuleClass(ApiService.class)
-                .needLog(true);
-        NetSdk.initSdk(config);
+            PushSdk.ins().initSDK(this);
 
 
+            NetConfig config = NetSdk.config(this)
+                    .baseUrl(ApiService.API_HOST)
+                    .setModuleClass(ApiService.class)
+                    .needLog(true);
+            NetSdk.initSdk(config);
 
-        //图标选择框架用到
-        ImageLoaderConfiguration imageconfig = ImageLoaderConfiguration.createDefault(this);
-        ImageLoader.getInstance().init(imageconfig);     //UniversalImageLoader初始化
-        x.Ext.init(this);                           //xUtils3初始化
+
+
+            //图标选择框架用到
+            ImageLoaderConfiguration imageconfig = ImageLoaderConfiguration.createDefault(this);
+            ImageLoader.getInstance().init(imageconfig);     //UniversalImageLoader初始化
+            x.Ext.init(this);                           //xUtils3初始化
+        }
+
+
     }
 
 
@@ -83,6 +88,20 @@ public class App extends ABApplication {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
+    //是否是主进程
+    private boolean isMainProcess() {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                LogUtils.d(String.format("当前进程：%s", appProcess.processName) );
+                return getApplicationInfo().packageName.equals(appProcess.processName);
+            }
+        }
+        return false;
+    }
+
 }
 
 

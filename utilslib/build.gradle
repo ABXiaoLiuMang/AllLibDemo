@@ -51,6 +51,7 @@ dependencies {
 
     compileOnly rootDependencies["appcompat"]
     compileOnly rootDependencies["Gson"]
+    compileOnly rootDependencies["mmkv"]
 }
 
 

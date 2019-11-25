@@ -55,6 +55,7 @@ ext {
             logutils               : 'com.apkfuns.logutils:library:1.6.0',
             Gson                   : 'com.google.code.gson:gson:2.8.6',
             webviewSonic           : 'com.tencent.sonic:sdk:3.1.0',
+            mmkv                   : 'com.tencent:mmkv:1.0.22',
 
 
             AB_Adapter             : 'com.dale.x:AB_Adapter:1.0.0-beta01',
