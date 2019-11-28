@@ -62,7 +62,7 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
 //        goActivity(ScrollActivity.class);
         mainPresenter.initRequest();
 
-        LiveDataManager.getInstance().testPrice.observeForever(new NetObserver<String>(){
+        LiveDataManager.getInstance().testPrice.observe(this,new NetObserver<String>(){
             @Override
             protected void onSuccess(String s) {
                  tv_head.setText("-->" + s);

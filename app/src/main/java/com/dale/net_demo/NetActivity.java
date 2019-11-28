@@ -43,12 +43,6 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_net);
         requestPermission();
 
-        //必须先初始化
-        NetConfig defa = NetSdk.config(this)
-                .baseUrl("https://www.soarg999.com/CP57/")
-                .setModuleClass(Api.class)
-                .needLog(true);
-        NetSdk.initSdk(defa);
 
 
         findViewById(R.id.tv_changeBaseUrl).setOnClickListener(this);

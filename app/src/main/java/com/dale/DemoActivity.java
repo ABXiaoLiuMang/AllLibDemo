@@ -16,6 +16,7 @@ import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
+import com.dale.view.XMarqueView;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -92,5 +93,18 @@ public class DemoActivity extends ABRefreshActivity<String> {
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
 
+    }
+
+    @Override
+    public View getHeaderView() {
+        View view = View.inflate(mContext,R.layout.item_head,null);
+        XMarqueView xMarqueView = view.findViewById(R.id.xMarqueView);
+        List<String> list = new ArrayList<>();
+        list.add("会将它的参数和每个条件比较，直到找到一个合适的分支，否则会走默认分支");
+        list.add("会将它的参数和每个条件比较，直到找到一个合适的分支，否则会走默认分支");
+        list.add("会将它的参数和每个条件比较，直到找到一个合适的分支，否则会走默认分支");
+        xMarqueView.setList(list);
+        xMarqueView.autoScroll(this);
+        return view;
     }
 }
