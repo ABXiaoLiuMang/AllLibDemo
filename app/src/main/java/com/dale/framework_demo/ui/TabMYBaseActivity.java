@@ -24,4 +24,9 @@ public class TabMYBaseActivity extends ABTabActivity {
         return new Class[]{Tab1Fragment.class,Tab1Fragment.class,Tab1Fragment.class};
     }
 
+    @Override
+    protected void initViewsAndEvents() {
+        super.initViewsAndEvents();
+        setTextMsg(2,"99");
+    }
 }

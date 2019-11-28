@@ -19,6 +19,7 @@ public abstract class ABTabActivity extends ABBaseActivity{
 
     protected TabFragmentTabHost bottomBar;
     protected String[] texts;
+    protected TextView[] msgCounts;
     protected Class<? extends Fragment>[] fragments;
     protected int [] resIds;
 
@@ -39,6 +40,7 @@ public abstract class ABTabActivity extends ABBaseActivity{
         resIds = getTabImageResIds();
         bottomBar = findViewById(android.R.id.tabhost);
         bottomBar.setup(mContext, getSupportFragmentManager(), R.id.fragment_content);
+        msgCounts = new TextView[texts.length];
         for (int i = 0; i < texts.length; i++) {
             TabHost.TabSpec tabSpec = bottomBar.newTabSpec(texts[i]).setIndicator(getTabItemView(i));
             bottomBar.addTab(tabSpec, fragments[i], bundle);
@@ -50,8 +52,19 @@ public abstract class ABTabActivity extends ABBaseActivity{
         ImageView imageView = view.findViewById(R.id.tabhost_iv);
         imageView.setImageResource(resIds[index]);
         TextView textView = view.findViewById(R.id.tabhost_tv);
+        TextView msgCount = view.findViewById(R.id.msgCount);
         textView.setText(texts[index]);
+        msgCounts[index] = msgCount;
         return view;
+    }
+
+    protected void setTextMsg(int index, String msgCount){
+        msgCounts[index].setText(msgCount);
+        msgCounts[index].setVisibility(View.VISIBLE);
+    }
+
+    protected void setGoneTextMsg(int index){
+        msgCounts[index].setVisibility(View.GONE);
     }
 
     /**
