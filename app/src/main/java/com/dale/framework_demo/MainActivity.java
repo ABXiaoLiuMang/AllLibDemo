@@ -11,15 +11,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.ABWebActivity;
+import com.dale.framework.util.ABConfig;
+import com.dale.framework.util.ScrollChangeHelper;
+import com.dale.framework.view.TitleBar;
 import com.dale.framework_demo.ui.KeyValueActivity;
 import com.dale.framework_demo.ui.MainContract;
 import com.dale.framework_demo.ui.MainPresenter;
 import com.dale.framework_demo.ui.OtherPresenter;
 import com.dale.framework_demo.ui.ScrollActivity;
 import com.dale.framework_demo.ui.TabMYBaseActivity;
-import com.dale.framework.util.ABConfig;
-import com.dale.framework.util.ScrollChangeHelper;
-import com.dale.framework.view.TitleBar;
 import com.dale.libdemo.R;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
@@ -67,13 +67,13 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
             protected void onSuccess(String s) {
                  tv_head.setText("-->" + s);
                 LogUtils.d("MainActivity:" + s);
-                dismissDialog();
+                dismissLoading();
             }
 
             @Override
             protected void onError(ErrorMessage errorMessage) {
                 tv_head.setText("-->" + errorMessage.getMessage());
-                dismissDialog();
+                dismissLoading();
             }
         });
 
@@ -95,7 +95,7 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
         View headView = View.inflate(mContext, R.layout.header_layout, null);
         tv_head = headView.findViewById(R.id.tv_head);
         headView.setOnClickListener(v -> {
-            showDialog();
+            showLoading();
             otherPresenter.testOther();
         });
         return headView;
@@ -161,13 +161,14 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
         refreshLayout.finishRefresh();
     }
 
+
     @Override
-    public void showDialog() {
+    public void showLoading() {
         showProgressDialog();
     }
 
     @Override
-    public void dismissDialog() {
+    public void dismissLoading() {
         dismissProgressDialog();
     }
 }

@@ -79,6 +79,8 @@
 
         <activity android:name="com.dale.agentweb_demo.AgentMainActivity" />
 
+        <activity android:name="com.dale.fragment_demo.MainFragmentActivity" />
+
 
         <!--推送必须start-->
         <provider

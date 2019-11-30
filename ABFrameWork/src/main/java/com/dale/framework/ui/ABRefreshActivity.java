@@ -68,8 +68,8 @@ public abstract class ABRefreshActivity<T> extends ABBaseActivity implements IRe
     }
 
     @Override
-    public Mode getMode() {
-        return Mode.DISABLED;
+    public int getMode() {
+        return Mode.BOTH;
     }
 
     @Override

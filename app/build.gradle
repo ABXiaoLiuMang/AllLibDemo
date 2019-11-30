@@ -129,8 +129,11 @@ dependencies {
     implementation project(path: ':XWebView')
     implementation project(path: ':ABRefreshView')
     implementation project(path: ':ABZxing')
-    implementation project(path: ':ABFrameWork')
 
+//    implementation project(path: ':ABFrameWork')
+
+    implementation project(path: ':XFragmentLib')
+    implementation project(path: ':xframework')
 
 
 

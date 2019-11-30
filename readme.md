@@ -18,3 +18,6 @@
 2019.11.20
     - 1.1.6版本
       - 更新基类，修Presenter生命周期Lifecycle方式监听，已经demo实现LivaData方式回调
+      
+2019.11.29 单activity https://github.com/YoKeyword/Fragmentation
+    - 新建单activity xframework lib  库 

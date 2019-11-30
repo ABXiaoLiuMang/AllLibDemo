@@ -18,10 +18,12 @@
             <option value="$PROJECT_DIR$/ABZxing" />
             <option value="$PROJECT_DIR$/PickerviewLib" />
             <option value="$PROJECT_DIR$/PopupLib" />
+            <option value="$PROJECT_DIR$/XFragmentLib" />
             <option value="$PROJECT_DIR$/XWebView" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/imagelib" />
             <option value="$PROJECT_DIR$/utilslib" />
+            <option value="$PROJECT_DIR$/xframework" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

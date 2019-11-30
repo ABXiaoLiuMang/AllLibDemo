@@ -7,8 +7,7 @@ import androidx.annotation.NonNull;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
-import com.dale.framework.ui.ABRefreshActivity;
-import com.dale.framework.ui.Mode;
+import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
 import com.dale.libdemo.R;
@@ -17,11 +16,12 @@ import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
 import com.dale.view.XMarqueView;
+import com.dale.framework.ui.ABRefreshActivity;
+import com.dale.framework.ui.Mode;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DemoActivity extends ABRefreshActivity<String> {
@@ -42,12 +42,13 @@ public class DemoActivity extends ABRefreshActivity<String> {
         list.add("ImagePicker 实例");
         list.add("PopupDialog 实例");
         list.add("AgentWeb 实例");
+        list.add("Fragment 实例");
         listAdapter.setNewData(list);
     }
 
     @Override
-    public Mode getMode() {
-        return super.getMode();
+    public int getMode() {
+        return Mode.DISABLED;
     }
 
     @Override
@@ -81,6 +82,9 @@ public class DemoActivity extends ABRefreshActivity<String> {
                     break;
                 case 7:
                     goActivity(AgentMainActivity.class);
+                    break;
+                case 8:
+                    goActivity(MainFragmentActivity.class);
                     break;
             }
     }

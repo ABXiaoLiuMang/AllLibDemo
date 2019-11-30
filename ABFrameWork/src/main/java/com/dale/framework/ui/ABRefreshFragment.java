@@ -69,8 +69,8 @@ public abstract class ABRefreshFragment<T> extends ABBaseFragment implements IRe
     }
 
     @Override
-    public Mode getMode() {
-        return Mode.getDefault();
+    public int getMode() {
+        return Mode.BOTH;
     }
 
     @Override

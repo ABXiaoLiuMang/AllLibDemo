@@ -1,16 +1,18 @@
 package com.dale.framework.ui;
 
-public enum Mode {
+import androidx.annotation.IntDef;
 
-    DISABLED,
+public interface Mode {
 
-    PULL_FROM_START,
+    int DISABLED = 0;
 
-    PULL_FROM_END,
+    int PULL_FROM_START = 1;
 
-    BOTH;
+    int PULL_FROM_END = 2;
 
-    static Mode getDefault() {
-        return BOTH;
+    int BOTH = 3;
+    @IntDef({DISABLED,PULL_FROM_START,PULL_FROM_END,BOTH})
+    @interface BaseMode {
     }
+
 }
