@@ -19,7 +19,6 @@ import com.dale.framework_demo.ui.MainContract;
 import com.dale.framework_demo.ui.MainPresenter;
 import com.dale.framework_demo.ui.OtherPresenter;
 import com.dale.framework_demo.ui.ScrollActivity;
-import com.dale.framework_demo.ui.TabMYBaseActivity;
 import com.dale.libdemo.R;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
@@ -117,7 +116,7 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
                 goActivity(ScrollActivity.class);
                 break;
             case 3:
-                goActivity(TabMYBaseActivity.class);
+//                goActivity(TabMYBaseActivity.class);
                 break;
         }
 //

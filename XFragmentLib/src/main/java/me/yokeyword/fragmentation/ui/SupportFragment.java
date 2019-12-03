@@ -3,6 +3,7 @@ package me.yokeyword.fragmentation.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 
@@ -223,7 +224,6 @@ public class SupportFragment extends Fragment implements ISupportFragment {
      * <p>
      * Similar to {@link Activity#setResult(int, Intent)}
      *
-     * @see #startForResult(ISupportFragment, int)
      */
     @Override
     public void setFragmentResult(int resultCode, Bundle bundle) {
@@ -231,11 +231,10 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     }
 
     /**
-     * 类似  {@link Activity#onActivityResult(int, int, Intent)}
+     * 类似  {@link Activity onActivityResult(int, int, Intent)}
      * <p>
-     * Similar to {@link Activity#onActivityResult(int, int, Intent)}
+     * Similar to {@link Activity onActivityResult(int, int, Intent)}
      *
-     * @see #startForResult(ISupportFragment, int)
      */
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
@@ -244,12 +243,11 @@ public class SupportFragment extends Fragment implements ISupportFragment {
 
     /**
      * 在start(TargetFragment,LaunchMode)时,启动模式为SingleTask/SingleTop, 回调TargetFragment的该方法
-     * 类似 {@link Activity#onNewIntent(Intent)}
+     * 类似 {@link Activity onNewIntent(Intent)}
      * <p>
-     * Similar to {@link Activity#onNewIntent(Intent)}
+     * Similar to {@link Activity onNewIntent(Intent)}
      *
      * @param args putNewBundle(Bundle newBundle)
-     * @see #start(ISupportFragment, int)
      */
     @Override
     public void onNewBundle(Bundle args) {
@@ -259,7 +257,6 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     /**
      * 添加NewBundle,用于启动模式为SingleTask/SingleTop时
      *
-     * @see #start(ISupportFragment, int)
      */
     @Override
     public void putNewBundle(Bundle newBundle) {
@@ -268,20 +265,6 @@ public class SupportFragment extends Fragment implements ISupportFragment {
 
 
     /****************************************以下为可选方法(Optional methods)******************************************************/
-
-    /**
-     * 隐藏软键盘
-     */
-    protected void hideSoftInput() {
-        mDelegate.hideSoftInput();
-    }
-
-    /**
-     * 显示软键盘,调用该方法后,会在onPause时自动隐藏软键盘
-     */
-    protected void showSoftInput(final View view) {
-        mDelegate.showSoftInput(view);
-    }
 
     /**
      * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
@@ -325,47 +308,46 @@ public class SupportFragment extends Fragment implements ISupportFragment {
 
     /**
      * 启动新的Fragment，并能接收到新Fragment的数据返回
-     * @param toFragment
+     * @param toClass
      */
-    public void start(ISupportFragment toFragment) {
-        mDelegate.start(toFragment);
+    public void start(Class<? extends ISupportFragment> toClass) {
+        mDelegate.start(getFragmentByCls(toClass));
+    }
+
+    public void start(Class<? extends ISupportFragment> toClass, Bundle bundle) {
+        mDelegate.start(getFragmentByCls(toClass,bundle));
     }
 
     /**
      * 启动新的Fragment，并能接收到新Fragment的数据返回
      * @param launchMode Similar to Activity's LaunchMode.
      */
-    public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
-        mDelegate.start(toFragment, launchMode);
+    public void start(Class<? extends ISupportFragment> toClass, @LaunchMode int launchMode) {
+        mDelegate.start(getFragmentByCls(toClass), launchMode);
+    }
+
+    public void start(Class<? extends ISupportFragment> toClass,  Bundle bundle,@LaunchMode int launchMode) {
+        mDelegate.start(getFragmentByCls(toClass,bundle), launchMode);
     }
 
     /**
      * 启动新的Fragment，并能接收到新Fragment的数据返回
      */
-    public void startForResult(ISupportFragment toFragment, int requestCode) {
-        mDelegate.startForResult(toFragment, requestCode);
+    public void startForResult(Class<? extends ISupportFragment> toClass, int requestCode) {
+        mDelegate.startForResult(getFragmentByCls(toClass), requestCode);
+    }
+    public void startForResult(Class<? extends ISupportFragment> toClass,Bundle bundle, int requestCode) {
+        mDelegate.startForResult(getFragmentByCls(toClass,bundle), requestCode);
     }
 
     /**
      * 启动目标Fragment，并关闭当前Fragment；不要尝试pop()+start()，动画会有问题
      */
-    public void startWithPop(ISupportFragment toFragment) {
-        mDelegate.startWithPop(toFragment);
+    public void startWithPop(Class<? extends ISupportFragment> toClass) {
+        mDelegate.startWithPop(getFragmentByCls(toClass));
     }
-
-    /**
-     * 启动目标Fragment，并关闭当前Fragment；不要尝试pop()+start()，动画会有问题
-     * @see #popTo(Class, boolean)
-     * +
-     * @see #start(ISupportFragment)
-     */
-    public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
-        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
-    }
-
-
-    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
-        mDelegate.replaceFragment(toFragment, addToBackStack);
+    public void startWithPop(Class<? extends ISupportFragment> toClass,Bundle bundle) {
+        mDelegate.startWithPop(getFragmentByCls(toClass,bundle));
     }
 
     /**
@@ -375,12 +357,6 @@ public class SupportFragment extends Fragment implements ISupportFragment {
         mDelegate.pop();
     }
 
-    /**
-     * Pop the child fragment.
-     */
-    public void popChild() {
-        mDelegate.popChild();
-    }
 
     /**
      * 出栈到目标fragment
@@ -393,57 +369,31 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     }
 
     /**
-     * 如果你想在出栈后, 立刻进行FragmentTransaction操作，请使用该方法
-     */
-    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
-        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
-    }
-
-    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
-        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
-    }
-
-    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {
-        mDelegate.popToChild(targetFragmentClass, includeTargetFragment);
-    }
-
-    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
-        mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
-    }
-
-    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
-        mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
-    }
-
-    /**
-     * 得到位于栈顶Fragment
-     */
-    public ISupportFragment getTopFragment() {
-        return SupportHelper.getTopFragment(getFragmentManager());
-    }
-
-    public ISupportFragment getTopChildFragment() {
-        return SupportHelper.getTopFragment(getChildFragmentManager());
-    }
-
-    /**
-     * @return 位于当前Fragment的前一个Fragment
-     */
-    public ISupportFragment getPreFragment() {
-        return SupportHelper.getPreFragment(this);
-    }
-
-    /**
      * 获取栈内的fragment对象
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getFragmentManager(), fragmentClass);
     }
 
-    /**
-     * 获取栈内的fragment对象
-     */
-    public <T extends ISupportFragment> T findChildFragment(Class<T> fragmentClass) {
-        return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
+    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass,Bundle bundle){
+        try{
+            String stringClass = toClass.getCanonicalName();
+            Class<?> fClass = Class.forName(stringClass);
+            Object instance = fClass.newInstance();
+            if (instance instanceof ISupportFragment){
+                Fragment fragment = (Fragment)instance;
+                if (bundle != null){
+                    fragment.setArguments(bundle);
+                }
+                return (ISupportFragment) fragment;
+            }
+        }catch (Exception e){
+            Log.e("Dream","跳转Fragment获取错误");
+        }
+       return null;
+    }
+
+    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass){
+         return getFragmentByCls(toClass,null);
     }
 }

@@ -43,7 +43,8 @@
 
         <activity android:name="com.dale.framework_demo.ui.KeyValueActivity" />
         <activity android:name="com.dale.framework_demo.ui.ScrollActivity" />
-        <activity android:name="com.dale.framework_demo.ui.TabMYBaseActivity" />
+    <!--    <activity android:name="com.dale.framework_demo.ui.TabMYBaseActivity" />-->
+   <!--     <activity android:name="com.dale.fragment_demo.XTabActivity" />-->
 
         <activity android:name="com.dale.framework_demo.MainActivity" />
 

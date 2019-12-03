@@ -1,5 +1,9 @@
 apply plugin: 'com.android.library'
 
+if ("true" == xframeLib){
+    apply plugin: 'com.novoda.bintray-release'
+}
+
 def customizeConfig = rootProject.ext.android //android配置
 def rootDependencies = rootProject.ext.dependencies //库依赖
 
@@ -78,4 +82,16 @@ dependencies {
     compileOnly project(path: ':ABRefreshView')
     compileOnly project(path: ':ABZxing')
     compileOnly project(path: ':XFragmentLib')
+}
+
+if ("true" == xframeLib){
+    publish {
+        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+        groupId = 'com.dale.x'  //jcenter上的路径
+        artifactId = 'AB_XFrameWork'  //项目名称
+        publishVersion = xframeLib_version    //版本号
+        desc = 'AB_XFrameWork'
+        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/xframework'
+        licences = 'Apache-2.0'
+    }
 }

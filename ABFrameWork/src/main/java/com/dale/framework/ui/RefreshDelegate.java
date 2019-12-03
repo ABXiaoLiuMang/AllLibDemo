@@ -8,6 +8,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
+import static com.dale.framework.ui.Mode.BOTH;
+import static com.dale.framework.ui.Mode.DISABLED;
+import static com.dale.framework.ui.Mode.PULL_FROM_END;
+import static com.dale.framework.ui.Mode.PULL_FROM_START;
+
 public class RefreshDelegate<T> {
 
     private IRefresh iRefresh;

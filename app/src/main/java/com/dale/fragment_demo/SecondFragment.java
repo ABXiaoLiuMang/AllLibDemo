@@ -2,12 +2,9 @@ package com.dale.fragment_demo;
 
 import com.dale.framework.ui.ABBaseFragment;
 import com.dale.libdemo.R;
+import com.dale.utils.ToastUtils;
 
 public class SecondFragment extends ABBaseFragment {
-
-    public static SecondFragment newInstance() {
-        return new SecondFragment();
-    }
 
     @Override
     protected int getLayoutId() {
@@ -21,6 +18,8 @@ public class SecondFragment extends ABBaseFragment {
 
     @Override
     protected void initViewsAndEvents() {
-
+        if(bundle != null && bundle.containsKey("TestKey")){
+            ToastUtils.showLong(bundle.getString("TestKey"));
+        }
     }
 }

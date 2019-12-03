@@ -20,10 +20,6 @@ public interface ISupportFragment {
     int SINGLETOP = 1;
     int SINGLETASK = 2;
 
-    // ResultCode
-    int RESULT_CANCELED = 0;
-    int RESULT_OK = -1;
-
     @IntDef({STANDARD, SINGLETOP, SINGLETASK})
     @Retention(RetentionPolicy.SOURCE)
     @interface LaunchMode {
@@ -62,4 +58,5 @@ public interface ISupportFragment {
     void putNewBundle(Bundle newBundle);
 
     boolean onBackPressedSupport();
+
 }
