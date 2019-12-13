@@ -68,6 +68,7 @@
         <activity android:name="com.dale.zxing_demo.TestScanActivity" />
         <activity android:name="com.dale.zxing_demo.MytestActivity" />
         <activity android:name="com.dale.zxing_demo.TestGeneratectivity" />
+        <activity android:name="com.dale.thread_demo.ThreadActivity" />
 
 
         <activity android:name="com.dale.image_demo.lzy.ImagePickerActivity" />
@@ -115,6 +116,8 @@
             android:value="com.baidu.lbsapi.API_KEY"
             android:name="bzpOsFbglaLttH4FMdG4brvPrNnPGChq"/>
         <!--百度地图end-->
+
+        <service android:name="com.dale.InitializeService"/>
 
     </application>
 

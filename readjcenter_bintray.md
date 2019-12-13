@@ -11,8 +11,8 @@ android签名 ->SHA256就是
 
 
 - 注册地址https://bintray.com/signup/oss
-- 邮箱登录：441623442dale@gmail.com（）
-- 邮箱登录：abxingxing@gmail.com（用这个->谷歌登录）
+- git 代码管理邮箱：441623442@qq.com （密码：441623442@qq.com）
+- 邮箱登录：abxingxing@gmail.com（上传代码用这个->谷歌登录）
 - key:dd9580acfcc6ff298afedc55df7c06123e3eaadc
 
 - gradlew clean build bintrayUpload -PbintrayUser=abxingxing  -PbintrayKey=dd9580acfcc6ff298afedc55df7c06123e3eaadc  -PdryRun=false

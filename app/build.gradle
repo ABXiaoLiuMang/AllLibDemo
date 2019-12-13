@@ -148,7 +148,7 @@ dependencies {
     implementation 'com.lxj:statelayout:1.0.5'
 
     implementation 'com.airbnb.android:lottie:2.7.0'
-
+    implementation project(path: ':tasklib')
 
 
 //    implementation rootDependencies["AB_Adapter"]

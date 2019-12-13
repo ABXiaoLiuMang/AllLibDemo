@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/XWebView" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/imagelib" />
+            <option value="$PROJECT_DIR$/tasklib" />
             <option value="$PROJECT_DIR$/utilslib" />
             <option value="$PROJECT_DIR$/xframework" />
           </set>

@@ -15,6 +15,7 @@ import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
+import com.dale.thread_demo.ThreadActivity;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.Mode;
@@ -43,6 +44,7 @@ public class DemoActivity extends ABRefreshActivity<String> {
         list.add("PopupDialog 实例");
         list.add("AgentWeb 实例");
         list.add("Fragment 实例");
+        list.add("ThreadPool 实例");
         listAdapter.setNewData(list);
     }
 
@@ -85,6 +87,9 @@ public class DemoActivity extends ABRefreshActivity<String> {
                     break;
                 case 8:
                     goActivity(MainFragmentActivity.class);
+                    break;
+                case 9:
+                    goActivity(ThreadActivity.class);
                     break;
             }
     }

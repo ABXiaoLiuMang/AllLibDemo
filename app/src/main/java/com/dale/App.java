@@ -55,6 +55,8 @@ public class App extends ABApplication {
     public void onCreate() {
         super.onCreate();
 
+        InitializeService.start(this,"初始化放在线程中");
+
         LogUtils.isDebug(true);
 
         if (LeakCanary.isInAnalyzerProcess(this)) {

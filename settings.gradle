@@ -1,2 +1,2 @@
-include ':app', ':ABNetLib', ':ABFrameWork', ':ABLocation', ':ABPush', ':ABView', ':XWebView', ':PopupLib', ':imagelib', ':PickerviewLib', ':utilslib', ':ABBaseAdapter', ':ABRefreshView', ':ABZxing', ':xframework', ':XFragmentLib'
+include ':app', ':ABNetLib', ':ABFrameWork', ':ABLocation', ':ABPush', ':ABView', ':XWebView', ':PopupLib', ':imagelib', ':PickerviewLib', ':utilslib', ':ABBaseAdapter', ':ABRefreshView', ':ABZxing', ':xframework', ':XFragmentLib', ':tasklib'
 rootProject.name='AllLibDemo'
