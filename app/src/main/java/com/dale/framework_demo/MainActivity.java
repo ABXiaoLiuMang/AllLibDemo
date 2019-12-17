@@ -28,6 +28,8 @@ import com.dale.utils.PermissionUtils;
 import com.dale.utils.SizeUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
+import net.jodah.typetools.TypeResolver;
+
 import java.util.List;
 
 
@@ -50,7 +52,6 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
     protected void initPresenters() {
         mainPresenter = new MainPresenter(this, this);
         otherPresenter = new OtherPresenter(this);
-
     }
 
 

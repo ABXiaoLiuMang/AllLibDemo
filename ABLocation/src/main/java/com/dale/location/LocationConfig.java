@@ -43,7 +43,7 @@ public class LocationConfig extends BDAbstractLocationListener implements ILocat
 
     @Override
     public void startLocation() {
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.LOCATION)).callback(new PermissionUtils.SimpleCallback() {
+        PermissionUtils.permission(PermissionConstants.LOCATION).callback(new PermissionUtils.SimpleCallback() {
             @Override
             public void onGranted() {
                 mLocClient = new LocationClient(app);

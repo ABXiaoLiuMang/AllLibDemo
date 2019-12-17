@@ -34,7 +34,7 @@ public class TestGeneratectivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_generate);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA)).request();
+        PermissionUtils.permission(PermissionConstants.CAMERA).request();
         initView();
         createQRCode();
     }

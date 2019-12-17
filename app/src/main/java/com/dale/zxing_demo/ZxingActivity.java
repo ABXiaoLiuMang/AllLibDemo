@@ -16,7 +16,7 @@ public class ZxingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zxing);
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA)).request();
+        PermissionUtils.permission(PermissionConstants.CAMERA).request();
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

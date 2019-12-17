@@ -82,6 +82,7 @@
         <activity android:name="com.dale.agentweb_demo.AgentMainActivity"  android:process=":xweb"/>
 
         <activity android:name="com.dale.fragment_demo.MainFragmentActivity" />
+        <activity android:name="com.dale.resolver.TypeResolverActivity" />
 
 
         <!--推送必须start-->

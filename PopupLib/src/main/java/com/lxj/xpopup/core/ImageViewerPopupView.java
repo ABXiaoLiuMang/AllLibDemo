@@ -438,7 +438,7 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
      */
     protected void save() {
         //check permission
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.STORAGE)).
+        PermissionUtils.permission(PermissionConstants.STORAGE).
                 callback(new PermissionUtils.SimpleCallback() {
                     @Override
                     public void onGranted() {

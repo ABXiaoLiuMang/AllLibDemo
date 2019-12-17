@@ -51,7 +51,7 @@ public abstract class ABScanActivity extends AppCompatActivity implements QRCode
      * 打开相册
      */
     protected void openPhoto() {
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.STORAGE))
+        PermissionUtils.permission(PermissionConstants.STORAGE)
                 .callback(new PermissionUtils.SimpleCallback() {
                     @Override
                     public void onGranted() {
@@ -93,7 +93,7 @@ public abstract class ABScanActivity extends AppCompatActivity implements QRCode
     @Override
     protected void onStart() {
         super.onStart();
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA))
+        PermissionUtils.permission(PermissionConstants.CAMERA)
                 .callback(new PermissionUtils.SimpleCallback() {
                     @Override
                     public void onGranted() {

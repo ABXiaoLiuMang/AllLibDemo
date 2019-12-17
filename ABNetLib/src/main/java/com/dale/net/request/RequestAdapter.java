@@ -18,11 +18,6 @@ public interface RequestAdapter<R, T> {
 
         public abstract RequestAdapter<?, ?> get(Type returnType, Annotation[] annotations);
 
-
-        protected static Type getParameterUpperBound(int index, ParameterizedType type) {
-            return Utils.getParameterUpperBound(index, type);
-        }
-
         protected static Class<?> getRawType(Type type) {
             return Utils.getRawType(type);
         }

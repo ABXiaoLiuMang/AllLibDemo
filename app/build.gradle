@@ -95,6 +95,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'net.jodah:typetools:0.4.0'
 
     testImplementation rootDependencies["junit"]
     androidTestImplementation rootDependencies["test_runner"]

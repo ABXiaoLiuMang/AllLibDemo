@@ -15,7 +15,7 @@ public class MytestActivity extends ABScanActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA)).request();
+        PermissionUtils.permission(PermissionConstants.CAMERA).request();
     }
 
     @Override
