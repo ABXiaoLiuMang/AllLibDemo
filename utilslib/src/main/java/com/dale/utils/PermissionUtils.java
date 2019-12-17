@@ -30,7 +30,7 @@ import java.util.Set;
 
 /**
  * 权限申请工具类
- * 使用方法如:  PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.STORAGE)).request();
+ * 使用方法如:  PermissionUtils.permission(PermissionConstants.STORAGE).request();
  */
 public final class PermissionUtils {
 
@@ -152,11 +152,10 @@ public final class PermissionUtils {
     /**
      * 设置权限
      *
-     * @param permissions The permissions.
      * @return the single {@link PermissionUtils} instance
      */
-    public static PermissionUtils permission(@PermissionConstants.Permission final String... permissions) {
-        return new PermissionUtils(permissions);
+    public static PermissionUtils permission(@PermissionConstants.Permission final String permission) {
+        return new PermissionUtils(PermissionConstants.getPermissions(permission));
     }
 
     /**
