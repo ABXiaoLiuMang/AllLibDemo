@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.dale.framework.R;
 import com.dale.framework.util.ABConfig;
 import com.dale.framework.view.TitleBar;
+import com.dale.utils.StatusBarUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 /**
@@ -75,5 +76,12 @@ public class ABWebActivity extends AbsWebActivity implements TitleBar.LeftBtnOnC
     @Override
     public void onRightClick(View view) {
         finish();
+    }
+
+    @Override
+    protected void initSystemBar() {
+        super.initSystemBar();
+        StatusBarUtil.setTransparentForWindow(this);
+        StatusBarUtil.setDarkMode(this);
     }
 }

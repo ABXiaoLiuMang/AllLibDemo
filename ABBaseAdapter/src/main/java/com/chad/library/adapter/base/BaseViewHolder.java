@@ -64,17 +64,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private final LinkedHashSet<Integer> itemChildLongClickViewIds;
     private BaseQuickAdapter adapter;
-    /**
-     * use itemView instead
-     */
-    @Deprecated
+
     public View convertView;
-
-    /**
-     * Package private field to retain the associated user object and detect a change
-     */
-    private Object associatedObject;
-
 
     public BaseViewHolder(final View view) {
         super(view);
@@ -618,17 +609,4 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return (T) view;
     }
 
-    /**
-     * Retrieves the last converted object on this view.
-     */
-    public Object getAssociatedObject() {
-        return associatedObject;
-    }
-
-    /**
-     * Should be called during convert
-     */
-    public void setAssociatedObject(Object associatedObject) {
-        this.associatedObject = associatedObject;
-    }
 }

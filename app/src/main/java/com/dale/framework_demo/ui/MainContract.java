@@ -1,7 +1,6 @@
 package com.dale.framework_demo.ui;
 
 
-import com.dale.framework_demo.Person;
 import com.dale.framework.ui.IBaseView;
 
 import java.util.List;
@@ -15,9 +14,9 @@ public interface MainContract {
     }
 
     interface IView extends IBaseView {
-        void initSuccess(List<Person> list);
-        void onLoadMoreSuccess(List<Person> list);
-        void ononRefreshSuccess(List<Person> list);
+        void initSuccess(List<String> list);
+        void onLoadMoreSuccess(List<String> list);
+        void ononRefreshSuccess(List<String> list);
     }
 
 }

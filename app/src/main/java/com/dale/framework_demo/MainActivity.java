@@ -29,7 +29,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import java.util.List;
 
 
-public class MainActivity extends ABRefreshActivity<Person> implements MainContract.IView {
+public class MainActivity extends ABRefreshActivity<String> implements MainContract.IView {
 
     MainPresenter mainPresenter;
     OtherPresenter otherPresenter;
@@ -80,7 +80,7 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
     }
 
     @Override
-    public BaseQuickAdapter<Person, BaseViewHolder> getListAdapter() {
+    public BaseQuickAdapter<String, BaseViewHolder> getListAdapter() {
         return new PersonAdapter(R.layout.item_layout);
     }
 
@@ -143,19 +143,19 @@ public class MainActivity extends ABRefreshActivity<Person> implements MainContr
 
 
     @Override
-    public void initSuccess(List<Person> list) {
+    public void initSuccess(List<String> list) {
         listAdapter.setNewData(list);
         refreshLayout.finishRefresh();
     }
 
     @Override
-    public void onLoadMoreSuccess(List<Person> list) {
+    public void onLoadMoreSuccess(List<String> list) {
         listAdapter.addData(list);
         refreshLayout.finishLoadMore();
     }
 
     @Override
-    public void ononRefreshSuccess(List<Person> list) {
+    public void ononRefreshSuccess(List<String> list) {
         listAdapter.setNewData(list);
         refreshLayout.finishRefresh();
     }

@@ -27,7 +27,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     private String rightTitle;
     private boolean showRight;
     private boolean showLeft;
-    private boolean whiteStyle;
+    private boolean whiteStyle;//true:图标，字体都是白色
     private Drawable left_drawable;
     private Drawable right_drawable;
     private int backRes;

@@ -14,6 +14,8 @@ import java.util.List;
 
 public class MainPresenter extends BasePresenter<MainContract.IView> implements MainContract.IPresenter {
 
+    int postion = 0;
+
     public MainPresenter(LifecycleOwner lifecycleOwner, MainContract.IView iView) {
         super(lifecycleOwner, iView);
     }
@@ -62,31 +64,18 @@ public class MainPresenter extends BasePresenter<MainContract.IView> implements 
 
     @Override
     public void onRefresh() {
+        postion = 0;
         new Handler().postDelayed(() -> getView().ononRefreshSuccess(initdata()),1000);
     }
 
-    private List<Person> initdata(){
-        List arrList = new ArrayList();
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
-        arrList.add(new Person());
+    private ArrayList<String> initdata(){
+        ArrayList<String> arrList = new ArrayList();
+        for (int i = 0; i < 10; i++) {
+//            Person p = new Person();
+//            p.setName("gogo--:" + postion);
+            arrList.add("gogo--:" + postion);
+            postion++;
+        }
         return arrList;
     }
 
