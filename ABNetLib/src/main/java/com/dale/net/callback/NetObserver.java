@@ -2,6 +2,7 @@ package com.dale.net.callback;
 
 import androidx.lifecycle.Observer;
 
+import com.dale.net.bean.DataType;
 import com.dale.net.bean.LiveResult;
 import com.dale.net.exception.ErrorMessage;
 
@@ -12,10 +13,10 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
             return;
         }
         switch (result.type) {
-            case SUCCESS:
+            case DataType.SUCCESS:
                 onSuccess(result.data);
                 break;
-            case ERROR:
+            case DataType.ERROR:
                 onError(result.errorMessage);
                 break;
             default:

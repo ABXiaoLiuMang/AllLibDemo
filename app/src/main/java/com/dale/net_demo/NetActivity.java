@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.dale.constant.PermissionConstants;
 import com.dale.framework_demo.MainActivity;
 import com.dale.libdemo.R;
 import com.dale.net.NetSdk;
@@ -29,6 +30,7 @@ import com.dale.net_demo.bean.ListBean;
 import com.dale.net_demo.bean.MyData;
 import com.dale.net_demo.bean.TokenData;
 import com.dale.net_demo.bean.WBaseEntity;
+import com.dale.utils.PermissionUtils;
 import com.dale.utils.ToastUtils;
 
 import java.io.File;
@@ -45,7 +47,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net);
-        requestPermission();
+        PermissionUtils.permission(PermissionConstants.STORAGE).request();
 
 
 
@@ -123,38 +125,22 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
                 .send(netLiveData);
 
 
-//        NetSdk.create(Api.class)
-//                .getModelString()
-//                .asLife(this)
-//                .send(new OnCallBack<MyData>() {
-//                    @Override
-//                    public void onSuccess(MyData appConfigBean) {
-//                        setText("ok:" + NetJsonUtils.toJson(appConfigBean));
-//                        Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
-//                    }
-//
-//                    @Override
-//                    public void onError(ErrorMessage errorMessage) {
-//                        Log.d("Dream", "err:" + errorMessage.getMessage() + new Thread().getName());
-//                    }
-//                });
+        NetSdk.create(Api.class)
+                .getModelString()
+                .asLife(this)
+                .send(new OnCallBack<BaseEntity<MyData>>() {
+                    @Override
+                    public void onSuccess(BaseEntity<MyData> appConfigBean) {
+                        setText("ok:" + NetJsonUtils.toJson(appConfigBean));
+                        Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
+                    }
 
+                    @Override
+                    public void onError(ErrorMessage errorMessage) {
+                        Log.d("Dream", "err:" + errorMessage.getMessage() + new Thread().getName());
+                    }
+                });
 
-//        NetSdk.create(Api.class)
-//                .getModelString()
-//                .addLifecycleOwner(this)
-//                .send(new OnCallBack<BaseEntity<String>>() {
-//                    @Override
-//                    public void onSuccess(BaseEntity<String> appConfigBean) {
-//                        setText("ok:" + appConfigBean.toString());
-//                        Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
-//                    }
-//
-//                    @Override
-//                    public void onError(ErrorMessage errorMessage) {
-//                        Log.d("Dream", "err:" + errorMessage.getMessage() + new Thread().getName());
-//                    }
-//                });
 
     }
 
@@ -208,25 +194,6 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
                 .params("password", "111111")
                 .asLife(this)
                 .send(netLiveData);
-//        NetSdk.create(Api.class)
-//                .getUserLoginInfo()
-//                .params("username", "div123")
-//                .params("password", "111111")
-//                .asLife(this)
-//                .send(new OnCallBack<TokenData>() {
-//                    @Override
-//                    public void onSuccess(TokenData loginTokenEntity) {
-//                        Log.d("Dream", "ok:getUserLoginInfo");
-//                        header = loginTokenEntity.getToken();
-//                        setText("ok:" + loginTokenEntity.toString());
-//                    }
-//
-//                    @Override
-//                    public void onError(ErrorMessage errorMessage) {
-//                        Log.d("Dream", "err:" + errorMessage.getMessage());
-//                        setText("err:" + errorMessage.getMessage());
-//                    }
-//                });
 
 
     }
@@ -315,9 +282,5 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         return path;
     }
 
-    private static final int REQUEST_PERMISSION = 0;
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE},
-                REQUEST_PERMISSION);
-    }
+
 }

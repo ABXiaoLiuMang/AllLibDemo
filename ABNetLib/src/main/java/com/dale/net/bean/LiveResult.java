@@ -3,7 +3,7 @@ package com.dale.net.bean;
 import com.dale.net.exception.ErrorMessage;
 
 public class LiveResult<T>{
-    public DataType type;
+    public int type;
     public T data;
     public ErrorMessage errorMessage;
     public void setData(T data) {

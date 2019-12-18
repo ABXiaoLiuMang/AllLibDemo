@@ -1,12 +1,6 @@
 package com.dale.net.bean;
 
-public enum DataType {
-    /**
-     * 成功
-     */
-    SUCCESS,
-    /**
-     * 失败
-     */
-    ERROR
+public interface DataType {
+    int ERROR = 0;
+    int SUCCESS = 1;
 }
