@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.collection.ArrayMap;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -27,22 +28,20 @@ public class RequestBuilder<T> implements NetCall<T> {
     public final ServiceMethod<T, ?> serviceMethod;
     public Object oparams;
     public String url;
-    public String moduleKey;
-    public Map<String, File> fileMap = new HashMap<>();
-    public Map<String, String> allStringParams = new HashMap<>();
+    public ArrayMap<String, File> fileMap = new ArrayMap<>();
+    public ArrayMap<String, String> allStringParams = new ArrayMap<>();
     public Headers.Builder headers;
     public String baseUrl;
     MediaType mMediaType;
     MutableLiveData<ProgressModel> mProgressModelLiveData;
     LifecycleOwner owner;
 
-    RequestBuilder(ServiceMethod<T, ?> serviceMethod,String moduleKey) {
+    RequestBuilder(ServiceMethod<T, ?> serviceMethod) {
         this.serviceMethod = serviceMethod;
         headers = new Headers.Builder();
         this.url = serviceMethod.relativeUrl;
         this.method = serviceMethod.httpMethod;
-        this.moduleKey = moduleKey;
-        baseUrl = NetSdk.getConfig(moduleKey).getBaseUrl();
+        baseUrl = NetSdk.getConfig().getBaseUrl();
         mMediaType = MediaType.parse("application/x-www-form-urlencoded;charset=utf-8");
     }
 

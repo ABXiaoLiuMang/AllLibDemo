@@ -14,40 +14,36 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class NetSdk {
-
+    private static NetConfigImpl mConfig = null;
     private static Context mContext;
-
     private static final Map<Method, ServiceMethod<?, ?>> serviceMethodCache = new ConcurrentHashMap<>();
-    private static final Map<String, NetConfigImpl> mapNetConfig = new ConcurrentHashMap<>();
-
-    public static void initSdk(NetConfig netConfig) {
-        NetConfigImpl config = (NetConfigImpl) netConfig;
-        mapNetConfig.put(config.getModuleKey(),config);
-    }
 
 
     public static NetConfig config(Context application) {
         mContext = application;
-        return new NetConfigImpl();
+        if (mConfig == null) {
+            mConfig = new NetConfigImpl();
+        }
+        return mConfig;
     }
 
     /**
      * 获取当前配置,重新设值
      */
-    public static NetConfigImpl getConfig(String moduleKey) {
-        NetConfigImpl mConfig = null;
-        if(mapNetConfig.containsKey(moduleKey)){
-            mConfig = mapNetConfig.get(moduleKey);
-        }
+    public static NetConfigImpl getConfig() {
         if (mConfig == null) {
-            throw new RuntimeException("请先在Application中调用NetSdk.initSdk()初始化NetSdk moduleKey:" + moduleKey);
+            throw new RuntimeException("请先在Application中调用NetSdk.config()初始化");
         }
         return mConfig;
     }
 
 
-    public static void setBaseUrl(String baseUrl,Class apiCls){
-        getConfig(apiCls.getName()).baseUrl(baseUrl);
+    /**
+     * 动态设置baseUrl
+     * @param baseUrl
+     */
+    public static void setBaseUrl(String baseUrl){
+        getConfig().baseUrl(baseUrl);
     }
 
     public static DownloadRequestBuilder download(){
@@ -65,7 +61,7 @@ public class NetSdk {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args){
                         ServiceMethod<Object, Object> serviceMethod = (ServiceMethod<Object, Object>) loadServiceMethod(method);
-                        RequestBuilder<Object> builder = new RequestBuilder<>(serviceMethod, service.getName());
+                        RequestBuilder<Object> builder = new RequestBuilder<>(serviceMethod);
                         return serviceMethod.requestAdapter.adapt(builder);
                     }
                 });

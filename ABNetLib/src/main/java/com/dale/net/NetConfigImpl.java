@@ -25,7 +25,6 @@ public class NetConfigImpl implements NetConfig {
     private List<Interceptor> interceptors = new ArrayList<>();
     private String baseUrl;
     private boolean needLog = false;
-    private String moduleKey = "defaultModuleKey";
 
     @Override
     public NetConfig needLog(boolean allowLog) {
@@ -70,12 +69,6 @@ public class NetConfigImpl implements NetConfig {
     }
 
     @Override
-    public NetConfig setModuleClass(Class cls) {
-        this.moduleKey = cls.getName();
-        return this;
-    }
-
-    @Override
     public NetConfig addInterceptor(Interceptor interceptor) {
         interceptors.add(interceptor);
         return this;
@@ -113,7 +106,4 @@ public class NetConfigImpl implements NetConfig {
         return needLog;
     }
 
-    public String getModuleKey() {
-        return moduleKey;
-    }
 }

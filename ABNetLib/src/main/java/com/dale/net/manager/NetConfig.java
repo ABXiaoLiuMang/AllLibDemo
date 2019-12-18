@@ -10,7 +10,6 @@ public interface NetConfig {
      */
     NetConfig needLog(boolean allowLog);
 
-
     /**
      * desc: 设置连接超时时间
      */
@@ -36,11 +35,6 @@ public interface NetConfig {
      * desc: 添加公共参数
      */
     NetConfig params(String key, String value);
-
-    /**
-     * desc: 设置lib域名缓存key
-     */
-    NetConfig setModuleClass(Class cls);
 
     /**
      * desc: 全局默认使用base url

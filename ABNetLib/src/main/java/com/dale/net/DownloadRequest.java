@@ -48,7 +48,6 @@ import static com.dale.net.Constant.REQUEST_FILE_CODE;
  * description: 下载文件
  */
 public class DownloadRequest {
-    private String moduleKey;
     private String url;
     private String savePath;
     private String fileName;
@@ -58,7 +57,6 @@ public class DownloadRequest {
         url = builder.getUrl();
         savePath = builder.getSavePath();
         fileName = builder.getFileName();
-        moduleKey = builder.getModuleKey();
     }
 
     public void send(final DownCallBack downCallBack) {
@@ -97,7 +95,7 @@ public class DownloadRequest {
         if (TextUtils.isEmpty(fileName)) {
             throw new NullPointerException("请调用fileName()方法设置文件存储名字");
         }
-        NetConfigImpl config = NetSdk.getConfig(moduleKey);
+        NetConfigImpl config = NetSdk.getConfig();
         OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
         if (config.isNeedLog()) {
             httpBuilder.addInterceptor(new HttpLogger());

@@ -200,7 +200,7 @@ public class Request<T> {
     }
 
     protected void execute(okhttp3.Request mRequest, NetLiveData<T> netLiveData) {
-        OkHttpClient okHttpClient = RequestManager.getClient(NetSdk.getConfig(requestBuilder.moduleKey));
+        OkHttpClient okHttpClient = RequestManager.getClient(NetSdk.getConfig());
         Call call = okHttpClient.newCall(mRequest);
         call.enqueue(new RequestCallback(this,netLiveData));
     }

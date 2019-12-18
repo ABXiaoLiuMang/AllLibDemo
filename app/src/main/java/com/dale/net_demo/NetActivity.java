@@ -56,7 +56,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         tv_result = findViewById(R.id.tv_result);
         tv_host = findViewById(R.id.tv_host);
 
-        tv_host.setText("当前域名：" + NetSdk.getConfig(Api.class.getName()).getBaseUrl());
+        tv_host.setText("当前域名：" + NetSdk.getConfig().getBaseUrl());
     }
 
 
@@ -64,8 +64,8 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_changeBaseUrl:
-                NetSdk.setBaseUrl("https://www.soarg999.com/ZZCP/",Api.class);
-                tv_host.setText("当前域名：" + NetSdk.getConfig(Api.class.getName()).getBaseUrl());
+                NetSdk.setBaseUrl("https://www.soarg999.com/ZZCP/");
+                tv_host.setText("当前域名：" + NetSdk.getConfig().getBaseUrl());
                 break;
             case R.id.tv_get:
                 getModelString();

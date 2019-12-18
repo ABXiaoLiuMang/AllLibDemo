@@ -15,6 +15,7 @@ import com.dale.location_demo.MyOnLocationListener;
 import com.dale.net.NetSdk;
 import com.dale.net.manager.NetConfig;
 import com.dale.net_demo.Api;
+import com.dale.net_demo.bean.TestBaseEntity;
 import com.dale.push.PushSdk;
 import com.dale.utils.LogUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -71,19 +72,13 @@ public class App extends ABApplication {
             PushSdk.ins().initSDK(this);
 
 
-            NetConfig config = NetSdk.config(this)
-                    .baseUrl(ApiService.API_HOST)
-                    .setModuleClass(ApiService.class)
-                    .needLog(true);
-            NetSdk.initSdk(config);
-
 
             //必须先初始化
-            config = NetSdk.config(this)
+            NetSdk.config(this)
                     .baseUrl("https://www.soarg999.com/CP57/")
-                    .setModuleClass(Api.class)
                     .needLog(true);
-            NetSdk.initSdk(config);
+
+
 
 
             //图标选择框架用到
