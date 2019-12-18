@@ -3,22 +3,15 @@ package com.dale;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.widget.ImageView;
 
 import androidx.multidex.MultiDex;
 
-import com.dale.framework_demo.api.ApiService;
 import com.dale.framework.util.ABApplication;
-import com.dale.libdemo.R;
 import com.dale.location.LocationSdk;
 import com.dale.location_demo.MyOnLocationListener;
 import com.dale.net.NetSdk;
-import com.dale.net.manager.NetConfig;
-import com.dale.net_demo.Api;
-import com.dale.net_demo.bean.TestBaseEntity;
 import com.dale.push.PushSdk;
 import com.dale.utils.LogUtils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -26,7 +19,6 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.squareup.leakcanary.LeakCanary;
 
-import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 import me.yokeyword.fragmentation.Fragmentation;

@@ -24,11 +24,15 @@ import com.dale.net.callback.OnCallBack;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.net.manager.NetConfig;
 import com.dale.net.utils.NetJsonUtils;
+import com.dale.net_demo.bean.BaseEntity;
+import com.dale.net_demo.bean.ListBean;
 import com.dale.net_demo.bean.MyData;
 import com.dale.net_demo.bean.TokenData;
+import com.dale.net_demo.bean.WBaseEntity;
 import com.dale.utils.ToastUtils;
 
 import java.io.File;
+import java.util.List;
 
 public class NetActivity extends AppCompatActivity implements View.OnClickListener {
     String header = "";
@@ -51,6 +55,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         findViewById(R.id.tv_post).setOnClickListener(this);
         findViewById(R.id.tv_get_down).setOnClickListener(this);
         findViewById(R.id.tv_get_del).setOnClickListener(this);
+        findViewById(R.id.tv_get_listdata).setOnClickListener(this);
         tv_pro = findViewById(R.id.tv_pro);
         progress = findViewById(R.id.progress);
         tv_result = findViewById(R.id.tv_result);
@@ -69,6 +74,9 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.tv_get:
                 getModelString();
+                break;
+            case R.id.tv_get_listdata:
+                getListDemo();
                 break;
             case R.id.tv_get_params:
                 if (TextUtils.isEmpty(header)) {
@@ -95,11 +103,11 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
     public void getModelString() {
         Log.d("Dream", "开始 getModelString");
 
-        NetLiveData netLiveData = new NetLiveData<MyData>();
-        netLiveData.observe(this, new NetObserver<MyData>() {
+        NetLiveData netLiveData = new NetLiveData<BaseEntity<MyData>>();
+        netLiveData.observe(this, new NetObserver<BaseEntity<MyData>>() {
             @Override
-            protected void onSuccess(MyData appConfigBean) {
-                setText("ok:" + NetJsonUtils.toJson(appConfigBean));
+            protected void onSuccess(BaseEntity<MyData> appConfigBean) {
+                setText("ok:" + NetJsonUtils.toJson(appConfigBean.getData()));
                 Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
             }
 
@@ -224,6 +232,31 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
     }
 
 
+    public void getListDemo() {
+        Log.d("Dream", "开始 getListDemo");
+
+        NetLiveData netLiveData = new NetLiveData<WBaseEntity<List<ListBean>>>();
+        netLiveData.observe(this, new NetObserver<WBaseEntity<List<ListBean>>>() {
+            @Override
+            protected void onSuccess(WBaseEntity<List<ListBean>> appConfigBean) {
+                setText("ok:" + NetJsonUtils.toJson(appConfigBean.getResult()));
+                Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName() +"-->" + NetJsonUtils.toJson(appConfigBean.getResult()));
+            }
+
+            @Override
+            protected void onError(ErrorMessage errorMessage) {
+                Log.d("Dream", "err:" + errorMessage.getMessage() + Thread.currentThread().getName());
+            }
+        });
+
+        NetSdk.create(Api.class)
+                .getListDemo()
+                .asLife(this)
+                .baseUrl("https://api.apiopen.top/getJoke?page=1&count=2&type=video")
+                .send(netLiveData);
+    }
+
+
     DownloadRequestBuilder downloadRequestBuilder;
     private void downFile(){
         File appDir = new File(getDestPath());
@@ -233,7 +266,6 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         downloadRequestBuilder = NetSdk.download()
                 .url("https://imtt.dd.qq.com/16891/068AAAB2C233C9684E53DF8A13748CB9.apk?fsname=com.eg.android.AlipayGphone_10.1.55.6000_137.apk&csr=1bbd")
                 .savePath(appDir.getAbsolutePath() + File.pathSeparator)
-                .setModuleClass(Api.class)
                 .fileName("支付宝.apk");
 
         downloadRequestBuilder.send(new DownCallBack() {

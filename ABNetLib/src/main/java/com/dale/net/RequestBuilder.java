@@ -12,13 +12,10 @@ import androidx.lifecycle.Observer;
 import com.dale.net.bean.DataType;
 import com.dale.net.bean.LiveResult;
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.bean.ProgressModel;
 import com.dale.net.callback.OnCallBack;
 import com.dale.net.exception.ErrorMessage;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -32,9 +29,10 @@ public class RequestBuilder<T> implements NetCall<T> {
     public ArrayMap<String, String> allStringParams = new ArrayMap<>();
     public Headers.Builder headers;
     public String baseUrl;
+    public MutableLiveData<Integer> netLiveData;
     MediaType mMediaType;
-    MutableLiveData<ProgressModel> mProgressModelLiveData;
     LifecycleOwner owner;
+
 
     RequestBuilder(ServiceMethod<T, ?> serviceMethod) {
         this.serviceMethod = serviceMethod;
@@ -131,16 +129,8 @@ public class RequestBuilder<T> implements NetCall<T> {
     }
 
     @Override
-    public RequestBuilder<T> addUploadListener( @NonNull Observer<ProgressModel> observer) {
-        if (mProgressModelLiveData == null) {
-            mProgressModelLiveData = new MutableLiveData<>();
-        }
-        if(owner == null){
-            mProgressModelLiveData.observeForever(observer);
-            Log.w(Constant.LOG_TAG,"请调用addLifecycleOwner以便生命周期监听");
-        }else{
-            mProgressModelLiveData.observe(owner, observer);
-        }
+    public RequestBuilder<T> addUploadListener( @NonNull final MutableLiveData<Integer> netLiveData) {
+        this.netLiveData = netLiveData;
         return this;
     }
 

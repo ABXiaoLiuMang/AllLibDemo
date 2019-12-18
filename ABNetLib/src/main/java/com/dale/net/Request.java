@@ -3,10 +3,7 @@ package com.dale.net;
 
 import android.text.TextUtils;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.bean.ProgressModel;
 import com.dale.net.callback.ProgressListener;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.net.manager.RequestManager;
@@ -143,18 +140,16 @@ public class Request<T> {
             File file = entity.getValue();
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("application/octet-stream"), file);
-            ProgressModel progressModel = new ProgressModel();
-            progressModel.fileName = file.getName();
-            progressModel.fileKey = key;
+
             UploadRequestBody uploadRequestBody = new UploadRequestBody(requestFile, new ProgressListener() {
                 @Override
-                public void progress(ProgressModel progressModel) {
-                    if (requestBuilder.mProgressModelLiveData != null) {
-                        requestBuilder.mProgressModelLiveData.postValue(progressModel);
+                public void progress(int progress) {
+                    if (requestBuilder.netLiveData != null) {
+                        requestBuilder.netLiveData.postValue(progress);
                     }
                 }
-            }, progressModel);
-            builder.addFormDataPart(key, progressModel.fileName, uploadRequestBody);
+            });
+            builder.addFormDataPart(key, file.getName(), uploadRequestBody);
         }
 
         if (requestBuilder.allStringParams != null && requestBuilder.allStringParams.size() != 0) {

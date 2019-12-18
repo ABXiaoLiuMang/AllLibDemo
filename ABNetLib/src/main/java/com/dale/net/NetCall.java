@@ -2,10 +2,10 @@ package com.dale.net;
 
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.bean.ProgressModel;
 import com.dale.net.callback.OnCallBack;
 
 import java.io.File;
@@ -74,9 +74,9 @@ public interface NetCall<T> {
     NetCall<T> send(NetLiveData<T> netLiveData);
 
     /**
-     * 监听上传进度
-     * @param observer
+     * 监听上传进度(注意此方法为设置生命周期，在调用时取消注册即可)
+     * @param netLiveData
      * @return
      */
-    NetCall<T> addUploadListener(Observer<ProgressModel> observer);
+    NetCall<T> addUploadListener(MutableLiveData<Integer> netLiveData);
 }

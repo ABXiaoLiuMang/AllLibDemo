@@ -1,7 +1,6 @@
 package com.dale.net.request;
 
 
-import com.dale.net.bean.ProgressModel;
 import com.dale.net.callback.ProgressListener;
 
 import java.io.IOException;
@@ -18,13 +17,11 @@ import okio.Sink;
 public class UploadRequestBody extends RequestBody {
     private RequestBody requestBody;
     private ProgressListener mListener;
-    private ProgressModel progress;
     private BufferedSink bufferedSink;
 
-    public UploadRequestBody(RequestBody body, ProgressListener listener, ProgressModel progress) {
+    public UploadRequestBody(RequestBody body, ProgressListener listener) {
         requestBody = body;
         mListener = listener;
-        this.progress = progress;
     }
 
     @Override
@@ -62,11 +59,8 @@ public class UploadRequestBody extends RequestBody {
                 }
                 bytesWritten += byteCount;
                 //回调
-                if (progress != null && mListener != null){
-                    progress.currentProgress = bytesWritten;
-                    progress.length = contentLength;
-                    progress.isFinish = bytesWritten==contentLength;
-                    mListener.progress(progress);
+                if (mListener != null){
+                    mListener.progress((int) (bytesWritten * 100 /contentLength));
                 }
             }
         };

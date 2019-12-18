@@ -1,6 +1,7 @@
 package com.dale.net;
 
 import com.dale.net.bean.NetLiveData;
+import com.dale.net.callback.XEntity;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.net.utils.NetJsonUtils;
 
@@ -42,16 +43,26 @@ public class RequestCallback<T> implements Callback {
                 try {
                     String result = response.body().string();
                     Type respType = request.requestBuilder.serviceMethod.requestAdapter.responseType();
+                    T t;
                     if(respType == String.class){
-                        netLiveData.postNext((T) result);
+                        t = (T) result;
                     }else {
-                        T t = NetJsonUtils.fromJson(result, respType);
-                        if(t == null){
-                            createErrorMessage(DATA_PARSE_ERROR,"数据解析异常");
+                        t = NetJsonUtils.fromJson(result, respType);
+                    }
+                    if(t == null){
+                        createErrorMessage(DATA_PARSE_ERROR,"数据解析异常");
+                    }else {
+                        if(t instanceof XEntity){
+                            XEntity xEntity = (XEntity) t;
+                            if(xEntity.isOk()){
+                                netLiveData.postNext(t);
+                            }else {
+                                createErrorMessage(-1,"自定义异常");
+                                xEntity.error();
+                            }
                         }else {
                             netLiveData.postNext(t);
                         }
-
                     }
                 } catch (Exception e) {
                     createErrorMessage(UNKNOW_SERVICE_ERROR,e.getMessage());

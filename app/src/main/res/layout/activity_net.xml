@@ -34,6 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="get请求（有参数）"/>
+    <Button
+        android:id="@+id/tv_get_listdata"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="list数据"/>
 
     <Button
         android:id="@+id/tv_get_down"

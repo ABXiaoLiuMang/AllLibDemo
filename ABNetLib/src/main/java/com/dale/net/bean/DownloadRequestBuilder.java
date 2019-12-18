@@ -12,7 +12,6 @@ public class DownloadRequestBuilder {
     String url;
     String savePath;
     String fileName;
-    String moduleKey = "defaultModuleKey";
     private DownloadRequest mRequest;
 
     public DownloadRequestBuilder url(String url) {
@@ -27,11 +26,6 @@ public class DownloadRequestBuilder {
 
     public DownloadRequestBuilder fileName(String fileName) {
         this.fileName = fileName;
-        return this;
-    }
-
-    public DownloadRequestBuilder setModuleClass(Class cls) {
-        this.moduleKey = cls.getName();
         return this;
     }
 
@@ -59,7 +53,4 @@ public class DownloadRequestBuilder {
         return fileName;
     }
 
-    public String getModuleKey() {
-        return moduleKey;
-    }
 }
