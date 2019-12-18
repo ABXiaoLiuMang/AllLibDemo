@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.squareup.leakcanary.LeakCanary;
+import com.zbj.videoplayer.utils.VideoLogUtil;
 
 import org.xutils.x;
 
@@ -51,6 +52,7 @@ public class App extends ABApplication {
         InitializeService.start(this,"初始化放在线程中");
 
         LogUtils.isDebug(true);
+        VideoLogUtil.setIsLog(true);
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;

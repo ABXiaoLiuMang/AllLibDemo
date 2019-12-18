@@ -47,6 +47,7 @@ public class DemoActivity extends ABRefreshActivity<String> {
         list.add("Fragment 实例");
         list.add("ThreadPool 实例");
         list.add("TypeResolver 实例");
+        list.add("Video 实例");
         listAdapter.setNewData(list);
     }
 
@@ -95,6 +96,9 @@ public class DemoActivity extends ABRefreshActivity<String> {
                     break;
                 case 10:
                     goActivity(TypeResolverActivity.class);
+                    break;
+                case 11:
+                    goActivity(com.dale.video_demo.MainActivity.class);
                     break;
             }
     }

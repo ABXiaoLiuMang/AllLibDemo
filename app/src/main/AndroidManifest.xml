@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
 
@@ -119,6 +120,80 @@
         <!--百度地图end-->
 
         <service android:name="com.dale.InitializeService"/>
+
+        <!--视频demo 开始-->
+        <!--用于AppLink，html跳到此页面  scheme_Adr: 'yilu://link/?page=main',-->
+        <activity android:name="com.dale.video_demo.SchemeActivity"
+            android:screenOrientation="portrait">
+            <!--Android 接收外部跳转过滤器-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="yc.com"/>
+            </intent-filter>
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 协议部分配置 ,要在web配置相同的-->
+                <!--yilu://link/?page=main-->
+                <data
+                    android:host="link"
+                    android:scheme="yilu" />
+            </intent-filter>
+
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 协议部分配置 ,要在web配置相同的-->
+                <!--yilu://www.yc.com/?page=main-->
+                <data
+                    android:host="www.yc.com"
+                    android:scheme="yilu" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.dale.video_demo.TestTinyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestClarityActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestRecyclerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestFragmentActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestEightVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestWindowActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestNormalActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestFullActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestSavePosActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.dale.video_demo.TestSurfaceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <!--视频demo 结束-->
 
     </application>
 

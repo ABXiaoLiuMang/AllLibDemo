@@ -150,6 +150,9 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:2.7.0'
     implementation project(path: ':tasklib')
+    implementation project(path: ':ABVideoPlayer')
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
 
 
 //    implementation rootDependencies["AB_Adapter"]

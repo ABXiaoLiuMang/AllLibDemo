@@ -3,4 +3,16 @@
     <string name="title_activity_abbase">ABBaseActivity</string>
     <string name="title_activity_scroll">弹性</string>
     <string name="title_activity_key_value">KeyValueActivity</string>
+
+
+
+
+    <!--视频-->
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
+    <string name="delete">删除</string>
+    <string name="network_error">网络不给力</string>
+    <string name="retry">重试</string>
+    <string name="loading">加载中</string>
+    <string name="error">发生错误</string>
 </resources>

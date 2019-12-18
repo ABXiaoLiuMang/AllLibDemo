@@ -1,6 +1,5 @@
 package com.dale.net_demo;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -8,13 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.dale.constant.PermissionConstants;
-import com.dale.framework_demo.MainActivity;
 import com.dale.libdemo.R;
 import com.dale.net.NetSdk;
 import com.dale.net.bean.DownloadRequestBuilder;
@@ -23,7 +19,6 @@ import com.dale.net.callback.DownCallBack;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.callback.OnCallBack;
 import com.dale.net.exception.ErrorMessage;
-import com.dale.net.manager.NetConfig;
 import com.dale.net.utils.NetJsonUtils;
 import com.dale.net_demo.bean.BaseEntity;
 import com.dale.net_demo.bean.ListBean;
