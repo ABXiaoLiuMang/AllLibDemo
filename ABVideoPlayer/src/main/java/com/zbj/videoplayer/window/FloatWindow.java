@@ -50,10 +50,7 @@ public class FloatWindow {
         if (mFloatWindowMap == null || !mFloatWindowMap.containsKey(tag)) {
             return;
         }
-        IFloatWindow iFloatWindow = mFloatWindowMap.get(tag);
-        if (iFloatWindow != null) {
-            iFloatWindow.dismiss();
-        }
+        mFloatWindowMap.get(tag).dismiss();
         mFloatWindowMap.remove(tag);
     }
 
@@ -102,7 +99,7 @@ public class FloatWindow {
         }
 
         public B setWidth(@WindowScreen.screenType int screenType, float ratio) {
-            mWidth = (int) ((screenType == WindowScreen.WIDTH ?
+            mWidth = (int) ((screenType == WindowScreen.width ?
                     WindowUtil.getScreenWidth(mApplicationContext) :
                     WindowUtil.getScreenHeight(mApplicationContext)) * ratio);
             return this;
@@ -110,7 +107,7 @@ public class FloatWindow {
 
 
         public B setHeight(@WindowScreen.screenType int screenType, float ratio) {
-            mHeight = (int) ((screenType == WindowScreen.WIDTH ?
+            mHeight = (int) ((screenType == WindowScreen.width ?
                     WindowUtil.getScreenWidth(mApplicationContext) :
                     WindowUtil.getScreenHeight(mApplicationContext)) * ratio);
             return this;
@@ -128,14 +125,14 @@ public class FloatWindow {
         }
 
         public B setX(@WindowScreen.screenType int screenType, float ratio) {
-            xOffset = (int) ((screenType == WindowScreen.WIDTH ?
+            xOffset = (int) ((screenType == WindowScreen.width ?
                     WindowUtil.getScreenWidth(mApplicationContext) :
                     WindowUtil.getScreenHeight(mApplicationContext)) * ratio);
             return this;
         }
 
         public B setY(@WindowScreen.screenType int screenType, float ratio) {
-            yOffset = (int) ((screenType == WindowScreen.WIDTH ?
+            yOffset = (int) ((screenType == WindowScreen.width ?
                     WindowUtil.getScreenWidth(mApplicationContext) :
                     WindowUtil.getScreenHeight(mApplicationContext)) * ratio);
             return this;
@@ -176,8 +173,7 @@ public class FloatWindow {
                 mFloatWindowMap = new HashMap<>();
             }
             if (mFloatWindowMap.containsKey(mTag)) {
-                throw new IllegalArgumentException("FloatWindow of this tag has been added," +
-                        " Please set a new tag for the new FloatWindow");
+                throw new IllegalArgumentException("FloatWindow of this tag has been added, Please set a new tag for the new FloatWindow");
             }
             if (mView == null && mLayoutId == 0) {
                 throw new IllegalArgumentException("View has not been set!");
@@ -194,3 +190,4 @@ public class FloatWindow {
         }
     }
 }
+

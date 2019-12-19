@@ -20,12 +20,14 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
+
+import androidx.annotation.DrawableRes;
 
 import com.zbj.videoplayer.constant.ConstantKeys;
-import com.zbj.videoplayer.inter.player.InterVideoController;
-import com.zbj.videoplayer.inter.player.VideoControllerView;
-import com.zbj.videoplayer.player.VideoPlayer;
+import com.zbj.videoplayer.inter.player.InterVideoPlayer;
 import com.zbj.videoplayer.utils.VideoPlayerUtils;
 
 import java.util.Timer;
@@ -33,19 +35,14 @@ import java.util.TimerTask;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/10/21
  *     desc  : 控制器抽象类
  *     revise:
  * </pre>
  */
-public abstract class AbsVideoPlayerController extends VideoControllerView implements
-        View.OnTouchListener, InterVideoController {
+public abstract class AbsVideoPlayerController extends FrameLayout implements View.OnTouchListener {
 
     private Context mContext;
-    protected VideoPlayer mVideoPlayer;
-    //protected InterPropertyVideoPlayer mVideoPlayer;
+    protected InterVideoPlayer mVideoPlayer;
     private Timer mUpdateProgressTimer;
     private TimerTask mUpdateProgressTimerTask;
     private Timer mUpdateNetSpeedTimer;
@@ -77,13 +74,120 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
         this.setOnTouchListener(this);
     }
 
-    /**
-     * 设置VideoPlayer
-     * @param videoPlayer            VideoPlayer对象
-     */
-    public void setVideoPlayer(VideoPlayer videoPlayer) {
+    public void setVideoPlayer(InterVideoPlayer videoPlayer) {
         mVideoPlayer = videoPlayer;
     }
+
+    /**
+     * 获取是否是锁屏模式
+     * @return                      true表示锁屏
+     */
+    public abstract boolean getLock();
+
+    /**
+     * 设置视频播放器中间的播放键是否显示，设置自定义图片
+     * @param isVisibility          是否可见
+     * @param image                 image
+     */
+    public abstract void setCenterPlayer(boolean isVisibility ,@DrawableRes int image);
+
+    /**
+     * 设置是否显示视频头部的下载，分享布局控件
+     * @param isVisibility          是否可见
+     */
+    public abstract void setTopVisibility(boolean isVisibility);
+
+    /**
+     * 设置top到顶部的距离
+     * @param top                   top距离
+     */
+    public abstract void setTopPadding(float top);
+
+    /**
+     * 设置横屏播放时，tv和audio图标是否显示
+     * @param isVisibility1                 tv图标是否显示
+     * @param isVisibility2                 audio图标是否显示
+     */
+    public abstract void setTvAndAudioVisibility(boolean isVisibility1 , boolean isVisibility2);
+
+    /**
+     * 设置不操作后，多久自动隐藏头部和底部布局
+     * @param time                  时间
+     */
+    public abstract void setHideTime(long time);
+
+
+    /**
+     * 设置加载loading类型
+     *
+     * @param type 加载loading的类型
+     *             目前1，是仿腾讯加载loading
+     *             2，是转圈加载loading
+     */
+    public abstract void setLoadingType(@ConstantKeys.LoadingType int type);
+
+    /**
+     * 设置播放的视频的标题
+     *
+     * @param title 视频标题
+     */
+    public abstract void setTitle(String title);
+
+    /**
+     * 视频底图
+     *
+     * @param resId 视频底图资源
+     */
+    public abstract void setImage(@DrawableRes int resId);
+
+    /**
+     * 视频底图ImageView控件，提供给外部用图片加载工具来加载网络图片
+     *
+     * @return 底图ImageView
+     */
+    public abstract ImageView imageView();
+
+    /**
+     * 设置总时长
+     */
+    public abstract void setLength(long length);
+
+    /**
+     * 设置总时长
+     */
+    public abstract void setLength(String length);
+
+    /**
+     * 当播放器的播放状态发生变化，在此方法中国你更新不同的播放状态的UI
+     *
+     * @param playState 播放状态：
+     */
+    public abstract void onPlayStateChanged(int playState);
+
+    /**
+     * 当播放器的播放模式发生变化，在此方法中更新不同模式下的控制器界面。
+     *
+     * @param playMode 播放器的模式：
+     */
+    public abstract void onPlayModeChanged(int playMode);
+
+    /**
+     * 重置控制器，将控制器恢复到初始状态。
+     */
+    public abstract void reset();
+
+    /**
+     * 控制器意外销毁，比如手动退出，意外崩溃等等
+     */
+    public abstract void destroy();
+
+
+    /**
+     * 当电量发生变化的时候，在此方法中国你更新不同的电量状态的UI
+     *
+     * @param batterState 电量状态
+     */
+    public abstract void onBatterStateChanged(int batterState);
 
     /**
      * 当正在缓冲或者播放准备中状态时，开启缓冲时更新网络加载速度
@@ -110,6 +214,7 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
         mUpdateNetSpeedTimer.schedule(mUpdateNetSpeedTask, 0, 100);
     }
 
+
     /**
      * 取消缓冲时更新网络加载速度
      */
@@ -123,6 +228,7 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
             mUpdateNetSpeedTask = null;
         }
     }
+
 
     /**
      * 开启更新进度的计时器。
@@ -149,6 +255,7 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
         mUpdateProgressTimer.schedule(mUpdateProgressTimerTask, 0, 1000);
     }
 
+
     /**
      * 取消更新进度的计时器。
      */
@@ -162,6 +269,63 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
             mUpdateProgressTimerTask = null;
         }
     }
+
+    /**
+     * 更新进度，包括更新网络加载速度
+     */
+    protected abstract void updateNetSpeedProgress();
+
+    /**
+     * 更新进度，包括进度条进度，展示的当前播放位置时长，总时长等。
+     */
+    protected abstract void updateProgress();
+
+
+
+    /**
+     * 手势左右滑动改变播放位置时，显示控制器中间的播放位置变化视图，
+     * 在手势滑动ACTION_MOVE的过程中，会不断调用此方法。
+     *
+     * @param duration            视频总时长ms
+     * @param newPositionProgress 新的位置进度，取值0到100。
+     */
+    protected abstract void showChangePosition(long duration, int newPositionProgress);
+
+
+    /**
+     * 手势左右滑动改变播放位置后，手势up或者cancel时，隐藏控制器中间的播放位置变化视图，
+     * 在手势ACTION_UP或ACTION_CANCEL时调用。
+     */
+    protected abstract void hideChangePosition();
+
+
+    /**
+     * 手势在右侧上下滑动改变音量时，显示控制器中间的音量变化视图，
+     * 在手势滑动ACTION_MOVE的过程中，会不断调用此方法。
+     *
+     * @param newVolumeProgress 新的音量进度，取值1到100。
+     */
+    protected abstract void showChangeVolume(int newVolumeProgress);
+
+    /**
+     * 手势在左侧上下滑动改变音量后，手势up或者cancel时，隐藏控制器中间的音量变化视图，
+     * 在手势ACTION_UP或ACTION_CANCEL时调用。
+     */
+    protected abstract void hideChangeVolume();
+
+    /**
+     * 手势在左侧上下滑动改变亮度时，显示控制器中间的亮度变化视图，
+     * 在手势滑动ACTION_MOVE的过程中，会不断调用此方法。
+     *
+     * @param newBrightnessProgress 新的亮度进度，取值1到100。
+     */
+    protected abstract void showChangeBrightness(int newBrightnessProgress);
+
+    /**
+     * 手势在左侧上下滑动改变亮度后，手势up或者cancel时，隐藏控制器中间的亮度变化视图，
+     * 在手势ACTION_UP或ACTION_CANCEL时调用。
+     */
+    protected abstract void hideChangeBrightness();
 
     /**
      * 滑动处理调节声音和亮度的逻辑
@@ -241,7 +405,6 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
                         }
                     }
                 }
-                //是否需要改变播放的进度
                 if (mNeedChangePosition) {
                     long duration = mVideoPlayer.getDuration();
                     long toPosition = (long) (mGestureDownPosition + duration * deltaX / getWidth());
@@ -249,21 +412,18 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
                     int newPositionProgress = (int) (100f * mNewPosition / duration);
                     showChangePosition(duration, newPositionProgress);
                 }
-                //是否改变亮度
                 if (mNeedChangeBrightness) {
                     deltaY = -deltaY;
                     float deltaBrightness = deltaY * 3 / getHeight();
                     float newBrightness = mGestureDownBrightness + deltaBrightness;
                     newBrightness = Math.max(0, Math.min(newBrightness, 1));
                     float newBrightnessPercentage = newBrightness;
-                    WindowManager.LayoutParams params = VideoPlayerUtils.scanForActivity(mContext)
-                            .getWindow().getAttributes();
+                    WindowManager.LayoutParams params = VideoPlayerUtils.scanForActivity(mContext).getWindow().getAttributes();
                     params.screenBrightness = newBrightnessPercentage;
                     VideoPlayerUtils.scanForActivity(mContext).getWindow().setAttributes(params);
                     int newBrightnessProgress = (int) (100f * newBrightnessPercentage);
                     showChangeBrightness(newBrightnessProgress);
                 }
-                //是否改变音量
                 if (mNeedChangeVolume) {
                     deltaY = -deltaY;
                     int maxVolume = mVideoPlayer.getMaxVolume();
@@ -277,7 +437,7 @@ public abstract class AbsVideoPlayerController extends VideoControllerView imple
                 break;
             //滑动结束
             case MotionEvent.ACTION_CANCEL:
-            //滑动手指抬起
+                //滑动手指抬起
             case MotionEvent.ACTION_UP:
                 if (mNeedChangePosition) {
                     mVideoPlayer.seekTo(mNewPosition);

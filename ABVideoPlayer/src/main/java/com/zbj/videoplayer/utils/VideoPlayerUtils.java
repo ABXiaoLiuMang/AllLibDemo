@@ -21,12 +21,9 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
@@ -36,9 +33,6 @@ import java.util.Locale;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/10/21
  *     desc  : 工具类
  *     revise:
  * </pre>
@@ -68,17 +62,11 @@ public final class VideoPlayerUtils {
      * @param activity      activity
      * @return
      */
-    public static boolean isActivityLiving(@Nullable Activity activity) {
+    public static boolean isActivityLiving(Activity activity) {
         if (activity == null) {
             return false;
         }
-        if (activity.isFinishing()) {
-            return false;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
-            return false;
-        }
-        return true;
+        return !activity.isFinishing();
     }
 
 
@@ -234,32 +222,6 @@ public final class VideoPlayerUtils {
         return manager.getActiveNetworkInfo();
     }
 
-    /**
-     * 空指针检测，不能为null，可以为""
-     * @param obj           obj对象
-     * @param message       消息
-     * @param <T>           泛型
-     * @return              obj
-     */
-    public static <T> T requireNonNull(T obj, String message) {
-        if (obj == null) {
-            throw new NullPointerException(message);
-        }
-        return obj;
-    }
-
-    /**
-     * 空指针检测，不能为null，也不能为""
-     * @param obj           obj对象
-     * @param message       消息
-     * @return              字符串
-     */
-    public static String requireNonEmpty(String obj, String message) {
-        if (TextUtils.isEmpty(obj)) {
-            throw new IllegalArgumentException(message);
-        }
-        return obj;
-    }
-
 
 }
+

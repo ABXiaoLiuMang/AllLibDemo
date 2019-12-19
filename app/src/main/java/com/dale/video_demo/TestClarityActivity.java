@@ -6,9 +6,9 @@ import android.widget.Button;
 import com.bumptech.glide.Glide;
 import com.dale.libdemo.R;
 import com.dale.utils.StatusBarUtil;
-import com.zbj.videoplayer.bean.VideoClarity;
 import com.zbj.videoplayer.constant.ConstantKeys;
 import com.zbj.videoplayer.controller.VideoPlayerController;
+import com.zbj.videoplayer.dialog.VideoClarity;
 import com.zbj.videoplayer.manager.VideoPlayerManager;
 import com.zbj.videoplayer.player.VideoPlayer;
 

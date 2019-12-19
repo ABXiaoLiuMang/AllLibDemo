@@ -24,13 +24,12 @@ public class IFloatWindowImpl extends IFloatWindow {
     private TimeInterpolator mDecelerateInterpolator;
 
     private IFloatWindowImpl() {
-
     }
 
     IFloatWindowImpl(FloatWindow.B b) {
         mB = b;
         if (mB.mMoveType == MoveType.fixed) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.N_MR1) {
                 mFloatView = new FloatPhone(b.mApplicationContext);
             } else {
                 mFloatView = new FloatToast(b.mApplicationContext);
@@ -103,7 +102,7 @@ public class IFloatWindowImpl extends IFloatWindow {
     @Override
     public void updateX(int screenType, float ratio) {
         checkMoveType();
-        mB.xOffset = (int) ((screenType == WindowScreen.WIDTH ?
+        mB.xOffset = (int) ((screenType == WindowScreen.width ?
                 WindowUtil.getScreenWidth(mB.mApplicationContext) :
                 WindowUtil.getScreenHeight(mB.mApplicationContext)) * ratio);
         mFloatView.updateX(mB.xOffset);
@@ -113,7 +112,7 @@ public class IFloatWindowImpl extends IFloatWindow {
     @Override
     public void updateY(int screenType, float ratio) {
         checkMoveType();
-        mB.yOffset = (int) ((screenType == WindowScreen.WIDTH ?
+        mB.yOffset = (int) ((screenType == WindowScreen.width ?
                 WindowUtil.getScreenWidth(mB.mApplicationContext) :
                 WindowUtil.getScreenHeight(mB.mApplicationContext)) * ratio);
         mFloatView.updateY(mB.yOffset);
@@ -211,12 +210,12 @@ public class IFloatWindowImpl extends IFloatWindow {
                                         });
                                         startAnimator();
                                         break;
-                                        default:
-                                            break;
+                                    default:
+                                        break;
                                 }
                                 break;
-                                default:
-                                    break;
+                            default:
+                                break;
 
                         }
                         return false;

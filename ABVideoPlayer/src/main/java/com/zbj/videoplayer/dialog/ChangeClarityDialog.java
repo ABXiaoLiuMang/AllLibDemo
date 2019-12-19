@@ -25,7 +25,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.zbj.videoplayer.R;
 import com.zbj.videoplayer.inter.listener.OnClarityChangedListener;
 import com.zbj.videoplayer.utils.VideoPlayerUtils;
@@ -35,9 +34,6 @@ import java.util.List;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2018/1/29
  *     desc  : 切换清晰度对话框（仿腾讯视频切换清晰度的对话框）
  *     revise:
  * </pre>
@@ -132,5 +128,4 @@ public class ChangeClarityDialog extends Dialog {
     public void setOnClarityCheckedListener(OnClarityChangedListener listener) {
         mListener = listener;
     }
-
 }

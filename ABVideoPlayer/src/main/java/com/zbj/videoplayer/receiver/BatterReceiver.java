@@ -27,11 +27,9 @@ import com.zbj.videoplayer.manager.VideoPlayerManager;
 import com.zbj.videoplayer.player.VideoPlayer;
 import com.zbj.videoplayer.utils.VideoLogUtil;
 
+
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/9/17
  *     desc  : 电量状态监听广播
  *     revise:
  * </pre>

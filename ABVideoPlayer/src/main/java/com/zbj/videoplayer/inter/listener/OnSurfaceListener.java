@@ -16,24 +16,23 @@ limitations under the License.
 package com.zbj.videoplayer.inter.listener;
 
 
-import android.view.SurfaceHolder;
+import android.graphics.SurfaceTexture;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/11/9
  *     desc  : VideoSurfaceView监听
  *     revise:
  * </pre>
  */
 public interface OnSurfaceListener {
 
-    void surfaceCreated(SurfaceHolder holder);
+    void onSurfaceAvailable(SurfaceTexture surface);
 
-    void surfaceChanged(SurfaceHolder holder, int format, int width, int height);
+    void onSurfaceSizeChanged(SurfaceTexture surface, int width, int height);
 
-    void surfaceDestroyed(SurfaceHolder holder);
+    boolean onSurfaceDestroyed(SurfaceTexture surface);
+
+    void onSurfaceUpdated(SurfaceTexture surface);
 
 
 }

@@ -15,9 +15,6 @@ import java.util.List;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2018/2/10
  *     desc  : 用于在内部自动申请权限
  *     revise:
  * </pre>

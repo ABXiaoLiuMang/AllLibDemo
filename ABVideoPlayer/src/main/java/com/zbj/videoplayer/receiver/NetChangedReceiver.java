@@ -29,9 +29,6 @@ import com.zbj.videoplayer.utils.VideoLogUtil;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2019/5/21
  *     desc  : 网络状态监听广播
  *     revise:
  * </pre>

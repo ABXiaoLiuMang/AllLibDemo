@@ -20,9 +20,6 @@ import com.zbj.videoplayer.constant.ConstantKeys;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/11/9
  *     desc  : 视频顶部点击事件
  *     revise:
  * </pre>

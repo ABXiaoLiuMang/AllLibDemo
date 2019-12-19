@@ -18,9 +18,6 @@ import com.zbj.videoplayer.utils.VideoLogUtil;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2018/8/29
  *     desc  : 适配了悬浮窗的view
  *     revise:
  * </pre>
@@ -45,19 +42,19 @@ public class FloatPlayerView extends FrameLayout {
     }
 
     private void init() {
-        LayoutInflater inflater = (LayoutInflater) this.getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view ;
         if (inflater != null) {
             view = inflater.inflate(R.layout.view_window_dialog, this);
             mVideoPlayer = view.findViewById(R.id.video_player);
             mVideoPlayer.setUp(path,null);
-            mVideoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
+            mVideoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_NATIVE);
             //创建视频控制器
             VideoPlayerController controller = new VideoPlayerController(getContext());
             controller.setTopVisibility(false);
             controller.setLoadingType(ConstantKeys.Loading.LOADING_QQ);
             controller.imageView().setBackgroundColor(Color.BLACK);
+            controller.setCenterPlayer(true,R.drawable.icon_play_center);
             controller.setOnCompletedListener(new OnCompletedListener() {
                 @Override
                 public void onCompleted() {
@@ -67,15 +64,8 @@ public class FloatPlayerView extends FrameLayout {
                     }
                 }
             });
-            //controller.onPlayModeChanged(ConstantKeys.PlayMode.MODE_TINY_WINDOW);
             mVideoPlayer.setController(controller);
-            //mVideoPlayer.enterTinyWindow();
-            mVideoPlayer.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mVideoPlayer.start();
-                }
-            },300);
+            mVideoPlayer.start();
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,9 +88,6 @@ public class FloatPlayerView extends FrameLayout {
     }
 
     public interface CompletedListener{
-        /**
-         * 播放完成
-         */
         void Completed();
     }
 

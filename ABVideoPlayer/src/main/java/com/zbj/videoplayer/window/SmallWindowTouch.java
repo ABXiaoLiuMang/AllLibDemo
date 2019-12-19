@@ -8,9 +8,6 @@ import android.widget.FrameLayout;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2018/8/29
  *     desc  : 小窗口触摸移动
  *     revise:
  * </pre>
@@ -44,6 +41,7 @@ public class SmallWindowTouch implements View.OnTouchListener {
                 FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) mView.getLayoutParams();
                 _xDelta = X - lParams.leftMargin;
                 _yDelta = Y - lParams.topMargin;
+
                 break;
             case MotionEvent.ACTION_UP:
                 if (Math.abs(mDownY - Y) < 5 && Math.abs(mDownX - X) < 5) {
@@ -71,9 +69,6 @@ public class SmallWindowTouch implements View.OnTouchListener {
                     layoutParams.topMargin = 0;
                 }
                 mView.setLayoutParams(layoutParams);
-                break;
-            default:
-                break;
         }
         return false;
     }

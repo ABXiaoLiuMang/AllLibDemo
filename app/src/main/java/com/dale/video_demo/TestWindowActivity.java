@@ -110,8 +110,8 @@ public class TestWindowActivity extends BaseActivity implements View.OnClickList
                 //.setWidth(WindowScreen.WIDTH, 0.4f)
                 //.setHeight(WindowScreen.WIDTH, 0.3f)
                 //这个是设置位置
-                .setX(WindowScreen.WIDTH, 0.8f)
-                .setY(WindowScreen.HEIGHT, 0.3f)
+                .setX(WindowScreen.width, 0.8f)
+                .setY(WindowScreen.height, 0.3f)
                 .setMoveType(MoveType.slide)
                 .setFilter(false)
                 //.setFilter(true, WindowActivity.class, EmptyActivity.class)

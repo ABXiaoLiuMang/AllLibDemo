@@ -19,16 +19,13 @@ import android.util.Log;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/10/21
  *     desc  : log工具
  *     revise:
  * </pre>
  */
 public final class VideoLogUtil {
 
-    private static final String TAG = "YCVideoPlayer";
+    private static final String TAG = "VideoPlayer";
     private static boolean isLog = true;
 
     /**

@@ -8,9 +8,6 @@ import android.os.Build;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2019/5/21
  *     desc  : 网络状态监听工具类
  *     revise:
  * </pre>

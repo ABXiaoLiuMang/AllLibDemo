@@ -18,9 +18,6 @@ package com.zbj.videoplayer.inter.listener;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/11/21
  *     desc  : 清晰度监听接口
  *     revise:
  * </pre>

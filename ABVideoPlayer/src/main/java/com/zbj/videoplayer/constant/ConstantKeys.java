@@ -16,7 +16,6 @@ limitations under the License.
 package com.zbj.videoplayer.constant;
 
 
-
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -24,14 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/10/21
  *     desc  : 常量
  *     revise:
  * </pre>
  */
 public final class ConstantKeys {
+
 
     /**
      * 通过注解限定类型
@@ -44,19 +41,20 @@ public final class ConstantKeys {
         int TYPE_NATIVE = 222;
     }
 
-    @IntDef({IjkPlayerType.TYPE_IJK, IjkPlayerType.TYPE_NATIVE})
+    @IntDef({IjkPlayerType.TYPE_IJK,IjkPlayerType.TYPE_NATIVE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface PlayerType{}
 
+
     /**
      * 控制器上的视频顶部View点击事件
-     *                  在竖屏模式下，默认是不显示，需要显示设置controller.setTopVisibility(true);
+     *                  在竖屏模式下
      *                  1.DOWNLOAD，下载
      *                  2.AUDIO，切换音频
      *                  3.SHARE，分享
      *                  4.MENU，菜单
      *
-     *                  在横屏模式下，默认是不显示，需要显示设置controller.setTvAndAudioVisibility(true,true);
+     *                  在横屏模式下
      *                  5.TV，点击投影到电视上
      *                  6.HOR_AUDIO，音频
      */
@@ -69,8 +67,8 @@ public final class ConstantKeys {
         int TV = 2009;
         int HOR_AUDIO = 2010;
     }
-    @IntDef({VideoControl.DOWNLOAD, VideoControl.AUDIO,
-            VideoControl.SHARE, VideoControl.MENU, VideoControl.TV,
+    @IntDef({VideoControl.DOWNLOAD,VideoControl.AUDIO,
+            VideoControl.SHARE,VideoControl.MENU,VideoControl.TV,
             VideoControl.HOR_AUDIO})
     @Retention(RetentionPolicy.SOURCE)
     public @interface VideoControlType{}
@@ -110,6 +108,8 @@ public final class ConstantKeys {
         int MODE_TINY_WINDOW = 1003;
     }
 
+
+
     /**
      * 通过注解限定类型
      * 加载loading的类型
@@ -122,7 +122,7 @@ public final class ConstantKeys {
         int LOADING_QQ = 2;
     }
 
-    @IntDef({Loading.LOADING_RING, Loading.LOADING_QQ})
+    @IntDef({Loading.LOADING_RING,Loading.LOADING_QQ})
     @Retention(RetentionPolicy.SOURCE)
     public @interface LoadingType{}
 

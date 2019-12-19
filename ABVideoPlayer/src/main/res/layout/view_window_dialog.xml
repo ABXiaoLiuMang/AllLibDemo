@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <org.yczbj.ycvideoplayerlib.player.VideoPlayer
+    <com.zbj.videoplayer.player.VideoPlayer
         android:id="@+id/video_player"
         android:layout_width="240dp"
         android:layout_height="150dp"/>

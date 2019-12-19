@@ -1,7 +1,6 @@
 package com.zbj.videoplayer.window;
 
 
-
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;

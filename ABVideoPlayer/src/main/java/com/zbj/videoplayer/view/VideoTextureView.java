@@ -16,7 +16,6 @@ limitations under the License.
 
 package com.zbj.videoplayer.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.view.Gravity;
@@ -24,31 +23,20 @@ import android.view.TextureView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.zbj.videoplayer.inter.listener.OnTextureListener;
-import com.zbj.videoplayer.utils.VideoLogUtil;
+import com.zbj.videoplayer.inter.listener.OnSurfaceListener;
 
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/10/21
  *     desc  : 重写TextureView，适配视频的宽高和旋转
  *     revise:
  * </pre>
  */
-@SuppressLint("NewApi")
 public class VideoTextureView extends TextureView implements TextureView.SurfaceTextureListener {
-
-    /**
-     * 优点：支持移动、旋转、缩放等动画，支持截图。具有view的属性
-     * 缺点：必须在硬件加速的窗口中使用，占用内存比SurfaceView高，在5.0以前在主线程渲染，5.0以后有单独的渲染线程。
-     */
 
     private int videoHeight;
     private int videoWidth;
-    private OnTextureListener onTextureListener;
-    private static final float EQUAL_FLOAT = 0.0000001f;
+    private OnSurfaceListener onSurfaceListener;
 
 
     public VideoTextureView(Context context) {
@@ -59,13 +47,13 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
     /**
      * SurfaceTexture准备就绪
      * @param surface                   surface
-     * @param width                     WIDTH
-     * @param height                    HEIGHT
+     * @param width                     width
+     * @param height                    height
      */
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        if (onTextureListener != null) {
-            onTextureListener.onSurfaceAvailable(surface);
+        if (onSurfaceListener != null) {
+            onSurfaceListener.onSurfaceAvailable(surface);
         }
     }
 
@@ -73,13 +61,13 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
     /**
      * SurfaceTexture缓冲大小变化
      * @param surface                   surface
-     * @param width                     WIDTH
-     * @param height                    HEIGHT
+     * @param width                     width
+     * @param height                    height
      */
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        if (onTextureListener != null) {
-            onTextureListener.onSurfaceSizeChanged(surface, width, height);
+        if (onSurfaceListener != null) {
+            onSurfaceListener.onSurfaceSizeChanged(surface, width, height);
         }
     }
 
@@ -91,8 +79,8 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         //清空释放
-        if (onTextureListener != null) {
-            onTextureListener.onSurfaceDestroyed(surface);
+        if (onSurfaceListener != null) {
+            onSurfaceListener.onSurfaceDestroyed(surface);
         }
         return false;
     }
@@ -105,28 +93,28 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         //如果播放的是暂停全屏了
-        if (onTextureListener != null) {
-            onTextureListener.onSurfaceUpdated(surface);
+        if (onSurfaceListener != null) {
+            onSurfaceListener.onSurfaceUpdated(surface);
         }
     }
 
 
     /**
      * 获取listener
-     * @return                          onTextureListener
+     * @return                          onSurfaceListener
      */
-    public OnTextureListener getonTextureListener() {
-        return onTextureListener;
+    public OnSurfaceListener getOnSurfaceListener() {
+        return onSurfaceListener;
     }
 
 
     /**
      * 设置监听
-     * @param surfaceListener           onTextureListener
+     * @param surfaceListener           onSurfaceListener
      */
-    public void setOnTextureListener(OnTextureListener surfaceListener) {
+    public void setOnSurfaceListener(OnSurfaceListener surfaceListener) {
         setSurfaceTextureListener(this);
-        onTextureListener = surfaceListener;
+        onSurfaceListener = surfaceListener;
     }
 
 
@@ -176,26 +164,17 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // 获取视图旋转的角度
         float viewRotation = getRotation();
         // 如果判断成立，则说明显示的TextureView和本身的位置是有90度的旋转的，所以需要交换宽高参数。
         float viewRotation1 = 90f;
         float viewRotation2 = 270f;
-        //如果是横竖屏旋转切换视图，则宽高属性互换
-        if (Math.abs(viewRotation-viewRotation1)> EQUAL_FLOAT && Math.abs(viewRotation1-viewRotation)> EQUAL_FLOAT ||
-                (Math.abs(viewRotation-viewRotation2)> EQUAL_FLOAT && Math.abs(viewRotation2-viewRotation)> EQUAL_FLOAT)){
+        if (viewRotation == viewRotation1 || viewRotation == viewRotation2) {
             int tempMeasureSpec = widthMeasureSpec;
             //noinspection SuspiciousNameCombination
             widthMeasureSpec = heightMeasureSpec;
             heightMeasureSpec = tempMeasureSpec;
-            VideoLogUtil.d("TextureView---------"+"如果是横竖屏旋转切换视图，则宽高属性互换");
         }
-        /*if (viewRotation == viewRotation1 || viewRotation == viewRotation2) {
-            int tempMeasureSpec = widthMeasureSpec;
-            //noinspection SuspiciousNameCombination
-            widthMeasureSpec = heightMeasureSpec;
-            heightMeasureSpec = tempMeasureSpec;
-        }*/
+
         int width = getDefaultSize(videoWidth, widthMeasureSpec);
         int height = getDefaultSize(videoHeight, heightMeasureSpec);
         if (videoWidth > 0 && videoHeight > 0) {
@@ -216,7 +195,7 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
                     height = width * videoHeight / videoWidth;
                 }
             } else if (widthSpecMode == MeasureSpec.EXACTLY) {
-                // only the WIDTH is fixed, adjust the HEIGHT to match aspect ratio if possible
+                // only the width is fixed, adjust the height to match aspect ratio if possible
                 width = widthSpecSize;
                 height = width * videoHeight / videoWidth;
                 if (heightSpecMode == MeasureSpec.AT_MOST && height > heightSpecSize) {
@@ -225,7 +204,7 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
                     width = height * videoWidth / videoHeight;
                 }
             } else if (heightSpecMode == MeasureSpec.EXACTLY) {
-                // only the HEIGHT is fixed, adjust the WIDTH to match aspect ratio if possible
+                // only the height is fixed, adjust the width to match aspect ratio if possible
                 height = heightSpecSize;
                 width = height * videoWidth / videoHeight;
                 if (widthSpecMode == MeasureSpec.AT_MOST && width > widthSpecSize) {
@@ -234,21 +213,23 @@ public class VideoTextureView extends TextureView implements TextureView.Surface
                     height = width * videoHeight / videoWidth;
                 }
             } else {
-                // neither the WIDTH nor the HEIGHT are fixed, try to use actual video size
+                // neither the width nor the height are fixed, try to use actual video size
                 width = videoWidth;
                 height = videoHeight;
                 if (heightSpecMode == MeasureSpec.AT_MOST && height > heightSpecSize) {
-                    // too tall, decrease both WIDTH and HEIGHT
+                    // too tall, decrease both width and height
                     height = heightSpecSize;
                     width = height * videoWidth / videoHeight;
                 }
                 if (widthSpecMode == MeasureSpec.AT_MOST && width > widthSpecSize) {
-                    // too wide, decrease both WIDTH and HEIGHT
+                    // too wide, decrease both width and height
                     width = widthSpecSize;
                     height = width * videoHeight / videoWidth;
                 }
             }
-        }  // no size yet, just adopt the given spec sizes
+        } else {
+            // no size yet, just adopt the given spec sizes
+        }
         setMeasuredDimension(width, height);
     }
 

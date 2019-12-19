@@ -31,26 +31,27 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 import com.zbj.videoplayer.R;
-import com.zbj.videoplayer.bean.VideoClarity;
 import com.zbj.videoplayer.constant.ConstantKeys;
 import com.zbj.videoplayer.dialog.ChangeClarityDialog;
+import com.zbj.videoplayer.dialog.VideoClarity;
 import com.zbj.videoplayer.inter.listener.OnClarityChangedListener;
 import com.zbj.videoplayer.inter.listener.OnCompletedListener;
 import com.zbj.videoplayer.inter.listener.OnPlayOrPauseListener;
 import com.zbj.videoplayer.inter.listener.OnPlayerTypeListener;
 import com.zbj.videoplayer.inter.listener.OnVideoBackListener;
 import com.zbj.videoplayer.inter.listener.OnVideoControlListener;
-import com.zbj.videoplayer.player.VideoPlayer;
+import com.zbj.videoplayer.inter.player.InterVideoPlayer;
 import com.zbj.videoplayer.receiver.BatterReceiver;
 import com.zbj.videoplayer.receiver.NetChangedReceiver;
 import com.zbj.videoplayer.utils.VideoLogUtil;
 import com.zbj.videoplayer.utils.VideoPlayerUtils;
-import com.zbj.videoplayer.view.BaseToast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,9 +62,6 @@ import java.util.Locale;
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2017/9/29
  *     desc  : 播放器控制器，主要是处理UI操作逻辑
  *     revise: 注意：建议先判断状态，再进行设置参数
  * </pre>
@@ -73,31 +71,22 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     private Context mContext;
     private ImageView mImage;
     private ImageView mCenterStart;
-    /**
-     * top顶部视图，包括所有的
-     */
     private LinearLayout mTop;
     private ImageView mBack;
     private TextView mTitle;
-    /**
-     * 正常视频，top顶部视图，包括下载，分享，更多，音频控件
-     */
+
     private LinearLayout mLlTopOther;
     private ImageView mIvDownload;
     private ImageView mIvAudio;
     private ImageView mIvShare;
     private ImageView mIvMenu;
-    /**
-     * 横向屏幕视图，top顶部视图，包括音频，tv，电量，时间等控件
-     */
+
     private LinearLayout mLlHorizontal;
     private ImageView mIvHorAudio;
     private ImageView mIvHorTv;
     private ImageView mBattery;
     private TextView mTime;
-    /**
-     * 底部视图，包括所有的
-     */
+
     private LinearLayout mBottom;
     private ImageView mRestartPause;
     private TextView mPosition;
@@ -106,56 +95,28 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     private TextView mClarity;
     private ImageView mFullScreen;
     private TextView mLength;
-    /**
-     * 加载loading视图，包括所有的
-     */
     private LinearLayout mLoading;
     private ProgressBar pbLoadingRing;
     private ProgressBar pbLoadingQq;
     private TextView mLoadText;
-    /**
-     * 改变播放位置视图，这个是在屏幕上左右滑动切换播放进度的控件
-     */
     private LinearLayout mChangePosition;
     private TextView mChangePositionCurrent;
     private ProgressBar mChangePositionProgress;
-    /**
-     * 改变屏幕亮度视图，这个是在屏幕左边上下滑动改变亮度的控件
-     */
     private LinearLayout mChangeBrightness;
     private ProgressBar mChangeBrightnessProgress;
-    /**
-     * 改变播放声音视图，这个是在屏幕右边上下滑动改变音量的控件
-     */
     private LinearLayout mChangeVolume;
     private ProgressBar mChangeVolumeProgress;
-    /**
-     * 异常壮体视图
-     */
     private LinearLayout mError;
     private TextView mTvError;
     private TextView mRetry;
-    /**
-     * 完成播放视图
-     */
     private LinearLayout mCompleted;
     private TextView mReplay;
     private TextView mShare;
-    /**
-     * 锁屏视图，只有在横屏播放的时候才会显示
-     */
     private FrameLayout mFlLock;
     private ImageView mIvLock;
-    /**
-     * 底部播放进度条
-     */
     private LinearLayout mLine;
     private ProgressBar mPbPlayBar;
 
-
-    /**
-     * top视图和bottom视图是否显示
-     */
     private boolean topBottomVisible;
     /**
      * 倒计时器
@@ -184,7 +145,12 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      * 顶部的布局，下载，切换音频，分享布局是否显示。
      * 默认为false，不显示
      */
-    private boolean mIsTopLayoutVisibility = false;
+    private boolean mIsTopAndBottomVisibility = false;
+    /**
+     * 设置视频播放器中间的播放键是否显示
+     * 默认为false，不显示
+     */
+    private boolean mIsCenterPlayerVisibility = false;
     /**
      * 设置横屏播放时，tv图标是否显示
      * 默认为false，不显示
@@ -222,23 +188,12 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (pbLoadingRing!=null && pbLoadingRing.getVisibility()== View.VISIBLE){
-                boolean animating = pbLoadingRing.isAnimating();
-                if (animating){
-                    pbLoadingRing.clearAnimation();
-                }
-            }
-            if (pbLoadingQq!=null && pbLoadingQq.getVisibility()== View.VISIBLE){
-                boolean ringAnimating = pbLoadingQq.isAnimating();
-                if (ringAnimating){
-                    pbLoadingQq.clearAnimation();
-                }
-            }
-        } else {
-            if (pbLoadingRing!=null && pbLoadingRing.getVisibility()== View.VISIBLE){
+            boolean animating = pbLoadingRing.isAnimating();
+            if (animating){
                 pbLoadingRing.clearAnimation();
             }
-            if (pbLoadingQq!=null && pbLoadingQq.getVisibility()== View.VISIBLE){
+            boolean ringAnimating = pbLoadingQq.isAnimating();
+            if (ringAnimating){
                 pbLoadingQq.clearAnimation();
             }
         }
@@ -254,7 +209,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                 IntentFilter filter = new IntentFilter();
                 filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
                 mContext.registerReceiver(netChangedReceiver, filter);
-                VideoLogUtil.i("广播监听---------注册网络监听广播");
+                VideoLogUtil.i("注册网络监听广播");
             }
             hasRegisterNetReceiver = true;
         }
@@ -268,7 +223,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         if (hasRegisterNetReceiver) {
             if (netChangedReceiver != null) {
                 mContext.unregisterReceiver(netChangedReceiver);
-                VideoLogUtil.i("广播监听---------解绑注册网络监听广播");
+                VideoLogUtil.i("解绑注册网络监听广播");
             }
             hasRegisterNetReceiver = false;
         }
@@ -283,7 +238,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
             mContext.registerReceiver(mBatterReceiver, new IntentFilter(
                     Intent.ACTION_BATTERY_CHANGED));
             hasRegisterBatteryReceiver = true;
-            VideoLogUtil.i("广播监听---------注册电池监听广播");
+            VideoLogUtil.i("注册电池监听广播");
         }
     }
 
@@ -295,7 +250,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         if (hasRegisterBatteryReceiver) {
             mContext.unregisterReceiver(mBatterReceiver);
             hasRegisterBatteryReceiver = false;
-            VideoLogUtil.i("广播监听---------解绑电池监听广播");
+            VideoLogUtil.i("解绑电池监听广播");
         }
     }
 
@@ -361,19 +316,22 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         mLine = findViewById(R.id.line);
         mPbPlayBar = findViewById(R.id.pb_play_bar);
 
-        setTopVisibility(mIsTopLayoutVisibility);
+        setTopVisibility(mIsTopAndBottomVisibility);
     }
 
 
     private void initListener() {
         mCenterStart.setOnClickListener(this);
         mBack.setOnClickListener(this);
+
         mIvDownload.setOnClickListener(this);
         mIvShare.setOnClickListener(this);
         mIvAudio.setOnClickListener(this);
         mIvMenu.setOnClickListener(this);
+
         mIvHorAudio.setOnClickListener(this);
         mIvHorTv.setOnClickListener(this);
+
         mRestartPause.setOnClickListener(this);
         mFullScreen.setOnClickListener(this);
         mClarity.setOnClickListener(this);
@@ -413,7 +371,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     @Override
     public void setTopVisibility(boolean isVisibility) {
-        this.mIsTopLayoutVisibility = isVisibility;
+        this.mIsTopAndBottomVisibility = isVisibility;
         if(isVisibility){
             mLlTopOther.setVisibility(VISIBLE);
         }else {
@@ -480,10 +438,8 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      * @param title             视频标题
      */
     @Override
-    public void setTitle(String title) {
-        if (title!=null && title.length()>0){
-            mTitle.setText(title);
-        }
+    public void setTitle(@NonNull String title) {
+        mTitle.setText(title);
     }
 
 
@@ -513,12 +469,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     @Override
     public void setLength(long length) {
-        if (length>0){
-            mLength.setVisibility(VISIBLE);
-            mLength.setText(VideoPlayerUtils.formatTime(length));
-        } else {
-            mLength.setVisibility(GONE);
-        }
+        mLength.setText(VideoPlayerUtils.formatTime(length));
     }
 
 
@@ -528,12 +479,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     @Override
     public void setLength(String length) {
-        if (length!=null && length.length()>0){
-            mLength.setVisibility(VISIBLE);
-            mLength.setText(length);
-        } else {
-            mLength.setVisibility(GONE);
-        }
+        mLength.setText(length);
     }
 
 
@@ -542,11 +488,28 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      * @param videoPlayer   播放器
      */
     @Override
-    public void setVideoPlayer(VideoPlayer videoPlayer) {
+    public void setVideoPlayer(InterVideoPlayer videoPlayer) {
         super.setVideoPlayer(videoPlayer);
         // 给播放器配置视频链接地址
-        if (clarities != null && clarities.size() > 1 && clarities.size()>defaultClarityIndex) {
+        if (clarities != null && clarities.size() > 1) {
             mVideoPlayer.setUp(clarities.get(defaultClarityIndex).getVideoUrl(), null);
+        }
+    }
+
+    /**
+     * 设置中间播放按钮是否显示，并且支持设置自定义图标
+     * @param isVisibility          是否可见，默认不可见
+     * @param image                 image
+     */
+    @Override
+    public void setCenterPlayer(boolean isVisibility, @DrawableRes int image) {
+        this.mIsCenterPlayerVisibility = isVisibility;
+        if(isVisibility){
+            if(image==0){
+                mCenterStart.setImageResource(R.drawable.ic_player_center_start);
+            }else {
+                mCenterStart.setImageResource(image);
+            }
         }
     }
 
@@ -639,7 +602,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     @SuppressLint("SetTextI18n")
     @Override
-    public void onPlayStateChanged(@ConstantKeys.CurrentState int playState) {
+    public void onPlayStateChanged(int playState) {
         switch (playState) {
             case ConstantKeys.CurrentState.STATE_IDLE:
                 break;
@@ -655,19 +618,38 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                 break;
             //正在播放
             case ConstantKeys.CurrentState.STATE_PLAYING:
-                statePlaying();
+                mLoading.setVisibility(View.GONE);
+                mCenterStart.setVisibility(View.GONE);
+                mRestartPause.setImageResource(R.drawable.ic_player_pause);
+                startDismissTopBottomTimer();
+                cancelUpdateNetSpeedTimer();
                 break;
             //暂停播放
             case ConstantKeys.CurrentState.STATE_PAUSED:
-                statePaused();
+                mLoading.setVisibility(View.GONE);
+                mCenterStart.setVisibility(mIsCenterPlayerVisibility?View.VISIBLE:View.GONE);
+                mRestartPause.setImageResource(R.drawable.ic_player_start);
+                cancelDismissTopBottomTimer();
+                cancelUpdateNetSpeedTimer();
                 break;
             //正在缓冲(播放器正在播放时，缓冲区数据不足，进行缓冲，缓冲区数据足够后恢复播放)
             case ConstantKeys.CurrentState.STATE_BUFFERING_PLAYING:
-                stateBufferingPlaying();
+                mError.setVisibility(View.GONE);
+                mLoading.setVisibility(View.VISIBLE);
+                mCenterStart.setVisibility(View.GONE);
+                mRestartPause.setImageResource(R.drawable.ic_player_pause);
+                mLoadText.setText("正在准备...");
+                startDismissTopBottomTimer();
+                cancelUpdateNetSpeedTimer();
                 break;
-            //暂停缓冲
+            //正在缓冲
             case ConstantKeys.CurrentState.STATE_BUFFERING_PAUSED:
-                stateBufferingPaused();
+                mLoading.setVisibility(View.VISIBLE);
+                mRestartPause.setImageResource(R.drawable.ic_player_start);
+                mLoadText.setText("正在准备...");
+                cancelDismissTopBottomTimer();
+                //开启缓冲时更新网络加载速度
+                startUpdateNetSpeedTimer();
                 break;
             //播放错误
             case ConstantKeys.CurrentState.STATE_ERROR:
@@ -682,83 +664,34 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         }
     }
 
+
     /**
      * 播放准备中
      */
     private void startPreparing() {
+        mImage.setVisibility(View.GONE);
         mLoading.setVisibility(View.VISIBLE);
         mLoadText.setText("正在准备...");
-        mImage.setVisibility(View.GONE);
         mError.setVisibility(View.GONE);
         mCompleted.setVisibility(View.GONE);
+        mTop.setVisibility(View.GONE);
+        mBottom.setVisibility(View.GONE);
         mCenterStart.setVisibility(View.GONE);
         mLength.setVisibility(View.GONE);
-        mPbPlayBar.setVisibility(GONE);
-        setTopBottomVisible(false);
         //开启缓冲时更新网络加载速度
         startUpdateNetSpeedTimer();
         startUpdateProgressTimer();
     }
 
-    /**
-     * 正在播放
-     */
-    private void statePlaying() {
-        mLoading.setVisibility(View.GONE);
-        mPbPlayBar.setVisibility(View.VISIBLE);
-        mRestartPause.setImageResource(R.drawable.ic_player_pause);
-        mCenterStart.setImageResource(R.drawable.icon_pause_center);
-        setTopBottomVisible(true);
-        startDismissTopBottomTimer();
-        cancelUpdateNetSpeedTimer();
-    }
-
-    /**
-     * 暂停播放
-     */
-    private void statePaused() {
-        mLoading.setVisibility(View.GONE);
-        mRestartPause.setImageResource(R.drawable.ic_player_start);
-        mCenterStart.setImageResource(R.drawable.icon_play_center);
-        setTopBottomVisible(true);
-        cancelDismissTopBottomTimer();
-        cancelUpdateNetSpeedTimer();
-    }
-
-    /**
-     * 正在缓冲(播放器正在播放时，缓冲区数据不足，进行缓冲，缓冲区数据足够后恢复播放)
-     */
-    private void stateBufferingPlaying() {
-        mLoading.setVisibility(View.VISIBLE);
-        setTopBottomVisible(false);
-        mRestartPause.setImageResource(R.drawable.ic_player_pause);
-        mCenterStart.setImageResource(R.drawable.icon_pause_center);
-        mLoadText.setText("正在准备...");
-        startDismissTopBottomTimer();
-        cancelUpdateNetSpeedTimer();
-    }
-
-    /**
-     * 暂停缓冲
-     */
-    private void stateBufferingPaused() {
-        mLoading.setVisibility(View.VISIBLE);
-        mRestartPause.setImageResource(R.drawable.ic_player_start);
-        mCenterStart.setImageResource(R.drawable.icon_play_center);
-        mLoadText.setText("正在准备...");
-        setTopBottomVisible(false);
-        cancelDismissTopBottomTimer();
-        //开启缓冲时更新网络加载速度
-        startUpdateNetSpeedTimer();
-    }
 
     /**
      * 播放错误
      */
     private void stateError() {
-        mLoading.setVisibility(View.GONE);
         setTopBottomVisible(false);
+        mTop.setVisibility(View.VISIBLE);
         mError.setVisibility(View.VISIBLE);
+        mLine.setVisibility(GONE);
         cancelUpdateProgressTimer();
         cancelUpdateNetSpeedTimer();
         if (!VideoPlayerUtils.isConnected(mContext)){
@@ -773,80 +706,78 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     private void stateCompleted() {
         cancelUpdateProgressTimer();
-        cancelUpdateNetSpeedTimer();
         setTopBottomVisible(false);
-        mLoading.setVisibility(View.GONE);
         mImage.setVisibility(View.VISIBLE);
         mCompleted.setVisibility(View.VISIBLE);
         //设置播放完成的监听事件
         if(mOnCompletedListener!=null){
             mOnCompletedListener.onCompleted();
         }
-        mPbPlayBar.setProgress(100);
         //当播放完成就解除广播
         unRegisterNetChangedReceiver();
+        cancelUpdateNetSpeedTimer();
     }
+
 
     /**
      * 当播放器的播放模式发生变化时
      * @param playMode 播放器的模式：
      */
     @Override
-    public void onPlayModeChanged(@ConstantKeys.PlayMode int playMode) {
+    public void onPlayModeChanged(int playMode) {
         switch (playMode) {
             //普通模式
             case ConstantKeys.PlayMode.MODE_NORMAL:
-                //隐藏锁屏控件
                 mFlLock.setVisibility(View.GONE);
+                mBack.setVisibility(View.VISIBLE);
                 mFullScreen.setImageResource(R.drawable.ic_player_open);
                 mFullScreen.setVisibility(View.VISIBLE);
-                //隐藏清晰度
                 mClarity.setVisibility(View.GONE);
-                //隐藏横屏的时候展现的布局
+                setTopVisibility(mIsTopAndBottomVisibility);
                 mLlHorizontal.setVisibility(View.GONE);
                 unRegisterBatterReceiver();
                 mIsLock = false;
                 if (mOnPlayerTypeListener!=null){
                     mOnPlayerTypeListener.onNormal();
                 }
-                setTopBottomVisible(true);
-                //隐藏电量图标
-                mBattery.setVisibility(GONE);
-                VideoLogUtil.d("播放模式--------普通模式");
                 break;
             //全屏模式
             case ConstantKeys.PlayMode.MODE_FULL_SCREEN:
                 mFlLock.setVisibility(View.VISIBLE);
+                mBack.setVisibility(View.VISIBLE);
                 mFullScreen.setVisibility(View.VISIBLE);
                 mFullScreen.setImageResource(R.drawable.ic_player_close);
                 if (clarities != null && clarities.size() > 1) {
                     mClarity.setVisibility(View.VISIBLE);
                 }
-                mLlHorizontal.setVisibility(View.VISIBLE);
-                mIvHorTv.setVisibility(mIsTvIconVisibility?VISIBLE:GONE);
-                mIvHorAudio.setVisibility(mIsAudioIconVisibility?VISIBLE:GONE);
-                setTopBottomVisible(true);
+                mLlTopOther.setVisibility(GONE);
+                if (mIsTopAndBottomVisibility){
+                    mLlHorizontal.setVisibility(View.VISIBLE);
+                    mIvHorTv.setVisibility(mIsTvIconVisibility?VISIBLE:GONE);
+                    mIvHorAudio.setVisibility(mIsAudioIconVisibility?VISIBLE:GONE);
+                }else {
+                    mLlHorizontal.setVisibility(View.GONE);
+                }
                 registerBatterReceiver();
                 if (mOnPlayerTypeListener!=null){
                     mOnPlayerTypeListener.onFullScreen();
                 }
-                VideoLogUtil.d("播放模式--------全屏模式");
                 break;
             //小窗口模式
             case ConstantKeys.PlayMode.MODE_TINY_WINDOW:
                 mFlLock.setVisibility(View.GONE);
-                mFullScreen.setImageResource(R.drawable.ic_player_open);
-                mFullScreen.setVisibility(View.VISIBLE);
+                mBack.setVisibility(View.VISIBLE);
+                mClarity.setVisibility(View.GONE);
                 mIsLock = false;
                 if (mOnPlayerTypeListener!=null){
                     mOnPlayerTypeListener.onTinyWindow();
                 }
-                VideoLogUtil.d("播放模式--------小窗口模式");
                 break;
             default:
                 break;
         }
     }
+
 
     /**
      * 重新设置
@@ -860,10 +791,14 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         mSeek.setSecondaryProgress(0);
         mPbPlayBar.setProgress(0);
         mCenterStart.setVisibility(VISIBLE);
-        mLength.setVisibility(View.GONE);
+        mLength.setVisibility(View.VISIBLE);
         mFlLock.setVisibility(View.GONE);
         mImage.setVisibility(View.VISIBLE);
         mBottom.setVisibility(View.GONE);
+        mFullScreen.setImageResource(R.drawable.ic_player_open);
+        mTop.setVisibility(View.VISIBLE);
+        mBack.setVisibility(View.VISIBLE);
+
         mLoading.setVisibility(View.GONE);
         mError.setVisibility(View.GONE);
         mCompleted.setVisibility(View.GONE);
@@ -891,7 +826,13 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     public void onClick(View v) {
         if (v == mCenterStart) {
             //开始播放
-            startVideo();
+            if (mVideoPlayer.isIdle()) {
+                mVideoPlayer.start();
+            }else if (mVideoPlayer.isPlaying() || mVideoPlayer.isBufferingPlaying()) {
+                mVideoPlayer.pause();
+            } else if (mVideoPlayer.isPaused() || mVideoPlayer.isBufferingPaused()) {
+                mVideoPlayer.restart();
+            }
         } else if (v == mBack) {
             //退出，执行返回逻辑
             //如果是全屏，则先退出全屏
@@ -900,7 +841,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
             } else if (mVideoPlayer.isTinyWindow()) {
                 //如果是小窗口，则退出小窗口
                 mVideoPlayer.exitTinyWindow();
-            } else {
+            }else {
                 //如果两种情况都不是，执行逻辑交给使用者自己实现
                 if(mBackListener!=null){
                     mBackListener.onBackClick();
@@ -923,7 +864,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                     }
                 }
             }else {
-                BaseToast.showRoundRectToast("请检测是否有网络");
+                Toast.makeText(mContext,"请检测是否有网络",Toast.LENGTH_SHORT).show();
             }
         } else if (v == mFullScreen) {
             //全屏模式，重置锁屏，设置为未选中状态
@@ -949,23 +890,18 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                 //开始从此位置播放
                 mVideoPlayer.restart();
             }else {
-                BaseToast.showRoundRectToast("请检测是否有网络");
+                Toast.makeText(mContext,"请检测是否有网络",Toast.LENGTH_SHORT).show();
             }
         } else if (v == mReplay) {
             //重新播放
             if(VideoPlayerUtils.isConnected(mContext)){
                 mRetry.performClick();
             }else {
-                BaseToast.showRoundRectToast("请检测是否有网络");
+                Toast.makeText(mContext,"请检测是否有网络",Toast.LENGTH_SHORT).show();
             }
         } else if (v == mShare) {
             //分享
-            if(mVideoControlListener==null){
-                VideoLogUtil.d("请在初始化的时候设置分享监听事件");
-                return;
-            }
-            //点击下载
-            mVideoControlListener.onVideoControlClick(ConstantKeys.VideoControl.SHARE);
+            Toast.makeText(mContext, "分享", Toast.LENGTH_SHORT).show();
         } else if(v == mFlLock){
             //点击锁屏按钮，则进入锁屏模式
             setLock(mIsLock);
@@ -1012,26 +948,10 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
             //点击横向TV
             mVideoControlListener.onVideoControlClick(ConstantKeys.VideoControl.TV);
         }  else if (v == this) {
-            if (mVideoPlayer.isFullScreen() || mVideoPlayer.isNormal()){
-                if (mVideoPlayer.isPlaying() || mVideoPlayer.isPaused()
-                        || mVideoPlayer.isBufferingPlaying() || mVideoPlayer.isBufferingPaused()) {
-                    setTopBottomVisible(!topBottomVisible);
-                }
+            if (mVideoPlayer.isPlaying() || mVideoPlayer.isPaused()
+                    || mVideoPlayer.isBufferingPlaying() || mVideoPlayer.isBufferingPaused()) {
+                setTopBottomVisible(!topBottomVisible);
             }
-        }
-    }
-
-    /**
-     * 开始播放
-     */
-    private void startVideo() {
-        //开始播放
-        if (mVideoPlayer.isIdle()) {
-            mVideoPlayer.start();
-        }else if (mVideoPlayer.isPlaying() || mVideoPlayer.isBufferingPlaying()) {
-            mVideoPlayer.pause();
-        } else if (mVideoPlayer.isPaused() || mVideoPlayer.isBufferingPaused()) {
-            mVideoPlayer.restart();
         }
     }
 
@@ -1072,10 +992,9 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
 
     /**
      * 设置top、bottom的显示和隐藏
-     * @param visible                   true显示，false隐藏.
+     * @param visible true显示，false隐藏.
      */
     private void setTopBottomVisible(boolean visible) {
-        setCenterVisible(visible);
         mTop.setVisibility(visible ? View.VISIBLE : View.GONE);
         mBottom.setVisibility(visible ? View.VISIBLE : View.GONE);
         mLine.setVisibility(visible ? View.GONE : View.VISIBLE);
@@ -1089,14 +1008,6 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         }
     }
 
-    /**
-     * 设置center的显示和隐藏
-     * @param visible                   true显示，false隐藏.
-     */
-    private void setCenterVisible(boolean visible){
-        mCenterStart.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
 
     /**
      * 开启top、bottom自动消失的timer
@@ -1108,7 +1019,6 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         }
         cancelDismissTopBottomTimer();
         if (mDismissTopBottomCountDownTimer == null) {
-            //CountDownTimer定时器
             mDismissTopBottomCountDownTimer = new CountDownTimer(time, time) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -1299,6 +1209,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     public void setOnCompletedListener(OnCompletedListener listener){
         this.mOnCompletedListener = listener;
     }
+
 
     /**
      * 视频播放模式监听
