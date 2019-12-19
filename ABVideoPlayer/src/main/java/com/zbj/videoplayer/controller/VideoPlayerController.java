@@ -618,6 +618,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                 break;
             //正在播放
             case ConstantKeys.CurrentState.STATE_PLAYING:
+                mImage.setVisibility(View.GONE);//my
                 mLoading.setVisibility(View.GONE);
                 mCenterStart.setVisibility(View.GONE);
                 mRestartPause.setImageResource(R.drawable.ic_player_pause);
@@ -669,7 +670,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      * 播放准备中
      */
     private void startPreparing() {
-        mImage.setVisibility(View.GONE);
+//        mImage.setVisibility(View.GONE);
         mLoading.setVisibility(View.VISIBLE);
         mLoadText.setText("正在准备...");
         mError.setVisibility(View.GONE);

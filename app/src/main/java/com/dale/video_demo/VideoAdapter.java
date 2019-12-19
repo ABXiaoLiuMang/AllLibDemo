@@ -74,7 +74,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         }
 
         void bindData(Video video) {
-            mController.setTitle(video.getTitle());
             //mController.setLength(video.getLength());
             ImageUtil.display(itemView.getContext(),video.getUrl(),R.drawable.image_default,mController.imageView());
             mVideoPlayer.setUp(video.getUrl(), null);
