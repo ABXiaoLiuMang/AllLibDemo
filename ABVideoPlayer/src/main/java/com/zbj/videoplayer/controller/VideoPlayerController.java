@@ -1015,7 +1015,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     private void startDismissTopBottomTimer() {
         if(time==0){
-            time = 8000;
+            time = 3500;
         }
         cancelDismissTopBottomTimer();
         if (mDismissTopBottomCountDownTimer == null) {

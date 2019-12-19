@@ -59,8 +59,8 @@ public class TestNormalActivity extends BaseActivity  {
 
     @Override
     public void initView() {
-//        StatusBarUtil.setTransparentForWindow(this);
-//        StatusBarUtil.setDarkMode(this);//状态栏图标白色
+        StatusBarUtil.setTransparentForWindow(this);
+        StatusBarUtil.setDarkMode(this);//状态栏图标白色
         videoPlayer = findViewById(R.id.video_player);
         //必须关键的4步，播放视频最简单的方式
         videoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
