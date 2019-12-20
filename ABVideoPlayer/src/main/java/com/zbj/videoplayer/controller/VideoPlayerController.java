@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -676,7 +675,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         mLoadText.setText("正在准备...");
         mError.setVisibility(View.GONE);
         mCompleted.setVisibility(View.GONE);
-        mTop.setVisibility(View.GONE);
+//        mTop.setVisibility(View.GONE);
         mBottom.setVisibility(View.GONE);
         mCenterStart.setVisibility(View.GONE);
         mLength.setVisibility(View.GONE);
@@ -691,7 +690,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     private void stateError() {
         setTopBottomVisible(false);
-        mTop.setVisibility(View.VISIBLE);
+//        mTop.setVisibility(View.VISIBLE);
         mError.setVisibility(View.VISIBLE);
         mLine.setVisibility(GONE);
         cancelUpdateProgressTimer();
@@ -798,7 +797,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         mImage.setVisibility(View.VISIBLE);
         mBottom.setVisibility(View.GONE);
         mFullScreen.setImageResource(R.drawable.ic_player_open);
-        mTop.setVisibility(View.VISIBLE);
+//        mTop.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
 
         mLoading.setVisibility(View.GONE);
@@ -1002,7 +1001,9 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      * @param visible true显示，false隐藏.
      */
     private void setTopBottomVisible(boolean visible) {
-        mTop.setVisibility(visible ? View.VISIBLE : View.GONE);
+        if(mVideoPlayer.isFullScreen()){
+            mTop.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
         mBottom.setVisibility(visible ? View.VISIBLE : View.GONE);
         mLine.setVisibility(visible ? View.GONE : View.VISIBLE);
         topBottomVisible = visible;

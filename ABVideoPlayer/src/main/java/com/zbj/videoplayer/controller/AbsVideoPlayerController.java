@@ -78,6 +78,10 @@ public abstract class AbsVideoPlayerController extends FrameLayout implements Vi
         mVideoPlayer = videoPlayer;
     }
 
+    /**
+     * 设置进入全屏的方式
+     * @param screenMode
+     */
     public void setScreenMode(@ConstantKeys.ScreenMode int screenMode) {
         mScreenMode = screenMode;
     }

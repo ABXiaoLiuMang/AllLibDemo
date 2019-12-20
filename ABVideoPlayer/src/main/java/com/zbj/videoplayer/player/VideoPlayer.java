@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Surface;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 
+import com.zbj.videoplayer.R;
 import com.zbj.videoplayer.constant.ConstantKeys;
 import com.zbj.videoplayer.controller.AbsVideoPlayerController;
 import com.zbj.videoplayer.inter.listener.OnSurfaceListener;
@@ -935,6 +937,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         contentView.addView(mContainer, params);
         mCurrentMode = ConstantKeys.PlayMode.MODE_FULL_SCREEN;
+        titleShowAndHide(View.VISIBLE);
         mController.onPlayModeChanged(mCurrentMode);
         VideoLogUtil.d("MODE_FULL_SCREEN");
     }
@@ -964,6 +967,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
         contentView.addView(mContainer, params);
 
         mCurrentMode = ConstantKeys.PlayMode.MODE_FULL_SCREEN;
+        titleShowAndHide(View.VISIBLE);
         mController.onPlayModeChanged(mCurrentMode);
         VideoLogUtil.d("MODE_FULL_SCREEN");
     }
@@ -992,12 +996,21 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             this.addView(mContainer, params);
             mCurrentMode = ConstantKeys.PlayMode.MODE_NORMAL;
+            titleShowAndHide(View.GONE);
             mController.onPlayModeChanged(mCurrentMode);
             VideoLogUtil.d("MODE_NORMAL");
             this.setOnKeyListener(null);
             return true;
         }
         return false;
+    }
+
+    /**
+     * dale 自定义标题显示隐藏
+     */
+    private void titleShowAndHide(int visibility) {
+        View mTop = mController.findViewById(R.id.top);
+        mTop.setVisibility(visibility);
     }
 
 
