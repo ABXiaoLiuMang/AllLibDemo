@@ -101,6 +101,7 @@ public class ScrollCalculatorHelper {
 
         @Override
         public void run() {
+            videoPlayer.setNeedMute(true);
             videoPlayer.seekTo(1);
             videoPlayer.start();
         }

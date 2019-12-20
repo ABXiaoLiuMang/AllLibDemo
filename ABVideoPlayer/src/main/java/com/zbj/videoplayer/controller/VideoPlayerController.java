@@ -469,7 +469,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
      */
     @Override
     public void setLength(long length) {
-        mLength.setText(VideoPlayerUtils.formatTime(length));
+        setLength(VideoPlayerUtils.formatTime(length));
     }
 
 
@@ -480,6 +480,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
     @Override
     public void setLength(String length) {
         mLength.setText(length);
+        mLength.setVisibility(View.VISIBLE);
     }
 
 
@@ -792,7 +793,7 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
         mSeek.setSecondaryProgress(0);
         mPbPlayBar.setProgress(0);
         mCenterStart.setVisibility(VISIBLE);
-        mLength.setVisibility(View.VISIBLE);
+//        mLength.setVisibility(View.VISIBLE);
         mFlLock.setVisibility(View.GONE);
         mImage.setVisibility(View.VISIBLE);
         mBottom.setVisibility(View.GONE);

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dale.libdemo.R;
 import com.zbj.videoplayer.constant.ConstantKeys;
 import com.zbj.videoplayer.controller.VideoPlayerController;
+import com.zbj.videoplayer.inter.listener.OnCompletedListener;
 import com.zbj.videoplayer.player.VideoPlayer;
 
 
@@ -70,6 +71,12 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         void setController(VideoPlayerController controller) {
             mController = controller;
             mVideoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
+            mVideoPlayer.setNeedMute(true);
+            mController.setOnCompletedListener(() -> {
+               if(mVideoPlayer != null && mVideoPlayer.isFullScreen()){
+                   mVideoPlayer.exitFullScreen();
+               }
+            });
             mVideoPlayer.setController(mController);
         }
 

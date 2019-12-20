@@ -1,6 +1,8 @@
 package com.dale.video_demo;
 
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dale.libdemo.R;
 import com.dale.utils.StatusBarUtil;
@@ -19,6 +21,10 @@ import com.zbj.videoplayer.player.VideoPlayer;
  */
 public class TestNormalActivity extends BaseActivity  {
 
+
+    TextView tv_speed;
+
+    float speed = 1f;
 
     VideoPlayer videoPlayer;
     private VideoPlayerController controller;
@@ -69,6 +75,13 @@ public class TestNormalActivity extends BaseActivity  {
         controller.setTopPadding(24.0f);
         videoPlayer.continueFromLastPosition(false);
         videoPlayer.setController(controller);
+        controller.setLength("20:00:00");
+        tv_speed = findViewById(R.id.tv_speed);
+        tv_speed.setOnClickListener(v -> {
+            speed= speed - 0.1f;
+            videoPlayer.setSpeed(speed);
+            tv_speed.setText("速度:" + speed);
+        });
     }
 
     @Override

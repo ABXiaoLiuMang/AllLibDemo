@@ -145,7 +145,7 @@ public class TestSavePosActivity extends BaseActivity  {
         //设置播放位置
         videoPlayer.seekTo(100);
         //设置播放速度，不必须
-        videoPlayer.setSpeed(100);
+        videoPlayer.setSpeed(0.5f);
         //设置视频链接
         videoPlayer.setUp("",null);
         //设置音量

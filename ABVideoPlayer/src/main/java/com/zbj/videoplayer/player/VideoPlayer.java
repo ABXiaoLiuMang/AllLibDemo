@@ -83,6 +83,11 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
      **/
     private int mCurrentMode = ConstantKeys.PlayMode.MODE_NORMAL;
 
+    /**
+     * 设置是否静音（默认不静音）
+     */
+    private boolean mNeedMute = false;
+
 
     private Context mContext;
     private AudioManager mAudioManager;
@@ -233,6 +238,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
         }
         if (mMediaPlayer instanceof IjkMediaPlayer) {
             ((IjkMediaPlayer) mMediaPlayer).setSpeed(speed);
+            ((IjkMediaPlayer) mMediaPlayer).setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "soundtouch", 1);
         } else if (mMediaPlayer instanceof AndroidMediaPlayer){
             //((AndroidMediaPlayer) mMediaPlayer).setSpeed(speed);
             VideoLogUtil.d("只有IjkPlayer才能设置播放速度");
@@ -506,6 +512,11 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
         return 0;
     }
 
+    @Override
+    public void setNeedMute(boolean needMute) {
+        mNeedMute = needMute;
+    }
+
 
     /**
      * 获取持续时长
@@ -652,6 +663,13 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
         ((IjkMediaPlayer)mMediaPlayer).setOption(player, "mediacodec", 0);
         ((IjkMediaPlayer)mMediaPlayer).setOption(player, "mediacodec-auto-rotate", 1);
         ((IjkMediaPlayer)mMediaPlayer).setOption(player, "mediacodec-handle-resolution-change", 1);
+
+        if(mNeedMute){
+            mMediaPlayer.setVolume(0, 0);
+        }else {
+            mMediaPlayer.setVolume(1, 1);
+        }
+
     }
 
 
@@ -937,6 +955,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         contentView.addView(mContainer, params);
         mCurrentMode = ConstantKeys.PlayMode.MODE_FULL_SCREEN;
+        needMute(1,1);
         titleShowAndHide(View.VISIBLE);
         mController.onPlayModeChanged(mCurrentMode);
         VideoLogUtil.d("MODE_FULL_SCREEN");
@@ -967,6 +986,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
         contentView.addView(mContainer, params);
 
         mCurrentMode = ConstantKeys.PlayMode.MODE_FULL_SCREEN;
+        needMute(1,1);
         titleShowAndHide(View.VISIBLE);
         mController.onPlayModeChanged(mCurrentMode);
         VideoLogUtil.d("MODE_FULL_SCREEN");
@@ -997,6 +1017,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
             this.addView(mContainer, params);
             mCurrentMode = ConstantKeys.PlayMode.MODE_NORMAL;
             titleShowAndHide(View.GONE);
+            needMute(0,0);
             mController.onPlayModeChanged(mCurrentMode);
             VideoLogUtil.d("MODE_NORMAL");
             this.setOnKeyListener(null);
@@ -1011,6 +1032,15 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
     private void titleShowAndHide(int visibility) {
         View mTop = mController.findViewById(R.id.top);
         mTop.setVisibility(visibility);
+    }
+
+    /**
+     * dale 自定义标题显示隐藏
+     */
+    private void needMute(float var1, float var2) {
+        if(mNeedMute){
+            mMediaPlayer.setVolume(var1, var2);
+        }
     }
 
 

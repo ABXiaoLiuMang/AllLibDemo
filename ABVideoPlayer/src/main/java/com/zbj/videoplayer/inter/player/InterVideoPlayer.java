@@ -117,6 +117,11 @@ public interface InterVideoPlayer {
     int getVolume();
 
     /**
+     * 是否静音
+     */
+    void setNeedMute(boolean needMute);
+
+    /**
      * 获取办法给总时长，毫秒
      *
      * @return 视频总时长ms
