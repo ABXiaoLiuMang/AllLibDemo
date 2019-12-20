@@ -43,6 +43,7 @@ public abstract class AbsVideoPlayerController extends FrameLayout implements Vi
 
     private Context mContext;
     protected InterVideoPlayer mVideoPlayer;
+    protected int mScreenMode = ConstantKeys.ScreenMode.MODE_HORIZONTAL;
     private Timer mUpdateProgressTimer;
     private TimerTask mUpdateProgressTimerTask;
     private Timer mUpdateNetSpeedTimer;
@@ -67,7 +68,6 @@ public abstract class AbsVideoPlayerController extends FrameLayout implements Vi
     private int mGestureDownVolume;
     private long mNewPosition;
 
-
     public AbsVideoPlayerController(Context context) {
         super(context);
         mContext = context;
@@ -76,6 +76,10 @@ public abstract class AbsVideoPlayerController extends FrameLayout implements Vi
 
     public void setVideoPlayer(InterVideoPlayer videoPlayer) {
         mVideoPlayer = videoPlayer;
+    }
+
+    public void setScreenMode(@ConstantKeys.ScreenMode int screenMode) {
+        mScreenMode = screenMode;
     }
 
     /**

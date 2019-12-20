@@ -108,6 +108,17 @@ public final class ConstantKeys {
         int MODE_TINY_WINDOW = 1003;
     }
 
+    /**
+     * 点击全屏安全打开的方式
+     * 1.MODE_VERTICAL 竖屏全屏播放（视频高度> 视频宽度 ）
+     * 2.MODE_HORIZONTAL 竖屏全屏播放（视频高度<视频宽度 ）
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ScreenMode {
+        int MODE_VERTICAL = 2001;
+        int MODE_HORIZONTAL = 2002;
+    }
+
 
 
     /**

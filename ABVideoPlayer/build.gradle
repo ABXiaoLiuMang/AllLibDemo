@@ -46,8 +46,8 @@ dependencies {
     androidTestImplementation rootDependencies["espresso_core"]
 
 
-    compileOnly rootDependencies["appcompat"]
-    compileOnly rootDependencies["cardview"]
+    implementation rootDependencies["appcompat"]
+    implementation rootDependencies["cardview"]
 //    compileOnly project(path: ':utilslib')
     //这两个是必须要加的，其它的可供选择
     compileOnly 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'

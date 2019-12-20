@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -873,7 +874,12 @@ public class VideoPlayerController extends AbsVideoPlayerController implements V
                 mFlLock.setVisibility(VISIBLE);
                 mIsLock = false;
                 mIvLock.setImageResource(R.drawable.player_unlock_btn);
-                mVideoPlayer.enterFullScreen();
+                if(ConstantKeys.ScreenMode.MODE_VERTICAL == mScreenMode){
+                    mVideoPlayer.enterVerticalScreenScreen();
+                }else {
+                    mVideoPlayer.enterFullScreen();
+                }
+
             } else if (mVideoPlayer.isFullScreen()) {
                 mFlLock.setVisibility(GONE);
                 mVideoPlayer.exitFullScreen();
