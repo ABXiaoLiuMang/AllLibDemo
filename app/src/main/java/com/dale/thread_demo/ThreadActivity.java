@@ -16,10 +16,7 @@ public class ThreadActivity extends ABBaseActivity {
         return R.layout.activity_thread;
     }
 
-    @Override
-    protected void initPresenters() {
 
-    }
 
     @Override
     protected void initViewsAndEvents() {

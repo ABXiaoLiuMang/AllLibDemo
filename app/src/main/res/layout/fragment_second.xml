@@ -12,9 +12,10 @@
         app:centreTitle="second" />
 
     <Button
+        android:id="@+id/btn_test"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:text="第二个"
+        android:text="第二个(点击模拟请求)"
         android:layout_marginTop="@dimen/dp_10"
         />
     <Button
@@ -46,6 +47,13 @@
         android:layout_height="@dimen/dp_45"
         android:text="第二个"
         android:layout_marginTop="@dimen/dp_10"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_test"
+        android:textColor="@color/black"
         />
 
 </LinearLayout>

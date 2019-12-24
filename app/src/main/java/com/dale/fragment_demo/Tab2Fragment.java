@@ -18,11 +18,6 @@ public class Tab2Fragment extends ABTabFragment {
     }
 
     @Override
-    protected void initPresenters() {
-
-    }
-
-    @Override
     protected void initViewsAndEvents() {
         TitleBar titleBar = rootView.findViewById(R.id.titleBar);
         titleBar.setShowLeft(View.INVISIBLE);

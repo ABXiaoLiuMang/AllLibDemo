@@ -19,7 +19,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
  * create on 2019/5/17
  * description:下拉刷新基类
  */
-public abstract class ABRefreshFragment<T> extends ABBaseFragment implements IRefresh<T> {
+public abstract class ABRefreshFragment<T,P extends BasePresenter> extends ABBaseFragment<P> implements IRefresh<T> {
 
     protected RefreshDelegate<T> refreshDelegate;
     protected BaseQuickAdapter<T, BaseViewHolder> listAdapter;

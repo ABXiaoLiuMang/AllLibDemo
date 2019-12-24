@@ -7,11 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.dale.framework.R;
+import com.dale.framework.util.Util;
 import com.dale.utils.ExitUtils;
 import com.dale.utils.KeyboardUtils;
 import com.dale.utils.StatusBarUtil;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
+
+import java.lang.reflect.Type;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,15 +25,14 @@ import me.yokeyword.fragmentation.ui.SupportActivity;
  * create on 2019/5/17
  * description: 基类
  */
-public abstract class ABBaseActivity extends SupportActivity {
+public abstract class ABBaseActivity<P extends BasePresenter> extends SupportActivity {
+    protected P presenter;
     protected Activity mContext;
     protected Bundle bundle;
     protected Unbinder unbinder;
     protected LoadingPopupView progressDialog;
 
     protected abstract int getLayoutId();
-
-    protected abstract void initPresenters();
 
     protected abstract void initViewsAndEvents();
 
@@ -43,7 +45,7 @@ public abstract class ABBaseActivity extends SupportActivity {
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
         bundle = getIntent().getExtras();
-        initPresenters();
+        initPresenter();
         initViewsAndEvents();
     }
 
@@ -100,6 +102,32 @@ public abstract class ABBaseActivity extends SupportActivity {
     protected void initSystemBar(){
         StatusBarUtil.setTransparentForWindow(this);
         StatusBarUtil.setLightMode(this);//状态栏图标黑色
+    }
+
+
+    private void initPresenter() {
+        try {
+            Class<?> childClass = this.getClass();
+            Type childType = childClass.getGenericSuperclass();
+            presenter = Util.createPresenter(childType);
+            while (presenter == null){
+                childClass = childClass.getSuperclass();
+                if (childClass == null){
+                    break;
+                }else {
+                    if ("com.dale.framework.ui.ABBaseActivity".equalsIgnoreCase(childClass.getName())){
+                        break;
+                    }
+                    childType = childClass.getGenericSuperclass();
+                    presenter = Util.createPresenter(childType);
+                }
+            }
+
+            if (presenter != null){
+                presenter.initPresenter(this,this);
+            }
+        } catch (Exception e) {
+        }
     }
 
 //    /**************** Fragment ****************/

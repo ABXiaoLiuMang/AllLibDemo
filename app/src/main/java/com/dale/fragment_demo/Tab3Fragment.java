@@ -13,10 +13,6 @@ public class Tab3Fragment extends ABTabFragment {
         return R.layout.fragment_tab3;
     }
 
-    @Override
-    protected void initPresenters() {
-
-    }
 
     @Override
     protected void initViewsAndEvents() {

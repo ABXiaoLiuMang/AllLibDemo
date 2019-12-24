@@ -1,24 +1,20 @@
 package com.dale.framework_demo.ui;
 
-import androidx.lifecycle.LifecycleOwner;
-
+import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.LiveDataManager;
 import com.dale.framework_demo.api.ApiService;
-import com.dale.framework.ui.BasePresenter;
 import com.dale.net.NetSdk;
 import com.dale.utils.LogUtils;
 
 
-public class OtherPresenter extends BasePresenter implements OtherContract.IPresenter {
-
-    public OtherPresenter(LifecycleOwner lifecycleOwner) {
-        super(lifecycleOwner);
-    }
+public class OtherPresenter extends BasePresenter<OtherContract.IView> implements OtherContract.IPresenter {
 
     public void onCreate(){
         super.onCreate();
-//        testOther();
         LogUtils.d("Dream","onCreate OtherPresenter");
+        if(getView() !=null){
+            getView().test();
+        }
     }
 
     public void onStart(){
@@ -48,18 +44,23 @@ public class OtherPresenter extends BasePresenter implements OtherContract.IPres
 
     @Override
     public void testOther() {
-        NetSdk.create(ApiService.class)
-                .getSeries()
-                .params("page",String.valueOf(1))
-                .params("per_page",String.valueOf(24))
-                .asLife(getLifecycleOwner())
-                .send(LiveDataManager.getInstance().testPrice);
+//        NetSdk.create(ApiService.class)
+//                .getSeries()
+//                .baseUrl("http://api2.ibaozou.com/")
+//                .params("page",String.valueOf(1))
+//                .params("per_page",String.valueOf(24))
+//                .asLife(getLifecycleOwner())
+//                .send(LiveDataManager.getInstance().testPrice);
+        if(getView() != null){
+            getView().test();
+        }
     }
 
     @Override
     public void getHome() {
         NetSdk.create(ApiService.class)
                 .getHome()
+                .baseUrl("http://api2.ibaozou.com/")
                 .asLife(getLifecycleOwner())
                 .send(LiveDataManager.getInstance().testPrice);
     }

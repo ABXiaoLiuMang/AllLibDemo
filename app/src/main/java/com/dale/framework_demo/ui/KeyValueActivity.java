@@ -13,10 +13,6 @@ public class KeyValueActivity extends ABBaseActivity {
         return R.layout.activity_key_value;
     }
 
-    @Override
-    protected void initPresenters() {
-    }
-
 
     @Override
     protected void initViewsAndEvents() {

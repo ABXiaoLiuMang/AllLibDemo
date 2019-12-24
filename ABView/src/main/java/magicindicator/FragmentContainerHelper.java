@@ -22,7 +22,7 @@ import magicindicator.buildins.commonnavigator.model.PositionData;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FragmentContainerHelper {
-    private List<MagicIndicator> mMagicIndicators = new ArrayList<MagicIndicator>();
+    private List<MagicIndicator> mMagicIndicators = new ArrayList<>();
     private ValueAnimator mScrollAnimator;
     private int mLastSelectedIndex;
     private int mDuration = 150;

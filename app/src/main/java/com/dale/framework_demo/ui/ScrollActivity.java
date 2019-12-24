@@ -30,10 +30,10 @@ public class ScrollActivity extends ABBaseActivity {
         return R.layout.activity_scroll;
     }
 
-    @Override
-    protected void initPresenters() {
-        otherPresenter = new OtherPresenter(this);
-    }
+//    @Override
+//    protected void initPresenters() {
+//        otherPresenter = new OtherPresenter();
+//    }
 
 
     @Override

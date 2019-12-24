@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
+import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
 import com.dale.libdemo.R;
@@ -26,11 +27,11 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DemoActivity extends ABRefreshActivity<String> {
-    @Override
-    protected void initPresenters() {
-
-    }
+public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
+//    @Override
+//    protected void initPresenters() {
+////        https://download.csdn.net/download/xiaoyu5256/9809854 设计模式下载  （设计模式之禅）
+//    }
 
     @Override
     protected void initViewsAndEvents() {

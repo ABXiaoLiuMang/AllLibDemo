@@ -10,9 +10,8 @@ import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.LogUtils;
 
-public class Tab1Fragment extends ABBaseFragment {
+public class Tab1Fragment extends ABBaseFragment<OtherPresenter> {
 
-    OtherPresenter otherPresenter;
     TextView text;
 
 //    public static Tab1Fragment getInstance(Bundle bundle) {
@@ -25,11 +24,6 @@ public class Tab1Fragment extends ABBaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_tab1;
-    }
-
-    @Override
-    protected void initPresenters() {
-        otherPresenter = new OtherPresenter(this);
     }
 
 
@@ -50,7 +44,7 @@ public class Tab1Fragment extends ABBaseFragment {
 
             }
         });
-        otherPresenter.getHome();
+        presenter.getHome();
     }
 
 }

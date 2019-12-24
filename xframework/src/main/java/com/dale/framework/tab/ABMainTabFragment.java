@@ -1,14 +1,14 @@
 package com.dale.framework.tab;
 
 
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.Nullable;
 import androidx.collection.ArrayMap;
+
 import com.dale.framework.R;
 import com.dale.framework.ui.ABBaseFragment;
+
 import magicindicator.FragmentContainerHelper;
 import magicindicator.MagicIndicator;
 import magicindicator.buildins.commonnavigator.CommonNavigator;
@@ -39,10 +39,6 @@ public abstract class ABMainTabFragment extends ABBaseFragment implements TabAda
     @Override
     protected int getLayoutId() {
         return R.layout.activity_tab_main;
-    }
-
-    @Override
-    protected void initPresenters() {
     }
 
     @Override

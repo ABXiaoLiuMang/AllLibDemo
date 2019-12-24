@@ -18,18 +18,18 @@ public class TypeResolverActivity extends ABBaseActivity {
         return R.layout.activity_type_resolver;
     }
 
-    @Override
-    protected void initPresenters() {
-        Class<?>[] typeArgs = TypeResolver.resolveRawArguments(Foo.class, Bar.class);
-        LogUtils.d("arg1:" + typeArgs[0].getSimpleName() + " arg2:" + typeArgs[1].getSimpleName());
-
-
-//        typeArgs = TypeResolver.reify(Foo.class, Bar.class);
+//    @Override
+//    protected void initPresenters() {
+//        Class<?>[] typeArgs = TypeResolver.resolveRawArguments(Foo.class, Bar.class);
+//        LogUtils.d("arg1:" + typeArgs[0].getSimpleName() + " arg2:" + typeArgs[1].getSimpleName());
 //
-//        ParameterizedType paramType = (ParameterizedType) typeArgs;
-//        Type[] actualTypeArgs = paramType.getActualTypeArguments();
-//        ParameterizedType arg = (ParameterizedType)actualTypeArgs[0];
-    }
+//
+////        typeArgs = TypeResolver.reify(Foo.class, Bar.class);
+////
+////        ParameterizedType paramType = (ParameterizedType) typeArgs;
+////        Type[] actualTypeArgs = paramType.getActualTypeArguments();
+////        ParameterizedType arg = (ParameterizedType)actualTypeArgs[0];
+//    }
 
     @Override
     protected void initViewsAndEvents() {

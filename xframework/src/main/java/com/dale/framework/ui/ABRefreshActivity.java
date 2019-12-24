@@ -19,7 +19,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
  * create on 2019/5/17
  * description:下拉刷新基类
  */
-public abstract class ABRefreshActivity<T> extends ABBaseActivity implements IRefresh<T> {
+public abstract class ABRefreshActivity<T,P extends BasePresenter> extends ABBaseActivity<P> implements IRefresh<T> {
 
     protected RefreshDelegate<T> refreshDelegate;
     protected BaseQuickAdapter<T, BaseViewHolder> listAdapter;
@@ -34,6 +34,9 @@ public abstract class ABRefreshActivity<T> extends ABBaseActivity implements IRe
     @CallSuper
     @Override
     protected void initViewsAndEvents() {
+//        if(presenter != null){
+//            childPresenter = presenter;
+//        }
         refreshDelegate = new RefreshDelegate<>(this);
         listAdapter = getListAdapter();
         refreshDelegate.initViews(listAdapter);

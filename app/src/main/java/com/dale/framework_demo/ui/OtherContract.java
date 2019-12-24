@@ -8,5 +8,8 @@ public interface OtherContract {
         void getHome();
 
     }
+    interface IView {
+        void test();
+    }
 
 }

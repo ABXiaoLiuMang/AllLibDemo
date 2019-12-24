@@ -1,29 +1,23 @@
 package com.dale.framework_demo.ui;
 
-import android.os.Handler;
-
-import androidx.lifecycle.LifecycleOwner;
-
-import com.dale.framework_demo.Person;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.utils.LogUtils;
+import com.dale.utils.WeakHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainPresenter extends BasePresenter<MainContract.IView> implements MainContract.IPresenter {
 
     int postion = 0;
 
-    public MainPresenter(LifecycleOwner lifecycleOwner, MainContract.IView iView) {
-        super(lifecycleOwner, iView);
-    }
+    public OtherPresenter otherPresenter = new OtherPresenter();
 
     public void onCreate(){
         super.onCreate();
 //        initRequest();
         LogUtils.d("onCreate MainPresenter");
+        attachChildPresenter(otherPresenter);
     }
 
     public void onStart(){
@@ -59,13 +53,23 @@ public class MainPresenter extends BasePresenter<MainContract.IView> implements 
 
     @Override
     public void onLoadMore(int page) {
-        new Handler().postDelayed(() -> getView().onLoadMoreSuccess(initdata()),1000);
+
+
+        new WeakHandler().postDelayed(() -> {
+            if(getView() != null){
+                getView().onLoadMoreSuccess(initdata());
+            }
+        },10000);
     }
 
     @Override
     public void onRefresh() {
         postion = 0;
-        new Handler().postDelayed(() -> getView().ononRefreshSuccess(initdata()),1000);
+        new WeakHandler().postDelayed(() -> {
+            if(getView() != null){
+                getView().ononRefreshSuccess(initdata());
+            }
+        },10000);
     }
 
     private ArrayList<String> initdata(){

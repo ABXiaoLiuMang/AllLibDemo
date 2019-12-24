@@ -11,8 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dale.framework.R;
+import com.dale.framework.util.Util;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
+
+import java.lang.reflect.Type;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,7 +26,8 @@ import me.yokeyword.fragmentation.ui.SupportFragment;
  * create on 2019/5/17
  * description:所有Fragment基类
  */
-public abstract class ABBaseFragment extends SupportFragment {
+public abstract class ABBaseFragment<P extends BasePresenter> extends SupportFragment {
+    protected P presenter;
     protected Activity mContext;
     protected Bundle bundle;
     protected View rootView;
@@ -31,8 +35,6 @@ public abstract class ABBaseFragment extends SupportFragment {
     protected LoadingPopupView progressDialog;
 
     protected abstract int getLayoutId();
-
-    protected abstract void initPresenters();
 
     protected abstract void initViewsAndEvents();
 
@@ -65,7 +67,7 @@ public abstract class ABBaseFragment extends SupportFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initPresenters();
+        initPresenter();
         initViewsAndEvents();
     }
 
@@ -106,6 +108,31 @@ public abstract class ABBaseFragment extends SupportFragment {
         super.onDestroyView();
         if (unbinder != null) {
             unbinder.unbind();
+        }
+    }
+
+    private void initPresenter() {
+        try {
+            Class<?> childClass = this.getClass();
+            Type childType = childClass.getGenericSuperclass();
+            presenter = Util.createPresenter(childType);
+            while (presenter == null){
+                childClass = childClass.getSuperclass();
+                if (childClass == null){
+                    break;
+                }else {
+                    if ("com.dale.framework.ui.ABBaseFragment".equalsIgnoreCase(childClass.getName())){
+                        break;
+                    }
+                    childType = childClass.getGenericSuperclass();
+                    presenter = Util.createPresenter(childType);
+                }
+            }
+
+            if (presenter != null){
+                presenter.initPresenter(this,this);
+            }
+        } catch (Exception e) {
         }
     }
 

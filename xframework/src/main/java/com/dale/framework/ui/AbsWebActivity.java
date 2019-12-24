@@ -37,7 +37,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 /**
  * 抽象webview基类
  */
-public abstract class AbsWebActivity extends ABBaseActivity implements OnRefreshListener {
+public abstract class AbsWebActivity<P extends BasePresenter> extends ABBaseActivity<P> implements OnRefreshListener {
 
     public static final String ERROR_LAYOUT_ID_KEY = "error_layout_id_key";
 
@@ -47,10 +47,6 @@ public abstract class AbsWebActivity extends ABBaseActivity implements OnRefresh
     protected MiddlewareWebChromeBase mMiddleWareWebChrome;
 //    protected MiddlewareWebClientBase mMiddleWareWebClient;
     protected SonicImpl mSonicImpl;
-
-    @Override
-    protected void initPresenters() {
-    }
 
 
     protected void buildAgentWeb() {

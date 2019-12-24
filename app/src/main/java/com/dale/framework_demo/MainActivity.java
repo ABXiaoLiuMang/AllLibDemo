@@ -18,6 +18,7 @@ import com.dale.framework.view.TitleBar;
 import com.dale.framework_demo.ui.KeyValueActivity;
 import com.dale.framework_demo.ui.MainContract;
 import com.dale.framework_demo.ui.MainPresenter;
+import com.dale.framework_demo.ui.OtherContract;
 import com.dale.framework_demo.ui.OtherPresenter;
 import com.dale.framework_demo.ui.ScrollActivity;
 import com.dale.libdemo.R;
@@ -26,6 +27,7 @@ import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.LogUtils;
 import com.dale.utils.PermissionUtils;
 import com.dale.utils.SizeUtils;
+import com.dale.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import net.jodah.typetools.TypeResolver;
@@ -33,10 +35,7 @@ import net.jodah.typetools.TypeResolver;
 import java.util.List;
 
 
-public class MainActivity extends ABRefreshActivity<String> implements MainContract.IView {
-
-    MainPresenter mainPresenter;
-    OtherPresenter otherPresenter;
+public class MainActivity extends ABRefreshActivity<String,MainPresenter> implements MainContract.IView,OtherContract.IView {
 
     int page = 0;
     protected NestedScrollView scrollView;
@@ -48,12 +47,6 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
         return R.layout.activity_alpha_refresh;
     }
 
-    @Override
-    protected void initPresenters() {
-        mainPresenter = new MainPresenter(this, this);
-        otherPresenter = new OtherPresenter(this);
-    }
-
 
     @Override
     protected void initViewsAndEvents() {
@@ -63,7 +56,7 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
         new ScrollChangeHelper.Builder().scrollHeight(SizeUtils.dp2px(150)).setAlphaView(titleBar).setNestedScrollView(scrollView).build();
 
 //        goActivity(ScrollActivity.class);
-        mainPresenter.initRequest();
+        presenter.initRequest();
 
         LiveDataManager.getInstance().testPrice.observe(this,new NetObserver<String>(){
             @Override
@@ -80,7 +73,7 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
             }
         });
 
-        otherPresenter.testOther();
+        presenter.otherPresenter.testOther();
     }
 
     @Override
@@ -99,7 +92,7 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
         tv_head = headView.findViewById(R.id.tv_head);
         headView.setOnClickListener(v -> {
             showLoading();
-            otherPresenter.testOther();
+            presenter.otherPresenter.testOther();
         });
         return headView;
     }
@@ -135,14 +128,14 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
             refreshLayout.finishLoadMoreWithNoMoreData();
         } else {
             page++;
-            mainPresenter.onLoadMore(page);
+            presenter.onLoadMore(page);
         }
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         page = 0;
-        mainPresenter.onRefresh();
+        presenter.onRefresh();
     }
 
 
@@ -156,6 +149,7 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
     public void onLoadMoreSuccess(List<String> list) {
         listAdapter.addData(list);
         refreshLayout.finishLoadMore();
+        LogUtils.d("onLoadMoreSuccess");
     }
 
     @Override
@@ -173,5 +167,10 @@ public class MainActivity extends ABRefreshActivity<String> implements MainContr
     @Override
     public void dismissLoading() {
         dismissProgressDialog();
+    }
+
+    @Override
+    public void test() {
+        ToastUtils.showLong("ge ni");
     }
 }

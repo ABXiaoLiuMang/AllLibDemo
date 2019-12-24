@@ -15,10 +15,6 @@ public class MainFragmentActivity extends ABBaseActivity {
         return R.layout.activity_main_fragment;
     }
 
-    @Override
-    protected void initPresenters() {
-
-    }
 
     @Override
     protected void initViewsAndEvents() {

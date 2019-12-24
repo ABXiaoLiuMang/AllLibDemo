@@ -1,13 +1,10 @@
 package com.dale.video_demo;
 
 import android.graphics.Rect;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dale.libdemo.R;
+import com.dale.utils.WeakHandler;
 import com.zbj.videoplayer.player.VideoPlayer;
 
 /**
