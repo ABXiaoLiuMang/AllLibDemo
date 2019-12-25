@@ -1,5 +1,6 @@
 package com.dale.video_demo;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,6 +22,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
     private VideoPlayer videoPlayer;
     private Button mBtnTiny1;
     private Button mBtnTiny2;
+    private Button mBtnTiny3;
 
     @Override
     protected void onStop() {
@@ -62,6 +64,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
         videoPlayer = (VideoPlayer) findViewById(R.id.nice_video_player);
         mBtnTiny1 = (Button) findViewById(R.id.btn_tiny_1);
         mBtnTiny2 = (Button) findViewById(R.id.btn_tiny_2);
+        mBtnTiny3 = (Button) findViewById(R.id.btn_tiny_3);
 
         videoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
         videoPlayer.setUp(ConstantVideo.VideoPlayerList[0], null);
@@ -110,6 +113,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
     public void initListener() {
         mBtnTiny1.setOnClickListener(this);
         mBtnTiny2.setOnClickListener(this);
+        mBtnTiny3.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +135,10 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
                     videoPlayer.start();
                 }
                 videoPlayer.enterFullScreen();
+                break;
+            case R.id.btn_tiny_3:
+                VideoPlayerManager.instance().suspendVideoPlayer();
+                startActivity(TestNextActivity.class);
                 break;
             default:
                 break;

@@ -68,6 +68,12 @@ android {
             minifyEnabled false //true开启混淆配置
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+
+            //debug版本禁用生成多个apk
+            ext.enableCrashlytics = false
+            aaptOptions.cruncherEnabled = false//禁用PNG运算 为了加快编译速度
+            splits.abi.enable = false
+            splits.density.enable = false
         }
     }
 

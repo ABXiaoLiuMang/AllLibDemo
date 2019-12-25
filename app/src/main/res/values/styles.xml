@@ -12,6 +12,17 @@
 
         <!--窗口背景颜色-->
         <item name="android:windowBackground">@android:color/white</item>
+
+        <!--防止多点触控-->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <!--启动页主题-->
+    <style name="LauncherActivityTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@mipmap/ic_launcher</item>
     </style>
 
     <style name="tweetName">

@@ -27,4 +27,11 @@
         android:layout_marginTop="16dp"
         android:text="2.直接开启横屏全屏播放"/>
 
+    <Button
+        android:id="@+id/btn_tiny_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="3.下一个界面继续播放"/>
+
 </LinearLayout>

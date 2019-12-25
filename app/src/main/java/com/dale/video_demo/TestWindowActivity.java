@@ -95,7 +95,7 @@ public class TestWindowActivity extends BaseActivity implements View.OnClickList
         if (FloatWindow.get() != null) {
             return;
         }
-        String url = "http://play.g3proxy.lecloud.com/vod/v2/MjUxLzE2LzgvbGV0di11dHMvMTQvdmVyXzAwXzIyLTExMDc2NDEzODctYXZjLTE5OTgxOS1hYWMtNDgwMDAtNTI2MTEwLTE3MDg3NjEzLWY1OGY2YzM1NjkwZTA2ZGFmYjg2MTVlYzc5MjEyZjU4LTE0OTg1NTc2ODY4MjMubXA0?b=259&mmsid=65565355&tm=1499247143&key=f0eadb4f30c404d49ff8ebad673d3742&platid=3&splatid=345&playid=0&tss=no&vtype=21&cvid=2026135183914&payff=0&pip=08cc52f8b09acd3eff8bf31688ddeced&format=0&sign=mb&dname=mobile&expect=1&tag=mobile&xformat=super";
+        String url = "http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4";
         FloatPlayerView.setUrl(url);
         FloatPlayerView floatPlayerView = new FloatPlayerView(getApplicationContext());
         floatPlayerView.setCompletedListener(new FloatPlayerView.CompletedListener() {
