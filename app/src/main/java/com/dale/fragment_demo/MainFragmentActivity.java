@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.libdemo.R;
+import com.dale.utils.ExitUtils;
 import com.dale.utils.LogUtils;
 import com.dale.utils.ToastUtils;
 
@@ -54,6 +55,7 @@ public class MainFragmentActivity extends ABBaseActivity {
                 ToastUtils.showLong("再按一次退出程序");
                 mExitTime = System.currentTimeMillis();
             } else {
+                ExitUtils.getInstance().finishAll();
                 Process.killProcess(android.os.Process.myPid());
                 System.gc();
                 System.exit(0);
