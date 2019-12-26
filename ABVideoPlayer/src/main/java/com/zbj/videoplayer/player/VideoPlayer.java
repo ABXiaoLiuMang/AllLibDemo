@@ -620,6 +620,7 @@ public class VideoPlayer extends FrameLayout implements InterVideoPlayer {
     }
 
     private void createIjkMediaPlayer() {
+//        https://www.jianshu.com/p/843c86a9e9ad 相关设置
         //创建IjkMediaPlayer对象
         mMediaPlayer = new IjkMediaPlayer();
         int player = IjkMediaPlayer.OPT_CATEGORY_PLAYER;

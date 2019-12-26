@@ -17,6 +17,7 @@ import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
 import com.dale.resolver.TypeResolverActivity;
+import com.dale.stateview_demo.StateTestActivity;
 import com.dale.thread_demo.ThreadActivity;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
@@ -47,7 +48,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("AgentWeb 实例");
         list.add("Fragment 实例");
         list.add("ThreadPool 实例");
-        list.add("TypeResolver 实例");
+        list.add("statedemo 实例");
         list.add("Video 实例");
         listAdapter.setNewData(list);
     }
@@ -96,7 +97,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(ThreadActivity.class);
                     break;
                 case 10:
-                    goActivity(TypeResolverActivity.class);
+                    goActivity(StateTestActivity.class);
                     break;
                 case 11:
                     goActivity(com.dale.video_demo.MainActivity.class);

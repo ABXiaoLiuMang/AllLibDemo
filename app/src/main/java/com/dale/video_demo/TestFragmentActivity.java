@@ -31,6 +31,10 @@ public class TestFragmentActivity extends BaseActivity  {
 
     @Override
     public void initView() {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.container, new TestOtherFragment())
+//                .commit();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.container, new TestFragment())

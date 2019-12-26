@@ -12,6 +12,7 @@ import com.zbj.videoplayer.controller.VideoPlayerController;
 import com.zbj.videoplayer.inter.listener.OnVideoControlListener;
 import com.zbj.videoplayer.manager.VideoPlayerManager;
 import com.zbj.videoplayer.player.VideoPlayer;
+import com.zbj.videoplayer.utils.VideoPlayerUtils;
 
 
 /**
@@ -57,6 +58,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
         return R.layout.activity_test_video2;
     }
 
+    String url = ConstantVideo.VideoPlayerList[0];
     @Override
     public void initView() {
         StatusBarUtil.setTransparentForWindow(this);
@@ -67,7 +69,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
         mBtnTiny3 = (Button) findViewById(R.id.btn_tiny_3);
 
         videoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
-        videoPlayer.setUp(ConstantVideo.VideoPlayerList[0], null);
+        videoPlayer.setUp(url, null);
         VideoPlayerController controller = new VideoPlayerController(this);
         controller.setTitle("办公室小野开番外了，居然在办公室开澡堂！老板还点赞？");
         controller.setLength(98000);
@@ -137,7 +139,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
                 videoPlayer.enterFullScreen();
                 break;
             case R.id.btn_tiny_3:
-                VideoPlayerManager.instance().suspendVideoPlayer();
+                VideoPlayerUtils.savePlayPosition(TestFullActivity.this, url, videoPlayer.getCurrentPosition());
                 startActivity(TestNextActivity.class);
                 break;
             default:

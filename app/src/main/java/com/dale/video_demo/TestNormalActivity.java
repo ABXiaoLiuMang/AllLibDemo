@@ -70,7 +70,9 @@ public class TestNormalActivity extends BaseActivity  {
         videoPlayer = findViewById(R.id.video_player);
         //必须关键的4步，播放视频最简单的方式
         videoPlayer.setPlayerType(ConstantKeys.IjkPlayerType.TYPE_IJK);
-        videoPlayer.setUp(ConstantVideo.VideoPlayerList[0], null);
+        videoPlayer.setUp("rtmp://58.200.131.2:1935/livetv/hunantv",null);
+
+//        videoPlayer.setUp(ConstantVideo.VideoPlayerList[0], null);
         controller = new VideoPlayerController(this);
         controller.setTopPadding(24.0f);
         videoPlayer.continueFromLastPosition(false);

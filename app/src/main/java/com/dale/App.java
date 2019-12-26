@@ -11,6 +11,8 @@ import com.dale.location.LocationSdk;
 import com.dale.location_demo.MyOnLocationListener;
 import com.dale.net.NetSdk;
 import com.dale.push.PushSdk;
+import com.dale.stateview_demo.custom.GlobalAdapter;
+import com.dale.stateview_demo.state.Gloading;
 import com.dale.utils.LogUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -98,6 +100,8 @@ public class App extends ABApplication {
                     }
                 })
                 .install();
+
+        Gloading.initDefault(new GlobalAdapter());
     }
 
 
