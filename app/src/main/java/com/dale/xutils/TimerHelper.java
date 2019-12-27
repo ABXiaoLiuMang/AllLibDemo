@@ -1,4 +1,4 @@
-package com.dale.utils;
+package com.dale.xutils;
 
 import android.os.Handler;
 import android.os.Looper;
