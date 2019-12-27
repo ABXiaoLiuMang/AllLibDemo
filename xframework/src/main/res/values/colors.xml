@@ -15,4 +15,7 @@
     <color name="toast_bg">#ab000000</color>
     <color name="titlebar_line_color">#80c8c8c8</color>
     <color name="styleBarBg">#D81B60</color>
+
+    <color name="x_btn_normal">#D81B60</color>
+    <color name="x_btn_press">#99D81B60</color>
 </resources>

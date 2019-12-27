@@ -1,10 +1,5 @@
 package com.dale.stateview_demo;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.libdemo.R;
 import com.dale.stateview_demo.state.Gloading;
@@ -18,7 +13,7 @@ public class StateTestActivity extends ABBaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.x_activity_main;
     }
 
     @Override

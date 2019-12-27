@@ -88,7 +88,7 @@ public abstract class AbsWebActivity<P extends BasePresenter> extends ABBaseActi
     protected int getErrorLayoutID() {
         int id = bundle.getInt(ERROR_LAYOUT_ID_KEY, -1);
         if (id == -1) {
-            id = R.layout.web_error_page;
+            id = R.layout.x_web_error_page;
         }
         return id;
     }

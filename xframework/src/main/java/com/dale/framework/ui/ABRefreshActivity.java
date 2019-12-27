@@ -28,7 +28,7 @@ public abstract class ABRefreshActivity<T,P extends BasePresenter> extends ABBas
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_refresh;
+        return R.layout.x_activity_refresh;
     }
 
     @CallSuper

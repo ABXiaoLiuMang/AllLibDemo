@@ -73,7 +73,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         super.onFinishInflate();
         setPadding(0, SizeUtils.dp2px(28),0,0);
         setBackgroundResource(backRes);
-        View mlLinearLayout = LayoutInflater.from(mContext).inflate(R.layout.view_titlebar, this, true);
+        View mlLinearLayout = LayoutInflater.from(mContext).inflate(R.layout.x_view_titlebar, this, true);
         tv_back = mlLinearLayout.findViewById(R.id.backView);
         tv_title = mlLinearLayout.findViewById(R.id.tv_title);
         tv_right = mlLinearLayout.findViewById(R.id.tv_right);

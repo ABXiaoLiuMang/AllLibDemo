@@ -49,7 +49,7 @@ public class TabAdapter extends CommonNavigatorAdapter {
         MainTab mainTab = mainTabs[index];
         if(titleView == null){
             titleView = new CommonPagerTitleView(mContext);
-            View customLayout = View.inflate(mContext, R.layout.item_home_tabhost,null);
+            View customLayout = View.inflate(mContext, R.layout.x_item_home_tabhost,null);
             TextView titleText = customLayout.findViewById(R.id.titleText);
             TextView tvTipCount = customLayout.findViewById(R.id.tvTipCount);
             ImageView ivTabIcon = customLayout.findViewById(R.id.ivTabIcon);

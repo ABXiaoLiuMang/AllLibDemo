@@ -38,7 +38,7 @@ public abstract class ABMainTabFragment extends ABBaseFragment implements TabAda
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_tab_main;
+        return R.layout.x_activity_tab_main;
     }
 
     @Override

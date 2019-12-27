@@ -52,7 +52,7 @@ public class SearchBar extends FrameLayout implements EditText.OnEditorActionLis
                 }
             }
         });
-        LayoutParams params = new LayoutParams(-1, -1);
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         view.setLayoutParams(params);
         addView(view);
     }

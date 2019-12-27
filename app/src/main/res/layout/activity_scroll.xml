@@ -56,5 +56,5 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/toolbar_layout" />
+    <include layout="@layout/x_toolbar_layout" />
 </FrameLayout>

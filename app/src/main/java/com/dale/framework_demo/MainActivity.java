@@ -9,7 +9,6 @@ import androidx.core.widget.NestedScrollView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.dale.constant.PermissionConstants;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.ABWebActivity;
 import com.dale.framework.util.ABConfig;
@@ -19,18 +18,14 @@ import com.dale.framework_demo.ui.KeyValueActivity;
 import com.dale.framework_demo.ui.MainContract;
 import com.dale.framework_demo.ui.MainPresenter;
 import com.dale.framework_demo.ui.OtherContract;
-import com.dale.framework_demo.ui.OtherPresenter;
 import com.dale.framework_demo.ui.ScrollActivity;
 import com.dale.libdemo.R;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.LogUtils;
-import com.dale.utils.PermissionUtils;
 import com.dale.utils.SizeUtils;
 import com.dale.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-
-import net.jodah.typetools.TypeResolver;
 
 import java.util.List;
 
@@ -44,7 +39,7 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_alpha_refresh;
+        return R.layout.x_activity_alpha_refresh;
     }
 
 

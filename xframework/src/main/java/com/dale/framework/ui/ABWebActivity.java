@@ -22,7 +22,7 @@ public class ABWebActivity extends AbsWebActivity implements TitleBar.LeftBtnOnC
     protected TitleBar titleBar;
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_webview;
+        return R.layout.x_activity_webview;
     }
 
     @Override

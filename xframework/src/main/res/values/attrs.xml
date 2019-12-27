@@ -34,5 +34,11 @@
     </declare-styleable>
 
 
+    <declare-styleable name="StateLayout">
+        <attr name="state_layout" format="reference" />
+        <attr name="state_emptyDrawable" format="reference" />
+        <attr name="state_netErroDrawable" format="reference" />
+    </declare-styleable>
+
 
 </resources>

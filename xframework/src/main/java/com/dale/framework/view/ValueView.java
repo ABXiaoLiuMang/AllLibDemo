@@ -27,7 +27,7 @@ public class ValueView extends FrameLayout {
 	public ValueView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.ValueView);
-		View mlLinearLayout = LayoutInflater.from(context).inflate(R.layout.value_item_layout, this, true);
+		View mlLinearLayout = LayoutInflater.from(context).inflate(R.layout.x_value_item_layout, this, true);
 		tv_key = mlLinearLayout.findViewById(R.id.tv_key);
 		tv_value = mlLinearLayout.findViewById(R.id.tv_value);
 
