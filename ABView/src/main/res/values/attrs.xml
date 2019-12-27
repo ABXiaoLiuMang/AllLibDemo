@@ -2,7 +2,7 @@
 <resources>
 
 
-    <declare-styleable name="RoundmageView">
+    <declare-styleable name="RoundImageView">
         <attr name="roundWidth" format="dimension" />
         <attr name="roundHeight" format="dimension" />
     </declare-styleable>
@@ -76,10 +76,8 @@
         </attr>
     </declare-styleable>
 
-    <!--自定义隐藏/显示密码的的EditText-->
-    <declare-styleable name="PassWordEditText">
-        <attr name="hideDrawable" format="reference"/>
-        <attr name="showDrawable" format="reference"/>
+    <declare-styleable name="PasswordView">
+        <attr name="eyePaddingRight" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="XBanner">

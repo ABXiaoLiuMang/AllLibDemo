@@ -6,8 +6,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.dale.framework.util.ABApplication;
-import com.dale.utils.ImagePlaceHolder;
-import com.dale.utils.RoundedCornersTransform;
 import com.dale.utils.SizeUtils;
 
 import java.io.File;

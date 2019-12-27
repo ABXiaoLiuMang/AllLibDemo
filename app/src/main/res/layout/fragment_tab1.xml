@@ -1,15 +1,144 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/x_toolbar_layout" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tab11111111111111111"
-        />
+    <com.dale.view.DragView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="#043"
+                android:gravity="center"
+                android:text="点击跳转第二个界面"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/huise"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <com.dale.view.PasswordView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:theme="@style/MyEditText"
+                    android:paddingRight="@dimen/dp_38"
+                    android:background="@null" />
+            </LinearLayout>
+
+
+            <com.dale.view.CouponBgView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="#47BDBD"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:horizontal_style="circle"
+                app:vertical_style="triangle">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="顺旺基优惠券"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="全场五折优惠"
+                        android:textColor="#FC4A36"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="券编号：2016070920160720"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="有效期：2016-07-09至2016-07-20"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/ic_launcher" />
+            </com.dale.view.CouponBgView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:padding="@dimen/dp_10"
+                android:background="#043"
+                >
+                <com.dale.view.CircleImageView
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    app:border_width="@dimen/dp_2"
+                    app:border_color="@color/redTab"
+                    android:src="@mipmap/icon_test"
+                    />
+                <com.dale.view.RoundImageView
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    app:roundHeight="10dp"
+                    app:roundWidth="10dp"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:src="@mipmap/icon_test"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@id/dragView"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80"
+            android:background="@drawable/oval_red_main"
+            android:gravity="center"
+            android:text="悬浮球"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </com.dale.view.DragView>
+
 
 </LinearLayout>

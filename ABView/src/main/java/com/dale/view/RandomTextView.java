@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -94,6 +95,7 @@ public class RandomTextView extends AppCompatTextView {
                 for (int i = 0; i < text.length(); i++) {
                     pianyilianglist[i] = 15;
                 }
+
                 break;
         }
     }
@@ -101,20 +103,26 @@ public class RandomTextView extends AppCompatTextView {
     //自定义滚动速度数组
     public void setPianyilian(int[] list) {
         this.text = getText().toString();
+
         pianyiliangSum = new int[list.length];
         overLine = new int[list.length];
         pianyilianglist = list;
+
+
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
+
+        Log.d("RandomTextView","draw");
         if (firstIn) {
             firstIn = false;
             super.onDraw(canvas);
             p = getPaint();
             Paint.FontMetricsInt fontMetrics = p.getFontMetricsInt();
             measuredHeight = getMeasuredHeight();
+            Log.d("RandomTextView", "onDraw: " + measuredHeight);
             baseline = (measuredHeight - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
             float[] widths = new float[4];
             p.getTextWidths("9999", widths);
@@ -128,9 +136,15 @@ public class RandomTextView extends AppCompatTextView {
 
     //绘制
     private void drawNumber(Canvas canvas) {
+
         for (int j = 0; j < numLength; j++) {
+
             for (int i = 1; i < maxLine; i++) {
-                if (i == maxLine - 1 && i * baseline + pianyiliangSum[j] <= baseline) {
+
+
+                if (i == maxLine - 1 && i * baseline + pianyiliangSum[j] <= baseline)
+
+                {
                     pianyilianglist[j] = 0;
                     overLine[j] = 1;
                     int auto = 0;
@@ -138,6 +152,7 @@ public class RandomTextView extends AppCompatTextView {
                         auto += overLine[k];
                     }
                     if (auto == numLength * 2 - 1) {
+
                         removeCallbacks(task);
                         //修复停止后绘制问题
                         if (this.auto)
@@ -150,6 +165,10 @@ public class RandomTextView extends AppCompatTextView {
 
                     drawText(canvas, setBack(arrayListText.get(j), maxLine - i - 1) + "", 0 + f0 * j,
                             i * baseline + pianyiliangSum[j], p);
+
+                    //canvas.drawText(setBack(arrayListText.get(j), maxLine - i - 1) + "", 0 + f0 * j,
+                    //        i * baseline + pianyiliangSum[j], p);
+
                 else {
                     //定位后画一次就好啦
                     if (overLine[j] == 1) {
@@ -157,28 +176,45 @@ public class RandomTextView extends AppCompatTextView {
 
                         drawText(canvas, arrayListText.get(j) + "", 0 + f0 * j,
                                 baseline, p);
+                        // canvas.drawText(arrayListText.get(j) + "", 0 + f0 * j,
+                        //        baseline, p);
                     }
+
+                    //break;
                 }
+
+
             }
+
+
         }
     }
 
     //设置上方数字0-9递减
     private int setBack(int c, int back) {
+
         if (back == 0) return c;
+
         back = back % 10;
+
         int re = c - back;
+
         if (re < 0) re = re + 10;
+
         return re;
     }
 
     //开始滚动
     public void start() {
+
         this.text = getText().toString();
         numLength = text.length();
+
         arrayListText = getList(text);
+
         postDelayed(task, 17);
         auto = true;
+
     }
 
     public void setMaxLine(int l) {
@@ -186,31 +222,48 @@ public class RandomTextView extends AppCompatTextView {
     }
 
     private ArrayList<Integer> getList(String s) {
+
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
         for (int i = 0; i < s.length(); i++) {
+
             String ss = s.substring(i, i + 1);
+
             int a = Integer.parseInt(ss);
+
             arrayList.add(a);
         }
         return arrayList;
 
     }
 
+
+
+
+
     public void destroy() {
         auto = false;
         removeCallbacks(task);
+
+
     }
 
     private final Runnable task = new Runnable() {
 
         public void run() {
+            // TODO Auto-generated method stub
             if (auto) {
+                Log.d("RandomTextView",""+auto);
                 postDelayed(this, 20);
+
                 for (int j = 0; j < numLength; j++) {
                     pianyiliangSum[j] -= pianyilianglist[j];
+
                 }
+
                 invalidate();
             }
+
         }
     };
 
@@ -222,7 +275,9 @@ public class RandomTextView extends AppCompatTextView {
     }
 
     private void drawText(Canvas mCanvas, String text, float x, float y, Paint p) {
+
         if (y >= -measuredHeight && y <= 2 * measuredHeight)
+
             mCanvas.drawText(text + "", x,
                     y, p);
         else return;

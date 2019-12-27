@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
+import android.view.Gravity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -39,6 +40,7 @@ public class SplashTextView extends AppCompatTextView {
 
 
     protected void init() {
+        setGravity(Gravity.CENTER);
         setText(StringUtils.getFormatString(millisText, time / 1000));
         initTimer();
         timer.start();

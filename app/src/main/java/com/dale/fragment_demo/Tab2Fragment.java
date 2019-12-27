@@ -10,11 +10,13 @@ import com.dale.libdemo.R;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.ToastUtils;
+import com.dale.view.RandomTextView;
 
 public class Tab2Fragment extends ABTabFragment<OtherPresenter> implements OtherContract.IView  {
 
 
     TextView tv_test;
+    RandomTextView mRandomTextView;
 
     @Override
     protected int getLayoutId() {
@@ -55,4 +57,14 @@ public class Tab2Fragment extends ABTabFragment<OtherPresenter> implements Other
         ToastUtils.showLong("hahahaha");
     }
 
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        mRandomTextView = rootView.findViewById(R.id.mRandomTextView);
+        mRandomTextView.setText("876543");
+//        mRandomTextView.setPianyilian(RandomTextView.ALL);//所有位数相同速度滚动：
+        mRandomTextView.setPianyilian(RandomTextView.FIRSTF_FIRST);//从左到右侧由快到慢滚动：
+//        mRandomTextView.setPianyilian(RandomTextView.FIRSTF_LAST);//从左到右侧由慢到快滚动：
+        mRandomTextView.start();
+    }
 }

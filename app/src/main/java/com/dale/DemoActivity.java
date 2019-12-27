@@ -3,6 +3,7 @@ package com.dale;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -19,6 +20,7 @@ import com.dale.push_demo.PushActivity;
 import com.dale.resolver.TypeResolverActivity;
 import com.dale.stateview_demo.StateTestActivity;
 import com.dale.thread_demo.ThreadActivity;
+import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.Mode;
@@ -126,5 +128,19 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         xMarqueView.setList(list);
         xMarqueView.autoScroll(this);
         return view;
+    }
+
+
+    @Override
+    public RecyclerView.ItemDecoration getItemDecoration() {
+        return new RecyclerViewDivider.Builder(this)
+                .setOrientation(RecyclerViewDivider.VERTICAL)
+                .setStyle(RecyclerViewDivider.Style.BETWEEN)
+                .setColorRes(R.color.anhei)
+                .setSize(1.5f)
+                .setStartSkipCount(3)
+                .setMarginLeft(72)
+                .setMarginRight(8)
+                .build();
     }
 }

@@ -3,6 +3,7 @@ package com.dale.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -244,8 +245,8 @@ public class ScratchCard extends View {
         mOutterPaint = new Paint();
         mPath = new Path();
 
-        // bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.p1211);            //设置底部图片
-//        mOutterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.p1);         //设置遮盖层图片
+//         bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.p1211);            //设置底部图片
+        mOutterBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_search);         //设置遮盖层图片
         mText = "谢谢惠顾";
         mTextBound = new Rect();
         mBackPaint = new Paint();

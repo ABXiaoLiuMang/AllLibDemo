@@ -20,7 +20,7 @@ public class TimerHelper implements LifecycleObserver {
     private static final int STOP = 3;
     private Handler handler;
     private TimerTask timerTask;
-    private long delayMillis;
+    private long delayMillis;//间隔执行时间
     /**
      * 循环次数
      */
@@ -30,29 +30,17 @@ public class TimerHelper implements LifecycleObserver {
      */
     private long currCount;
     private int timeStatus = -1;
-    /**
-     *
-     * @param timerTask 回调任务
-     * @param delayMillis 间隔执行时间
-     */
     public TimerHelper(TimerTask timerTask, long delayMillis) {
         this.timerTask = timerTask;
         this.delayMillis = delayMillis;
     }
 
-    /**
-     * desc: 循环次数
-     *@author Jeff created on 2018/9/11 11:04
-     */
     public TimerHelper count(int count){
         this.count = count;
         return this;
     }
 
-    /**
-     * desc: 开始
-     *@author Jeff created on 2018/10/6 11:43
-     */
+
     public TimerHelper life(FragmentActivity activity){
         activity.getLifecycle().addObserver(this);
         return this;
@@ -67,7 +55,6 @@ public class TimerHelper implements LifecycleObserver {
     }
 
     /**
-     *
      * @param firstDelay 第一次执行的时间
      */
     public void start(long firstDelay){
@@ -120,18 +107,12 @@ public class TimerHelper implements LifecycleObserver {
 
 
 
-    /**
-     * desc: 是否真正循环
-     *@author Jeff created on 2018/9/11 10:50
-     */
+
     public boolean isRunning(){
         return handler != null;
     }
 
-    /**
-     * desc: 结束
-     *@author Jeff created on 2018/9/11 10:50
-     */
+
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void stop(){
         try{

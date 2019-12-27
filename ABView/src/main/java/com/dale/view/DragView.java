@@ -17,9 +17,8 @@ import com.dale.utils.SPUtils;
  * 作者Dale:2019/3/6
  */
 public class DragView extends FrameLayout {
-    public static final String KEY_FLOATING_X = "KEY_FLOATING_X";
-    public static final String KEY_FLOATING_Y = "KEY_FLOATING_Y";
-    public static final String KEY_DragView = "DragView";
+    private static final String KEY_FLOATING_X = "KEY_FLOATING_X";
+    private static final String KEY_FLOATING_Y = "KEY_FLOATING_Y";
     ViewDragHelper dragHelper;
     View dragView;
     View contentView;

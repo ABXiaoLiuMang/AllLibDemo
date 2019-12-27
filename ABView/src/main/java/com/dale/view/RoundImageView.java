@@ -17,24 +17,24 @@ import androidx.appcompat.widget.AppCompatImageView;
 /**
  * 圆角ImageView
  */
-public class RoundmageView extends AppCompatImageView {
+public class RoundImageView extends AppCompatImageView {
 
     private Paint paint;
     private int roundWidth = 15;
     private int roundHeight = 15;
     private Paint paint2;
 
-    public RoundmageView(Context context, AttributeSet attrs, int defStyle) {
+    public RoundImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);
     }
 
-    public RoundmageView(Context context, AttributeSet attrs) {
+    public RoundImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public RoundmageView(Context context) {
+    public RoundImageView(Context context) {
         super(context);
         init(context, null);
     }
@@ -42,9 +42,9 @@ public class RoundmageView extends AppCompatImageView {
     private void init(Context context, AttributeSet attrs) {
 
         if(attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundmageView);
-            roundWidth= a.getDimensionPixelSize(R.styleable.RoundmageView_roundWidth, roundWidth);
-            roundHeight= a.getDimensionPixelSize(R.styleable.RoundmageView_roundHeight, roundHeight);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView);
+            roundWidth= a.getDimensionPixelSize(R.styleable.RoundImageView_roundWidth, roundWidth);
+            roundHeight= a.getDimensionPixelSize(R.styleable.RoundImageView_roundHeight, roundHeight);
         }else {
             float density = context.getResources().getDisplayMetrics().density;
             roundWidth = (int) (roundWidth*density);
