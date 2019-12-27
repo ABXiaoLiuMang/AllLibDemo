@@ -162,7 +162,7 @@ public class DivergeView extends View implements Runnable {
     }
 
     public interface DivergeViewProvider {
-        public Bitmap getBitmap(Object obj);
+        Bitmap getBitmap(Object obj);
     }
 
 

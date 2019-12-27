@@ -36,7 +36,7 @@ public class Tab1Fragment extends ABTabFragment<OtherPresenter> implements Other
 //        presenter.testOther();
         presenter.getHome();
 
-        LiveDataManager.getInstance().testPrice.observeForever(new NetObserver<String>(){
+        LiveDataManager.getInstance().testPrice.observe(this,new NetObserver<String>(){
 
             @Override
             protected void onSuccess(String s) {

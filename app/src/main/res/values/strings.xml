@@ -34,4 +34,7 @@
     <string name="to_recycler_view_load">在RecyclerView中使用</string>
     <string name="to_special">特殊的Loading UI</string>
     <string name="wrap_single_view">加载状态仅显示在某个View的区域</string>
+
+    <string name="module_ui_labels">Label 1;Label 2</string>
+    <string name="module_ui_labelss">Label 1;Label 2;Label 3;Label 4</string>
 </resources>

@@ -1,6 +1,11 @@
 package com.dale.fragment_demo;
 
+import android.graphics.Bitmap;
+import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.dale.framework.ui.ABBaseFragment;
 import com.dale.framework_demo.LiveDataManager;
@@ -10,10 +15,16 @@ import com.dale.libdemo.R;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.ToastUtils;
+import com.dale.view.DivergeView;
+import com.just.agentweb.Provider;
+
+import java.util.ArrayList;
 
 public class SecondFragment extends ABBaseFragment<OtherPresenter> implements OtherContract.IView {
 
-    TextView tv_test;
+    DivergeView mDivergeView;
+    private ArrayList<Bitmap> mList;
+    private int mIndex = 0;
 
     @Override
     protected int getLayoutId() {
@@ -22,33 +33,63 @@ public class SecondFragment extends ABBaseFragment<OtherPresenter> implements Ot
 
     @Override
     protected void initViewsAndEvents() {
-        if(bundle != null && bundle.containsKey("TestKey")){
+        if (bundle != null && bundle.containsKey("TestKey")) {
             ToastUtils.showLong(bundle.getString("TestKey"));
         }
 
-        tv_test = rootView.findViewById(R.id.tv_test);
+        mList = new ArrayList<>();
+        mList.add(((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.battery_10, null)).getBitmap());
+        mList.add(((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.battery_20, null)).getBitmap());
+        mList.add(((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.battery_50, null)).getBitmap());
+        mList.add(((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.battery_80, null)).getBitmap());
+        mList.add(((BitmapDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.battery_100, null)).getBitmap());
+
+
+        mDivergeView = rootView.findViewById(R.id.mDivergeView);
 
         rootView.findViewById(R.id.btn_test).setOnClickListener(v -> {
             presenter.getHome();
-            presenter.testOther();
+//            presenter.testOther();
+
+            if (mIndex == 5) {
+                mIndex = 0;
+            }
+            mDivergeView.startDiverges(mIndex);
+            mIndex++;
+
         });
 
-        LiveDataManager.getInstance().testPrice.observeForever(new NetObserver<String>(){
+        mDivergeView.post(new Runnable() {
+            @Override
+            public void run() {
+                mDivergeView.setEndPoint(new PointF(mDivergeView.getMeasuredWidth() / 2, 0));
+                mDivergeView.setDivergeViewProvider(new Provider());
+            }
+        });
+
+        LiveDataManager.getInstance().testPrice.observe(this, new NetObserver<String>() {
 
             @Override
             protected void onSuccess(String s) {
-                tv_test.setText("成功：" +s);
             }
 
             @Override
             protected void onError(ErrorMessage errorMessage) {
-                tv_test.setText("失败:" +errorMessage.getMessage());
             }
         });
     }
 
     @Override
     public void test() {
-         ToastUtils.showLong("hahahaha");
+        ToastUtils.showLong("hahahaha");
+    }
+
+
+    class Provider implements DivergeView.DivergeViewProvider {
+
+        @Override
+        public Bitmap getBitmap(Object obj) {
+            return mList == null ? null : mList.get((int) obj);
+        }
     }
 }

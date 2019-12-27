@@ -1,15 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/x_toolbar_layout" />
+    <com.dale.framework.view.TitleBar
+        android:id="@id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        app:centreTitle="second" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tab2222222222"
-        />
+
+    <com.dale.view.IOSScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_test"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="第二个(点击模拟请求)(点击开始美拍效果)" />
+
+            <com.dale.view.SegmentView
+                android:id="@+id/sv_tab0"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_20"
+                app:segmentv_borderWidth="1dp"
+                app:segmentv_colorMain="@color/colorPrimary"
+                app:segmentv_colorSub="@color/white"
+                app:segmentv_divideWidth="1dp"
+                app:segmentv_radius="4dp"
+                app:segmentv_textSize="@dimen/dp_15"
+                app:segmentv_titles="@string/module_ui_labelss" />
+
+
+            <com.dale.view.SegmentView
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_20"
+                app:segmentv_borderWidth="1dp"
+                app:segmentv_colorMain="@color/colorPrimary"
+                app:segmentv_colorSub="@color/white"
+                app:segmentv_divideWidth="1dp"
+                app:segmentv_radius="13dp"
+                app:segmentv_textSize="@dimen/sp_15"
+                app:segmentv_titles="@string/module_ui_labelss" />
+
+
+            <com.dale.view.DashView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                app:dashWidth="@dimen/dp_3"
+                app:lineColor="@color/colorPrimary"
+                app:lineHeight="@dimen/dp_2"
+                app:lineWidth="5dp" />
+
+            <com.dale.view.MailLineView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="@dimen/dp_10"
+                />
+
+            <com.dale.view.LabelView
+                app:num="20:00"
+                app:textLabel="晚场"
+                app:numStyle="italic"
+                app:numSize="14sp"
+                app:textSize="9sp"
+                app:direction="leftTop"
+                app:labelTopPadding="15dp"
+                app:labelCenterPadding="5dp"
+                app:labelBottomPadding="10dp"
+                app:backgroundColor="@color/colorPrimaryDark"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+
+            <!--           setBgColorId(int bgColorId)	设置角标背景色（资源id）
+                       setBgColor(int bgColor)	设置角标背景色
+                       setTextColorId(int colorId)	设置文字颜色（资源id）
+                       setTextColor(int color)	设置文字颜色
+                       setText(int textId)	设置文字（资源id）
+                       setText(String text)	设置文字-->
+            <com.dale.view.CornerLabelView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/dp_10"
+                app:bg_color="#FFAD2C"
+                app:position="right_top"
+                app:side_length="50dp"
+                app:textCornerLabel="Android"
+                app:text_color="#000000"
+                app:text_size="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+    </com.dale.view.IOSScrollView>
+
 
 </LinearLayout>
