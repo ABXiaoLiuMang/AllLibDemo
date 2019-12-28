@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -14,7 +15,7 @@ import com.dale.utils.StringUtils;
 /**
  * 闪屏倒计时控件
  */
-public class SplashTextView extends AppCompatTextView {
+public class SplashTextView extends AppCompatTextView implements View.OnClickListener {
 
     private long time;
     private onFinishListener onFinishListener;
@@ -41,7 +42,8 @@ public class SplashTextView extends AppCompatTextView {
 
     protected void init() {
         setGravity(Gravity.CENTER);
-        setText(StringUtils.getFormatString(millisText, time / 1000));
+        setOnClickListener(this);
+        setText(StringUtils.getFormatString(millisText, (time / 1000) + 1));
         initTimer();
         timer.start();
     }
@@ -57,7 +59,7 @@ public class SplashTextView extends AppCompatTextView {
             timer = new CountDownTimer(time, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    setText(StringUtils.getFormatString(millisText, millisUntilFinished / 1000));
+                    setText(StringUtils.getFormatString(millisText, (millisUntilFinished / 1000) + 1));
                 }
 
                 @Override
@@ -83,6 +85,13 @@ public class SplashTextView extends AppCompatTextView {
 
     public void setOnFinishListener(SplashTextView.onFinishListener onFinishListener) {
         this.onFinishListener = onFinishListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (onFinishListener != null) {
+            onFinishListener.onFinish();
+        }
     }
 
     public interface onFinishListener {

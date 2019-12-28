@@ -22,7 +22,7 @@
     <style name="LauncherActivityTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@mipmap/ic_launcher</item>
+        <item name="android:windowBackground">@mipmap/login_sp_splash</item>
     </style>
 
     <style name="tweetName">
@@ -171,4 +171,6 @@
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
+
+
 </resources>

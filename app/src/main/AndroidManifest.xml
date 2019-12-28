@@ -49,10 +49,13 @@
 
         <activity android:name="com.dale.framework_demo.MainActivity" />
 
-        <activity android:name="com.dale.DemoActivity">
+        <activity android:name="com.dale.DemoActivity"/>
+        <activity android:name="com.dale.GuideActivity"/>
+        <activity android:name="com.dale.SplashActivity"
+            android:theme="@style/LauncherActivityTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

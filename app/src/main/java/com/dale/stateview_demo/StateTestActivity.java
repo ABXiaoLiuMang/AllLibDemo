@@ -1,70 +1,49 @@
 package com.dale.stateview_demo;
 
+import android.view.View;
+
 import com.dale.framework.ui.ABBaseActivity;
+import com.dale.framework.view.StateLayout;
 import com.dale.libdemo.R;
 import com.dale.stateview_demo.state.Gloading;
+import com.dale.utils.RandomUtils;
 import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
+import com.lxj.statelayout.State;
 
-public class StateTestActivity extends ABBaseActivity {
+public class StateTestActivity extends ABBaseActivity implements StateLayout.OnRetryListener {
 
-    protected Gloading.Holder mHolder;
+   StateLayout stateLayout;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.x_activity_main;
+        return R.layout.activity_state_test;
     }
 
     @Override
     protected void initViewsAndEvents() {
-        showLoading();
-        new WeakHandler().postDelayed(() -> {
-            ToastUtils.showLong("成功了");
-            showLoadSuccess();
-        },2000);
-    }
+        stateLayout = findViewById(R.id.stateLayout);
+        stateLayout.setVisibility(View.VISIBLE);
+        findViewById(R.id.tv_content).setVisibility(View.GONE);
 
-
-
-
-
-
-
-
-    protected void initLoadingStatusViewIfNeed() {
-        if (mHolder == null) {
-            //bind status view to activity root view by default
-            mHolder = Gloading.getDefault().wrap(findViewById(R.id.test_state)).withRetry(new Runnable() {
-                @Override
-                public void run() {
-                    onLoadRetry();
-                }
-            });
+        int postion = RandomUtils.getRandom(100);
+        switch (postion % 3){
+            case 0:
+                stateLayout.setState(StateLayout.STATE_LOADING);
+                break;
+            case 1:
+                stateLayout.setState(StateLayout.STATE_NET_ERROR);
+                break;
+            case 2:
+                stateLayout.setState(StateLayout.STATE_EMPTY);
+                break;
         }
+        stateLayout.setOnRetryListener(this);
     }
 
-    protected void onLoadRetry() {
-        // override this method in subclass to do retry task
-    }
-
-    public void showLoading() {
-        initLoadingStatusViewIfNeed();
-        mHolder.showLoading();
-    }
-
-    public void showLoadSuccess() {
-        initLoadingStatusViewIfNeed();
-        mHolder.showLoadSuccess();
-    }
-
-    public void showLoadFailed() {
-        initLoadingStatusViewIfNeed();
-        mHolder.showLoadFailed();
-    }
-
-    public void showEmpty() {
-        initLoadingStatusViewIfNeed();
-        mHolder.showEmpty();
+    @Override
+    public void onRetry() {
+       ToastUtils.showLong("重试一次");
     }
 }

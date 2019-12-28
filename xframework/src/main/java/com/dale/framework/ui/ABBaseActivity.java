@@ -96,7 +96,7 @@ public abstract class ABBaseActivity<P extends BasePresenter> extends SupportAct
     public void finish() {
         super.finish();
         KeyboardUtils.hideSoftInput(this);
-        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+//        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     protected void initSystemBar(){

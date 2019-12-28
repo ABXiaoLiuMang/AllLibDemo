@@ -19,11 +19,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-public class StateLayout extends FrameLayout {
-    private final static int STATE_LOADING = 0x10;
-    private final static int STATE_EMPTY = 0x11;
-    private final static int STATE_NET_ERROR = 0x12;
-
+public class StateLayout extends FrameLayout implements View.OnClickListener {
+    public final static int STATE_LOADING = 0x10;
+    public final static int STATE_EMPTY = 0x11;
+    public final static int STATE_NET_ERROR = 0x12;
 
     @IntDef({STATE_LOADING, STATE_EMPTY, STATE_NET_ERROR,
             StateLayout.VISIBLE, StateLayout.INVISIBLE, StateLayout.GONE})
@@ -41,6 +40,7 @@ public class StateLayout extends FrameLayout {
     private TextView x_state_tv;
     private Button x_state_btn;
     private LoadingView x_state_loading;
+    private OnRetryListener onRetryListener;
 
     public StateLayout(Context context) {
         this(context, null);
@@ -67,6 +67,7 @@ public class StateLayout extends FrameLayout {
         x_state_tv = root.findViewById(R.id.x_state_tv);
         x_state_btn = root.findViewById(R.id.x_state_btn);
         x_state_loading = root.findViewById(R.id.x_state_loading);
+        x_state_btn.setOnClickListener(this);
     }
 
     private void showLoading() {
@@ -106,6 +107,10 @@ public class StateLayout extends FrameLayout {
         return this;
     }
 
+    public StateLayout setOnRetryListener(OnRetryListener onRetryListener) {
+        this.onRetryListener = onRetryListener;
+        return this;
+    }
 
     public StateLayout button(CharSequence text, int visibility) {
         x_state_btn.setText(text);
@@ -132,5 +137,18 @@ public class StateLayout extends FrameLayout {
                 break;
         }
         return this;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+       if(onRetryListener != null){
+           onRetryListener.onRetry();
+       }
+    }
+
+
+    public interface OnRetryListener{
+       void onRetry();
     }
 }

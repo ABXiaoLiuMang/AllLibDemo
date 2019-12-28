@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@id/x_state_layout"
@@ -10,7 +11,9 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:visibility="gone"
+        >
 
         <ImageView
             android:id="@id/x_state_iv"
@@ -47,7 +50,12 @@
 
     <com.lxj.xpopup.widget.LoadingView
         android:id="@id/x_state_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-</merge>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:color="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:loading_view_size="@dimen/dp_40"
+        tools:visibility="visible"
+        />
+</FrameLayout>
