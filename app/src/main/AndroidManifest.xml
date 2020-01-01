@@ -83,7 +83,8 @@
         <activity android:name="com.dale.popup_demo.PopupDemoActivity" />
         <activity android:name="com.dale.popup_demo.PopupMainActivity" />
 
-        <activity android:name="com.dale.agentweb_demo.AgentMainActivity"  android:process=":xweb"/>
+   <!--     <activity android:name="com.dale.agentweb_demo.AgentMainActivity"/>-->
+    <activity android:name="com.dale.agentweb_demo.AgentMainActivity"  android:process=":xweb"/>
 
         <activity android:name="com.dale.fragment_demo.MainFragmentActivity" />
         <activity android:name="com.dale.resolver.TypeResolverActivity" />

@@ -18,4 +18,5 @@
 
     <color name="x_btn_normal">#D81B60</color>
     <color name="x_btn_press">#99D81B60</color>
+    <color name="x_state_text_color">#999999</color>
 </resources>

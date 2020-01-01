@@ -29,8 +29,10 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="@string/state_no_data"
-            android:textColor="@color/anhei"
-            android:textSize="@dimen/sp_15" />
+            android:textColor="@color/x_state_text_color"
+            android:textSize="@dimen/sp_15"
+            tools:text="没有网络啦"
+            />
 
         <Button
             android:id="@id/x_state_btn"

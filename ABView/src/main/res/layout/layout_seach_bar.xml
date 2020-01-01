@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/search_bag_bg"
     android:orientation="horizontal">
 
@@ -9,8 +10,8 @@
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:src="@mipmap/icon_search" />
+        android:layout_marginLeft="26dp"
+        android:src="@mipmap/x_icon_search" />
 
     <EditText
         android:id="@+id/et_search_input"
@@ -21,31 +22,31 @@
         android:layout_weight="1"
         android:background="@null"
         android:hint="搜索关键字"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="#333333"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:singleLine="true"
-        android:textColor="@android:color/white"
+        android:textColor="#333333"
         android:textSize="12dp" />
 
     <ImageView
         android:id="@+id/iv_search_close"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_gravity="center"
-        android:padding="3dp"
-        android:src="@mipmap/icon_clear"
-        android:visibility="invisible" />
+        android:src="@mipmap/x_icon_clear"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        />
 
     <TextView
         android:id="@+id/tv_search_cancel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="18dp"
         android:gravity="center"
         android:padding="10dp"
         android:text="取消"
-        android:textColor="@android:color/white"
+        android:textColor="#333333"
         android:textSize="14sp" />
 </LinearLayout>

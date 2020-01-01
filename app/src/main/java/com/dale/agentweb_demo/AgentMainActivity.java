@@ -61,7 +61,7 @@ public class AgentMainActivity extends BaseAgentWebActivity {
     @Nullable
     @Override
     protected String getUrl() {
-        return "http://www.wuchajian.net/";
+        return "https://www.baidu.com/";
     }
 }
 

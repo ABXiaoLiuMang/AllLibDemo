@@ -246,7 +246,7 @@ public class ScratchCard extends View {
         mPath = new Path();
 
 //         bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.p1211);            //设置底部图片
-        mOutterBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_search);         //设置遮盖层图片
+        mOutterBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.x_icon_search);         //设置遮盖层图片
         mText = "谢谢惠顾";
         mTextBound = new Rect();
         mBackPaint = new Paint();
