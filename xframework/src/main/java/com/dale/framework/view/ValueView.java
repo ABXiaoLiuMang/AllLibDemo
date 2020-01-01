@@ -93,15 +93,4 @@ public class ValueView extends FrameLayout {
 	public void setTextValue(String value) {
 		tv_value.setText(value);
 	}
-
-
-	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-        if (isClickable()) {
-            setBackgroundResource(R.drawable.listview_item_bg);
-        } else {
-            setBackgroundResource(R.color.item_listView_normal_bg);
-        }
-	}
 }

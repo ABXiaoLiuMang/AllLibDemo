@@ -86,7 +86,7 @@ public abstract class ABBaseActivity<P extends BasePresenter> extends SupportAct
                 intent.putExtras(bundle);
             }
             mContext.startActivityForResult(intent, 0);
-            mContext.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            mContext.overridePendingTransition(R.anim.x_push_left_in, R.anim.x_push_left_out);
         } catch (Exception e) {
         }
     }
@@ -96,7 +96,7 @@ public abstract class ABBaseActivity<P extends BasePresenter> extends SupportAct
     public void finish() {
         super.finish();
         KeyboardUtils.hideSoftInput(this);
-//        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+        overridePendingTransition(R.anim.x_push_right_in, R.anim.x_push_right_out);
     }
 
     protected void initSystemBar(){

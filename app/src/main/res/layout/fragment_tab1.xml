@@ -133,7 +133,7 @@
             android:id="@id/dragView"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_80"
-            android:background="@drawable/oval_red_main"
+            android:background="@drawable/x_oval_red_main"
             android:gravity="center"
             android:text="悬浮球"
             android:textColor="@color/white"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="45dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/search_bag_bg"
+    android:background="@drawable/x_search_bag_bg"
     android:orientation="horizontal">
 
     <ImageView

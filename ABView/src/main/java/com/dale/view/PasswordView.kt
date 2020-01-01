@@ -76,9 +76,9 @@ class PasswordView : AppCompatEditText {
             }
         }
         val enabledColor = resolveAttr()
-        eyeShow = getDrawableWithIntrinsicBounds(context, R.mipmap.eye_open, enabledColor)
-        eyeHide = getDrawableWithIntrinsicBounds(context, R.mipmap.eye_close, enabledColor)
-        delete = getDrawableWithIntrinsicBounds(context, R.mipmap.icon_edit_delete, enabledColor)
+        eyeShow = getDrawableWithIntrinsicBounds(context, R.mipmap.x_eye_open, enabledColor)
+        eyeHide = getDrawableWithIntrinsicBounds(context, R.mipmap.x_eye_close, enabledColor)
+        delete = getDrawableWithIntrinsicBounds(context, R.mipmap.x_icon_edit_delete, enabledColor)
         picWidth = eyeShow.intrinsicWidth
         picHeight = eyeShow.intrinsicHeight
         addTextChangedListener(object : TextWatcher {

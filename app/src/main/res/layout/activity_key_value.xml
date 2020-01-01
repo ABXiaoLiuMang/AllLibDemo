@@ -19,7 +19,7 @@
         app:keyText="标题"
         app:valueHintColor="@color/cardview_dark_background"
         app:valueHintText="@string/srl_component_falsify"
-        app:valueImg="@drawable/ic_right_arraw"
+        app:valueImg="@drawable/x_right_arraw"
         app:valueText="吱吱吱" />
 
     <com.dale.framework.view.ValueView
@@ -30,7 +30,7 @@
         app:keyText="标题"
         app:valueHintColor="@color/cardview_dark_background"
         app:valueHintText="@string/srl_component_falsify"
-        app:valueImg="@drawable/ic_right_arraw"
+        app:valueImg="@drawable/x_right_arraw"
         app:valueText="吱吱吱" />
 
     <com.dale.framework.view.ValueView

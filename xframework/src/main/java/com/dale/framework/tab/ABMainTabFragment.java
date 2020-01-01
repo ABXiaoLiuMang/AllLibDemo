@@ -33,7 +33,7 @@ public abstract class ABMainTabFragment extends ABBaseFragment implements TabAda
     protected abstract ABTabFragment[] getFragments();
 
     protected @ColorRes int getTextColor(){
-        return R.color.text_color;
+        return R.color.x_tab_color;
     }
 
     @Override

@@ -3,10 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/item_qrcode_scan"/>
-  <Button
-      android:layout_width="match_parent"
-      android:layout_height="45dp"
-      android:id="@+id/btn"
-      />
+    <include layout="@layout/x_item_qrcode_scan" />
+
 </FrameLayout>

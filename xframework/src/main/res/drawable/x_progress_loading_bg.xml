@@ -9,4 +9,4 @@
     android:repeatMode="restart"
     android:startOffset="-1"
     android:toDegrees="360.0"
-    android:drawable="@drawable/ico_loading_big" />
+    android:drawable="@drawable/x_loading_big" />

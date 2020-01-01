@@ -98,7 +98,7 @@ public abstract class ABBaseFragment<P extends BasePresenter> extends SupportFra
                 intent.putExtras(bundle);
             }
             mContext.startActivityForResult(intent, 0);
-            mContext.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            mContext.overridePendingTransition(R.anim.x_push_left_in, R.anim.x_push_left_out);
         } catch (Exception e) {
         }
     }

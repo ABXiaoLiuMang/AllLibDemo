@@ -6,23 +6,23 @@
     android:orientation="vertical"
     >
 
-    <TextView
+    <Button
         android:id="@+id/test"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:text="点击测试"
+        android:text="点击测试(自定义)"
         android:gravity="center"/>
-    <TextView
+    <Button
         android:id="@+id/test1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:text="点击测试"
+        android:text="点击测试（系统1）"
         android:gravity="center"/>
-    <TextView
+    <Button
         android:id="@+id/test2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
-        android:text="点击测试"
+        android:text="点击测试（系统2）"
         android:gravity="center"/>
 
 </LinearLayout>

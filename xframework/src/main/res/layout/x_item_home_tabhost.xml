@@ -29,7 +29,7 @@
             android:layout_alignEnd="@+id/ivTabIcon"
             android:layout_marginEnd="-8dp"
             android:layout_marginTop="-6dp"
-            android:background="@drawable/oval_red_main"
+            android:background="@drawable/x_oval_red_main"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="10dp"

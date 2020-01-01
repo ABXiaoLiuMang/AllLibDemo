@@ -44,7 +44,7 @@ public abstract class ABScanActivity extends AppCompatActivity implements QRCode
     }
 
     protected int getLayoutId() {
-        return R.layout.activity_default_scan;
+        return R.layout.x_activity_default_scan;
     }
 
     /**

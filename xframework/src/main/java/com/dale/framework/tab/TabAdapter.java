@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 
 import com.dale.framework.R;
-import com.dale.utils.ResUtils;
 
 import magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
@@ -24,7 +23,7 @@ public class TabAdapter extends CommonNavigatorAdapter {
     private Context mContext;
     private MainTab[] mainTabs;
     private TextView [] tvTipCounts;
-    private @ColorRes int textColor = R.color.text_color;
+    private @ColorRes int textColor = R.color.x_tab_color;
     private SparseArray<CommonPagerTitleView> mTitleViewsArray = new SparseArray();
 
 

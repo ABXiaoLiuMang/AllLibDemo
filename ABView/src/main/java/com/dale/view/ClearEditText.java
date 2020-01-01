@@ -35,7 +35,7 @@ public class ClearEditText extends AppCompatEditText implements
     private void init() {
         mClearDrawable = getCompoundDrawables()[2];
         if (mClearDrawable == null) {
-            mClearDrawable = getResources().getDrawable(R.drawable.lib_view_search_clear);
+            mClearDrawable = getResources().getDrawable(R.drawable.x_lib_view_search_clear);
         }
         mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
         setClearIconVisible(false);

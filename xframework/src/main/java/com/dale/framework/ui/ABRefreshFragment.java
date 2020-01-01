@@ -61,8 +61,8 @@ public abstract class ABRefreshFragment<T,P extends BasePresenter> extends ABBas
     public RecyclerView.ItemDecoration getItemDecoration() {
         return new GridItemDecoration
                 .Builder(mContext)
-                .horColor(R.color.divider_color)
-                .verColor(R.color.divider_color)
+                .horColor(R.color.x_line_color)
+                .verColor(R.color.x_line_color)
                 .showLastDivider(true)
                 .size(1)
                 .build();

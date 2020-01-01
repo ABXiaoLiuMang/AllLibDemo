@@ -33,7 +33,7 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_qrcode_scan);
+        setContentView(R.layout.x_item_qrcode_scan);
 
         String[] strings = {Manifest.permission.INTERNET
                 , Manifest.permission.READ_EXTERNAL_STORAGE

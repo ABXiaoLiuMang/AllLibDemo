@@ -39,7 +39,7 @@
             android:layout_width="120dp"
             android:layout_height="35dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/state_btn_select"
+            android:background="@drawable/x_state_btn_select"
             android:gravity="center"
             android:text="@string/state_retry"
             android:textColor="@color/white"

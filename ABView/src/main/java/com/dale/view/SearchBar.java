@@ -27,7 +27,7 @@ public class SearchBar extends FrameLayout implements EditText.OnEditorActionLis
 
     public SearchBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_seach_bar, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.x_seach_bar_layout, null);
         mInput = view.findViewById(R.id.et_search_input);
         mClose = view.findViewById(R.id.iv_search_close);
         TextView cancel = view.findViewById(R.id.tv_search_cancel);

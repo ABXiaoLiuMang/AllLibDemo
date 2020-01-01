@@ -120,9 +120,9 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
 
         View root;
         if (mAdjustMode) {
-            root = LayoutInflater.from(getContext()).inflate(R.layout.pager_navigator_layout_no_scroll, this);
+            root = LayoutInflater.from(getContext()).inflate(R.layout.x_pager_navigator_layout_no_scroll, this);
         } else {
-            root = LayoutInflater.from(getContext()).inflate(R.layout.pager_navigator_layout, this);
+            root = LayoutInflater.from(getContext()).inflate(R.layout.x_pager_navigator_layout, this);
         }
 
         mScrollView = root.findViewById(R.id.scroll_view);   // mAdjustMode为true时，mScrollView为null

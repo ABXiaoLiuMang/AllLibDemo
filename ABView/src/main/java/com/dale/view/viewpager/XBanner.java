@@ -338,8 +338,8 @@ public class XBanner extends RelativeLayout implements XBannerViewPager.AutoPlay
             mPointTopBottomPading = typedArray.getDimensionPixelSize(R.styleable.XBanner_pointTopBottomPadding, mPointTopBottomPading);
             mPointContainerPosition = typedArray.getInt(R.styleable.XBanner_pointContainerPosition, BOTTOM);
             mPointContainerBackgroundDrawable = typedArray.getDrawable(R.styleable.XBanner_pointsContainerBackground);
-            mPointNoraml = typedArray.getResourceId(R.styleable.XBanner_pointNormal, R.drawable.dot_unselected);
-            mPointSelected = typedArray.getResourceId(R.styleable.XBanner_pointSelect, R.drawable.dot_selected);
+            mPointNoraml = typedArray.getResourceId(R.styleable.XBanner_pointNormal, R.drawable.x_dot_unselected);
+            mPointSelected = typedArray.getResourceId(R.styleable.XBanner_pointSelect, R.drawable.x_dot_selected);
             mTipTextColor = typedArray.getColor(R.styleable.XBanner_tipTextColor, mTipTextColor);
             mTipTextSize = typedArray.getDimensionPixelSize(R.styleable.XBanner_tipTextSize, mTipTextSize);
             mIsNumberIndicator = typedArray.getBoolean(R.styleable.XBanner_isShowNumberIndicator, mIsNumberIndicator);
@@ -524,7 +524,7 @@ public class XBanner extends RelativeLayout implements XBannerViewPager.AutoPlay
      * @param models 每一页的数据模型集合
      */
     public void setBannerData(@NonNull List<? extends SimpleBannerInfo> models) {
-        setBannerData(R.layout.xbanner_item_image, models);
+        setBannerData(R.layout.x_banner_item_image, models);
     }
 
     /**

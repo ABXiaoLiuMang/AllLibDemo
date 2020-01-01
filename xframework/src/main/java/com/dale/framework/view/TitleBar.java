@@ -55,7 +55,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         showRight = mTypedArray.getBoolean(R.styleable.TitleBar_showRight, false);
         showLeft = mTypedArray.getBoolean(R.styleable.TitleBar_showLeft, true);
 
-        int _id_left = mTypedArray.getResourceId(R.styleable.TitleBar_leftDrawable, whiteStyle ? R.drawable.lib_titlebar_back_white_normal : R.drawable.lib_titlebar_back_normal);
+        int _id_left = mTypedArray.getResourceId(R.styleable.TitleBar_leftDrawable, whiteStyle ? R.drawable.x_titlebar_back_white_normal : R.drawable.x_titlebar_back_normal);
         left_drawable = context.getResources().getDrawable(_id_left);
 
         int _id_right = mTypedArray.getResourceId(R.styleable.TitleBar_rightDrawable, -1);
@@ -63,7 +63,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
             right_drawable = context.getResources().getDrawable(_id_right);
         }
 
-        backRes = mTypedArray.getResourceId(R.styleable.TitleBar_barBg, R.drawable.shape_title_bg);
+        backRes = mTypedArray.getResourceId(R.styleable.TitleBar_barBg, R.drawable.x_title_bg);
 
         mTypedArray.recycle();
     }
