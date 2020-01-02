@@ -148,7 +148,7 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
     }
 
     @Override
-    public void ononRefreshSuccess(List<String> list) {
+    public void onRefreshSuccess(List<String> list) {
         listAdapter.setNewData(list);
         refreshLayout.finishRefresh();
     }

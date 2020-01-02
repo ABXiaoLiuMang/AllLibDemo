@@ -59,7 +59,7 @@ public class MainPresenter extends BasePresenter<MainContract.IView> implements 
             if(getView() != null){
                 getView().onLoadMoreSuccess(initdata());
             }
-        },10000);
+        },2000);
     }
 
     @Override
@@ -67,9 +67,9 @@ public class MainPresenter extends BasePresenter<MainContract.IView> implements 
         postion = 0;
         new WeakHandler().postDelayed(() -> {
             if(getView() != null){
-                getView().ononRefreshSuccess(initdata());
+                getView().onRefreshSuccess(initdata());
             }
-        },10000);
+        },2000);
     }
 
     private ArrayList<String> initdata(){

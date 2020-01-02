@@ -24,6 +24,7 @@ import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.Mode;
+import com.dale.worker_demo.WorkActivity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -52,6 +53,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("ThreadPool 实例");
         list.add("statedemo 实例");
         list.add("Video 实例");
+        list.add("Worker 实例");
         listAdapter.setNewData(list);
     }
 
@@ -103,6 +105,9 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 11:
                     goActivity(com.dale.video_demo.MainActivity.class);
+                    break;
+                case 12:
+                    goActivity(WorkActivity.class);
                     break;
             }
     }

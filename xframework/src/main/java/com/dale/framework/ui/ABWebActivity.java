@@ -18,7 +18,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
  * create on 2019/5/17
  * description: webview基类
  */
-public class ABWebActivity extends AbsWebActivity implements TitleBar.LeftBtnOnClickListener,TitleBar.RightBtnOnClickListener{
+public class ABWebActivity<P extends BasePresenter> extends AbsWebActivity<P> implements TitleBar.LeftBtnOnClickListener,TitleBar.RightBtnOnClickListener{
     protected TitleBar titleBar;
     @Override
     protected int getLayoutId() {

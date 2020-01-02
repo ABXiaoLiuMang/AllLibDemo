@@ -16,7 +16,7 @@ public interface MainContract {
     interface IView extends IBaseView {
         void initSuccess(List<String> list);
         void onLoadMoreSuccess(List<String> list);
-        void ononRefreshSuccess(List<String> list);
+        void onRefreshSuccess(List<String> list);
     }
 
 }
