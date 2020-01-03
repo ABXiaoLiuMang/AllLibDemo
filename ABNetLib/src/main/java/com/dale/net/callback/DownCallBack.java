@@ -7,7 +7,7 @@ import java.io.File;
  * create on 2019/7/14
  * description: 文件下载回调
  */
-public interface DownCallBack extends com.dale.net.callback.OnCallBack<File> {
+public interface DownCallBack extends OnCallBack<File> {
 
      void onProgress(Integer integer);
 

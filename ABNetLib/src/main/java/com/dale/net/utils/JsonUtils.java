@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class NetJsonUtils {
+public class JsonUtils {
 
     static class Json{
         static final Gson GSON = new GsonBuilder()

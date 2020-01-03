@@ -10,3 +10,6 @@
     
 - 一个时间轴效果，包括列表不通类型type （https://github.com/mCyp/Orient-Ui）
 - Jetpack即学即用 （https://www.jianshu.com/p/66b93df4b7a6）
+
+- ConstraintLayout 布局介绍 https://www.jianshu.com/p/958887ed4f5f
+- kotlin https://www.kotlincn.net/docs/reference/collections-overview.html

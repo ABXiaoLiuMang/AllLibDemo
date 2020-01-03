@@ -22,5 +22,12 @@ class TestLateinit {
         }
     }
 
+    class singletonDemo private constructor(){
+        companion object{
+            val instance : singletonDemo by lazy ( mode = LazyThreadSafetyMode.SYNCHRONIZED ){
+                singletonDemo()
+            }
+        }
+    }
 
 }

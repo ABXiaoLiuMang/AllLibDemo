@@ -39,7 +39,7 @@ class TestSign {
 
     /**
      * :: 操作符
-     * 等到类的class对象
+     * 得到类的class对象
      */
     val cls = TestSign::class.java
 

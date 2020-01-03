@@ -3,7 +3,7 @@ package com.dale.net;
 import com.dale.net.bean.NetLiveData;
 import com.dale.net.callback.XEntity;
 import com.dale.net.exception.ErrorMessage;
-import com.dale.net.utils.NetJsonUtils;
+import com.dale.net.utils.JsonUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -47,7 +47,7 @@ public class RequestCallback<T> implements Callback {
                     if(respType == String.class){
                         t = (T) result;
                     }else {
-                        t = NetJsonUtils.fromJson(result, respType);
+                        t = JsonUtils.fromJson(result, respType);
                     }
                     if(t == null){
                         createErrorMessage(DATA_PARSE_ERROR,"数据解析异常");

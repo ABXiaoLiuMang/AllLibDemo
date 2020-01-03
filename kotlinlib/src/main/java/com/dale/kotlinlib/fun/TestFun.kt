@@ -19,7 +19,7 @@ class TestFun {
         }
 
         //myUser不为null才执行
-        myUser?.let {
+        myUser!!.let {
             LogUtils.d("-->" + it.age + it.name)
         }
 

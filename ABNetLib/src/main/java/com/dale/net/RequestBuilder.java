@@ -23,7 +23,7 @@ import okhttp3.MediaType;
 public class RequestBuilder<T> implements NetCall<T> {
     public String method;
     public final ServiceMethod<T, ?> serviceMethod;
-    public Object oparams;
+    public Object operas;
     public String url;
     public ArrayMap<String, File> fileMap = new ArrayMap<>();
     public ArrayMap<String, String> allStringParams = new ArrayMap<>();
@@ -57,7 +57,7 @@ public class RequestBuilder<T> implements NetCall<T> {
 
     @Override
     public NetCall<T> params(Object params) {
-        this.oparams = params;
+        this.operas = params;
         return this;
     }
 

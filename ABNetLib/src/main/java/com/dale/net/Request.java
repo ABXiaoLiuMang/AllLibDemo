@@ -8,7 +8,7 @@ import com.dale.net.callback.ProgressListener;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.net.manager.RequestManager;
 import com.dale.net.request.UploadRequestBody;
-import com.dale.net.utils.NetJsonUtils;
+import com.dale.net.utils.JsonUtils;
 import com.dale.net.utils.Utils;
 
 import java.io.File;
@@ -175,11 +175,11 @@ public class Request<T> {
         RequestBody request;
         String mediaTypeName = requestBuilder.mMediaType.toString();
         //根据传的参数,判断使用哪种mediaType请求
-        if (requestBuilder.oparams != null) {
-            request = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), NetJsonUtils.toJson(requestBuilder.oparams));
+        if (requestBuilder.operas != null) {
+            request = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JsonUtils.toJson(requestBuilder.operas));
             requestBuilder.headers.set("Content-Type", "application/json");
         } else if (mediaTypeName.contains("application/json")) {
-            request = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), NetJsonUtils.toJson(requestBuilder.allStringParams));
+            request = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JsonUtils.toJson(requestBuilder.allStringParams));
             requestBuilder.headers.set("Content-Type", "application/json");
         } else {
             request = RequestBody.create(requestBuilder.mMediaType, createParams());

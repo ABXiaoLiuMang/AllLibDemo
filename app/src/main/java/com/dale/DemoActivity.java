@@ -12,6 +12,7 @@ import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
+import com.dale.kotlinlib.array.TestArray;
 import com.dale.libdemo.R;
 import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
@@ -114,7 +115,6 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
     }
 
     @Override

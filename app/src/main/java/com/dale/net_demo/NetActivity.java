@@ -19,7 +19,7 @@ import com.dale.net.callback.DownCallBack;
 import com.dale.net.callback.NetObserver;
 import com.dale.net.callback.OnCallBack;
 import com.dale.net.exception.ErrorMessage;
-import com.dale.net.utils.NetJsonUtils;
+import com.dale.net.utils.JsonUtils;
 import com.dale.net_demo.bean.BaseEntity;
 import com.dale.net_demo.bean.ListBean;
 import com.dale.net_demo.bean.MyData;
@@ -104,7 +104,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         netLiveData.observe(this, new NetObserver<BaseEntity<MyData>>() {
             @Override
             protected void onSuccess(BaseEntity<MyData> appConfigBean) {
-                setText("ok:" + NetJsonUtils.toJson(appConfigBean.getData()));
+                setText("ok:" + JsonUtils.toJson(appConfigBean.getData()));
                 Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
             }
 
@@ -126,7 +126,7 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
                 .send(new OnCallBack<BaseEntity<MyData>>() {
                     @Override
                     public void onSuccess(BaseEntity<MyData> appConfigBean) {
-                        setText("ok:" + NetJsonUtils.toJson(appConfigBean));
+                        setText("ok:" + JsonUtils.toJson(appConfigBean));
                         Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName());
                     }
 
@@ -201,8 +201,8 @@ public class NetActivity extends AppCompatActivity implements View.OnClickListen
         netLiveData.observe(this, new NetObserver<WBaseEntity<List<ListBean>>>() {
             @Override
             protected void onSuccess(WBaseEntity<List<ListBean>> appConfigBean) {
-                setText("ok:" + NetJsonUtils.toJson(appConfigBean.getResult()));
-                Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName() +"-->" + NetJsonUtils.toJson(appConfigBean.getResult()));
+                setText("ok:" + JsonUtils.toJson(appConfigBean.getResult()));
+                Log.d("Dream", "ok:getModelString" + Thread.currentThread().getName() +"-->" + JsonUtils.toJson(appConfigBean.getResult()));
             }
 
             @Override
