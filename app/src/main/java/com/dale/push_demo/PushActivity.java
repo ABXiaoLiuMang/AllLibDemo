@@ -6,13 +6,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.dale.App;
 import com.dale.libdemo.R;
 import com.dale.push.PushSdk;
 import com.dale.utils.ToastUtils;
+import com.dale.xutils.logintest.LoginIntercept;
 
 public class PushActivity extends AppCompatActivity {
 
@@ -27,6 +30,19 @@ public class PushActivity extends AppCompatActivity {
 
         ToastUtils.showLong("id -->" + PushSdk.getRegistrationId());
 
+        findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLoginDialog();
+            }
+        });
+    }
+
+
+    @LoginIntercept(content = "请登录或注册账号")
+    private void showLoginDialog() {
+        App.isLogin = true;
+        ToastUtils.showLong("去登录");
     }
 
 

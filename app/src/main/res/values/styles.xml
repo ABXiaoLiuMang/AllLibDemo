@@ -155,5 +155,11 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+    <style name="AppTheme.TransparentStatusBar" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>

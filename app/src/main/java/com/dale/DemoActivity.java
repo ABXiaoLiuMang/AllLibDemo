@@ -1,13 +1,16 @@
 package com.dale;
 
+import android.os.SystemClock;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
+import com.dale.automore.AutoLoadActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.MainActivity;
@@ -21,6 +24,8 @@ import com.dale.push_demo.PushActivity;
 import com.dale.resolver.TypeResolverActivity;
 import com.dale.stateview_demo.StateTestActivity;
 import com.dale.thread_demo.ThreadActivity;
+import com.dale.utils.MMKVUtil;
+import com.dale.utils.ToastUtils;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
@@ -55,6 +60,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("statedemo 实例");
         list.add("Video 实例");
         list.add("Worker 实例");
+        list.add("test 实例");
+        list.add("14auto 实例");
         listAdapter.setNewData(list);
     }
 
@@ -99,7 +106,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(MainFragmentActivity.class);
                     break;
                 case 9:
-                    goActivity(ThreadActivity.class);
+//                    goActivity(ThreadActivity.class);
+                    setTing();
                     break;
                 case 10:
                     goActivity(StateTestActivity.class);
@@ -109,6 +117,12 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 12:
                     goActivity(WorkActivity.class);
+                    break;
+                case 13:
+                    switchNightMode();
+                    break;
+                case 14:
+                    goActivity(AutoLoadActivity.class);
                     break;
             }
     }
@@ -147,5 +161,49 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                 .setMarginLeft(72)
                 .setMarginRight(8)
                 .build();
+    }
+
+
+    /**
+     * 日夜间模式切换
+     */
+    private void switchNightMode() {
+        boolean isNight = MMKVUtil.getBoolean("SWITCH_MODE_KEY", false);
+        if (isNight) {
+            // 日间模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            MMKVUtil.put("SWITCH_MODE_KEY", false);
+        } else {
+            // 夜间模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            MMKVUtil.put("SWITCH_MODE_KEY", true);
+        }
+        recreate();
+    }
+
+    boolean canEnviron = false;
+    private final static int COUNTS = 5;//点击次数
+    private final static long DURATION = 3 * 1000;//规定有效时间
+    private long[] mHits = new long[COUNTS];
+    private void setTing(){
+        if (!canEnviron) {
+            /**
+             * 实现双击方法
+             * src 拷贝的源数组
+             * srcPos 从源数组的那个位置开始拷贝.
+             * dst 目标数组
+             * dstPos 从目标数组的那个位子开始写数据
+             * length 拷贝的元素的个数
+             */
+            System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+            //实现左移，然后最后一个位置更新距离开机的时间，如果最后一个时间和最开始时间小于DURATION，即连续5次点击
+            mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+            if (mHits[0] >= (SystemClock.uptimeMillis() - DURATION)) {
+                ToastUtils.showLong("再次点击进行进入环境切换界面");
+                canEnviron = true;
+            }
+        } else {
+            ToastUtils.showLong("跳转成功");
+        }
     }
 }

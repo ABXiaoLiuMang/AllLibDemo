@@ -21,3 +21,5 @@
       
 2019.11.29 单activity https://github.com/YoKeyword/Fragmentation
     - 新建单activity xframework lib  库 
+    
+- 一个动画库地址:  https://lottiefiles.com/  

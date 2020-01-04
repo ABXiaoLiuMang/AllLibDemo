@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#fb7299</color>
-    <color name="colorPrimaryDark">#b85671</color>
+    <color name="colorPrimary">#3b3b3b</color>
+    <color name="colorPrimaryDark">#222323</color>
     <color name="colorAccent">@android:color/black</color>
+
+
 
     <color name="styleBarBg">#333333</color>
 
@@ -104,4 +106,6 @@
     <color name="alpha_85_black">#D9000000</color>
     <color name="alpha_90_black">#E6000000</color>
     <color name="alpha_95_black">#F2000000</color>
+
+
 </resources>

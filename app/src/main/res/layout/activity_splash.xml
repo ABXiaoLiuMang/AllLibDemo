@@ -4,7 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dale.SplashActivity">
+    tools:context="com.dale.SplashActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bg"
+        android:adjustViewBounds="true"
+        tools:background="@color/redTab"
+        android:scaleType="centerCrop"
+        />
 
     <com.dale.view.SplashTextView
         android:id="@+id/splashTextView"
@@ -18,7 +28,7 @@
         android:textSize="@dimen/sp_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:millisText="1000"
+        app:millisText="2000"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
