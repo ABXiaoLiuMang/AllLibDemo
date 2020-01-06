@@ -70,7 +70,7 @@ public class StringUtils {
                 return format;
             }
         } catch (Exception e) {
-            LogUtils.e( "getFormatString");
+            LogUtils.e( "getFormatString","");
         }
         return null;
     }

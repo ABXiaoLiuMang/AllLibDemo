@@ -69,6 +69,10 @@ public class BasePresenter<IView>{
         });
     }
 
+    protected boolean isAttachView(){
+        return mView != null;
+    }
+
     @CallSuper
     public void onCreate(){
     }
@@ -91,7 +95,7 @@ public class BasePresenter<IView>{
 
     @CallSuper
     public void onDestroy(){
-        if (mView != null){
+        if (isAttachView()){
             mView.clear();
             mView = null;
         }
@@ -99,9 +103,9 @@ public class BasePresenter<IView>{
 
     /**
      * desc: 获取当前View 可能为空,请做好非空判断
+     * 调用之前需要调用@{isAttachView}方法判断不为null
      */
     protected IView getView(){
-        if (mView == null) return null;
         return mView.get();
     }
 

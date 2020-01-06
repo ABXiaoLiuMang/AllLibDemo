@@ -46,13 +46,16 @@ public class ScrollChangeHelper implements NestedScrollView.OnScrollChangeListen
 
 
     public interface onMoveRatioListener{
+        /**
+         * @param ratio 比率 （ratio * 255 百分百透明度）
+         */
          void onMoveRatio(float ratio);
     }
 
     public static class Builder {
-        private int scrollHeight;
+        private int scrollHeight;//指定偏移量
         private NestedScrollView scrollView;
-        private View alphaView;
+        private View alphaView;//如果设置了此view将自行处理，没有设置回调处理
         private onMoveRatioListener onMoveRatioListener;
 
         public Builder scrollHeight(int scrollHeight) {
@@ -81,3 +84,11 @@ public class ScrollChangeHelper implements NestedScrollView.OnScrollChangeListen
 
     }
 }
+
+////白->红 可设置一个图片颜色变化
+//        mIvSearch.setColorFilter(new ColorMatrixColorFilter(new float[]{
+//                0,0,0,0,255-scale*12,
+//                0,0,0,0,255-scale*153,
+//                0,0,0,0,255-scale*172,
+//                0,0,0,1,0
+//                }));
