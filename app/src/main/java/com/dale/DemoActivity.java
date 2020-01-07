@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
+import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
@@ -65,6 +66,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("test 实例");
         list.add("14auto 实例");
         list.add("emotion 实例");
+        list.add("录音 实例");
         listAdapter.setNewData(list);
     }
 
@@ -136,7 +138,9 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                         isWeiXin = true;
                         goActivity(SimpleSessionActivity.class);
                     }
-
+                    break;
+                case 16:
+                    goActivity(AudioActivity.class);
                     break;
             }
     }

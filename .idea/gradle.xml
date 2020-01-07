@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ABAudio" />
             <option value="$PROJECT_DIR$/ABBaseAdapter" />
             <option value="$PROJECT_DIR$/ABFrameWork" />
             <option value="$PROJECT_DIR$/ABLocation" />
