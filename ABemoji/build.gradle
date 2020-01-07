@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+
+//if ("true" == locationLib){
+//    apply plugin: 'com.novoda.bintray-release'
+//}
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+        disable 'PrivateResource'
+    }
+
+    defaultConfig {
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = []
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    //系统库
+    compileOnly rootDependencies["appcompat"]
+
+}
+
+//if ("true" == locationLib){
+//    publish {
+//        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+//        groupId = 'com.dale.x'  //jcenter上的路径
+//        artifactId = 'AB_Location'  //项目名称
+//        publishVersion = locationLib_version    //版本号
+//        desc = 'AB_Location'
+//        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABLocation'
+//        licences = 'Apache-2.0'
+//    }
+//}

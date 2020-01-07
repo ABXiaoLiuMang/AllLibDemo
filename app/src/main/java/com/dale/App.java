@@ -3,9 +3,14 @@ package com.dale;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.widget.ImageView;
 
 import androidx.multidex.MultiDex;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dale.emoji.IImageLoader;
+import com.dale.emoji.LQREmotionKit;
 import com.dale.framework.util.ABApplication;
 import com.dale.location.LocationSdk;
 import com.dale.location_demo.MyOnLocationListener;
@@ -69,7 +74,7 @@ public class App extends ABApplication {
 
             PushSdk.ins().initSDK(this);
 
-
+            initEmotion();//加载表情
 
             //必须先初始化
             NetSdk.config(this)
@@ -124,6 +129,10 @@ public class App extends ABApplication {
             }
         }
         return false;
+    }
+
+    private void initEmotion(){
+        LQREmotionKit.init(this, (context, path, imageView) -> Glide.with(context).load(path).centerCrop().into(imageView));
     }
 
 }

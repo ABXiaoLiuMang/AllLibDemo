@@ -212,4 +212,10 @@
         <attr name="hlv_duration" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="ElipsisArrowTextView">
+        <attr name="arr_MaxLinesOnShrink" format="reference|integer" />
+        <attr name="arr_EllipsisHint" format="reference|string" /><!--default is ..-->
+        <attr name="arr_GapToExpandHint" format="reference|string" /><!--gap between "toExpandHint" and "trimmed text"-->
+    </declare-styleable>
+
 </resources>

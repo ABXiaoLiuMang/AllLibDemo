@@ -136,6 +136,7 @@ dependencies {
     implementation project(path: ':XWebView')
     implementation project(path: ':ABRefreshView')
     implementation project(path: ':ABZxing')
+    implementation project(path: ':abemoji')
 
 //    implementation project(path: ':ABFrameWork')
 
@@ -182,5 +183,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
+
 
 }

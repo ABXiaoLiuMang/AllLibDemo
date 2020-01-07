@@ -11,6 +11,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
+import com.dale.emotion.SimpleSessionActivity;
+import com.dale.emotion.WxSessionActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.MainActivity;
@@ -62,6 +64,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("Worker 实例");
         list.add("test 实例");
         list.add("14auto 实例");
+        list.add("emotion 实例");
         listAdapter.setNewData(list);
     }
 
@@ -75,6 +78,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         return new DemoAdapter(R.layout.item_layout);
     }
 
+    boolean isWeiXin = false;
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
             switch (position){
@@ -123,6 +127,16 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 14:
                     goActivity(AutoLoadActivity.class);
+                    break;
+                case 15:
+                    if(isWeiXin){
+                        isWeiXin = false;
+                        goActivity(WxSessionActivity.class);
+                    }else {
+                        isWeiXin = true;
+                        goActivity(SimpleSessionActivity.class);
+                    }
+
                     break;
             }
     }

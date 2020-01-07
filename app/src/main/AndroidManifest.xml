@@ -64,6 +64,9 @@
         <activity android:name="com.dale.worker_demo.WorkActivity" />
         <activity android:name="com.dale.push_demo.PushActivity" />
 
+        <activity android:name="com.dale.emotion.SimpleSessionActivity" />
+        <activity android:name="com.dale.emotion.WxSessionActivity" />
+
         <activity android:name="com.dale.location_demo.LocationActivity" />
 
         <activity android:name="com.dale.net_demo.NetActivity" />
