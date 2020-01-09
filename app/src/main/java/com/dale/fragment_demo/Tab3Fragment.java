@@ -39,7 +39,6 @@ public class Tab3Fragment extends ABTabFragment {
         itemClickListener = v -> {
             int index = Integer.parseInt(v.getTag().toString());
             ToastUtils.showLong("itemClick - " + dataList.get(index));
-            start(ChatFragment.class);
         };
         adapter = new AutoWrapLayout.WrapAdapter() {
 

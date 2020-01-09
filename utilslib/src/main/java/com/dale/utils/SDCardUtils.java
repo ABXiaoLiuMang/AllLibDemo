@@ -17,9 +17,6 @@ public final class SDCardUtils {
     private SDCardUtils() {
     }
 
-    // 日志 TAG
-    private static final String TAG = SDCardUtils.class.getSimpleName();
-
     /**
      * 判断内置 SDCard 是否正常挂载
      * @return {@code true} yes, {@code false} no

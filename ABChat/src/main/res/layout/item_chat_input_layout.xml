@@ -21,12 +21,13 @@
         android:focusable="true"
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_5"
-        android:src="@mipmap/icon_voice" />
+        android:src="@mipmap/ic_cheat_voice" />
 
     <Button
         android:id="@+id/btnAudio"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_38"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/shape_session_btn_voice_normal"
         android:text="@string/please_to_talk"
         android:textColor="#7e7e7e"
@@ -55,7 +56,7 @@
         android:clickable="true"
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_5"
-        android:src="@mipmap/icon_emoji"
+        android:src="@mipmap/ic_cheat_emo"
         android:focusable="true"
         />
 
@@ -85,7 +86,7 @@
             android:background="?selectableItemBackground"
             android:clickable="true"
             android:padding="@dimen/dp_5"
-            android:src="@mipmap/icon_add" />
+            android:src="@mipmap/ic_cheat_add" />
 
 
     </FrameLayout>

@@ -5,6 +5,26 @@ import java.io.IOException;
 import java.util.Locale;
 
 public final class FileUtils {
+    public static final String ROOT_DIR = "Android/data/";
+
+    /**
+     * 获取应用目录，当SD卡存在时，获取SD卡上的目录，当SD卡不存在时，获取应用的cache目录
+     */
+    public static String getDir(String name) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(SDCardUtils.getDiskCacheDir());
+        sb.append(File.separator);
+        sb.append(ROOT_DIR);
+        sb.append(File.separator);
+        sb.append(name);
+        sb.append(File.separator);
+        String path = sb.toString();
+        if (createOrExistsDir(path)) {
+            return path;
+        } else {
+            return null;
+        }
+    }
 
     /**
      * 根据路径获取File

@@ -1,15 +1,17 @@
 package com.dale.chat.ui;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.abchat.R;
+import com.dale.audio.AudioRecordManager;
+import com.dale.audio.IAudioRecordListener;
 import com.dale.chat.bean.MultipleMsgEntity;
+import com.dale.constant.PermissionConstants;
 import com.dale.emoji.EmotionKeyboard;
 import com.dale.emoji.EmotionLayout;
 import com.dale.emoji.IEmotionExtClickListener;
@@ -26,15 +31,20 @@ import com.dale.emoji.IEmotionSelectedListener;
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.utils.LogUtils;
+import com.dale.utils.PermissionUtils;
 import com.dale.utils.ResUtils;
 import com.dale.utils.StatusBarUtil;
 import com.dale.utils.StringUtils;
 import com.dale.utils.WeakHandler;
 
+import java.io.File;
 
-public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends BasePresenter> extends ABBaseActivity<P> implements IEmotionSelectedListener, BaseQuickAdapter.OnItemClickListener, IEmotionExtClickListener {
+
+public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends BasePresenter> extends ABBaseActivity<P> implements IEmotionSelectedListener,
+        BaseQuickAdapter.OnItemClickListener, IEmotionExtClickListener,IAudioRecordListener {
 
     protected EditText mEtContent;
+    protected LinearLayout mLlRoot;
     protected LinearLayout mLlContent;
     protected LinearLayout mFlEmotionView;//表情输入父布局
     protected EmotionLayout mElEmotion;//表情布局
@@ -46,6 +56,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     protected Button mBtnSend;//按住录音按钮
     protected View headView;
     protected EmotionKeyboard mEmotionKeyboard;
+    protected AudioRecordManager audioRecordManager;
 
     protected RecyclerView recyclerView;
     protected BaseQuickAdapter<T, BaseViewHolder> listAdapter;
@@ -58,6 +69,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
     @Override
     protected int getLayoutId() {
+        PermissionUtils.permission(PermissionConstants.STORAGE).request();
+        PermissionUtils.permission(PermissionConstants.MICROPHONE).request();
         return R.layout.fragment_chat_layout;
     }
 
@@ -75,6 +88,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViewsAndEvents() {
+        mLlRoot = findViewById(R.id.llRoot);
         mEtContent = findViewById(R.id.etContent);
         mLlContent = findViewById(R.id.llContent);
         mFlEmotionView = findViewById(R.id.flEmotionView);
@@ -87,9 +101,32 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         mBtnSend = findViewById(R.id.btnSend);
         recyclerView = findViewById(R.id.recyclerview);
         mElEmotion.attachEditText(mEtContent);
-        initEmotionKeyboard();
+        audioRecordManager = AudioRecordManager.getInstance(getApplicationContext());
         initListener();
         initRecyclerView();
+        initEmotionKeyboard();
+        initAudioRecordManager();
+
+        mBtnAudio.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    audioRecordManager.startRecord();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (isCancelled(v, event)) {
+                        audioRecordManager.willCancelRecord();
+                    } else {
+                        audioRecordManager.continueRecord();
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    audioRecordManager.stopRecord();
+                    audioRecordManager.destroyRecord();
+                    break;
+            }
+            return false;
+        });
+
     }
 
     protected void initRecyclerView() {
@@ -317,4 +354,137 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     }
 
 
+
+/***********以下都是录音出来逻辑************/
+    private void initAudioRecordManager() {
+        audioRecordManager.setMaxVoiceDuration(Const.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND);
+        File audioDir = new File(Const.AUDIO_SAVE_DIR);
+        if (!audioDir.exists()) {
+            audioDir.mkdirs();
+        }
+        audioRecordManager.setAudioSavePath(audioDir.getAbsolutePath());
+        audioRecordManager.setAudioRecordListener(this);
+    }
+
+    private TextView mTimerTV;
+    private TextView mStateTV;
+    private ImageView mStateIV;
+    private PopupWindow mRecordWindow;
+
+    @Override
+    public void initTipView() {
+        View view = View.inflate(mContext, R.layout.popup_audio_wi_vo, null);
+        mStateIV = view.findViewById(R.id.rc_audio_state_image);
+        mStateTV = view.findViewById(R.id.rc_audio_state_text);
+        mTimerTV = view.findViewById(R.id.rc_audio_timer);
+        mRecordWindow = new PopupWindow(view, -1, -1);
+        mRecordWindow.showAtLocation(mLlRoot, 17, 0, 0);
+        mRecordWindow.setFocusable(true);
+        mRecordWindow.setOutsideTouchable(false);
+        mRecordWindow.setTouchable(false);
+    }
+
+    @Override
+    public void setTimeoutTipView(int counter) {
+        if (this.mRecordWindow != null) {
+            this.mStateIV.setVisibility(View.GONE);
+            this.mStateTV.setVisibility(View.VISIBLE);
+            this.mStateTV.setText(R.string.voice_rec);
+            this.mStateTV.setBackgroundResource(R.drawable.bg_voice_popup);
+            this.mTimerTV.setText(String.format("%s", new Object[]{Integer.valueOf(counter)}));
+            this.mTimerTV.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void setRecordingTipView() {
+        if (this.mRecordWindow != null) {
+            this.mStateIV.setVisibility(View.VISIBLE);
+            this.mStateIV.setImageResource(R.mipmap.ic_volume_1);
+            this.mStateTV.setVisibility(View.VISIBLE);
+            this.mStateTV.setText(R.string.voice_rec);
+            this.mStateTV.setBackgroundResource(R.drawable.bg_voice_popup);
+            this.mTimerTV.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setAudioShortTipView() {
+        if (this.mRecordWindow != null) {
+            mStateIV.setImageResource(R.mipmap.ic_volume_wraning);
+            mStateTV.setText(R.string.voice_short);
+        }
+    }
+
+    @Override
+    public void setCancelTipView() {
+        if (this.mRecordWindow != null) {
+            this.mTimerTV.setVisibility(View.GONE);
+            this.mStateIV.setVisibility(View.VISIBLE);
+            this.mStateIV.setImageResource(R.mipmap.ic_volume_cancel);
+            this.mStateTV.setVisibility(View.VISIBLE);
+            this.mStateTV.setText(R.string.voice_cancel);
+            this.mStateTV.setBackgroundResource(R.drawable.corner_voice_style);
+        }
+    }
+
+    @Override
+    public void destroyTipView() {
+        if (this.mRecordWindow != null) {
+            this.mRecordWindow.dismiss();
+            this.mRecordWindow = null;
+            this.mStateIV = null;
+            this.mStateTV = null;
+            this.mTimerTV = null;
+        }
+    }
+
+    @Override
+    public void onAudioDBChanged(int db) {
+        switch (db / 5) {
+            case 0:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_1);
+                break;
+            case 1:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_2);
+                break;
+            case 2:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_3);
+                break;
+            case 3:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_4);
+                break;
+            case 4:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_5);
+                break;
+            case 5:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_6);
+                break;
+            case 6:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_7);
+                break;
+            default:
+                this.mStateIV.setImageResource(R.mipmap.ic_volume_8);
+        }
+    }
+
+
+    private boolean isCancelled(View view, MotionEvent event) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+
+        if (event.getRawX() < location[0] || event.getRawX() > location[0] + view.getWidth()
+                || event.getRawY() < location[1] - 40) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        AudioRecordManager.getInstance(mContext).destroyRecord();
+        AudioRecordManager.getInstance(mContext).destroyView();
+    }
 }

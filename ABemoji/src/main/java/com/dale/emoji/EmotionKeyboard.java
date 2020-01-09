@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.dale.utils.WeakHandler;
+
 /**
  * CSDN_LQR
  * 表情键盘协调工具
@@ -31,7 +33,7 @@ public class EmotionKeyboard {
     private View mEmotionLayout;//表情布局
     private EditText mEditText;
     private View mContentView;//内容布局view,即除了表情布局或者软键盘布局以外的布局，用于固定bar的高度，防止跳闪
-
+    private WeakHandler weakHandler = new WeakHandler();
     public EmotionKeyboard() {
     }
 
@@ -64,8 +66,7 @@ public class EmotionKeyboard {
                 if (event.getAction() == MotionEvent.ACTION_UP && mEmotionLayout.isShown()) {
                     lockContentHeight();//显示软件盘时，锁定内容高度，防止跳闪。
                     hideEmotionLayout(true);//隐藏表情布局，显示软件盘
-                    //软件盘显示后，释放内容高度
-                    mEditText.postDelayed(new Runnable() {
+                    weakHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             unlockContentHeightDelayed();
@@ -213,7 +214,7 @@ public class EmotionKeyboard {
      * 释放被锁定的内容高度
      */
     public void unlockContentHeightDelayed() {
-        mEditText.postDelayed(new Runnable() {
+        weakHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 ((LinearLayout.LayoutParams) mContentView.getLayoutParams()).weight = 1.0F;
@@ -226,7 +227,7 @@ public class EmotionKeyboard {
      */
     public void showSoftInput() {
         mEditText.requestFocus();
-        mEditText.post(new Runnable() {
+        weakHandler.post(new Runnable() {
             @Override
             public void run() {
                 mInputManager.showSoftInput(mEditText, 0);

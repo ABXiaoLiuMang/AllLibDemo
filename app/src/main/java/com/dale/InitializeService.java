@@ -6,7 +6,16 @@ import android.content.Intent;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.dale.audio.AudioRecordManager;
+import com.dale.emoji.LQREmotionKit;
+import com.dale.net.NetSdk;
+import com.dale.push.PushSdk;
 import com.dale.utils.LogUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.xutils.x;
 
 public class InitializeService extends IntentService {
 
@@ -49,11 +58,23 @@ public class InitializeService extends IntentService {
     private void initApplication() {
         //处理耗时操作和避免在application做过多初始化工作，比如初始化数据库等等
         LogUtils.d("IntentService初始化","initApplication");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        PushSdk.ins().initSDK(getApplication());
+        initEmotion();//加载表情
+
+        //必须先初始化
+        NetSdk.config(this)
+                .baseUrl("https://www.soarg999.com/CP57/")
+                .needLog(true);
+
+
+
+
+        //图标选择框架用到
+        ImageLoaderConfiguration imageconfig = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(imageconfig);     //UniversalImageLoader初始化
+        x.Ext.init(getApplication());
+
+        AudioRecordManager.getInstance(getApplicationContext());
     }
 
     @Override
@@ -67,5 +88,10 @@ public class InitializeService extends IntentService {
         super.onDestroy();
         LogUtils.d("IntentService销毁","onDestroy");
     }
+
+    private void initEmotion(){
+        LQREmotionKit.init(this, (context, path, imageView) -> Glide.with(context).load(path).centerCrop().into(imageView));
+    }
+
 }
 

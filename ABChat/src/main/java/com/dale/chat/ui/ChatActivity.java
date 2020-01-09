@@ -1,5 +1,6 @@
 package com.dale.chat.ui;
 
+import android.net.Uri;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,6 +12,7 @@ import com.dale.framework.ui.BasePresenter;
 import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +73,22 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
        ToastUtils.showLong("发送文件:" + stickerBitmapPath);
+    }
+
+    @Override
+    public void onStartRecord() {
+        ToastUtils.showShort("开始录音");
+//                RongIMClient.getInstance().sendTypingStatus(mConversationType, mSessionId, VoiceMessage.class.getAnnotation(MessageTag.class).value());
+    }
+
+    @Override
+    public void onFinish(Uri audioPath, int duration) {
+        //发送文件
+        File file = new File(audioPath.getPath());
+        if (file.exists()) {
+            ToastUtils.showShort("录音完成：audioPath" + audioPath + "  duration:" + duration);
+//                    mPresenter.sendAudioFile(audioPath, duration);
+        }
     }
 
 /******************** test code *******************/
