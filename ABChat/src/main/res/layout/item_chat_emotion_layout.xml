@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/dp_350"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_chat_layout">
+
+    <com.dale.emoji.EmotionLayout
+        android:id="@+id/elEmotion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible" />
+    <include layout="@layout/item_chat_func_layout" android:id="@+id/llMore" android:visibility="gone" />
+</LinearLayout>

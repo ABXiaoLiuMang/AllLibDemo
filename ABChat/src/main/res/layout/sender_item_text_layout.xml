@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/wechat_msg_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/time_stamp_bg"
+        android:gravity="center"
+        android:padding="@dimen/dp_5"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_12" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/dp_8"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/wechat_msg_tv_sender_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:minHeight="45dp"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_toStartOf="@+id/wechat_msg_iv_sender_profile"
+            android:background="@drawable/send_msg_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/colorBlack"
+            tools:text="你见过微信侧滑返回的联动效果，但开门效果、百叶窗效果见过吗？"
+            android:textSize="@dimen/sp_15"
+            android:focusable="true" />
+
+        <com.dale.view.CircleImageView
+            android:id="@+id/wechat_msg_iv_sender_profile"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_alignParentEnd="true"
+            app:border_width="@dimen/dp_2"
+            app:border_color="@color/white"
+            android:src="@mipmap/stranger" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

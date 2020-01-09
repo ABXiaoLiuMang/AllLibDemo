@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/.." />
+            <option value="$PROJECT_DIR$/../ABAudio" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/../ABChat" />
+            <option value="$PROJECT_DIR$/../ABFrameWork" />
+            <option value="$PROJECT_DIR$/../ABLocation" />
+            <option value="$PROJECT_DIR$/../ABNetLib" />
+            <option value="$PROJECT_DIR$/../ABPush" />
+            <option value="$PROJECT_DIR$/../ABRefreshView" />
+            <option value="$PROJECT_DIR$/../ABVideoPlayer" />
+            <option value="$PROJECT_DIR$/../ABView" />
+            <option value="$PROJECT_DIR$/../ABZxing" />
+            <option value="$PROJECT_DIR$/../ABemoji" />
+            <option value="$PROJECT_DIR$/../PickerviewLib" />
+            <option value="$PROJECT_DIR$/../PopupLib" />
+            <option value="$PROJECT_DIR$/../XFragmentLib" />
+            <option value="$PROJECT_DIR$/../XWebView" />
+            <option value="$PROJECT_DIR$/../app" />
+            <option value="$PROJECT_DIR$/../imagelib" />
+            <option value="$PROJECT_DIR$/../kotlinlib" />
+            <option value="$PROJECT_DIR$/../tasklib" />
+            <option value="$PROJECT_DIR$/../utilslib" />
+            <option value="$PROJECT_DIR$/../xframework" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

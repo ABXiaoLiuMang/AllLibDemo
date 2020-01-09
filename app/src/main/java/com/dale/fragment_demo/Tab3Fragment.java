@@ -1,9 +1,7 @@
 package com.dale.fragment_demo;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework.view.TitleBar;
@@ -41,6 +39,7 @@ public class Tab3Fragment extends ABTabFragment {
         itemClickListener = v -> {
             int index = Integer.parseInt(v.getTag().toString());
             ToastUtils.showLong("itemClick - " + dataList.get(index));
+            start(ChatFragment.class);
         };
         adapter = new AutoWrapLayout.WrapAdapter() {
 

@@ -58,8 +58,6 @@ public class App extends ABApplication {
     public void onCreate() {
         super.onCreate();
 
-        InitializeService.start(this,"初始化放在线程中");
-
         LogUtils.isDebug(true);
         VideoLogUtil.setIsLog(true);
 
@@ -71,9 +69,8 @@ public class App extends ABApplication {
 
         if(isMainProcess()){
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
-
+            InitializeService.start(this,"初始化放在线程中");
             PushSdk.ins().initSDK(this);
-
             initEmotion();//加载表情
 
             //必须先初始化

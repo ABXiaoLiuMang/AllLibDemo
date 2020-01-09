@@ -71,6 +71,7 @@
 
         <activity android:name="com.dale.emotion.SimpleSessionActivity" />
         <activity android:name="com.dale.emotion.WxSessionActivity" />
+        <activity android:name="com.dale.chat.ui.ChatActivity" />
 
         <activity android:name="com.dale.location_demo.LocationActivity" />
 

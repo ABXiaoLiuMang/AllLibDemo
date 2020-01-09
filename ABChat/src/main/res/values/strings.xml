@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ABChat</string>
+    <string name="send">发送</string>
+    <string name="please_to_talk">按住 说话</string>
+</resources>

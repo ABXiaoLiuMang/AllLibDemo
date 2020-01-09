@@ -5,12 +5,15 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
+import com.dale.chat.ui.ABChatActivity;
+import com.dale.chat.ui.ChatActivity;
 import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
@@ -18,22 +21,18 @@ import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
-import com.dale.kotlinlib.array.TestArray;
 import com.dale.libdemo.R;
 import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
-import com.dale.resolver.TypeResolverActivity;
 import com.dale.stateview_demo.StateTestActivity;
-import com.dale.thread_demo.ThreadActivity;
 import com.dale.utils.MMKVUtil;
 import com.dale.utils.ToastUtils;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.Mode;
-import com.dale.worker_demo.WorkActivity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -80,6 +79,11 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         return new DemoAdapter(R.layout.item_layout);
     }
 
+    @Override
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return new GridLayoutManager(mContext,3);
+    }
+
     boolean isWeiXin = false;
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -122,7 +126,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(com.dale.video_demo.MainActivity.class);
                     break;
                 case 12:
-                    goActivity(WorkActivity.class);
+                    goActivity(ChatActivity.class);
+//                    goActivity(WorkActivity.class);
                     break;
                 case 13:
                     switchNightMode();

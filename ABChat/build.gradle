@@ -36,7 +36,10 @@ android {
         }
     }
 
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
@@ -46,8 +49,31 @@ dependencies {
     testImplementation rootDependencies["junit"]
     androidTestImplementation rootDependencies["test_runner"]
     androidTestImplementation rootDependencies["espresso_core"]
-    compileOnly rootDependencies["appcompat"]
+
+    implementation rootDependencies["butterknife"]
+    annotationProcessor rootDependencies["butterknife_compiler"]
+
+    implementation rootDependencies["recyclerview"]
+    implementation rootDependencies["appcompat"]
+    implementation rootDependencies["design"]
+
+    compileOnly rootDependencies["glide"]
+
+    compileOnly project(path: ':ABBaseAdapter')
+    compileOnly project(path: ':imagelib')
     compileOnly project(path: ':utilslib')
+    compileOnly project(path: ':ABView')
+    compileOnly project(path: ':PickerviewLib')
+    compileOnly project(path: ':ABNetLib')
+    compileOnly project(path: ':PopupLib')
+    compileOnly project(path: ':XWebView')
+    compileOnly project(path: ':ABRefreshView')
+
+    compileOnly project(path: ':XFragmentLib')
+    compileOnly project(path: ':xframework')
+
+    compileOnly project(path: ':abemoji')
+    compileOnly project(path: ':ABAudio')
 
 
 }

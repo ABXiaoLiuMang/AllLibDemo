@@ -1,0 +1,93 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/dp_45"
+    android:background="@drawable/input_bg"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:weightSum="8"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:showIn="@layout/fragment_chat_layout"
+    >
+
+    <ImageView
+        android:id="@+id/ivAudio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:src="@mipmap/icon_voice" />
+
+    <Button
+        android:id="@+id/btnAudio"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_38"
+        android:background="@drawable/shape_session_btn_voice_normal"
+        android:text="@string/please_to_talk"
+        android:textColor="#7e7e7e"
+        android:visibility="gone"
+        android:layout_weight="7"
+        />
+
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_38"
+        android:maxHeight="@dimen/dp_70"
+        android:layout_weight="5"
+        android:textSize="@dimen/sp_14"
+        android:background="@drawable/et_underline_style"
+        android:textCursorDrawable="@null"
+        />
+
+    <ImageView
+        android:id="@+id/ivEmo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:src="@mipmap/icon_emoji"
+        android:focusable="true"
+        />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="44dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:background="@drawable/send_btn_bg"
+            android:text="@string/send"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            />
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/dp_5"
+            android:src="@mipmap/icon_add" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

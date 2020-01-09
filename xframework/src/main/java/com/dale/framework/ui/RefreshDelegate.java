@@ -56,6 +56,7 @@ public class RefreshDelegate<T> {
         refreshLayout.setEnableFooterFollowWhenNoMoreData(true);
         listAdapter.setOnItemClickListener(iRefresh);
         recyclerview.setLayoutManager(getLayoutManager());
+        recyclerview.setHasFixedSize(true);
         RecyclerView.ItemDecoration itemDecoration = getItemDecoration();
         if (itemDecoration != null) {
             recyclerview.addItemDecoration(itemDecoration);

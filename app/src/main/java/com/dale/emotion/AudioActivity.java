@@ -58,12 +58,12 @@ public class AudioActivity extends AppCompatActivity  {
     private void init() {
         PermissionUtils.permission(PermissionConstants.STORAGE).request();
         PermissionUtils.permission(PermissionConstants.MICROPHONE).request();
-        AudioRecordManager.getInstance(this).setMaxVoiceDuration(12);
+        AudioRecordManager.getInstance(getApplicationContext()).setMaxVoiceDuration(12);
         mAudioDir = new File(Environment.getExternalStorageDirectory(), "LQR_AUDIO");
         if (!mAudioDir.exists()) {
             mAudioDir.mkdirs();
         }
-        AudioRecordManager.getInstance(this).setAudioSavePath(mAudioDir.getAbsolutePath());
+        AudioRecordManager.getInstance(getApplicationContext()).setAudioSavePath(mAudioDir.getAbsolutePath());
     }
 
     private void initData() {
@@ -75,24 +75,24 @@ public class AudioActivity extends AppCompatActivity  {
         btn_audio.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    AudioRecordManager.getInstance(AudioActivity.this).startRecord();
+                    AudioRecordManager.getInstance(getApplicationContext()).startRecord();
                     break;
                 case MotionEvent.ACTION_MOVE:
                     if (isCancelled(v, event)) {
-                        AudioRecordManager.getInstance(AudioActivity.this).willCancelRecord();
+                        AudioRecordManager.getInstance(getApplicationContext()).willCancelRecord();
                     } else {
-                        AudioRecordManager.getInstance(AudioActivity.this).continueRecord();
+                        AudioRecordManager.getInstance(getApplicationContext()).continueRecord();
                     }
                     break;
                 case MotionEvent.ACTION_UP:
-                    AudioRecordManager.getInstance(AudioActivity.this).stopRecord();
-                    AudioRecordManager.getInstance(AudioActivity.this).destroyRecord();
+                    AudioRecordManager.getInstance(getApplicationContext()).stopRecord();
+                    AudioRecordManager.getInstance(getApplicationContext()).destroyRecord();
                     break;
             }
             return false;
         });
 
-        AudioRecordManager.getInstance(this).setAudioRecordListener(new IAudioRecordListener() {
+        AudioRecordManager.getInstance(getApplicationContext()).setAudioRecordListener(new IAudioRecordListener() {
 
             private TextView mTimerTV;
             private TextView mStateTV;

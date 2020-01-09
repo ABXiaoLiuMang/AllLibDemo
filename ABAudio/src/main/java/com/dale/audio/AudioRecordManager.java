@@ -15,6 +15,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.dale.utils.WeakHandler;
+
 import java.io.File;
 
 public class AudioRecordManager implements Handler.Callback {
@@ -23,7 +25,7 @@ public class AudioRecordManager implements Handler.Callback {
     private String SAVE_PATH;
     private IAudioState mCurAudioState;
     private Context mContext;
-    private Handler mHandler;
+    private WeakHandler mHandler;
     private AudioManager mAudioManager;
     private MediaRecorder mMediaRecorder;
     private Uri mAudioPath;
@@ -52,7 +54,7 @@ public class AudioRecordManager implements Handler.Callback {
     @TargetApi(21)
     private AudioRecordManager(Context context) {
         this.mContext = context;
-        this.mHandler = new Handler(this);
+        this.mHandler = new WeakHandler(this);
         this.RECORD_INTERVAL = 60;
         this.idleState = new AudioRecordManager.IdleState();
         this.recordState = new AudioRecordManager.RecordState();
