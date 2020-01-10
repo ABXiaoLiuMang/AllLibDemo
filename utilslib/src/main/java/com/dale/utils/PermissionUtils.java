@@ -154,8 +154,8 @@ public final class PermissionUtils {
      *
      * @return the single {@link PermissionUtils} instance
      */
-    public static PermissionUtils permission(@PermissionConstants.Permission final String permission) {
-        return new PermissionUtils(PermissionConstants.getPermissions(permission));
+    public static PermissionUtils permission(@PermissionConstants.Permission final String... permission) {
+        return new PermissionUtils(permission);
     }
 
     /**

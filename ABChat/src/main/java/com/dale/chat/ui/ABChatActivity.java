@@ -1,7 +1,6 @@
 package com.dale.chat.ui;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -35,6 +34,7 @@ import com.dale.utils.PermissionUtils;
 import com.dale.utils.ResUtils;
 import com.dale.utils.StatusBarUtil;
 import com.dale.utils.StringUtils;
+import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
 
 import java.io.File;
@@ -69,8 +69,6 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
     @Override
     protected int getLayoutId() {
-        PermissionUtils.permission(PermissionConstants.STORAGE).request();
-        PermissionUtils.permission(PermissionConstants.MICROPHONE).request();
         return R.layout.fragment_chat_layout;
     }
 
@@ -105,28 +103,19 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         initListener();
         initRecyclerView();
         initEmotionKeyboard();
-        initAudioRecordManager();
 
-        mBtnAudio.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    audioRecordManager.startRecord();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    if (isCancelled(v, event)) {
-                        audioRecordManager.willCancelRecord();
-                    } else {
-                        audioRecordManager.continueRecord();
-                    }
-                    break;
-                case MotionEvent.ACTION_UP:
-                    audioRecordManager.stopRecord();
-                    audioRecordManager.destroyRecord();
-                    break;
+        PermissionUtils.permission(PermissionConstants.STORAGE,PermissionConstants.MICROPHONE).callback(new PermissionUtils.SimpleCallback() {
+            @Override
+            public void onGranted() {
+                initAudioRecordManager();
             }
-            return false;
-        });
 
+            @Override
+            public void onDenied() {
+                ToastUtils.showLong("权限不足，不能使用");
+                finish();
+            }
+        }).request();
     }
 
     protected void initRecyclerView() {
@@ -356,6 +345,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
 
 /***********以下都是录音出来逻辑************/
+    @SuppressLint("ClickableViewAccessibility")
     private void initAudioRecordManager() {
         audioRecordManager.setMaxVoiceDuration(Const.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND);
         File audioDir = new File(Const.AUDIO_SAVE_DIR);
@@ -364,6 +354,26 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         }
         audioRecordManager.setAudioSavePath(audioDir.getAbsolutePath());
         audioRecordManager.setAudioRecordListener(this);
+
+        mBtnAudio.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    audioRecordManager.startRecord();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (isCancelled(v, event)) {
+                        audioRecordManager.willCancelRecord();
+                    } else {
+                        audioRecordManager.continueRecord();
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    audioRecordManager.stopRecord();
+                    audioRecordManager.destroyRecord();
+                    break;
+            }
+            return false;
+        });
     }
 
     private TextView mTimerTV;
@@ -484,7 +494,6 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @Override
     public void onDestroy() {
         super.onDestroy();
-        AudioRecordManager.getInstance(mContext).destroyRecord();
-        AudioRecordManager.getInstance(mContext).destroyView();
+        AudioRecordManager.getInstance(mContext).onDestroy();
     }
 }

@@ -3,6 +3,7 @@ package com.dale;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Process;
 
 import androidx.multidex.MultiDex;
 
@@ -65,6 +66,7 @@ public class App extends ABApplication {
 
 
         if(isMainProcess()){
+            LogUtils.d("main pid:" + Process.myPid() +" th:" + Thread.currentThread().getName());
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
             InitializeService.start(this,"初始化放在线程中");
                       //xUtils3初始化

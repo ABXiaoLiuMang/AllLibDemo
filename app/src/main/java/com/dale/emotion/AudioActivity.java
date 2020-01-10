@@ -1,5 +1,6 @@
 package com.dale.emotion;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import kr.co.namee.permissiongen.PermissionGen;
 
 /**
  * CSDN_LQR
@@ -49,21 +51,31 @@ public class AudioActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_audio);
         ButterKnife.bind(this);
         init();
-        initData();
-        initListener();
-
     }
 
 
     private void init() {
-        PermissionUtils.permission(PermissionConstants.STORAGE).request();
-        PermissionUtils.permission(PermissionConstants.MICROPHONE).request();
-        AudioRecordManager.getInstance(getApplicationContext()).setMaxVoiceDuration(12);
-        mAudioDir = new File(Environment.getExternalStorageDirectory(), "LQR_AUDIO");
-        if (!mAudioDir.exists()) {
-            mAudioDir.mkdirs();
-        }
-        AudioRecordManager.getInstance(getApplicationContext()).setAudioSavePath(mAudioDir.getAbsolutePath());
+        PermissionUtils.permission(PermissionConstants.STORAGE,PermissionConstants.MICROPHONE).callback(new PermissionUtils.SimpleCallback() {
+            @Override
+            public void onGranted() {
+                ToastUtils.showShort("同意了权限");
+                AudioRecordManager.getInstance(getApplicationContext()).setMaxVoiceDuration(12);
+                mAudioDir = new File(Environment.getExternalStorageDirectory(), "LQR_AUDIO");
+                if (!mAudioDir.exists()) {
+                    mAudioDir.mkdirs();
+                }
+                AudioRecordManager.getInstance(getApplicationContext()).setAudioSavePath(mAudioDir.getAbsolutePath());
+                initData();
+                initListener();
+            }
+
+            @Override
+            public void onDenied() {
+
+            }
+        }).request();
+
+
     }
 
     private void initData() {

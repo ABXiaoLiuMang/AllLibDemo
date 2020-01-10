@@ -3,6 +3,7 @@ package com.dale;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Process;
 
 import androidx.annotation.Nullable;
 
@@ -74,7 +75,8 @@ public class InitializeService extends IntentService {
         ImageLoader.getInstance().init(imageconfig);     //UniversalImageLoader初始化
         x.Ext.init(getApplication());
 
-        AudioRecordManager.getInstance(getApplicationContext());
+//        AudioRecordManager.getInstance(getApplicationContext());
+        LogUtils.d("pid:" + Process.myPid() +" th:" + Thread.currentThread().getName());
     }
 
     @Override

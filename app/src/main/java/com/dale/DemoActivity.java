@@ -1,9 +1,11 @@
 package com.dale;
 
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +14,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
-import com.dale.chat.ui.ABChatActivity;
 import com.dale.chat.ui.ChatActivity;
 import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
+import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.BasePresenter;
+import com.dale.framework.ui.Mode;
 import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
 import com.dale.libdemo.R;
@@ -31,8 +34,6 @@ import com.dale.utils.MMKVUtil;
 import com.dale.utils.ToastUtils;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
-import com.dale.framework.ui.ABRefreshActivity;
-import com.dale.framework.ui.Mode;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -44,6 +45,19 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //    protected void initPresenters() {
 ////        https://download.csdn.net/download/xiaoyu5256/9809854 设计模式下载  （设计模式之禅）
 //    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        PermissionGen.with(this)
+//                .addRequestCode(100)
+//                .permissions(Manifest.permission.RECORD_AUDIO
+//                        , Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                        , Manifest.permission.WAKE_LOCK
+//                        , Manifest.permission.READ_EXTERNAL_STORAGE)
+//                .request();
+    }
 
     @Override
     protected void initViewsAndEvents() {
