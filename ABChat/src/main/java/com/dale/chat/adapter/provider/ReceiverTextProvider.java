@@ -15,7 +15,7 @@ import com.dale.chat.ui.MoonUtils;
 import com.dale.chat.utils.HelpUtils;
 import com.dale.utils.LogUtils;
 
-public class ReceiverTextProvider extends BaseItemProvider<MultipleMsgEntity, BaseViewHolder> {
+public class ReceiverTextProvider extends BaseProvider<MultipleMsgEntity, BaseViewHolder> {
 
     @Override
     public int viewType() {
@@ -29,29 +29,9 @@ public class ReceiverTextProvider extends BaseItemProvider<MultipleMsgEntity, Ba
 
     @Override
     public void convert(BaseViewHolder helper, MultipleMsgEntity data, int position) {
-        MsgData currentMsgData = data.msgData;
-        MsgData preMsgData = null;
-        if(position > 0 && mData.size() > 0){
-            preMsgData = mData.get(position - 1).msgData;
-        }
-        String showTime;
-        if (preMsgData == null) {
-            showTime = HelpUtils.calculateShowTime(HelpUtils.getCurrentMillisTime(), data.msgData.getTimeStamp());
-        } else {
-            showTime = HelpUtils.calculateShowTime(currentMsgData.getTimeStamp(), preMsgData.getTimeStamp());
-        }
-        TextView timeStamp = helper.getView(R.id.wechat_msg_time_stamp);
-        if (showTime != null) {
-            timeStamp.setVisibility(View.VISIBLE);
-            timeStamp.setText(showTime);
-        } else {
-            timeStamp.setVisibility(View.GONE);
-        }
-
+        super.convert(helper,data,position);
         //设置消息文本
-        MoonUtils.identifyFaceExpression(mContext,helper.getView(R.id.wechat_msg_tv_receiver_msg),currentMsgData.getMsg(), ImageSpan.ALIGN_BOTTOM);
+        MoonUtils.identifyFaceExpression(mContext,helper.getView(R.id.wechat_receiver_text),data.msgData.getMsg(), ImageSpan.ALIGN_BOTTOM);
 
-        ImageView imageView = helper.getView(R.id.wechat_msg_iv_receiver_profile);
-        Glide.with(mContext).load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1406776478,3221057395&fm=26&gp=0.jpg").into(imageView);
     }
 }

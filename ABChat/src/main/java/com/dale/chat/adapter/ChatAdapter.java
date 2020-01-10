@@ -2,7 +2,9 @@ package com.dale.chat.adapter;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.MultipleItemRvAdapter;
+import com.dale.chat.adapter.provider.ReceiverImageProvider;
 import com.dale.chat.adapter.provider.ReceiverTextProvider;
+import com.dale.chat.adapter.provider.SenderImageProvider;
 import com.dale.chat.adapter.provider.SenderTextProvider;
 import com.dale.chat.bean.MultipleMsgEntity;
 
@@ -26,5 +28,7 @@ public class ChatAdapter extends MultipleItemRvAdapter<MultipleMsgEntity, BaseVi
     public void registerItemProvider() {
         mProviderDelegate.registerProvider(new ReceiverTextProvider());
         mProviderDelegate.registerProvider(new SenderTextProvider());
+        mProviderDelegate.registerProvider(new ReceiverImageProvider());
+        mProviderDelegate.registerProvider(new SenderImageProvider());
     }
 }

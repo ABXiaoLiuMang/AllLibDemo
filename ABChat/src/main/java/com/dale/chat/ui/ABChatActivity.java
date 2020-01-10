@@ -1,6 +1,7 @@
 package com.dale.chat.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,8 +37,13 @@ import com.dale.utils.StatusBarUtil;
 import com.dale.utils.StringUtils;
 import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.util.GlideImageLoader;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends BasePresenter> extends ABBaseActivity<P> implements IEmotionSelectedListener,
@@ -46,6 +52,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     protected EditText mEtContent;
     protected LinearLayout mLlRoot;
     protected LinearLayout mLlContent;
+    protected LinearLayout rlAlbum;//相册（拍照）
     protected LinearLayout mFlEmotionView;//表情输入父布局
     protected EmotionLayout mElEmotion;//表情布局
     protected LinearLayout mLlMore;//地图，红包等更多布局
@@ -70,6 +77,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     public abstract void onScrollTop();
 
     public abstract void sendMsg(String msg);
+
+    public abstract void selectPic(ArrayList<ImageItem> imageItems);
 
     @Override
     protected int getLayoutId() {
@@ -96,6 +105,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViewsAndEvents() {
+        rlAlbum = findViewById(R.id.rlAlbum);
         tv_title = findViewById(R.id.tv_title);
         backView = findViewById(R.id.backView);
         mLlRoot = findViewById(R.id.llRoot);
@@ -167,6 +177,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @SuppressLint("ClickableViewAccessibility")
     public void initListener() {
         backView.setOnClickListener(v -> finish());
+        rlAlbum.setOnClickListener(v -> selectPic());
         tv_title.setText(getTopTitle());
         //点击录音切换界面
         mIvAudio.setOnClickListener(v -> {
@@ -509,5 +520,36 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     public void onDestroy() {
         super.onDestroy();
         AudioRecordManager.getInstance(mContext).onDestroy();
+    }
+
+    /**
+     * 选择图片
+     */
+
+    private ImagePicker imagePicker;
+    private ArrayList<ImageItem> images = null;
+    private void selectPic(){
+        imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new GlideImageLoader());
+        imagePicker.setMultiMode(true);
+        imagePicker.setShowCamera(true);
+        imagePicker.setCrop(false);
+        imagePicker.setSelectLimit(9);
+        Intent intent = new Intent(this, ImageGridActivity.class);
+        intent.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == 100) {
+                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                selectPic(images);
+            } else {
+                ToastUtils.showLong("没有数据");
+            }
+        }
     }
 }

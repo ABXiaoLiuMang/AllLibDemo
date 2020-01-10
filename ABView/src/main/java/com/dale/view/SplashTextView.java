@@ -90,6 +90,7 @@ public class SplashTextView extends AppCompatTextView implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (onFinishListener != null) {
+            clearTimer();
             onFinishListener.onFinish();
         }
     }

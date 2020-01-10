@@ -11,6 +11,7 @@ import com.dale.chat.bean.MultipleMsgEntity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -68,6 +69,26 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     }
 
     @Override
+    public void selectPic(ArrayList<ImageItem> imageItems) {
+        for (ImageItem imageItem : imageItems){
+
+            MsgData msgData = new MsgData();
+            msgData.setMsg(imageItem.path);
+            msgData.setTimeStamp(System.currentTimeMillis());
+            MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_IMAGE,msgData);
+            listAdapter.addData(multipleMsgEntity);
+
+            msgData = new MsgData();
+            msgData.setMsg(imageItem.path);
+            msgData.setTimeStamp(System.currentTimeMillis());
+            multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_IMAGE,msgData);
+            listAdapter.addData(multipleMsgEntity);
+            recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
+
+        }
+    }
+
+    @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
     }
@@ -90,6 +111,19 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
        ToastUtils.showLong("发送文件:" + stickerBitmapPath);
+
+        MsgData msgData = new MsgData();
+        msgData.setMsg(stickerBitmapPath);
+        msgData.setTimeStamp(System.currentTimeMillis());
+        MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_IMAGE,msgData);
+        listAdapter.addData(multipleMsgEntity);
+
+        msgData = new MsgData();
+        msgData.setMsg(stickerBitmapPath);
+        msgData.setTimeStamp(System.currentTimeMillis());
+        multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_IMAGE,msgData);
+        listAdapter.addData(multipleMsgEntity);
+        recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
     }
 
     @Override
