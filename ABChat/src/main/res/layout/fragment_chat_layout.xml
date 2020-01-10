@@ -34,7 +34,6 @@
 
     <!--标签（地图，红包，图片，定位等）-->
     <include
-        android:id="@+id/flEmotionView"
         layout="@layout/item_chat_emotion_layout"
         android:visibility="gone" />
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.dale.chat.adapter.provider;
 
+import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.dale.abchat.R;
 import com.dale.chat.bean.MsgData;
 import com.dale.chat.bean.MultipleMsgEntity;
+import com.dale.chat.ui.MoonUtils;
 import com.dale.chat.utils.HelpUtils;
 
 public class SenderTextProvider extends BaseItemProvider<MultipleMsgEntity, BaseViewHolder> {
@@ -45,7 +47,8 @@ public class SenderTextProvider extends BaseItemProvider<MultipleMsgEntity, Base
             timeStamp.setVisibility(View.GONE);
         }
 
-        helper.setText(R.id.wechat_msg_tv_sender_msg,currentMsgData.getMsg());
+        //设置消息文本
+        MoonUtils.identifyFaceExpression(mContext,helper.getView(R.id.wechat_msg_tv_sender_msg),currentMsgData.getMsg(), ImageSpan.ALIGN_BOTTOM);
 
         ImageView imageView = helper.getView(R.id.wechat_msg_iv_sender_profile);
         Glide.with(mContext).load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1406776478,3221057395&fm=26&gp=0.jpg").into(imageView);

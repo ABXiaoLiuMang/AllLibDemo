@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -186,10 +185,18 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
             postTaskDelay(() -> smoothMoveToPosition(listAdapter.getItemCount() - 1), 50);
         });
 
+        mLlContent.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    closeBottomAndKeyboard();
+                    break;
+            }
+            return false;
+        });
+
         //触摸列表，关闭键盘
         recyclerView.setOnTouchListener((v, event) -> {
             closeBottomAndKeyboard();
-            LogUtils.d("event:" + event.getAction());
             return false;
         });
 
@@ -344,7 +351,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         mLlMore.setVisibility(View.GONE);
         if (mEmotionKeyboard != null) {
             mEmotionKeyboard.hideSoftInput();//我修改
-//            mEmotionKeyboard.interceptBackPress();
+            mEmotionKeyboard.interceptBackPress();
             mIvEmo.setImageResource(R.mipmap.ic_cheat_emo);
         }
     }

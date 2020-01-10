@@ -23,7 +23,7 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
-        listAdapter.setNewData(testData());
+        listAdapter.addData(testData());
     }
 
     @Override
@@ -52,7 +52,19 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
 
     @Override
     public void sendMsg(String msg) {
-        ToastUtils.showLong("发送的消息：" + msg);
+//        ToastUtils.showLong("发送的消息：" + msg);
+        MsgData msgData = new MsgData();
+        msgData.setMsg(msg);
+        msgData.setTimeStamp(System.currentTimeMillis());
+        MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_TEXT,msgData);
+        listAdapter.addData(multipleMsgEntity);
+
+        msgData = new MsgData();
+        msgData.setMsg(msg);
+        msgData.setTimeStamp(System.currentTimeMillis());
+        multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_TEXT,msgData);
+        listAdapter.addData(multipleMsgEntity);
+        recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
     }
 
     @Override
