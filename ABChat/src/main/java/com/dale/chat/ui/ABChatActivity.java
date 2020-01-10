@@ -52,8 +52,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     protected ImageView mIvEmo;//笑脸按钮
     protected ImageView mIvMore;//加号更多按钮
     protected ImageView mIvAudio;//点击显示按住录音按钮
-    protected Button mBtnAudio;//按住录音按钮
-    protected Button mBtnSend;//按住录音按钮
+    protected TextView mBtnAudio;//按住录音按钮
+    protected TextView mBtnSend;//发送按钮
     protected View headView;
     protected EmotionKeyboard mEmotionKeyboard;
     protected AudioRecordManager audioRecordManager;
@@ -112,7 +112,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
             @Override
             public void onDenied() {
-                ToastUtils.showLong("权限不足，不能使用");
+                ToastUtils.showLong("权限不足");
                 finish();
             }
         }).request();
@@ -143,7 +143,6 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
                 int lastCompletelyVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
                 if (lastCompletelyVisibleItemPosition == layoutManager.getItemCount() - 1) { //滑动到顶部
-
                 }
             }
         });
@@ -173,17 +172,9 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         });
 
         //触摸列表，关闭键盘
-        mLlContent.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    closeBottomAndKeyboard();
-                    break;
-            }
-            return false;
-        });
-        //触摸列表，关闭键盘
         recyclerView.setOnTouchListener((v, event) -> {
             closeBottomAndKeyboard();
+            LogUtils.d("event:" + event.getAction());
             return false;
         });
 
@@ -337,7 +328,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
         mElEmotion.setVisibility(View.GONE);
         mLlMore.setVisibility(View.GONE);
         if (mEmotionKeyboard != null) {
-            mEmotionKeyboard.interceptBackPress();
+            mEmotionKeyboard.hideSoftInput();//我修改
+//            mEmotionKeyboard.interceptBackPress();
             mIvEmo.setImageResource(R.mipmap.ic_cheat_emo);
         }
     }

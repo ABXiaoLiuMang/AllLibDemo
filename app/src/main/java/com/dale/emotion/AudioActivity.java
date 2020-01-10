@@ -1,6 +1,5 @@
 package com.dale.emotion;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import kr.co.namee.permissiongen.PermissionGen;
 
 /**
  * CSDN_LQR
@@ -104,7 +102,7 @@ public class AudioActivity extends AppCompatActivity  {
             return false;
         });
 
-        AudioRecordManager.getInstance(getApplicationContext()).setAudioRecordListener(new IAudioRecordListener() {
+        AudioRecordManager.getInstance(this).setAudioRecordListener(new IAudioRecordListener() {
 
             private TextView mTimerTV;
             private TextView mStateTV;

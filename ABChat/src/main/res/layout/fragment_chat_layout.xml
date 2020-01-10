@@ -19,13 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="0.0dp"
             android:layout_weight="1"
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="false"
             android:background="@color/white" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0_5"
-            android:background="#cccccc" />
+            android:background="#f1f1f1" />
 
         <!--输入控制-->
         <include layout="@layout/item_chat_input_layout" />
