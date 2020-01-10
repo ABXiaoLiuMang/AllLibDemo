@@ -32,6 +32,11 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     }
 
     @Override
+    public String getTopTitle() {
+        return "范冰冰";
+    }
+
+    @Override
     public void onScrollTop() {
         if(p < 5){
             new WeakHandler().postDelayed(() -> {

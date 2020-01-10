@@ -9,4 +9,6 @@
 
     <!--发送文本内容颜色-->
     <color name="colorBlack">#000000</color>
+
+    <color name="chat_title_bg">@android:color/white</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.dale.chat.ui;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -54,6 +55,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     protected ImageView mIvAudio;//点击显示按住录音按钮
     protected TextView mBtnAudio;//按住录音按钮
     protected TextView mBtnSend;//发送按钮
+    protected TextView backView;//返回按钮
+    protected TextView tv_title;//标题
     protected View headView;
     protected EmotionKeyboard mEmotionKeyboard;
     protected AudioRecordManager audioRecordManager;
@@ -62,6 +65,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     protected BaseQuickAdapter<T, BaseViewHolder> listAdapter;
 
     public abstract BaseQuickAdapter<T, BaseViewHolder> getListAdapter();
+
+    public abstract String getTopTitle();
 
     public abstract void onScrollTop();
 
@@ -74,7 +79,13 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
     @Override
     protected void initSystemBar() {
-        StatusBarUtil.setColor(this, ResUtils.getColor(R.color.colorPrimary), 0);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            View decorView = getWindow().getDecorView();
+            int vis = decorView.getSystemUiVisibility();
+            vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            decorView.setSystemUiVisibility(vis);
+        }
+        StatusBarUtil.setColor(this, ResUtils.getColor(R.color.chat_title_bg), 0);
     }
 
     @Override
@@ -86,6 +97,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViewsAndEvents() {
+        tv_title = findViewById(R.id.tv_title);
+        backView = findViewById(R.id.backView);
         mLlRoot = findViewById(R.id.llRoot);
         mEtContent = findViewById(R.id.etContent);
         mLlContent = findViewById(R.id.llContent);
@@ -154,6 +167,8 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
 
     @SuppressLint("ClickableViewAccessibility")
     public void initListener() {
+        backView.setOnClickListener(v -> finish());
+        tv_title.setText(getTopTitle());
         //点击录音切换界面
         mIvAudio.setOnClickListener(v -> {
             if (mBtnAudio.isShown()) {

@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f4f4f4"
+    android:background="#f8f8f8"
     android:gravity="bottom"
-    android:minHeight="@dimen/dp_48"
+    android:minHeight="@dimen/dp_54"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/dp_7"
-    android:paddingTop="@dimen/dp_6"
+    android:paddingTop="@dimen/dp_9"
     android:paddingRight="@dimen/dp_7"
-    android:paddingBottom="@dimen/dp_7"
+    android:paddingBottom="@dimen/dp_10"
     tools:showIn="@layout/fragment_chat_layout">
 
     <ImageView
@@ -39,7 +39,7 @@
         android:layout_weight="1"
         android:background="@drawable/et_underline_style"
         android:gravity="center_vertical|left"
-        android:maxHeight="@dimen/dp_70"
+        android:maxHeight="@dimen/dp_78"
         android:minHeight="@dimen/dp_35"
         android:paddingLeft="@dimen/dp_5"
         android:paddingTop="@dimen/dp_2"
