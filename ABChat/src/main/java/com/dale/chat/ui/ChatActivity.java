@@ -95,22 +95,22 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
 
     @Override
     public void onEmotionAddClick(View view) {
-        ToastUtils.showLong("onEmotionAddClick:添加");
+//        ToastUtils.showLong("标签添加按钮");
     }
 
     @Override
     public void onEmotionSettingClick(View view) {
-        ToastUtils.showLong("onEmotionSettingClick:设置");
+//        ToastUtils.showLong("标签设置按钮");
     }
 
     @Override
     public void onEmojiSelected(String key) {
-       ToastUtils.showLong("onEmojiSelected:" + key);
+//       ToastUtils.showLong("选中的标签");
     }
 
     @Override
     public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
-       ToastUtils.showLong("发送文件:" + stickerBitmapPath);
+//       ToastUtils.showLong("发送文件:" + stickerBitmapPath);
 
         MsgData msgData = new MsgData();
         msgData.setMsg(stickerBitmapPath);
@@ -128,8 +128,8 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
 
     @Override
     public void onStartRecord() {
-        ToastUtils.showShort("开始录音");
-//                RongIMClient.getInstance().sendTypingStatus(mConversationType, mSessionId, VoiceMessage.class.getAnnotation(MessageTag.class).value());
+//        ToastUtils.showShort("开始录音");
+//        RongIMClient.getInstance().sendTypingStatus(mConversationType, mSessionId, VoiceMessage.class.getAnnotation(MessageTag.class).value());
     }
 
     @Override
