@@ -1,15 +1,22 @@
 package com.dale.chat.ui;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.dale.abchat.R;
+import com.dale.audio.AudioPlayManager;
+import com.dale.audio.IAudioPlayListener;
 import com.dale.chat.adapter.ChatAdapter;
-import com.dale.chat.bean.MsgData;
+import com.dale.chat.bean.BaseMsg;
+import com.dale.chat.bean.MsgAudio;
+import com.dale.chat.bean.MsgText;
 import com.dale.chat.bean.MultipleMsgEntity;
+import com.dale.chat.utils.TestUtils;
 import com.dale.framework.ui.BasePresenter;
-import com.dale.utils.ToastUtils;
 import com.dale.utils.WeakHandler;
 import com.lzy.imagepicker.bean.ImageItem;
 
@@ -24,7 +31,7 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     protected void initViewsAndEvents() {
         super.initViewsAndEvents();
-        listAdapter.addData(testData());
+        listAdapter.addData(TestUtils.testData());
     }
 
     @Override
@@ -42,7 +49,7 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
         if(p < 5){
             new WeakHandler().postDelayed(() -> {
                 p++;
-                listAdapter.addData(0,testData());
+                listAdapter.addData(0,TestUtils.testData());
                 if(p >= 5){
                     headView.setVisibility(View.GONE);
                 }
@@ -54,35 +61,14 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     public void sendMsg(String msg) {
 //        ToastUtils.showLong("发送的消息：" + msg);
-        MsgData msgData = new MsgData();
-        msgData.setMsg(msg);
-        msgData.setTimeStamp(System.currentTimeMillis());
-        MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_TEXT,msgData);
-        listAdapter.addData(multipleMsgEntity);
-
-        msgData = new MsgData();
-        msgData.setMsg(msg);
-        msgData.setTimeStamp(System.currentTimeMillis());
-        multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_TEXT,msgData);
-        listAdapter.addData(multipleMsgEntity);
+        listAdapter.addData(TestUtils.createTestMsg(msg));
         recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
     }
 
     @Override
     public void selectPic(ArrayList<ImageItem> imageItems) {
         for (ImageItem imageItem : imageItems){
-
-            MsgData msgData = new MsgData();
-            msgData.setMsg(imageItem.path);
-            msgData.setTimeStamp(System.currentTimeMillis());
-            MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_IMAGE,msgData);
-            listAdapter.addData(multipleMsgEntity);
-
-            msgData = new MsgData();
-            msgData.setMsg(imageItem.path);
-            msgData.setTimeStamp(System.currentTimeMillis());
-            multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_IMAGE,msgData);
-            listAdapter.addData(multipleMsgEntity);
+            listAdapter.addData(TestUtils.createImageMsg(imageItem.path));
             recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
 
         }
@@ -90,7 +76,43 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        MultipleMsgEntity multipleMsgEntity = (MultipleMsgEntity) adapter.getItem(position);
+        BaseMsg baseMsg = multipleMsgEntity.baseMsg;
+        if(baseMsg instanceof MsgAudio){
+            MsgAudio msgAudio = (MsgAudio) baseMsg;
+            final ImageView ivAudio = view.findViewById(R.id.ivAudio);
+            Uri uri = Uri.parse(msgAudio.getUri());
+            AudioPlayManager.getInstance().startPlay(mContext, uri, new IAudioPlayListener() {
+                @Override
+                public void onStart(Uri var1) {
+                    if (ivAudio != null && ivAudio.getBackground() instanceof AnimationDrawable) {
+                        AnimationDrawable animation = (AnimationDrawable) ivAudio.getBackground();
+                        animation.start();
+                    }
+                }
 
+                @Override
+                public void onStop(Uri var1) {
+                    if (ivAudio != null && ivAudio.getBackground() instanceof AnimationDrawable) {
+                        AnimationDrawable animation = (AnimationDrawable) ivAudio.getBackground();
+                        animation.stop();
+                        animation.selectDrawable(0);
+                    }
+
+                }
+
+                @Override
+                public void onComplete(Uri var1) {
+                    if (ivAudio != null && ivAudio.getBackground() instanceof AnimationDrawable) {
+                        AnimationDrawable animation = (AnimationDrawable) ivAudio.getBackground();
+                        animation.stop();
+                        animation.selectDrawable(0);
+                    }
+                }
+            });
+
+
+        }
     }
 
     @Override
@@ -111,18 +133,7 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
 //       ToastUtils.showLong("发送文件:" + stickerBitmapPath);
-
-        MsgData msgData = new MsgData();
-        msgData.setMsg(stickerBitmapPath);
-        msgData.setTimeStamp(System.currentTimeMillis());
-        MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_IMAGE,msgData);
-        listAdapter.addData(multipleMsgEntity);
-
-        msgData = new MsgData();
-        msgData.setMsg(stickerBitmapPath);
-        msgData.setTimeStamp(System.currentTimeMillis());
-        multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_IMAGE,msgData);
-        listAdapter.addData(multipleMsgEntity);
+        listAdapter.addData(TestUtils.createImageMsg(stickerBitmapPath));
         recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
     }
 
@@ -137,39 +148,10 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
         //发送文件
         File file = new File(audioPath.getPath());
         if (file.exists()) {
-            ToastUtils.showShort("录音完成：audioPath" + audioPath + "  duration:" + duration);
+            listAdapter.addData(TestUtils.createAudioMsg(file.getPath(),duration));
+            recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
 //                    mPresenter.sendAudioFile(audioPath, duration);
         }
     }
 
-/******************** test code *******************/
-    private List<MultipleMsgEntity> testData(){
-        List<MultipleMsgEntity> list = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            MsgData msgData = new MsgData();
-            msgData.setMsg("谁删除了好友邀请列表");
-            msgData.setTimeStamp(System.currentTimeMillis());
-            MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_TEXT,msgData);
-            list.add(multipleMsgEntity);
-
-            msgData = new MsgData();
-            msgData.setMsg("不是我删除的别问我");
-            msgData.setTimeStamp(System.currentTimeMillis());
-            multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_TEXT,msgData);
-            list.add(multipleMsgEntity);
-
-            msgData = new MsgData();
-            msgData.setMsg("我有没有问你，艹");
-            msgData.setTimeStamp(System.currentTimeMillis());
-            multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_TEXT,msgData);
-            list.add(multipleMsgEntity);
-
-            msgData = new MsgData();
-            msgData.setMsg("你艹个鸡巴，滚蛋");
-            msgData.setTimeStamp(System.currentTimeMillis());
-            multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_TEXT,msgData);
-            list.add(multipleMsgEntity);
-        }
-        return list;
-    }
 }

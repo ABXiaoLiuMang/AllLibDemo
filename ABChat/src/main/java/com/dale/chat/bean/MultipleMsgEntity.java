@@ -15,16 +15,23 @@ public class MultipleMsgEntity {
     public static final int SENDER_IMAGE = 4;
 
 
+    /**
+     * 语音
+     */
+    public static final int RECEIVER_AUDIO = 5;
+    public static final int SENDER_AUDIO = 6;
+
+
 
     public int type;
-    public MsgData msgData;
+    public BaseMsg baseMsg;
 
     public MultipleMsgEntity(int type) {
         this.type = type;
     }
 
-    public MultipleMsgEntity(int type, MsgData msgData) {
+    public MultipleMsgEntity(int type, BaseMsg baseMsg) {
         this.type = type;
-        this.msgData = msgData;
+        this.baseMsg = baseMsg;
     }
 }

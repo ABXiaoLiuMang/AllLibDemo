@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.abchat.R;
+import com.dale.chat.bean.MsgImage;
 import com.dale.chat.bean.MultipleMsgEntity;
 
 public class ReceiverImageProvider extends BaseProvider<MultipleMsgEntity, BaseViewHolder> {
@@ -22,9 +23,10 @@ public class ReceiverImageProvider extends BaseProvider<MultipleMsgEntity, BaseV
     @Override
     public void convert(BaseViewHolder helper, MultipleMsgEntity data, int position) {
         super.convert(helper,data,position);
+        MsgImage msgImage = (MsgImage) data.baseMsg;
 
         ImageView wechat_receiver_imgage = helper.getView(R.id.wechat_receiver_imgage);
-        Glide.with(mContext).load(data.msgData.getMsg()).centerCrop().into(wechat_receiver_imgage);
+        Glide.with(mContext).load(msgImage.getUrl()).centerCrop().into(wechat_receiver_imgage);
 
 
     }

@@ -1,18 +1,12 @@
 package com.dale.chat.adapter.provider;
 
 import android.text.style.ImageSpan;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.dale.abchat.R;
-import com.dale.chat.bean.MsgData;
+import com.dale.chat.bean.MsgText;
 import com.dale.chat.bean.MultipleMsgEntity;
 import com.dale.chat.ui.MoonUtils;
-import com.dale.chat.utils.HelpUtils;
 
 public class SenderTextProvider extends BaseProvider<MultipleMsgEntity, BaseViewHolder> {
 
@@ -30,8 +24,10 @@ public class SenderTextProvider extends BaseProvider<MultipleMsgEntity, BaseView
     public void convert(BaseViewHolder helper, MultipleMsgEntity data, int position) {
         super.convert(helper, data, position);
 
+        MsgText msgText = (MsgText) data.baseMsg;
+
         //设置消息文本
-        MoonUtils.identifyFaceExpression(mContext,helper.getView(R.id.wechat_sender_text),data.msgData.getMsg(), ImageSpan.ALIGN_BOTTOM);
+        MoonUtils.identifyFaceExpression(mContext,helper.getView(R.id.wechat_sender_text),msgText.getText(), ImageSpan.ALIGN_BOTTOM);
 
     }
 }

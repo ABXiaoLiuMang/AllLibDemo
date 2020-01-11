@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.dale.abchat.R;
-import com.dale.chat.bean.MsgData;
+import com.dale.chat.bean.BaseMsg;
+import com.dale.chat.bean.MsgText;
 import com.dale.chat.bean.MultipleMsgEntity;
 import com.dale.chat.utils.HelpUtils;
 
@@ -17,14 +18,14 @@ public abstract class BaseProvider<T extends MultipleMsgEntity,V extends BaseVie
 
     @Override
     public void convert(V helper, T data, int position) {
-        MsgData currentMsgData = data.msgData;
-        MsgData preMsgData = null;
+        BaseMsg currentMsgData = data.baseMsg;
+        BaseMsg preMsgData = null;
         if(position > 0 && mData.size() > 0){
-            preMsgData = mData.get(position - 1).msgData;
+            preMsgData = mData.get(position - 1).baseMsg;
         }
         String showTime;
         if (preMsgData == null) {
-            showTime = HelpUtils.calculateShowTime(HelpUtils.getCurrentMillisTime(), data.msgData.getTimeStamp());
+            showTime = HelpUtils.calculateShowTime(HelpUtils.getCurrentMillisTime(), data.baseMsg.getTimeStamp());
         } else {
             showTime = HelpUtils.calculateShowTime(currentMsgData.getTimeStamp(), preMsgData.getTimeStamp());
         }
