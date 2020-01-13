@@ -8,19 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.abchat.R;
 import com.dale.chat.bean.MsgImage;
 import com.dale.chat.bean.MultipleMsgEntity;
-import com.dale.chat.ui.MyBitmapTransformation;
 import com.dale.utils.LogUtils;
 import com.dale.utils.SizeUtils;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class SenderImageProvider extends BaseProvider<MultipleMsgEntity, BaseViewHolder> {
 

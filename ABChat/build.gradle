@@ -59,7 +59,7 @@ dependencies {
     implementation rootDependencies["constraint_layout"]
 
     compileOnly rootDependencies["glide"]
-    compileOnly rootDependencies["glide_transformations"]
+//    compileOnly rootDependencies["glide_transformations"]
 
     compileOnly project(path: ':imagelib')
 
