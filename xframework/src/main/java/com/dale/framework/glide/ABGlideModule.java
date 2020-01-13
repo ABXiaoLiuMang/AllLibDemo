@@ -11,6 +11,8 @@ import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.request.RequestOptions;
+import com.dale.framework.R;
 import com.dale.utils.FileUtils;
 import com.dale.utils.StringUtils;
 
@@ -29,6 +31,13 @@ public class ABGlideModule extends AppGlideModule {
 
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
+        /**
+         * 配置全局默认占位图等
+         */
+//        RequestOptions requestOptions = new RequestOptions()
+//                .error(R.mipmap.x_state_failed)
+//                .placeholder(R.mipmap.x_state_empty);
+//        builder.setDefaultRequestOptions(requestOptions);
         String path = FileUtils.getDir(FileUtils.PIC);
         if(!StringUtils.isEmpty(path)){
             builder.setDiskCache(() -> DiskLruCacheWrapper.create(new File(path), IMAGE_DISK_CACHE_MAX_SIZE));
