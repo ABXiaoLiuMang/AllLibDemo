@@ -22,28 +22,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_margin="@dimen/dp_8"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/wechat_sender_sticker"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_toStartOf="@+id/chat_head"
+            android:adjustViewBounds="true"
+            android:scaleType="center"
+            tools:src="@mipmap/stranger"
+            />
 
         <com.dale.view.CircleImageView
             android:id="@+id/chat_head"
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_50"
+            android:layout_alignParentEnd="true"
             app:border_width="@dimen/dp_2"
             app:border_color="@color/white"
-            tools:src="@mipmap/stranger" />
-
-        <com.dale.view.RoundImageView
-            android:id="@+id/wechat_receiver_imgage"
-            android:layout_width="@dimen/dp_120"
-            android:layout_height="@dimen/dp_160"
-            android:layout_marginStart="@dimen/dp_5"
-            android:layout_toEndOf="@+id/chat_head"
-            android:adjustViewBounds="true"
-            app:radius="@dimen/dp_6"
-            tools:src="@mipmap/stranger"
-            />
-
+            android:src="@mipmap/stranger" />
     </RelativeLayout>
+
 
 
 </LinearLayout>

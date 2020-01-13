@@ -133,7 +133,7 @@ public class ChatActivity extends ABChatActivity<MultipleMsgEntity, BasePresente
     @Override
     public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
 //       ToastUtils.showLong("发送文件:" + stickerBitmapPath);
-        listAdapter.addData(TestUtils.createImageMsg(stickerBitmapPath));
+        listAdapter.addData(TestUtils.createStickerMsg(stickerBitmapPath));
         recyclerView.scrollToPosition(listAdapter.getItemCount()-1);
     }
 

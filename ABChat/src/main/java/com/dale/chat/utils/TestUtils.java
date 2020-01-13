@@ -47,6 +47,23 @@ public class TestUtils {
         return list;
     }
 
+    public static List<MultipleMsgEntity> createStickerMsg(String imagePath){
+        ArrayList<MultipleMsgEntity> list = new ArrayList<>();
+
+        MsgImage msgImage = new MsgImage();
+        msgImage.setUrl(imagePath);
+        msgImage.setTimeStamp(System.currentTimeMillis());
+        MultipleMsgEntity multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.SENDER_STICKER,msgImage);
+        list.add(multipleMsgEntity);
+
+        msgImage = new MsgImage();
+        msgImage.setUrl(imagePath);
+        msgImage.setTimeStamp(System.currentTimeMillis());
+        multipleMsgEntity = new MultipleMsgEntity(MultipleMsgEntity.RECEIVER_STICKER,msgImage);
+        list.add(multipleMsgEntity);
+        return list;
+    }
+
     public static List<MultipleMsgEntity> createAudioMsg(String audioPath,int duration){
         ArrayList<MultipleMsgEntity> list = new ArrayList<>();
 

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="radius" format="dimension|reference" />
+    <attr name="border_width" format="dimension|reference" />
+    <attr name="border_color" format="color|reference" />
 
     <declare-styleable name="RoundImageView">
-        <attr name="roundWidth" format="dimension" />
-        <attr name="roundHeight" format="dimension" />
+        <attr name="leftTopRadius" format="dimension|reference" />
+        <attr name="rightTopRadius" format="dimension|reference" />
+        <attr name="rightBottomRadius" format="dimension|reference" />
+        <attr name="leftBottomRadius" format="dimension|reference" />
+        <attr name="border_width"  />
+        <attr name="border_color" />
+        <attr name="radius" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">
-        <attr name="border_width" format="dimension" />
-        <attr name="border_color" format="color" />
+        <attr name="border_width"/>
+        <attr name="border_color"/>
     </declare-styleable>
 
     <declare-styleable name="DashView">
@@ -156,7 +164,7 @@
             <enum name="bottom" value="3" />
         </attr>
         <attr name="replybv_color" format="color" />
-        <attr name="radius" format="dimension" />
+        <attr name="radius" />
         <attr name="offset" format="dimension" />
         <attr name="trgWidth" format="dimension" />
         <attr name="trgHeight" format="dimension" />

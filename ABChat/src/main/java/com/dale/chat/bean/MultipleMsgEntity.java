@@ -9,17 +9,23 @@ public class MultipleMsgEntity {
     public static final int SENDER_TEXT = 2;
 
     /**
-     * 本地git表情 和本地图片文件
+     * 本地图片文件
      */
     public static final int RECEIVER_IMAGE = 3;
     public static final int SENDER_IMAGE = 4;
+
+    /**
+     * 本地git表情
+     */
+    public static final int RECEIVER_STICKER = 5;
+    public static final int SENDER_STICKER = 6;
 
 
     /**
      * 语音
      */
-    public static final int RECEIVER_AUDIO = 5;
-    public static final int SENDER_AUDIO = 6;
+    public static final int RECEIVER_AUDIO = 7;
+    public static final int SENDER_AUDIO = 8;
 
 
 

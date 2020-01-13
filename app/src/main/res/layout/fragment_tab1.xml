@@ -119,8 +119,7 @@
                 <com.dale.view.RoundImageView
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
-                    app:roundHeight="10dp"
-                    app:roundWidth="10dp"
+                    app:radius="10dp"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:src="@mipmap/icon_test"
                     />
