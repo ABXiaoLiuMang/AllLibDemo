@@ -30,6 +30,7 @@ import com.dale.emoji.IEmotionExtClickListener;
 import com.dale.emoji.IEmotionSelectedListener;
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.framework.ui.BasePresenter;
+import com.dale.utils.FileUtils;
 import com.dale.utils.LogUtils;
 import com.dale.utils.PermissionUtils;
 import com.dale.utils.ResUtils;
@@ -373,7 +374,7 @@ public abstract class ABChatActivity<T extends MultipleMsgEntity, P extends Base
     @SuppressLint("ClickableViewAccessibility")
     private void initAudioRecordManager() {
         audioRecordManager.setMaxVoiceDuration(Const.DEFAULT_MAX_AUDIO_RECORD_TIME_SECOND);
-        File audioDir = new File(Const.AUDIO_SAVE_DIR);
+        File audioDir = new File(FileUtils.getDir(Const.AUDIO_SAVE_DIR));
         if (!audioDir.exists()) {
             audioDir.mkdirs();
         }

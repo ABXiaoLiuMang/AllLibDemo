@@ -1,8 +1,11 @@
 package com.dale;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +13,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
@@ -19,6 +26,7 @@ import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
+import com.dale.framework.glide.GlideApp;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework.ui.Mode;
@@ -47,6 +55,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //    }
 
 
+    @SuppressLint("CheckResult")
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +66,17 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //                        , Manifest.permission.WAKE_LOCK
 //                        , Manifest.permission.READ_EXTERNAL_STORAGE)
 //                .request();
+//        GlideApp.with(this).load("").placeholder(R.mipmap.arrow).error(R.mipmap.arrow).addListener(new RequestListener<Drawable>() {
+//            @Override
+//            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                return false;
+//            }
+//        });
     }
 
     @Override

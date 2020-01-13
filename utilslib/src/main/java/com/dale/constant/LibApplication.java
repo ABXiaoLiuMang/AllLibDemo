@@ -21,11 +21,11 @@ public final class LibApplication {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static void init(final Application app) {
+    public static void init(final Application app,String path) {
         sApplication = app;
         Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler(sApplication));
         TopActivityManager.getInstance().init(sApplication);
-        SPUtils.getInstance(app);
+        SPUtils.getInstance(app,path);
         MMKVUtil.init(app);
     }
 

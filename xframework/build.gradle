@@ -59,12 +59,17 @@ dependencies {
     compileOnly rootDependencies["butterknife"]
     annotationProcessor rootDependencies["butterknife_compiler"]
 
+    annotationProcessor rootDependencies["glide_compiler"]
+    compileOnly rootDependencies["okhttp"]
+
+
 
     compileOnly rootDependencies["appcompat"]
     compileOnly rootDependencies["recyclerview"]
     compileOnly rootDependencies["design"]
     compileOnly rootDependencies["Gson"]
     compileOnly rootDependencies["webviewSonic"]
+    compileOnly rootDependencies["glide"]
 //    compileOnly rootDependencies["fragmentationx"]
 
 

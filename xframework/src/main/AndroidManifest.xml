@@ -8,6 +8,10 @@ package="com.dale.framework">
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:process=":web"
         android:multiprocess="true"/>
+
+    <meta-data
+        android:name="com.dale.framework.glide.ABGlideModule"
+        android:value="GlideModule" />
 </application>
 
 </manifest>

@@ -16,11 +16,11 @@ public final class SPUtils {
         shareEditor = sharedPreferences.edit();
     }
 
-    public static SPUtils getInstance(Context context) {
+    public static SPUtils getInstance(Context context,String path) {
         if (spUtils == null) {
             synchronized (SPUtils.class) {
                 if (spUtils == null) {
-                    spUtils = new SPUtils(context, "spUtils");
+                    spUtils = new SPUtils(context, path);
                 }
             }
         }

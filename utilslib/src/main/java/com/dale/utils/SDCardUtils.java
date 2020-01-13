@@ -222,9 +222,9 @@ public final class SDCardUtils {
     public static String getDiskCacheDir() {
         String cachePath;
         if (isSDCardEnable()) { // 判断 SDCard 是否挂载
-            cachePath = LibApplication.getApp().getExternalCacheDir().getPath();
+            cachePath = LibApplication.getApp().getExternalCacheDir().getPath();//  SDCard/Android/data/你的应用包名/cache/目录，一般存放临时缓存数据
         } else {
-            cachePath = LibApplication.getApp().getCacheDir().getPath();
+            cachePath = LibApplication.getApp().getCacheDir().getPath();//  /data/data/<application package>/cache目录
         }
         // 防止不存在目录文件, 自动创建
         FileUtils.createOrExistsDir(cachePath);

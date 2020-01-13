@@ -5,7 +5,22 @@ import java.io.IOException;
 import java.util.Locale;
 
 public final class FileUtils {
-    public static final String ROOT_DIR = "Android/data/";
+
+    /**
+     * 缓存目录
+     * 1.有sdcard: sdcard/Android/包名/cache/...
+     * 2.无sdcard:/data/data/包名/cache/...
+     * 3.preference 保存目录 ：/data/data/包名/shared_prefs/...
+     */
+
+    //语音存放目录（如语音录制）
+    public static final String AUDIO = "audio";
+    //视频存放位目录（如视频录制）
+    public static final String VIDEO = "video";
+    //图片存放位置（Glide图片加载）
+    public static final String PIC = "pic";
+    //SharedPreferences 保存目录
+    public static final String PREFERENCE = "cache";
 
     /**
      * 获取应用目录，当SD卡存在时，获取SD卡上的目录，当SD卡不存在时，获取应用的cache目录
@@ -13,8 +28,6 @@ public final class FileUtils {
     public static String getDir(String name) {
         StringBuilder sb = new StringBuilder();
         sb.append(SDCardUtils.getDiskCacheDir());
-        sb.append(File.separator);
-        sb.append(ROOT_DIR);
         sb.append(File.separator);
         sb.append(name);
         sb.append(File.separator);
