@@ -52,10 +52,12 @@ public class BasePresenter<IView>{
     }
 
     private void bindLifecycle(Lifecycle lifecycle){
+        onCreate();
         lifecycle.addObserver((LifecycleEventObserver) (source, event) -> {
-            if (event == Lifecycle.Event.ON_CREATE) {
-                onCreate();
-            } else if (event == Lifecycle.Event.ON_START) {
+//            if (event == Lifecycle.Event.ON_CREATE) {
+//                onCreate();
+//            } else
+            if (event == Lifecycle.Event.ON_START) {
                 onStart();
             } else if (event == Lifecycle.Event.ON_RESUME) {
                 onResume();

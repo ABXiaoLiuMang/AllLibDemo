@@ -1,6 +1,7 @@
 package com.dale.framework.glide;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +11,7 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 import com.dale.framework.R;
@@ -38,12 +40,20 @@ public class ABGlideModule extends AppGlideModule {
 //                .error(R.mipmap.x_state_failed)
 //                .placeholder(R.mipmap.x_state_empty);
 //        builder.setDefaultRequestOptions(requestOptions);
+
+        builder.setDefaultTransitionOptions(Drawable.class, DrawableTransitionOptions.withCrossFade());
         String path = FileUtils.getDir(FileUtils.PIC);
         if(!StringUtils.isEmpty(path)){
             builder.setDiskCache(() -> DiskLruCacheWrapper.create(new File(path), IMAGE_DISK_CACHE_MAX_SIZE));
         }else {
             super.applyOptions(context,builder);
         }
+
+//        Glide.with(context)
+//                .load("")
+//                .apply(new RequestOptions().placeholder(R.drawable.ic_launcher))
+//                .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
+//                .into(imageView);
 
     }
 

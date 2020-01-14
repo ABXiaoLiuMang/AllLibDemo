@@ -12,9 +12,9 @@ public class OtherPresenter extends BasePresenter<OtherContract.IView> implement
     public void onCreate(){
         super.onCreate();
         LogUtils.d("Dream","onCreate OtherPresenter");
-        if(getView() !=null){
-            getView().test();
-        }
+//        if(isAttachView()){
+//            getView().test();
+//        }
     }
 
     public void onStart(){
@@ -51,7 +51,7 @@ public class OtherPresenter extends BasePresenter<OtherContract.IView> implement
 //                .params("per_page",String.valueOf(24))
 //                .asLife(getLifecycleOwner())
 //                .send(LiveDataManager.getInstance().testPrice);
-        if(getView() != null){
+        if(isAttachView()){
             getView().test();
         }
     }

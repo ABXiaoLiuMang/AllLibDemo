@@ -9,9 +9,9 @@ package="com.dale.framework">
         android:process=":web"
         android:multiprocess="true"/>
 
-    <meta-data
+<!--    <meta-data
         android:name="com.dale.framework.glide.ABGlideModule"
-        android:value="GlideModule" />
+        android:value="GlideModule" />-->
 </application>
 
 </manifest>

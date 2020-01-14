@@ -67,8 +67,14 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
                 dismissLoading();
             }
         });
-
         presenter.otherPresenter.testOther();
+        LogUtils.d("initViewsAndEvents activity");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
