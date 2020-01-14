@@ -23,6 +23,9 @@ public class User implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "age")
+    private int age;
+
     // ID
     @SerializedName("userId")
     private String userId;
@@ -63,6 +66,14 @@ public class User implements Parcelable {
         this.name = name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }
@@ -79,12 +90,14 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeInt(age);
         dest.writeString(userId);
         dest.writeString(name);
     }
 
     protected User(Parcel in) {
         this.id = in.readInt();
+        this.age = in.readInt();
         this.userId = in.readString();
         this.name = in.readString();
     }

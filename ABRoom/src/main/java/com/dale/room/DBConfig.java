@@ -19,13 +19,13 @@ public class DBConfig implements IDBConfig {
     private String dbName = AppUtil.getVersionName() + ".db";//名称
     private String dbPath = FileUtils.getDir("room");//路径
     private boolean allowMainThread = true;//是否允许在主线程访问数据库
-    private boolean fallbackToUp;//当升级数据库时，允许数据库抛弃旧数据重新创建新的数据库表
+    private boolean fallbackToUp = true;//当升级数据库时，允许数据库抛弃旧数据重新创建新的数据库表(设置迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃)
     private  boolean fallbackToDown;//如果发生降级，是否会自动重新创建数据库
-    private int[] fallbackToDestructive;//通知数据库，允许从特定的版本中抛弃旧数据重新创建新的数据库表
+    private int[] fallbackToDestructive;//设置从某个版本开始迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
     private RoomDatabase.JournalMode journalMode = RoomDatabase.JournalMode.TRUNCATE;//设置数据库的日志模式
     private Executor executor;//设置自定义线程池
     private SupportSQLiteOpenHelper.Factory factory;//设置数据库工厂
-    private List<RoomDatabase.Callback> callbacks;//数据库状态监听
+    private List<RoomDatabase.Callback> callbacks;//数据库状态监听(监听数据库，创建和打开的操作)
     private Migration[] migrations;
 
     @Override
@@ -101,7 +101,7 @@ public class DBConfig implements IDBConfig {
     }
 
     @Override
-    public IDBConfig setMigration(Migration[] migrations) {
+    public IDBConfig setMigration(Migration... migrations) {
         this.migrations = migrations;
         return this;
     }

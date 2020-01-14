@@ -5,7 +5,10 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;
 
+import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.bumptech.glide.Glide;
 import com.dale.emoji.LQREmotionKit;
@@ -75,9 +78,6 @@ public class App extends ABApplication {
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
             InitializeService.start(this,"初始化放在线程中");
                       //xUtils3初始化
-
-            RoomSdk.ins()
-                    .initSDK(this,AppDatabase.class);
         }
 
 
@@ -121,6 +121,32 @@ public class App extends ABApplication {
         return false;
     }
 
+
+    private void initDb(){
+//        数据库版本 1->2 user表格新增了age列
+        Migration migration_1_2 = new Migration(1,2) {
+            @Override
+            public void migrate(@NonNull SupportSQLiteDatabase database) {
+                database.execSQL("ALTER TABLE User ADD COLUMN age integer");
+            }
+        };
+
+        /**
+         * 数据库版本 2->3 新增book表格
+         */
+         Migration MIGRATION_2_3 = new Migration(2, 3) {
+            @Override
+            public void migrate(SupportSQLiteDatabase database) {
+                database.execSQL(
+                        "CREATE TABLE IF NOT EXISTS `book` (`uid` INTEGER PRIMARY KEY autoincrement, `name` TEXT , `userId` INTEGER, 'time' INTEGER)");
+            }
+        };
+
+        RoomSdk.ins()
+//                .setMigration(migration_1_2)
+//                .setMigration(MIGRATION_2_3)
+                .initSDK(this,AppDatabase.class);
+    }
 
 }
 
