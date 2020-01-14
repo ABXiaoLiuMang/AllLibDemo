@@ -78,6 +78,7 @@ public class App extends ABApplication {
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
             InitializeService.start(this,"初始化放在线程中");
                       //xUtils3初始化
+            initDb();
         }
 
 

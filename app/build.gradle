@@ -193,4 +193,11 @@ dependencies {
 
     implementation 'com.lovedise:permissiongen:0.0.6'
     implementation project(path: ':ABRoom')
+
+    // 添加 LiveData 和 ViewModel 的依赖：
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-rc03"
+
+    //分开的依赖
+//    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0-rc03"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03"
 }

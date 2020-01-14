@@ -48,6 +48,7 @@ import com.dale.utils.MMKVUtil;
 import com.dale.utils.ToastUtils;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
+import com.dale.viewmodel.MyTestModelActivity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -106,6 +107,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("14auto 实例");
         list.add("emotion 实例");
         list.add("录音 实例");
+        list.add("17 viewModel");
         listAdapter.setNewData(list);
     }
 
@@ -186,6 +188,9 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 16:
                     goActivity(AudioActivity.class);
+                    break;
+                case 17:
+                    goActivity(MyTestModelActivity.class);
                     break;
             }
     }

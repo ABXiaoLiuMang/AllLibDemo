@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * 用户信息
  */
-@Entity(tableName = "User")
+@Entity(tableName = "user")
 public class User implements Parcelable {
 
     // 每个实体必须定义至少1个字段作为主键，即使只有1个字段，仍然需要用 @PrimaryKey 注解字段
