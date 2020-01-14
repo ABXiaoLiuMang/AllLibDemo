@@ -14,8 +14,13 @@ import com.dale.location.LocationSdk;
 import com.dale.location_demo.MyOnLocationListener;
 import com.dale.net.NetSdk;
 import com.dale.push.PushSdk;
+import com.dale.room.IDBConfig;
+import com.dale.room.RoomSdk;
+import com.dale.room_demo.AppDatabase;
 import com.dale.stateview_demo.custom.GlobalAdapter;
 import com.dale.stateview_demo.state.Gloading;
+import com.dale.utils.AppUtil;
+import com.dale.utils.FileUtils;
 import com.dale.utils.LogUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -70,6 +75,9 @@ public class App extends ABApplication {
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
             InitializeService.start(this,"初始化放在线程中");
                       //xUtils3初始化
+
+            RoomSdk.ins()
+                    .initSDK(this,AppDatabase.class);
         }
 
 

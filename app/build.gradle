@@ -164,6 +164,10 @@ dependencies {
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
 
 
+    implementation rootDependencies["room_runtime"]
+    implementation rootDependencies["room_rxjava2"]
+    annotationProcessor rootDependencies["room_compiler"]
+
 //    implementation rootDependencies["AB_Adapter"]
 //    implementation rootDependencies["AB_FrameWork"]
 //    implementation rootDependencies["AB_Location"]
@@ -188,4 +192,5 @@ dependencies {
     implementation project(path: ':ABChat')
 
     implementation 'com.lovedise:permissiongen:0.0.6'
+    implementation project(path: ':ABRoom')
 }

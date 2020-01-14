@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+
+//if ("true" == pushLib){
+//    apply plugin: 'com.novoda.bintray-release'
+//}
+
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+        disable 'PrivateResource'
+    }
+
+    defaultConfig {
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    //系统库
+    compileOnly rootDependencies["appcompat"]
+    compileOnly project(path: ':utilslib')
+
+    //DB
+    compileOnly rootDependencies["room_runtime"]
+    compileOnly rootDependencies["room_rxjava2"]
+    annotationProcessor rootDependencies["room_compiler"]
+
+
+}
+
+
+//if ("true" == pushLib){
+//    publish {
+//        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+//        groupId = 'com.dale.x'  //jcenter上的路径
+//        artifactId = 'AB_Push'  //项目名称
+//        publishVersion = pushLib_version    //版本号
+//        desc = 'AB_Push'
+//        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABPush'
+//        licences = 'Apache-2.0'
+//    }
+//}

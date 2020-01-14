@@ -8,6 +8,10 @@ ext {
             versionCode      : 1, //app版本号
             versionName      : "1.0.0",  //app版本号
     ]
+
+
+
+
     dependencies = [
             junit                  : 'junit:junit:4.12',            //单元测试包
             test_runner            : 'androidx.test:runner:1.2.0',
@@ -57,6 +61,17 @@ ext {
             webviewSonic           : 'com.tencent.sonic:sdk:3.1.0',
             mmkv                   : 'com.tencent:mmkv:1.0.22',
             fragmentationx         : 'me.yokeyword:fragmentationx:1.0.2',//单activity https://github.com/YoKeyword/Fragmentation
+
+
+            // DB
+            room_common            : 'androidx.room:room-common:2.2.3',
+            room_compiler          : 'androidx.room:room-compiler:2.2.3',
+            room_guava             : 'androidx.room:room-guava:2.2.3',
+            room_migration         : 'androidx.room:room-migration:2.2.3',
+            room_runtime           : 'androidx.room:room-runtime:2.2.3',
+            room_rxjava2           : 'androidx.room:room-rxjava2:2.2.3',
+            room_testing           : 'androidx.room:room-testing:2.2.3',
+
 
             AB_Adapter             : 'com.dale.x:AB_Adapter:1.0.0-beta01',
             AB_FrameWork           : 'com.dale.x:AB_FrameWork:1.0.0-beta01',
