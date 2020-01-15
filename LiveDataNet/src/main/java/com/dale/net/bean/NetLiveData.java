@@ -33,6 +33,7 @@ public class NetLiveData<T> extends LiveData<LiveResult<T>> {
         super.setValue(result);
     }
 
+
     /**
      * loading
      * 子线程时调用 此方法

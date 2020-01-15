@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.dale.framework">
+
+<application>
+
+    <activity
+        android:name="com.dale.framework.ui.ABWebActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:process=":web"
+        android:multiprocess="true"/>
+
+<!--    <meta-data
+        android:name="com.dale.framework.glide.ABGlideModule"
+        android:value="GlideModule" />-->
+</application>
+
+</manifest>
