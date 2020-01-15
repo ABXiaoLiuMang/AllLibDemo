@@ -9,9 +9,14 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.dale.emoji.LQREmotionKit;
 import com.dale.italk.db.AppDatabase;
+import com.dale.italk.interceptor.AddHeaderInterceptor;
+import com.dale.italk.interceptor.ReceivedCookiesInterceptor;
 import com.dale.net.NetSdk;
 import com.dale.room.RoomSdk;
+import com.dale.talk.IMManager;
 import com.dale.utils.LogUtils;
+
+import io.rong.imlib.RongIMClient;
 
 public class InitializeService extends IntentService {
 
@@ -56,6 +61,7 @@ public class InitializeService extends IntentService {
         initEmotion();//加载表情
         initNet();
         initDb();
+        IMManager.getInstance().init(this);
     }
 
 
@@ -67,6 +73,8 @@ public class InitializeService extends IntentService {
     private void initNet(){
         NetSdk.config(this)
                 .baseUrl("http://api.sealtalk.im/")
+                .addInterceptor(new AddHeaderInterceptor(this))
+                .addInterceptor(new ReceivedCookiesInterceptor(this))
                 .needLog(true);
     }
 

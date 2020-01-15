@@ -53,7 +53,9 @@ dependencies {
 
 
     compileOnly project(path: ':utilslib')
-
+    compileOnly project(path: ':ABNetLib')
+    compileOnly 'com.squareup.okhttp3:okhttp:4.2.2'
+    compileOnly 'com.google.code.gson:gson:2.8.6'
 
     //融云
     compileOnly 'cn.rongcloud.sdk:im_lib:2.10.3'

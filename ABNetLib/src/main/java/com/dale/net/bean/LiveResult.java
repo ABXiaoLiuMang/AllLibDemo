@@ -18,6 +18,12 @@ public class LiveResult<T>{
         this.data = null;
     }
 
+    public void setLoading() {
+        this.type = DataType.LOADING;
+        this.errorMessage = null;
+        this.data = null;
+    }
+
     public String getErrorMessage() {
         return errorMessage.getMessage();
     }

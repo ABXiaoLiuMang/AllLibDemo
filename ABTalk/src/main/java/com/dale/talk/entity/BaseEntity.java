@@ -1,4 +1,4 @@
-package com.dale.italk.entity;
+package com.dale.talk.entity;
 
 import com.dale.net.callback.XEntity;
 import com.dale.utils.ToastUtils;
