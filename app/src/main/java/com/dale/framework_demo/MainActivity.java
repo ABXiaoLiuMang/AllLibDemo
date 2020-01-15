@@ -1,11 +1,14 @@
 package com.dale.framework_demo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -36,6 +39,7 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
     protected NestedScrollView scrollView;
     protected TitleBar titleBar;
     protected TextView tv_head;
+    MutableLiveData<Boolean> liveData = new MutableLiveData<>();
 
     @Override
     protected int getLayoutId() {
@@ -49,6 +53,12 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
         scrollView = findViewById(com.dale.framework.R.id.scrollView);
         titleBar = findViewById(com.dale.framework.R.id.titleBar);
         new ScrollChangeHelper.Builder().scrollHeight(SizeUtils.dp2px(150)).setAlphaView(titleBar).setNestedScrollView(scrollView).build();
+
+        liveData.setValue(true);
+        liveData.setValue(false);
+        liveData.setValue(true);
+        liveData.setValue(false);
+        liveData.setValue(true);
 
 //        goActivity(ScrollActivity.class);
         presenter.initRequest();
@@ -75,6 +85,8 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
     @Override
     protected void onResume() {
         super.onResume();
+
+        liveData.observe(this, aBoolean -> LogUtils.d("bb:" + aBoolean));
     }
 
     @Override
