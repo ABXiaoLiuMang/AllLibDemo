@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+//if ("true" == viewLib){
+//    apply plugin: 'com.novoda.bintray-release'
+//}
+
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+    }
+
+
+    defaultConfig {
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    compileOnly rootDependencies["recyclerview"]
+    compileOnly rootDependencies["appcompat"]
+    compileOnly rootDependencies["Gson"]
+
+
+    compileOnly project(path: ':utilslib')
+
+
+    //融云
+    compileOnly 'cn.rongcloud.sdk:im_lib:2.10.3'
+    compileOnly 'com.google.android.material:material:1.2.0-alpha03'
+    compileOnly 'androidx.lifecycle:lifecycle-livedata:2.2.0-rc03'
+    compileOnly 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
+    compileOnly 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+
+}
+
+
+//if ("true" == viewLib){
+//    publish {
+//        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+//        groupId = 'com.dale.x'  //jcenter上的路径
+//        artifactId = 'AB_View'  //项目名称
+//        publishVersion = viewLib_version    //版本号
+//        desc = 'AB_View'
+//        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABView'
+//        licences = 'Apache-2.0'
+//    }
+//}
+

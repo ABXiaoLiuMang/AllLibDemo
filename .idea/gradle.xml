@@ -17,10 +17,12 @@
             <option value="$PROJECT_DIR$/ABPush" />
             <option value="$PROJECT_DIR$/ABRefreshView" />
             <option value="$PROJECT_DIR$/ABRoom" />
+            <option value="$PROJECT_DIR$/ABTalk" />
             <option value="$PROJECT_DIR$/ABVideoPlayer" />
             <option value="$PROJECT_DIR$/ABView" />
             <option value="$PROJECT_DIR$/ABZxing" />
             <option value="$PROJECT_DIR$/ABemoji" />
+            <option value="$PROJECT_DIR$/ITalk" />
             <option value="$PROJECT_DIR$/PickerviewLib" />
             <option value="$PROJECT_DIR$/PopupLib" />
             <option value="$PROJECT_DIR$/XFragmentLib" />
