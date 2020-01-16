@@ -62,9 +62,12 @@ dependencies {
     annotationProcessor rootDependencies["glide_compiler"]
     compileOnly rootDependencies["okhttp"]
 
-
+    compileOnly 'androidx.lifecycle:lifecycle-livedata:2.2.0-rc03'
+    compileOnly 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
+    compileOnly 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
 
     compileOnly rootDependencies["appcompat"]
+    compileOnly 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     compileOnly rootDependencies["recyclerview"]
     compileOnly rootDependencies["design"]
     compileOnly rootDependencies["Gson"]

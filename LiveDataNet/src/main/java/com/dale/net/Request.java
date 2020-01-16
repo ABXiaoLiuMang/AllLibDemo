@@ -75,7 +75,6 @@ public class Request<T> {
 
     }
 
-
     private String getUrl() {
         if (requestBuilder.url == null) {
             requestBuilder.url = "";

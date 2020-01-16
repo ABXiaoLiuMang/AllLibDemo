@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+        disable 'PrivateResource'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.dale.livedatademo"
+        vectorDrawables.useSupportLibrary = true
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.1.0'
+
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0-rc03'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation rootDependencies["butterknife"]
+    annotationProcessor rootDependencies["butterknife_compiler"]
+
+    annotationProcessor rootDependencies["glide_compiler"]
+    implementation rootDependencies["okhttp"]
+
+
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    implementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
+
+    implementation rootDependencies["appcompat"]
+    implementation rootDependencies["recyclerview"]
+    implementation rootDependencies["design"]
+    implementation rootDependencies["Gson"]
+    implementation rootDependencies["webviewSonic"]
+    implementation rootDependencies["glide"]
+    implementation rootDependencies["okhttp"]
+    implementation rootDependencies["glide"]
+    implementation rootDependencies["webviewSonic"]
+    implementation rootDependencies["multidex"]
+    implementation rootDependencies["mmkv"]
+    implementation rootDependencies["glide_transformations"]
+//    implementation rootDependencies["fragmentationx"]
+
+
+//    implementation project(path: ':ABPush') //非必须
+//    implementation project(path: ':ABLocation') //非必须
+
+
+    implementation project(path: ':ABBaseAdapter')
+    implementation project(path: ':imagelib')
+    implementation project(path: ':utilslib')
+    implementation project(path: ':ABView')
+    implementation project(path: ':PickerviewLib')
+    implementation project(path: ':LiveDataNet')
+    implementation project(path: ':PopupLib')
+    implementation project(path: ':XWebView')
+    implementation project(path: ':ABRefreshView')
+    implementation project(path: ':ABZxing')
+    implementation project(path: ':XFragmentLib')
+    implementation project(path: ':LiveDataFrameWork')
+
+}

@@ -30,7 +30,6 @@ public class RequestBuilder<T> implements NetCall<T> {
     public String baseUrl;
     public MutableLiveData<Integer> netLiveData;
     MediaType mMediaType;
-    LifecycleOwner owner;
 
 
     RequestBuilder(ServiceMethod<T, ?> serviceMethod) {
@@ -94,13 +93,8 @@ public class RequestBuilder<T> implements NetCall<T> {
 
     @Override
     public NetCall<T> send(NetLiveData<T> netLiveData) {
+        netLiveData.postLoading();
         new Request<>(this).send(netLiveData);
-        return this;
-    }
-
-    @Override
-    public NetCall<T> asLife(LifecycleOwner owner) {
-        this.owner = owner;
         return this;
     }
 

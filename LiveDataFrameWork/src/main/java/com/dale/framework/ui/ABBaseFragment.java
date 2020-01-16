@@ -11,14 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dale.framework.R;
-import com.dale.framework.util.Util;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
 
-import java.lang.reflect.Type;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.ui.SupportFragment;
 
 /**

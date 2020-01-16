@@ -14,9 +14,14 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
         }
         switch (result.type) {
             case DataType.SUCCESS:
+                onLoading(false);
                 onSuccess(result.data);
                 break;
+            case DataType.LOADING:
+                onLoading(true);
+                break;
             case DataType.ERROR:
+                onLoading(false);
                 onError(result.errorMessage);
                 break;
             default:
@@ -25,6 +30,8 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
     }
 
     protected abstract void onSuccess(T t);
+
+    protected abstract void onLoading(boolean show);
 
     protected abstract void onError(ErrorMessage errorMessage);
 }

@@ -3,21 +3,18 @@ package com.dale.framework.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
 import com.dale.framework.R;
-import com.dale.framework.util.Util;
 import com.dale.utils.ExitUtils;
 import com.dale.utils.KeyboardUtils;
 import com.dale.utils.StatusBarUtil;
+import com.dale.utils.WeakHandler;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
 
-import java.lang.reflect.Type;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.ui.SupportActivity;
 
 /**
@@ -29,6 +26,7 @@ public abstract class ABBaseActivity extends SupportActivity {
     protected Activity mContext;
     protected Bundle bundle;
     protected LoadingPopupView progressDialog;
+    private WeakHandler weakHandler = new WeakHandler();
 
     protected abstract int getLayoutId();
 
@@ -53,20 +51,29 @@ public abstract class ABBaseActivity extends SupportActivity {
     public void onDestroy() {
         super.onDestroy();
         ExitUtils.getInstance().removeActivity(this);//关闭的Act
+        //移除所有
+        weakHandler.removeCallbacksAndMessages(null);
     }
 
+    // 记录dialog 显示创建时间
+    private long dialogCreateTime;
     protected void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new XPopup.Builder(this)
                     .asLoading();
         }
+        dialogCreateTime = System.currentTimeMillis();
         progressDialog.show();
 
     }
 
     protected void dismissProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShow()) {
+            if (System.currentTimeMillis() - dialogCreateTime < 500) {
+                weakHandler.postDelayed(() -> progressDialog.dismiss(),350);
+            }else {
+                progressDialog.dismiss();
+            }
         }
     }
 

@@ -56,12 +56,6 @@ public interface NetCall<T> {
     NetCall<T> mediaType(MediaType mediaType);
 
     /**
-     * 为请求设置生命周期
-     * @param owner owner
-     */
-    NetCall<T> asLife(LifecycleOwner owner);
-
-    /**
      * @param netLiveData netLiveData
      */
     NetCall<T> send(NetLiveData<T> netLiveData);

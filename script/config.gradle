@@ -3,7 +3,7 @@ ext {
     android = [
             compileSdkVersion: 29, //编译sdk版本
             androidLibVersion: "29.0.0", //android官方库的版本
-            minSdkVersion    : 17,  //app最小适配系统版本
+            minSdkVersion    : 19,  //app最小适配系统版本
             targetSdkVersion : 29,  //app最高兼容系统版本
             versionCode      : 1, //app版本号
             versionName      : "1.0.0",  //app版本号
@@ -18,9 +18,9 @@ ext {
             espresso_core          : 'androidx.test.espresso:espresso-core:3.2.0',
 
             appcompat              : 'androidx.appcompat:appcompat:1.1.0',  //官方V7包
-            recyclerview           : 'androidx.recyclerview:recyclerview:1.1.0-rc01', //recyclerView包
+            recyclerview           : 'androidx.recyclerview:recyclerview:1.2.0-alpha01', //recyclerView包
             multidex               : 'com.android.support:multidex:1.0.3',      //方法数超限,dex分包库
-            design                 : 'com.google.android.material:material:1.2.0-alpha01',         //官方MD设计包
+            design                 : 'com.google.android.material:material:1.2.0-alpha03',         //官方MD设计包
             cardview               : 'androidx.cardview:cardview:1.0.0',    //官方cardView包
             support_annotations    : 'androidx.annotation:annotation:1.1.0', //注解包
             constraint_layout      : 'androidx.constraintlayout:constraintlayout:1.1.3',          //constraintlayout包

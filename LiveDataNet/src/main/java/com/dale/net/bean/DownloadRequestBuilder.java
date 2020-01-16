@@ -1,6 +1,7 @@
 package com.dale.net.bean;
 
 import com.dale.net.DownloadRequest;
+import com.dale.net.callback.DownCallBack;
 
 /**
  * create by Dale
