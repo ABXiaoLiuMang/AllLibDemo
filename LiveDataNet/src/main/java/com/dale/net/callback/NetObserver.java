@@ -31,7 +31,8 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
 
     protected abstract void onSuccess(T t);
 
-    protected abstract void onLoading(boolean show);
+    protected void onLoading(boolean show){
+    }
 
     protected abstract void onError(ErrorMessage errorMessage);
 }

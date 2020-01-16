@@ -81,6 +81,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
 
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0-rc03'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+
     //db
     implementation 'androidx.room:room-runtime:2.2.3'
     implementation 'androidx.room:room-rxjava2:2.2.3'
@@ -107,14 +111,14 @@ dependencies {
     implementation project(path: ':XWebView')
     implementation project(path: ':PopupLib')
     implementation project(path: ':XFragmentLib')
-    implementation project(path: ':xframework')
     implementation project(path: ':imagelib')
     implementation project(path: ':ABRefreshView')
     implementation project(path: ':abemoji')
     implementation project(path: ':utilslib')
     implementation project(path: ':ABBaseAdapter')
-    implementation project(path: ':ABNetLib')
     implementation project(path: ':ABTalk')
     implementation project(path: ':ABRoom')
     implementation project(path: ':ABZxing')
+    implementation project(path: ':LiveDataFrameWork')
+    implementation project(path: ':LiveDataNet')
 }

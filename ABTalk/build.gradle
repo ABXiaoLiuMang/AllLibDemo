@@ -53,7 +53,6 @@ dependencies {
 
 
     compileOnly project(path: ':utilslib')
-    compileOnly project(path: ':ABNetLib')
     compileOnly 'com.squareup.okhttp3:okhttp:4.2.2'
     compileOnly 'com.google.code.gson:gson:2.8.6'
 
@@ -63,6 +62,7 @@ dependencies {
     compileOnly 'androidx.lifecycle:lifecycle-livedata:2.2.0-rc03'
     compileOnly 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
     compileOnly 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+    compileOnly project(path: ':LiveDataNet')
 
 }
 

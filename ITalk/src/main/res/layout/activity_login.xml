@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_20"
+        android:text="13608079349"
+        android:inputType="phone"
         android:hint="请输入电话" />
 
     <com.dale.view.ClearEditText
@@ -19,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_10"
+        android:inputType="textPassword"
+        android:text="woaiqin2004"
         android:hint="请输入密码" />
 
     <Button
