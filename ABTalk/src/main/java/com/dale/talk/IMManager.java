@@ -3,11 +3,14 @@ package com.dale.talk;
 import android.content.Context;
 import android.text.TextUtils;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.dale.net.NetSdk;
+import com.dale.net.bean.DataType;
+import com.dale.net.bean.LiveResult;
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.exception.ErrorMessage;
 import com.dale.talk.api.Api;
-import com.dale.talk.common.ErrorCode;
 import com.dale.talk.common.TalkConfig;
 import com.dale.talk.entity.BaseEntity;
 import com.dale.talk.entity.LoginResult;
@@ -19,8 +22,7 @@ import io.rong.imlib.RongIMClient;
 public class IMManager {
     private static volatile IMManager instance;
     private Context context;
-    public NetLiveData<String> loginResult = new NetLiveData<>();//登录
-    public NetLiveData<BaseEntity<LoginResult>> tokenLiveData = new NetLiveData<>();//获取token
+
 
     private IMManager() {
     }
@@ -58,15 +60,15 @@ public class IMManager {
      * @param token
      * @param getTokenOnIncorrect
      */
-    public void connectIM(String token, final boolean getTokenOnIncorrect) {
+    public void connectIM(String token, final boolean getTokenOnIncorrect, final MutableLiveData<Boolean> loginResult) {
         RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
                 //刷新tonken重新连接
                 if (getTokenOnIncorrect) {
-                    getToken(tokenLiveData);
+                    getToken(loginResult);
                 } else {
-                    loginResult.postError(new ErrorMessage(ErrorCode.IM_ERROR.getCode(),"融云连接失败"));
+                    loginResult.postValue(false);
                 }
             }
 
@@ -75,7 +77,7 @@ public class IMManager {
              */
             @Override
             public void onSuccess(String userid) {
-                loginResult.postNext(userid);
+                loginResult.postValue(true);
             }
 
             /**
@@ -84,7 +86,7 @@ public class IMManager {
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
                 LogUtils.e("融云链接失败 code:" + errorCode.getValue() + ", msg:" + errorCode.getMessage());
-                loginResult.postError(new ErrorMessage(ErrorCode.IM_ERROR.getCode(),"融云连接失败"));
+                loginResult.postValue(false);
             }
         });
 
@@ -94,7 +96,19 @@ public class IMManager {
      * 获取用户 IM token
      * 此接口需要在登录成功后可调用，用于在 IM 提示 token 失效时刷新 token 使用
      */
-    private void getToken(NetLiveData<BaseEntity<LoginResult>> netLiveData) {
+    private void getToken(final MutableLiveData<Boolean> loginResult) {
+        NetLiveData<BaseEntity<LoginResult>> netLiveData = new NetLiveData<>();
+        Observer<LiveResult<BaseEntity<LoginResult>>> observer = new Observer<LiveResult<BaseEntity<LoginResult>>>() {
+            @Override
+            public void onChanged(LiveResult<BaseEntity<LoginResult>> baseEntity) {
+                if(baseEntity.type == DataType.SUCCESS){
+                    connectIM(baseEntity.data.getResult().getToken(), false,loginResult);
+                }else if(baseEntity.type == DataType.ERROR){
+                    loginResult.postValue(false);
+                }
+            }
+        };
+        netLiveData.observeForever(observer);
         NetSdk.create(Api.class)
                 .getToken()
                 .send(netLiveData);
@@ -105,8 +119,9 @@ public class IMManager {
      */
     private void cacheConnectIM() {
         if (RongIMClient.getInstance().getCurrentConnectionStatus() == RongIMClient.ConnectionStatusListener.ConnectionStatus.CONNECTED) {
+            LogUtils.d("融云长连接正常");
             String userId = MMKVUtil.getString(TalkConfig.userId);
-            loginResult.postNext(userId);
+//            loginResult.postNext(userId);
             return;
         }
 
@@ -115,6 +130,6 @@ public class IMManager {
             return;
         }
 
-        connectIM(loginToken, true);
+//        connectIM(loginToken, true);
     }
 }

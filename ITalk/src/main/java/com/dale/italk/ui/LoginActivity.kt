@@ -1,5 +1,6 @@
 package com.dale.italk.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.dale.framework.ui.ABBaseActivity
 import com.dale.italk.R
@@ -8,6 +9,7 @@ import com.dale.net.callback.NetObserver
 import com.dale.net.exception.ErrorMessage
 import com.dale.talk.IMManager
 import com.dale.talk.common.TalkConfig
+import com.dale.talk.common.TalkConfig.Companion.userName
 import com.dale.talk.entity.BaseEntity
 import com.dale.talk.entity.LoginResult
 import com.dale.utils.LogUtils
@@ -18,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : ABBaseActivity() {
 
     private var loginViewModel: LoginViewModel? = null
+    val loginLiveData = MutableLiveData<Boolean>()
+
     private var userName: String? = null
     private var passWord: String? = null
     override fun createProvider() {
@@ -42,7 +46,8 @@ class LoginActivity : ABBaseActivity() {
                     MMKVUtil.put(TalkConfig.passWord, passWord)
                     MMKVUtil.put(TalkConfig.country, "86")
                     MMKVUtil.put(TalkConfig.token, it.token)
-                    loginViewModel?.connectIM(it, true)
+
+                    loginViewModel?.connectIM(it, true,loginLiveData)
                 }
             }
 
@@ -56,35 +61,22 @@ class LoginActivity : ABBaseActivity() {
             }
         })
 
-        IMManager.getInstance().tokenLiveData?.observe(this, object : NetObserver<BaseEntity<LoginResult>>() {
-            override fun onSuccess(baseEntity: BaseEntity<LoginResult>?) {
-                baseEntity?.result?.let {
-                    loginViewModel?.connectIM(it, false)
-                }
 
-            }
-
-            override fun onError(errorMessage: ErrorMessage?) {
-                ToastUtils.showLong(errorMessage?.message)
-                dismissProgressDialog()
-            }
-        })
-
-        IMManager.getInstance().loginResult.observe(this,object : NetObserver<String>(){
-            override fun onSuccess(userId: String?) {
-                LogUtils.d("userid:$userId")
-                MMKVUtil.put(TalkConfig.userId, userId)
-                dismissProgressDialog()
-                goActivity(MainActivity::class.java)
-                finish()
-            }
-
-            override fun onError(errorMessage: ErrorMessage?) {
-                dismissProgressDialog()
-                ToastUtils.showLong(errorMessage?.message)
-            }
-
-        })
+//        IMManager.getInstance().loginResult.observe(this,object : NetObserver<String>(){
+//            override fun onSuccess(userId: String?) {
+//                LogUtils.d("userid:$userId")
+//                MMKVUtil.put(TalkConfig.userId, userId)
+//                dismissProgressDialog()
+//                goActivity(MainActivity::class.java)
+//                finish()
+//            }
+//
+//            override fun onError(errorMessage: ErrorMessage?) {
+//                dismissProgressDialog()
+//                ToastUtils.showLong(errorMessage?.message)
+//            }
+//
+//        })
 
 
 

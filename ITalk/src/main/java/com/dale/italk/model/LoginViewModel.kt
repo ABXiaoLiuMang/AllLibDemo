@@ -1,5 +1,6 @@
 package com.dale.italk.model
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dale.net.NetSdk
 import com.dale.net.bean.NetLiveData
@@ -28,8 +29,8 @@ class LoginViewModel : ViewModel() {
     /**
      * 连接融云
      */
-    fun connectIM(loginResult: LoginResult, tokenOnIncorrect :Boolean) {
-        IMManager.getInstance().connectIM(loginResult.token, tokenOnIncorrect)
+    fun connectIM(loginResult: LoginResult, tokenOnIncorrect :Boolean, loginLiveData :MutableLiveData<Boolean>) {
+        IMManager.getInstance().connectIM(loginResult.token, tokenOnIncorrect,loginLiveData)
     }
 
 }

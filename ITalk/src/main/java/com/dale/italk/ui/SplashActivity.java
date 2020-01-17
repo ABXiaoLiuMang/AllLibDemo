@@ -45,29 +45,29 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
                 .load("http://ww1.sinaimg.cn/large/0065oQSqly1g2pquqlp0nj30n00yiq8u.jpg")
                 .into(bg);
 
-        IMManager.getInstance().loginResult.observe(this,new NetObserver<String>(){
-            @Override
-            protected void onSuccess(String s) {
-                isLogin = true;
-            }
-
-            @Override
-            protected void onError(ErrorMessage errorMessage) {
-
-            }
-        });
-
-        IMManager.getInstance().tokenLiveData.observe(this,new NetObserver<BaseEntity<LoginResult>>(){
-
-            @Override
-            protected void onSuccess(BaseEntity<LoginResult> baseEntity) {
-                IMManager.getInstance().connectIM(baseEntity.getResult().getToken(), false);
-            }
-
-            @Override
-            protected void onError(ErrorMessage errorMessage) {
-            }
-        });
+//        IMManager.getInstance().loginResult.observe(this,new NetObserver<String>(){
+//            @Override
+//            protected void onSuccess(String s) {
+//                isLogin = true;
+//            }
+//
+//            @Override
+//            protected void onError(ErrorMessage errorMessage) {
+//
+//            }
+//        });
+//
+//        IMManager.getInstance().tokenLiveData.observe(this,new NetObserver<BaseEntity<LoginResult>>(){
+//
+//            @Override
+//            protected void onSuccess(BaseEntity<LoginResult> baseEntity) {
+//                IMManager.getInstance().connectIM(baseEntity.getResult().getToken(), false);
+//            }
+//
+//            @Override
+//            protected void onError(ErrorMessage errorMessage) {
+//            }
+//        });
     }
 
     @Override
