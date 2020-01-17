@@ -26,6 +26,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion customizeConfig.minSdkVersion
         targetSdkVersion customizeConfig.targetSdkVersion
+        multiDexEnabled true
         versionCode appVersionCode as int
         versionName appVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -62,6 +63,19 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
     implementation 'com.android.support:multidex:1.0.3'
+
+
+//    Navigation 两个版本依赖
+    // Java
+//    implementation "androidx.navigation:navigation-fragment:2.2.0-rc04"
+//    implementation "androidx.navigation:navigation-ui:2.2.0-rc04"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-rc04"
+    implementation "androidx.navigation:navigation-ui-ktx:2.2.0-rc04"
+
+
+
 
     implementation rootDependencies["butterknife"]
     annotationProcessor rootDependencies["butterknife_compiler"]
@@ -105,5 +119,6 @@ dependencies {
     implementation project(path: ':ABZxing')
     implementation project(path: ':XFragmentLib')
     implementation project(path: ':LiveDataFrameWork')
+
 
 }

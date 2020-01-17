@@ -55,11 +55,11 @@ class MainActivity : ABBaseActivity() {
 
         })
 
-        tv_test.setOnClickListener{
-            testViewModel?.getTestNetLiveData()
-
-            testViewMode2.getNetLiveData()
-        }
+//        tv_test.setOnClickListener{
+//            testViewModel?.getTestNetLiveData()
+//
+//            testViewMode2.getNetLiveData()
+//        }
     }
 
 }
