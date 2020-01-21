@@ -145,21 +145,7 @@
                     android:textColor="@color/white"
                     app:millisText="60000" />
 
-                <com.dale.view.SlideSwitch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    app:shape="circle" />
 
-                <com.dale.view.SlideSwitch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    app:shape="rect" />
 
             </LinearLayout>
 

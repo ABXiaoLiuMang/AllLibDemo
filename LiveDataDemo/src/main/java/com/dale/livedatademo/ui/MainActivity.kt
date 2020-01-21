@@ -1,6 +1,7 @@
 package com.dale.livedatademo.ui
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.dale.framework.ui.ABBaseActivity
 import com.dale.livedatademo.R
 import com.dale.livedatademo.model.TestViewModel
@@ -22,6 +23,7 @@ class MainActivity : ABBaseActivity() {
     override fun createProvider() {
         testViewModel = ViewModelProvider(this).get(TestViewModel::class.java)
         testViewMode2 = ViewModelProvider(this).get(TestViewModel2::class.java)
+        ViewModelProviders.of(this)
     }
 
     override fun initViewsAndEvents() {

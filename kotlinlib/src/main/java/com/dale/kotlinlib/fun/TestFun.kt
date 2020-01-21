@@ -39,6 +39,7 @@ class TestFun {
             this?.testPrint()
 
             LogUtils.d(myUser.eat?.food) //可以简写
+            LogUtils.d(this?.food) //可以简写
         }
         return 1
     }

@@ -11,7 +11,7 @@ class TestClass{
 
     val tc = 3 //这样修饰的外面都访问不到
 
-    //相当于静态内部内
+    //相当于静态内部类
     object CladObjects{
         const val p1 = 8 //const 相对于public修饰的静态常量（不能修改）
         val p2 = 8       //相当于 private修饰的静态常量，但是会自动生成一个静态方法供获取（不推荐此方法）
