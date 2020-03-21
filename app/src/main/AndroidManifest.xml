@@ -53,10 +53,12 @@
    <!--     <activity android:name="com.dale.fragment_demo.XTabActivity" />-->
 
         <activity android:name="com.dale.framework_demo.MainActivity" />
+        <activity android:name="com.dale.worker_demo.ChartDemoActivity" />
 
         <activity android:name="com.dale.viewmodel.MyTestModelActivity"/>
         <activity android:name="com.dale.DemoActivity"/>
         <activity android:name="com.dale.GuideActivity"/>
+        <activity android:name="net.cachapa.expandablelayout.demo.MainActivity"/>
         <activity android:name="com.dale.SplashActivity"
             android:theme="@style/LauncherActivityTheme"
             >

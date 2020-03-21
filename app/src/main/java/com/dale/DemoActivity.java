@@ -22,6 +22,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
 import com.dale.chat.ui.ChatActivity;
+import com.dale.dialog.XDialogManager;
 import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
@@ -50,6 +51,10 @@ import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
 import com.dale.zxing_demo.ZxingActivity;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.core.CenterPopupView;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
@@ -58,9 +63,11 @@ import java.util.List;
 public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //    @Override
 //    protected void initPresenters() {
-////        https://download.csdn.net/download/xiaoyu5256/9809854 设计模式下载  （设计模式之禅）
+////        https://download.csdn.net/download/xiaoyu5256/9809854 设计模式下载 （设计模式之禅）
 //    }
 
+
+    XDialogManager xDialogManager = new XDialogManager();
 
     @SuppressLint("CheckResult")
     @Override
@@ -84,6 +91,29 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //                return false;
 //            }
 //        });
+
+        BasePopupView basePopupView =   new XPopup.Builder(this)
+//                        .maxWidth(600)
+                .asCenterList("请选择一项", new String[]{"条目1", "条目2", "条目3", "条目4"},
+                        new OnSelectListener() {
+                            @Override
+                            public void onSelect(int position, String text) {
+                            }
+                        })
+                .show();
+
+        BasePopupView basePopupView2 =   new XPopup.Builder(this)
+//                        .maxWidth(600)
+                .asCenterList("请选择一项", new String[]{"条目1", "条目2"},
+                        new OnSelectListener() {
+                            @Override
+                            public void onSelect(int position, String text) {
+                            }
+                        })
+                .show();
+
+        xDialogManager.showUpdate(basePopupView2);
+        xDialogManager.showUpdate(basePopupView);
     }
 
     @Override

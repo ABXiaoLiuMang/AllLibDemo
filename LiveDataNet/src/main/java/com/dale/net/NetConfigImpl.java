@@ -1,11 +1,11 @@
 package com.dale.net;
 
+import androidx.collection.ArrayMap;
+
 import com.dale.net.manager.NetConfig;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Interceptor;
 
@@ -16,11 +16,11 @@ import okhttp3.Interceptor;
  */
 public class NetConfigImpl implements NetConfig {
 
-    private int connectTimeout = 10000;
-    private int readTimeout = 10000;
-    private int writeTimeout = 10000;
-    private Map<String,String> headers = new HashMap<>();
-    private Map<String,String> paramsMap = new HashMap<>();
+    private int connectTimeout = 10_000;
+    private int readTimeout = 10_000;
+    private int writeTimeout = 10_000;
+    private ArrayMap<String,String> headers = new ArrayMap<>();
+    private ArrayMap<String,String> paramsMap = new ArrayMap<>();
     private List<Interceptor> interceptors = new ArrayList<>();
     private String baseUrl;
     private boolean needLog = false;
@@ -85,11 +85,11 @@ public class NetConfigImpl implements NetConfig {
         return writeTimeout;
     }
 
-    public Map<String, String> getHeaders() {
+    public ArrayMap<String, String> getHeaders() {
         return headers;
     }
 
-    public Map<String, String> getParamsMap() {
+    public ArrayMap<String, String> getParamsMap() {
         return paramsMap;
     }
 

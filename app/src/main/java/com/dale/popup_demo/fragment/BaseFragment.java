@@ -10,8 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.dale.utils.ToastUtils;
-import com.lxj.statelayout.StateLayout;
-
 
 /**
  * Description:
@@ -20,15 +18,13 @@ import com.lxj.statelayout.StateLayout;
 public abstract class BaseFragment extends Fragment {
     View view;
     boolean isInit = false;
-    StateLayout stateLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(getLayoutId(), container, false);
-            stateLayout = new StateLayout(getContext()).wrap(view).showLoading(true);
         }
-        return stateLayout;
+        return view;
     }
 
     @Override
@@ -42,12 +38,6 @@ public abstract class BaseFragment extends Fragment {
             if (!isInit) {
                 isInit = true;
                 init(view);
-                stateLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        stateLayout.showContent();
-                    }
-                },300);
             }
         }
     }

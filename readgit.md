@@ -56,10 +56,28 @@ https://www.draw.io/  画图软件
 2814373873  13608079349
 https://zzcp02.com/#/home
 
-获取应用签名
+获取应用签名（定位到jdk安装目录的bin文件夹下面）
 keytool -list -v -keystore C:\Users\Dell\Desktop\release.keystore.jks
 android签名 ->SHA256就是
 
 http://api.hou2008.com/api/v1/wap/location 地理位置
 
 https://blog.csdn.net/xiaxiayige/article/details/80636091  nexus aar
+
+
+查看自己的用户名和邮箱地址：
+
+　　$ git config user.name
+
+　　$ git config user.email
+
+修改自己的用户名和邮箱地址：
+
+　　$ git config --global user.name "xxx"
+
+　　$ git config --global user.email "xxx"
+
+https://www.jianshu.com/p/cdd80dd15593  tag
+
+git tag -a V1.0.2 -m "替换bugly后版本"
+git push origin V1.0.2

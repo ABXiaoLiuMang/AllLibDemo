@@ -1,18 +1,12 @@
 package com.dale.net;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.collection.ArrayMap;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
-import com.dale.net.bean.DataType;
-import com.dale.net.bean.LiveResult;
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.exception.ErrorMessage;
 
 import java.io.File;
 
@@ -97,6 +91,7 @@ public class RequestBuilder<T> implements NetCall<T> {
         new Request<>(this).send(netLiveData);
         return this;
     }
+
 
     @Override
     public RequestBuilder<T> addUploadListener( @NonNull final MutableLiveData<Integer> netLiveData) {

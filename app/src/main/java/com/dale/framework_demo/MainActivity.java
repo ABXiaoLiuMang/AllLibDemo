@@ -116,7 +116,7 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
             case 0:
                 Bundle bundle = new Bundle();
                 bundle.putString(ABConfig.KEY_TITLE, "测试web");
-                bundle.putString(ABConfig.KEY_TEXT, "https://123.sogou.com/");
+                bundle.putString(ABConfig.KEY_TEXT, "https://chat.5b3x6.com/chat/chatClient/chatbox.jsp?companyID=5889092&configID=3");
                 goActivity(ABWebActivity.class, bundle);
                 break;
             case 1:

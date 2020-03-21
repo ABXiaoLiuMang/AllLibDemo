@@ -20,7 +20,6 @@ import com.lxj.xpopup.photoview.PhotoView;
  * wrap ViewPager, process drag event.
  */
 public class PhotoViewContainer extends FrameLayout {
-    private static final String TAG = "PhotoViewContainer";
     private ViewDragHelper dragHelper;
     public ViewPager viewPager;
     private int HideTopThreshold = 80;

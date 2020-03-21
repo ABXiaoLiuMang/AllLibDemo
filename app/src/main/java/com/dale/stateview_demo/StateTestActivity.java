@@ -6,11 +6,8 @@ import android.widget.LinearLayout;
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.framework.view.StateLayout;
 import com.dale.libdemo.R;
-import com.dale.stateview_demo.state.Gloading;
 import com.dale.utils.RandomUtils;
 import com.dale.utils.ToastUtils;
-import com.dale.utils.WeakHandler;
-import com.lxj.statelayout.State;
 
 public class StateTestActivity extends ABBaseActivity implements StateLayout.OnRetryListener {
 

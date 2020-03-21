@@ -61,7 +61,7 @@ public class AgentMainActivity extends BaseAgentWebActivity {
     @Nullable
     @Override
     protected String getUrl() {
-        return "https://www.baidu.com/";
+        return "https://chat.5b3x6.com/chat/chatClient/chatbox.jsp?companyID=5889092&configID=3";
     }
 }
 

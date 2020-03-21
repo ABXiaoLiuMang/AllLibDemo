@@ -1,0 +1,321 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <!--  <com.ty.common.view.TitleBar
+        android:id="@id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_68"
+        app:centreTitle="成员"
+        app:showLeft="false"
+        app:showRight="true"
+        />
+
+
+    <com.ty.view.IOSScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/member_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_14"
+                android:background="@drawable/white_corners_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15">
+
+                    <TextView
+                        android:layout_width="0.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:gravity="center_vertical"
+                        android:text="下级概览"
+                        android:textColor="@color/anhei"
+                        android:textSize="@dimen/dp_14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/x_right_arraw" />
+
+                </LinearLayout>
+
+
+                <com.ty.bwagent.view.ExpandableLayout
+                    android:id="@+id/expandable_item1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="250"
+                    app:el_expanded="false">
+
+                    <LinearLayout
+                        style="@style/MatchWrap.Vertical"
+                        android:layout_marginLeft="@dimen/dp_14"
+                        android:layout_marginRight="@dimen/dp_14"
+                        android:background="@drawable/white_corners_buttom_bg"
+                        android:gravity="center_vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/member_total_count"
+                                android:layout_width="0.0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/main_black"
+                                android:textSize="@dimen/dp_12"
+                                tools:text="下级成员总计:2222人" />
+
+                            <TextView
+                                android:id="@+id/member_month_add"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/main_black"
+                                android:textSize="@dimen/dp_12"
+                                tools:text="本月新增：11人" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_0_5"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:background="@color/color_line" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_35"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/dp_3"
+                                android:layout_height="@dimen/dp_18"
+                                android:background="@color/main_style_color" />
+
+                            <TextView
+                                android:layout_width="0.0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_10"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp_12"
+                                tools:text="下级增长曲线" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_38"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="0.0dp"
+                                android:layout_height="@dimen/dp_33"
+                                android:layout_weight="1"
+                                android:background="@drawable/commission_data_select_bg"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/dp_8"
+                                android:paddingRight="@dimen/dp_8">
+
+                                <TextView
+                                    android:id="@+id/member_start_time"
+                                    android:layout_width="0.0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="请选择时间"
+                                    android:textColor="@color/color_a5a9b3"
+                                    android:textSize="@dimen/dp_12" />
+
+                                <View
+                                    android:layout_width="@dimen/dp_12"
+                                    android:layout_height="@dimen/dp_1"
+                                    android:background="@color/color_a5a9b3" />
+
+                                <TextView
+                                    android:id="@+id/member_end_time"
+                                    android:layout_width="0.0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="请选择时间"
+                                    android:textColor="@color/color_a5a9b3"
+                                    android:textSize="@dimen/dp_12" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/member_screen"
+                                style="@style/CodeButton"
+                                android:layout_width="@dimen/dp_77"
+                                android:layout_height="@dimen/dp_33"
+                                android:layout_marginLeft="@dimen/dp_10"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dp_12"
+                                tools:text="筛选" />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_165"
+                            android:layout_marginTop="@dimen/dp_8" />
+
+                    </LinearLayout>
+                </com.ty.bwagent.view.ExpandableLayout>
+            </LinearLayout>
+
+
+            &lt;!&ndash;下月成员列表&ndash;&gt;
+            <LinearLayout
+                android:id="@+id/member_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_14"
+                android:background="@drawable/white_corners_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15">
+
+                    <TextView
+                        android:layout_width="0.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:gravity="center_vertical"
+                        android:text="下级成员列表"
+                        android:textColor="@color/anhei"
+                        android:textSize="@dimen/dp_14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/x_right_arraw" />
+
+                </LinearLayout>
+
+
+                <com.ty.bwagent.view.ExpandableLayout
+                    android:id="@+id/expandable_item2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="250"
+                    app:el_expanded="false">
+
+                    <LinearLayout
+                        style="@style/MatchWrap.Vertical"
+                        android:layout_marginLeft="@dimen/dp_14"
+                        android:layout_marginRight="@dimen/dp_14"
+                        android:background="@drawable/white_corners_buttom_bg"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_38"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/member_sort"
+                                android:layout_width="@dimen/dp_120"
+                                android:layout_height="@dimen/dp_33"
+                                android:gravity="center|left"
+                                android:textColor="@color/main_black"
+                                android:textSize="@dimen/dp_12"
+                                tools:text="按最后登录时间排序" />
+
+
+                            <LinearLayout
+                                android:layout_width="0.0dp"
+                                android:layout_height="@dimen/dp_33"
+                                android:layout_weight="1"
+                                android:background="@drawable/commission_data_select_bg"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/dp_8"
+                                android:paddingRight="@dimen/dp_8">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:src="@drawable/selector_login_register_tab_bg" />
+
+
+                                <com.ty.view.ClearEditText
+                                    android:id="@+id/search_editText"
+                                    android:layout_width="0.0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:gravity="center|left"
+                                    android:hint="请输入账号进行搜索"
+                                    android:textColor="@color/main_black"
+                                    android:textColorHint="@color/color_a5a9b3"
+                                    android:textSize="@dimen/dp_12" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_0_5"
+                            android:layout_marginTop="@dimen/dp_15"
+                            android:background="@color/color_line" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10" />
+
+                    </LinearLayout>
+                </com.ty.bwagent.view.ExpandableLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </com.ty.view.IOSScrollView>-->
+
+
+</LinearLayout>

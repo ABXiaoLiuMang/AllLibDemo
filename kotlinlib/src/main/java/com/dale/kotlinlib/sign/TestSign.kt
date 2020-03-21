@@ -12,13 +12,13 @@ class TestSign {
      * ?: 操作符
      * 1.如果name为空，获取不到长度，就用后面-1的值
      */
-    val l = name?.length ?: -1
+   private val l = name?.length ?: -1
 
     /**
      * !! 操作符
      * 1.如果name为空，就会抛出空指针
      */
-    val b = name!!.length
+    private val b = name!!.length
 
 
     /**

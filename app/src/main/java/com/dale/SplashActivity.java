@@ -8,9 +8,11 @@ import android.animation.ObjectAnimator;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.ABBaseActivity;
 import com.dale.libdemo.R;
 import com.dale.view.SplashTextView;
+import com.dale.worker_demo.ChartDemoActivity;
 import com.dale.xutils.GlideUtil;
 
 public class SplashActivity extends ABBaseActivity implements SplashTextView.onFinishListener {
@@ -38,7 +40,9 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
 
     @Override
     public void onFinish() {
-       goActivity(GuideActivity.class);
+//       goActivity(MainFragmentActivity.class);
+//       goActivity(GuideActivity.class);
+       goActivity(DemoActivity.class);
        finish();
     }
 

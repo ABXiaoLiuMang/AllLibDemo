@@ -73,7 +73,7 @@ public class ImageViewerDemo extends BaseFragment {
         pager = view.findViewById(R.id.pager);
         btn_custom = view.findViewById(R.id.btn_custom);
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
         recyclerView.setAdapter(new ImageAdapter());
 
@@ -105,7 +105,7 @@ public class ImageViewerDemo extends BaseFragment {
             @Override
             public void onClick(View v) {
                 //自定义的弹窗需要用asCustom来显示，之前的asImageViewer这些方法当然不能用了。
-                CustomImageViewerPopup viewerPopup = new CustomImageViewerPopup(getContext());
+                CustomImageViewerPopup viewerPopup = new CustomImageViewerPopup(getActivity());
                 //自定义的ImageViewer弹窗需要自己手动设置相应的属性，必须设置的有srcView，url和imageLoader。
                 viewerPopup.setSingleSrcView(image2, url2);
 //                viewerPopup.isInfinite(true);
@@ -113,7 +113,7 @@ public class ImageViewerDemo extends BaseFragment {
 //                viewerPopup.isShowIndicator(false);//是否显示页码指示器
 //                viewerPopup.isShowPlaceholder(false);//是否显示白色占位块
 //                viewerPopup.isShowSaveButton(false);//是否显示保存按钮
-                new XPopup.Builder(getContext())
+                new XPopup.Builder(getActivity())
                         .asCustom(viewerPopup)
                         .show();
             }

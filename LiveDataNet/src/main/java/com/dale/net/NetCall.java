@@ -1,7 +1,7 @@
 package com.dale.net;
 
 
-import androidx.lifecycle.LifecycleOwner;
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.MutableLiveData;
 
 import com.dale.net.bean.NetLiveData;
