@@ -32,7 +32,7 @@ git clone ssh://software@172.16.0.30/~/yafeng/.git
 
 - 查看自己的用户名和邮箱地址：
 　　$ git config user.name
-　　$ git config user.email
+　　$ git config user.emailcd..
 - 修改自己的用户名和邮箱地址：
 　　$ git config --global user.name "xxx"
 　　$ git config --global user.email "xxx"

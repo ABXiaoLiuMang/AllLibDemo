@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ import com.dale.stateview_demo.StateTestActivity;
 import com.dale.utils.LogUtils;
 import com.dale.utils.MMKVUtil;
 import com.dale.utils.ToastUtils;
+import com.dale.utils.UiMessageUtils;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
@@ -112,8 +114,6 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                         })
                 .show();
 
-        xDialogManager.showUpdate(basePopupView2);
-        xDialogManager.showUpdate(basePopupView);
     }
 
     @Override
@@ -139,6 +139,18 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("录音 实例");
         list.add("17 viewModel");
         listAdapter.setNewData(list);
+
+
+        UiMessageUtils.getInstance().addListener(new UiMessageUtils.UiMessageCallback(){
+
+            @Override
+            public void handleMessage(@NonNull UiMessageUtils.UiMessage localMessage) {
+                ToastUtils.showLong("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
+                LogUtils.d("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
+            }
+        });
+
+        UiMessageUtils.getInstance().send(0,"hahaah");
     }
 
     @Override

@@ -28,6 +28,7 @@ import com.dale.net.exception.ErrorMessage;
 import com.dale.utils.LogUtils;
 import com.dale.utils.SizeUtils;
 import com.dale.utils.ToastUtils;
+import com.dale.utils.UiMessageUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.List;
@@ -79,7 +80,7 @@ public class MainActivity extends ABRefreshActivity<String,MainPresenter> implem
         });
         presenter.otherPresenter.testOther();
         LogUtils.d("initViewsAndEvents activity");
-
+        UiMessageUtils.getInstance().send(2,"wo cao");
     }
 
     @Override
