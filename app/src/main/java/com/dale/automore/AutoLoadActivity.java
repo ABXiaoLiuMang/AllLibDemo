@@ -77,7 +77,7 @@ public class AutoLoadActivity extends ABBaseActivity {
             }
             mAutoLoadOnScrollListener.setLoading(false);
             mSwipeRefreshLayout.setRefreshing(false);
-        },1200);
+        },500);
     }
 
 

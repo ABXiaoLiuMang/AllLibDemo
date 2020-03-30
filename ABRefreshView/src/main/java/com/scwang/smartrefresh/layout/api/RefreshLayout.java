@@ -424,7 +424,7 @@ public interface RefreshLayout {
      */
     RefreshLayout setPrimaryColorsId(@ColorRes int... primaryColorId);
 
-    /**
+    /**3
      * finish refresh.
      * 完成刷新
      * @return RefreshLayout

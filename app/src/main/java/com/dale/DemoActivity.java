@@ -239,6 +239,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
     }
 
     @Override
