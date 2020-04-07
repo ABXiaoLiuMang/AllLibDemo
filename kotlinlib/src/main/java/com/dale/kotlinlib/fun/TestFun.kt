@@ -2,6 +2,7 @@ package com.dale.kotlinlib.`fun`
 
 import com.dale.kotlinlib.Eat
 import com.dale.kotlinlib.MyUser
+import com.dale.kotlinlib.obj.TestClass
 import com.dale.utils.LogUtils
 
 class TestFun {
@@ -34,6 +35,13 @@ class TestFun {
         val myUser = MyUser("dale",10000)
         myUser.eat = Eat("香蕉")
 
+
+        with(myUser){
+            this.eat?.apply {
+                this.testPrint()
+            }
+        }
+
         with(myUser.eat){
             LogUtils.d(this?.food)
             this?.testPrint()
@@ -58,5 +66,31 @@ class TestFun {
             this.testPrint()
         }
         return 1
+    }
+
+
+    /**
+     * 1、它是一个扩展函数
+     * 2、它是传递this作为参数
+     * 3、它是返回 this (即它自己本身)
+     * 4.可以方便的组织成链式调用
+     */
+    fun tesApply(){
+        val myUser = MyUser("", 100)
+            .apply { this.eat = Eat("葡萄") }
+        myUser.apply {
+            this.eat = Eat("香蕉")
+        }
+    }
+
+    fun testClass(){
+        val  testClass = TestClass()
+        LogUtils.d(TestClass.p3.toString())
+        LogUtils.d(TestClass.p4.toString())
+        TestClass.p4 = 8
+        TestClass.CladObjects.p1
+        TestClass.CladObjects.p3 = 0
+        TestClass.CladObjects.p3
+        testClass.tc = 1
     }
 }

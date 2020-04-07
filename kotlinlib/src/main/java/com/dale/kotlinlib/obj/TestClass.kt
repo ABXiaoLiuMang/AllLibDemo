@@ -9,7 +9,7 @@ package com.dale.kotlinlib.obj
 
 class TestClass{
 
-    val tc = 3 //这样修饰的外面都访问不到
+    var tc = 3 //这样修饰的外面都访问不到
 
     //相当于静态内部类
     object CladObjects{
@@ -24,7 +24,8 @@ class TestClass{
 
     //伴生对象，少了类名字（相当于静态代码块）
     companion object{
-        fun get2(){
+        fun get2():String{
+            return "hahah"
         }
         const val  p3 = 9 // val修饰 常量，不能修改
         var  p4 = 9       //var 不是常量，可以修改（也就是相当于生成了静态的get 和set方法）

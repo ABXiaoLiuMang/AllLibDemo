@@ -1,5 +1,7 @@
 package com.dale;
 
+import android.widget.TextView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.framework_demo.Person;
@@ -18,5 +20,7 @@ public class DemoAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.tv_mudule,item);
+        TextView textView = helper.getView(R.id.tv_mudule);
+        textView.setTextColor(0XFF4080FF);
     }
 }

@@ -12,6 +12,7 @@ open class TestArray {
     var map1 = mapOf("key1" to 1,"key2" to 2)  //不可写，但可以重新创建
     var map2 = mutableMapOf("key1" to 1,"key2" to 2) //可读写
     var set1 = setOf("1")
+    var setmap = mutableSetOf("d","d")
     var set2 = mutableSetOf("1")
 
     //推荐这样初始化

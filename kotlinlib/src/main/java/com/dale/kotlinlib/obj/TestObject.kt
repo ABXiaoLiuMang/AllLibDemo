@@ -10,4 +10,9 @@ object TestObject {
     fun testObect(){
 
     }
+
+    val hasCar :Boolean
+        get(){
+        return index == -1
+    }
 }

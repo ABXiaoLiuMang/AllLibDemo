@@ -5,14 +5,19 @@ import android.text.TextWatcher
 import android.view.View
 import com.dale.framework.ui.ABBaseActivity
 import com.dale.framework.ui.BasePresenter
+import com.dale.kotlinlib.MyUser
 import com.dale.kotlinlib.`fun`.TestFun
 import com.dale.kotlinlib.lateinit.TestLateinit
 import com.dale.kotlinlib.obj.TestClass
 import com.dale.kotlinlib.obj.TestObject
 import com.dale.libdemo.R
+import com.dale.log.LogUtils
 import kotlinx.android.synthetic.main.activity_kotlin.*
 
 class KotlinActivity : ABBaseActivity<BasePresenter<*>>() ,View.OnClickListener{
+
+    private val myUser : MyUser? = null
+
     override fun onClick(v: View?) {
     }
 
@@ -21,6 +26,10 @@ class KotlinActivity : ABBaseActivity<BasePresenter<*>>() ,View.OnClickListener{
     }
 
     override fun initViewsAndEvents() {
+
+
+        LogUtils.d(myUser!!.run { toString() })
+
         TestObject.testObect()
         TestObject.index
         TestClass.CladObjects.p1
@@ -30,10 +39,11 @@ class KotlinActivity : ABBaseActivity<BasePresenter<*>>() ,View.OnClickListener{
         TestClass.p3
         TestClass.p4 = 100
         TestClass.get2()
-        btn1.setOnClickListener(this)
+        btn1.setOnClickListener { }
         btn2.setOnClickListener(this)
         TestLateinit.name ="dale"
         TestLateinit.sex
+        TestObject.hasCar
 
 
         btn2.setOnClickListener(object : View.OnClickListener{
@@ -43,7 +53,7 @@ class KotlinActivity : ABBaseActivity<BasePresenter<*>>() ,View.OnClickListener{
         })
 
         btn2.setOnClickListener{ view ->
-          val id =  view.id;
+          val id =  view.id
         }
         btn2.setOnClickListener{
             it.id

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.ABBaseActivity;
+import com.dale.kotlin.KotlinActivity;
 import com.dale.libdemo.R;
 import com.dale.view.SplashTextView;
 import com.dale.worker_demo.ChartDemoActivity;
@@ -42,7 +43,8 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
     public void onFinish() {
 //       goActivity(MainFragmentActivity.class);
 //       goActivity(GuideActivity.class);
-       goActivity(DemoActivity.class);
+       goActivity(KotlinActivity.class);
+//       goActivity(DemoActivity.class);
        finish();
     }
 

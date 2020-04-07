@@ -1,12 +1,9 @@
 package com.dale;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +11,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
@@ -28,7 +21,6 @@ import com.dale.emotion.AudioActivity;
 import com.dale.emotion.SimpleSessionActivity;
 import com.dale.emotion.WxSessionActivity;
 import com.dale.fragment_demo.MainFragmentActivity;
-import com.dale.framework.glide.GlideApp;
 import com.dale.framework.ui.ABRefreshActivity;
 import com.dale.framework.ui.BasePresenter;
 import com.dale.framework.ui.Mode;
@@ -53,10 +45,6 @@ import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
 import com.dale.zxing_demo.ZxingActivity;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BasePopupView;
-import com.lxj.xpopup.core.CenterPopupView;
-import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
@@ -93,26 +81,6 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //                return false;
 //            }
 //        });
-
-        BasePopupView basePopupView =   new XPopup.Builder(this)
-//                        .maxWidth(600)
-                .asCenterList("请选择一项", new String[]{"条目1", "条目2", "条目3", "条目4"},
-                        new OnSelectListener() {
-                            @Override
-                            public void onSelect(int position, String text) {
-                            }
-                        })
-                .show();
-
-        BasePopupView basePopupView2 =   new XPopup.Builder(this)
-//                        .maxWidth(600)
-                .asCenterList("请选择一项", new String[]{"条目1", "条目2"},
-                        new OnSelectListener() {
-                            @Override
-                            public void onSelect(int position, String text) {
-                            }
-                        })
-                .show();
 
     }
 

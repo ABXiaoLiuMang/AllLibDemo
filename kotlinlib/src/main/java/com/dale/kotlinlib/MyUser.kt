@@ -1,6 +1,7 @@
 package com.dale.kotlinlib
 
 //https://blog.csdn.net/u012721519/article/details/79536989 在线视频地址
+//https://blog.csdn.net/u013064109/article/details/80387322 (kotlin学校)
 
 /**
  * 1.主构造函数至少有一个参数
