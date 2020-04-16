@@ -56,7 +56,7 @@ public class AudioActivity extends AppCompatActivity  {
         PermissionUtils.permission(PermissionConstants.STORAGE,PermissionConstants.MICROPHONE).callback(new PermissionUtils.SimpleCallback() {
             @Override
             public void onGranted() {
-                ToastUtils.showShort("同意了权限");
+                ToastUtils.showLong("同意了权限");
                 AudioRecordManager.getInstance(getApplicationContext()).setMaxVoiceDuration(12);
                 mAudioDir = new File(Environment.getExternalStorageDirectory(), "LQR_AUDIO");
                 if (!mAudioDir.exists()) {

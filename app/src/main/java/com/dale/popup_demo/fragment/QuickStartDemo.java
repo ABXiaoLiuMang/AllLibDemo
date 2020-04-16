@@ -117,7 +117,7 @@ public class QuickStartDemo extends BaseFragment implements View.OnClickListener
                             //如果你自己想拦截返回按键事件，则重写这个方法，返回true即可
                             @Override
                             public boolean onBackPressed() {
-                                ToastUtils.showShort("我拦截的返回按键，按返回键XPopup不会关闭了");
+                                ToastUtils.showLong("我拦截的返回按键，按返回键XPopup不会关闭了");
                                 return true;
                             }
                         }).asConfirm("我是标题", "床前明月光，疑是地上霜；举头望明月，低头思故乡。",
@@ -155,7 +155,7 @@ public class QuickStartDemo extends BaseFragment implements View.OnClickListener
                             //如果你自己想拦截返回按键事件，则重写这个方法，返回true即可
                             @Override
                             public boolean onBackPressed() {
-                                ToastUtils.showShort("我拦截的返回按键，按返回键XPopup不会关闭了");
+                                ToastUtils.showLong("我拦截的返回按键，按返回键XPopup不会关闭了");
                                 return true;
                             }
                         }).asConfirm("复用项目已有布局", "您可以复用项目已有布局，来使用XPopup强大的交互能力和逻辑封装，弹窗的布局完全由你自己控制。\n" +
