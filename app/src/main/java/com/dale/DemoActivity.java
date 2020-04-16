@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,7 @@ import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
+import com.dale.refresh.RefreshTestActivity;
 import com.dale.room_demo.AppDatabase;
 import com.dale.room_demo.entity.Phone;
 import com.dale.room_demo.entity.PhoneDao;
@@ -86,6 +88,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 
     @Override
     protected void initViewsAndEvents() {
+        MMKVUtil.put("keyTest","可以的");
         super.initViewsAndEvents();
         List<String> list = new ArrayList<>();
         list.add("frameword 实例");
@@ -118,7 +121,9 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
             }
         });
 
-        UiMessageUtils.getInstance().send(0,"hahaah");
+        //发送消息
+//        UiMessageUtils.getInstance().send(0,"hahaah");
+
     }
 
     @Override
@@ -290,6 +295,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
     @Override
     protected void onResume() {
         super.onResume();
+        ToastUtils.showLong(MMKVUtil.getString("keyTest","不可以的"));
+
         test();
     }
 

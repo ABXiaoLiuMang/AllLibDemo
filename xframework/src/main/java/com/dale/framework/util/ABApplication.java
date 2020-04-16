@@ -2,9 +2,7 @@ package com.dale.framework.util;
 
 import android.app.Application;
 
-import com.dale.constant.LibApplication;
 import com.dale.framework.R;
-import com.dale.utils.FileUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -29,7 +27,6 @@ public class ABApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
-		LibApplication.init(this, FileUtils.PREFERENCE);
 	}
 
 }

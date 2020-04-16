@@ -14,7 +14,7 @@
 
 
         <provider
-            android:name="com.dale.constant.LibApplication$FileProvider4UtilCode"
+            android:name="com.dale.constant.FileProvider4UtilCode"
             android:authorities="${applicationId}.utilcode.provider"
             android:exported="false"
             android:grantUriPermissions="true"

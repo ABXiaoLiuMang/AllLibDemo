@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.dale.framework.R;
 import com.dale.framework.util.Util;
+import com.dale.utils.LogUtils;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
 
@@ -53,6 +54,7 @@ public abstract class ABBaseFragment<P extends BasePresenter> extends SupportFra
         } else {
             ViewGroup parent = (ViewGroup) rootView.getParent();
             if (parent != null) {
+                parent.endViewTransition(rootView);
                 parent.removeView(rootView);
             }
             if (container != null) {
@@ -108,6 +110,12 @@ public abstract class ABBaseFragment<P extends BasePresenter> extends SupportFra
         super.onDestroyView();
         if (unbinder != null) {
             unbinder.unbind();
+        }
+        if (rootView != null) {
+            ViewGroup parentView = (ViewGroup) rootView.getParent();
+            if (parentView != null) {
+                parentView.removeView(rootView);
+            }
         }
     }
 

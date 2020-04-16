@@ -54,6 +54,7 @@
 
         <activity android:name="com.dale.framework_demo.MainActivity" />
         <activity android:name="com.dale.worker_demo.ChartDemoActivity" />
+        <activity android:name="com.dale.refresh.RefreshTestActivity" />
 
         <activity android:name="com.dale.viewmodel.MyTestModelActivity"/>
         <activity android:name="com.dale.DemoActivity"/>

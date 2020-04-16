@@ -29,7 +29,6 @@ public class ABApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
-		LibApplication.init(this, FileUtils.PREFERENCE);
 	}
 
 }

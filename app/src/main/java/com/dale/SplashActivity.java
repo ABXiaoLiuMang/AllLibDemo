@@ -43,8 +43,8 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
     public void onFinish() {
 //       goActivity(MainFragmentActivity.class);
 //       goActivity(GuideActivity.class);
-       goActivity(KotlinActivity.class);
-//       goActivity(DemoActivity.class);
+//       goActivity(KotlinActivity.class);
+       goActivity(DemoActivity.class);
        finish();
     }
 

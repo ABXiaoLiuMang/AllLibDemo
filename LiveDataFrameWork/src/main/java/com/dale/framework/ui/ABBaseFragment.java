@@ -48,6 +48,7 @@ public abstract class ABBaseFragment extends SupportFragment {
         } else {
             ViewGroup parent = (ViewGroup) rootView.getParent();
             if (parent != null) {
+                parent.endViewTransition(rootView);
                 parent.removeView(rootView);
             }
             if (container != null) {
@@ -93,6 +94,17 @@ public abstract class ABBaseFragment extends SupportFragment {
             mContext.startActivityForResult(intent, 0);
             mContext.overridePendingTransition(R.anim.x_push_left_in, R.anim.x_push_left_out);
         } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (rootView != null) {
+            ViewGroup parentView = (ViewGroup) rootView.getParent();
+            if (parentView != null) {
+                parentView.removeView(rootView);
+            }
         }
     }
 }

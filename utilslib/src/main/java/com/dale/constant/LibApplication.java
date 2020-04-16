@@ -1,10 +1,12 @@
 package com.dale.constant;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.core.content.FileProvider;
 
 import com.dale.utils.AppException;
+import com.dale.utils.FileUtils;
 import com.dale.utils.LogUtils;
 import com.dale.utils.MMKVUtil;
 import com.dale.utils.SPUtils;
@@ -29,19 +31,8 @@ public final class LibApplication {
         MMKVUtil.init(app);
     }
 
-
     public static Application getApp() {
         return sApplication;
     }
-
-
-
-    public static final class FileProvider4UtilCode extends FileProvider {
-        @Override
-        public boolean onCreate() {
-            return true;
-        }
-    }
-
 
 }
