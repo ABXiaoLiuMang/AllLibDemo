@@ -6,7 +6,7 @@
 
     <include layout="@layout/x_toolbar_layout" />
 
-    <com.dale.view.DragView
+    <com.dale.view.DragShareView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -137,7 +137,7 @@
             android:text="悬浮球"
             android:textColor="@color/white"
             android:textSize="12sp" />
-    </com.dale.view.DragView>
+    </com.dale.view.DragShareView>
 
 
 </LinearLayout>

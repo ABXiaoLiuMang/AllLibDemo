@@ -12,6 +12,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 import com.dale.framework.R;
 import com.dale.framework.util.GridItemDecoration;
+import com.dale.framework.view.StateLayout;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 /**
@@ -19,12 +21,13 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
  * create on 2019/5/17
  * description:下拉刷新基类
  */
-public abstract class ABRefreshActivity<T,P extends BasePresenter> extends ABBaseActivity<P> implements IRefresh<T> {
+public abstract class ABRefreshActivity<T,P extends BasePresenter> extends ABBaseActivity<P> implements IRefresh<T>, StateLayout.OnRetryListener {
 
     protected RefreshDelegate<T> refreshDelegate;
     protected BaseQuickAdapter<T, BaseViewHolder> listAdapter;
     protected RefreshLayout refreshLayout;
     protected RecyclerView recyclerView;
+    protected StateLayout stateLayout;
 
     @Override
     protected int getLayoutId() {
@@ -78,8 +81,21 @@ public abstract class ABRefreshActivity<T,P extends BasePresenter> extends ABBas
 
     @Override
     public View getEmptyView() {
-        return null;
+        stateLayout = (StateLayout) View.inflate(mContext,R.layout.x_statelayout,null);
+        stateLayout.contentView((SmartRefreshLayout) refreshLayout);
+        stateLayout.setOnRetryListener(this);
+        return stateLayout;
     }
+
+
+
+    @Override
+    public void onRetry(){
+        stateLayout.setState(StateLayout.STATE_LOADING);
+        onRefresh(refreshLayout);
+    }
+
+
 
     @Override
     public View getHeaderView() {

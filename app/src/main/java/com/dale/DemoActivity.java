@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +31,6 @@ import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
-import com.dale.refresh.RefreshTestActivity;
 import com.dale.room_demo.AppDatabase;
 import com.dale.room_demo.entity.Phone;
 import com.dale.room_demo.entity.PhoneDao;
@@ -43,7 +41,9 @@ import com.dale.utils.LogUtils;
 import com.dale.utils.MMKVUtil;
 import com.dale.utils.ToastUtils;
 import com.dale.utils.UiMessageUtils;
+import com.dale.utils.WeakHandler;
 import com.dale.view.RecyclerViewDivider;
+import com.dale.view.TestShareViewActivity;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
 import com.dale.zxing_demo.ZxingActivity;
@@ -51,6 +51,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//510000100941  12位太阳码
+
+//import com.dale.kotlinlib.simple.ObjectUtilKt;
+//import static com.dale.kotlinlib.simple.ObjectUtilKt.lastChar;
+//import static com.dale.kotlinlib.simple.ObjectUtilKt.toast;
 
 public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //    @Override
@@ -84,12 +90,38 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //            }
 //        });
 
+
+        //测试扩展函数
+//        toast(this,"");
+//        lastChar("");
+//        ObjectUtilKt.toast(this,"");
+//        ObjectUtilKt.lastChar("");
+
     }
 
     @Override
     protected void initViewsAndEvents() {
         MMKVUtil.put("keyTest","可以的");
         super.initViewsAndEvents();
+
+        initTestData();
+
+        UiMessageUtils.getInstance().addListener(new UiMessageUtils.UiMessageCallback(){
+
+            @Override
+            public void handleMessage(@NonNull UiMessageUtils.UiMessage localMessage) {
+                ToastUtils.showLong("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
+                LogUtils.d("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
+            }
+        });
+
+        //发送消息
+//        UiMessageUtils.getInstance().send(0,"hahaah");
+
+//        stateLayout.setState(StateLayout.STATE_NET_ERROR);
+    }
+
+    private void initTestData(){
         List<String> list = new ArrayList<>();
         list.add("frameword 实例");
         list.add("location 实例");
@@ -109,26 +141,13 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("emotion 实例");
         list.add("录音 实例");
         list.add("17 viewModel");
+        list.add("TestShare");
         listAdapter.setNewData(list);
-
-
-        UiMessageUtils.getInstance().addListener(new UiMessageUtils.UiMessageCallback(){
-
-            @Override
-            public void handleMessage(@NonNull UiMessageUtils.UiMessage localMessage) {
-                ToastUtils.showLong("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
-                LogUtils.d("id:" + localMessage.getId() + " obj:" + localMessage.getObject().toString());
-            }
-        });
-
-        //发送消息
-//        UiMessageUtils.getInstance().send(0,"hahaah");
-
     }
 
     @Override
     public int getMode() {
-        return Mode.DISABLED;
+        return Mode.BOTH;
     }
 
     @Override
@@ -207,17 +226,27 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                 case 17:
                     goActivity(MyTestModelActivity.class);
                     break;
+                case 18:
+                    goActivity(TestShareViewActivity.class);
+                    break;
             }
     }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        new WeakHandler().postDelayed(() -> {
+            initTestData();
+            refreshLayout.finishLoadMore();
+            refreshDelegate.setRefreshMode(refreshLayout,getMode());
+        },1000);
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+        new WeakHandler().postDelayed(() -> {
+            initTestData();
+            refreshLayout.finishRefresh();
+        },1000);
     }
 
     @Override

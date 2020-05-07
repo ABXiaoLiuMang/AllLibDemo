@@ -49,7 +49,13 @@ git branch -d 分支名  #删除本地分支
 git remote show origin  #查看远程分支和本地分支的对应关系
 git remote prune origin #删除远程已经删除过的分支
 
+git reset --hard commit_id //回退到某次提交
+git push -f origin master  强制覆盖提交
 git remote -v 查看远程仓库地址
+
+打tag
+git tag -a V1.0.2 -m "替换bugly后版本"
+git push origin V1.0.2
 
 https://www.draw.io/  画图软件
 
@@ -78,6 +84,3 @@ https://blog.csdn.net/xiaxiayige/article/details/80636091  nexus aar
 　　$ git config --global user.email "xxx"
 
 https://www.jianshu.com/p/cdd80dd15593  tag
-
-git tag -a V1.0.2 -m "替换bugly后版本"
-git push origin V1.0.2

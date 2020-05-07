@@ -1,5 +1,7 @@
 package com.dale.kotlin
 
+import android.app.Activity
+import com.dale.kotlinlib.simple.*
 
 
 fun main() {
@@ -9,4 +11,7 @@ fun main() {
 //    }
 //    LogUtils.d("Hello,") // 协程已在等待时主线程还在继续
 //    Thread.sleep(2000L) // 阻塞主线程 2 秒钟来保证 JVM 存活
+    "".lastChar()
+    var  activity :Activity? = null
+    activity?.toast("--")
 }

@@ -19,30 +19,10 @@ public class RefreshDelegate<T> {
     public void initViews(BaseQuickAdapter<T, BaseViewHolder> listAdapter) {
         RecyclerView recyclerview = iRefresh.getRecyclerView();
         RefreshLayout refreshLayout = iRefresh.getRefreshLayout();
-        switch (iRefresh.getMode()) {
-            case Mode.PULL_FROM_END://上拉加载更多
-                refreshLayout.setOnLoadMoreListener(iRefresh);
-                refreshLayout.setEnableRefresh(false);
-                refreshLayout.setEnableLoadMore(true);
-                break;
-            case Mode.PULL_FROM_START://顶部下拉刷新
-                refreshLayout.setOnRefreshListener(iRefresh);
-                refreshLayout.setEnableRefresh(true);
-                refreshLayout.setEnableLoadMore(false);
-                break;
-            case Mode.BOTH://上下都刷新
-                refreshLayout.setOnRefreshListener(iRefresh);
-                refreshLayout.setOnLoadMoreListener(iRefresh);
-                break;
-            case Mode.DISABLED://上下都不刷新
-                refreshLayout.setEnableLoadMore(false);
-                refreshLayout.setEnableRefresh(false);
-                break;
-        }
-
-         View headView;
-         View fooderView;
-         View emptyView;
+        setRefreshMode(refreshLayout,iRefresh.getMode());
+        View headView;
+        View fooderView;
+        View emptyView;
 
         if ((emptyView = getEmptyView()) != null) {
             listAdapter.setEmptyView(emptyView);
@@ -83,6 +63,29 @@ public class RefreshDelegate<T> {
 
     private View getFooterView() {
         return iRefresh.getFooterView();
+    }
+
+    public void setRefreshMode(RefreshLayout refreshLayout,int mode) {
+        switch (mode) {
+            case Mode.PULL_FROM_END://上拉加载更多
+                refreshLayout.setOnLoadMoreListener(iRefresh);
+                refreshLayout.setEnableRefresh(false);
+                refreshLayout.setEnableLoadMore(true);
+                break;
+            case Mode.PULL_FROM_START://顶部下拉刷新
+                refreshLayout.setOnRefreshListener(iRefresh);
+                refreshLayout.setEnableRefresh(true);
+                refreshLayout.setEnableLoadMore(false);
+                break;
+            case Mode.BOTH://上下都刷新
+                refreshLayout.setOnRefreshListener(iRefresh);
+                refreshLayout.setOnLoadMoreListener(iRefresh);
+                break;
+            case Mode.DISABLED://上下都不刷新
+                refreshLayout.setEnableLoadMore(false);
+                refreshLayout.setEnableRefresh(false);
+                break;
+        }
     }
 
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.dale.framework.view.TitleBar
+        android:id="@id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_68"
+        app:centreTitle="消息详情"
+        app:rightTitle="删除"
+        app:showRight="true" />
+
+    <com.dale.view.ShareView
+        android:id="@+id/shareView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:id="@+id/test"
+        />
+    <com.dale.view.XRTextView
+        android:id="@+id/codeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="http://01.minipic.eastday.com/20161229/20161229105231_a71df75a6b5be4281151b54b2bbd7362_4.jpeg"
+        />
+
+
+<!--    <com.dale.view.ShareImageView-->
+<!--        android:id="@+id/shareImageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/dp_250"-->
+<!--        android:layout_marginTop="@dimen/dp_10"-->
+<!--        android:background="@mipmap/logo"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:visibility="gone"-->
+<!--        app:codeGravity="BottomRight" />-->
+
+<!--<com.dale.view.ShareView-->
+<!--    android:id="@+id/mShareView2"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="@dimen/dp_300">-->
+
+<!--  &lt;!&ndash;  <com.dale.view.DragShareView-->
+<!--        android:id="@+id/mDragShareView"-->
+<!--        android:layout_width="800dp"-->
+<!--        android:layout_height="@dimen/dp_300"-->
+<!--        android:background="#043"-->
+<!--        >-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/contentView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+
+<!--            android:orientation="vertical">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+<!--        </LinearLayout>-->
+
+<!--        <com.dale.view.MyTextView-->
+<!--            android:id="@+id/codeTextView"-->
+<!--            android:layout_width="@dimen/dp_200"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="120dp"-->
+<!--            android:background="#2ef" />-->
+<!--        <com.dale.view.MyTextView-->
+<!--            android:id="@+id/tipTextView"-->
+<!--            android:layout_width="@dimen/dp_200"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="150dp"-->
+<!--            android:background="#0ef" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/codeImageView"-->
+<!--            android:layout_width="@dimen/dp_100"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:background="#cef" />-->
+<!--    </com.dale.view.DragShareView>&ndash;&gt;-->
+
+<!--</com.dale.view.ShareView>-->
+
+</LinearLayout>

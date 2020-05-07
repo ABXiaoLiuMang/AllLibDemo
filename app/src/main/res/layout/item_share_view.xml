@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_300">
+
+        <ImageView
+            android:id="@+id/imgBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            tools:background="#043" />
+
+        <ImageView
+            android:id="@+id/imgCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            tools:background="#c43"
+            tools:layout_height="@dimen/dp_60"
+            tools:layout_width="@dimen/dp_60" />
+
+        <TextView
+            android:id="@+id/shareUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_14"
+            tools:text="http://www.baidu.com" />
+
+        <TextView
+            android:id="@+id/shareText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_14"
+            tools:text="最牛逼的推广链接" />
+
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/radiaGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_topLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="左上" />
+
+        <RadioButton
+            android:id="@+id/rb_topRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="右上" />
+
+        <RadioButton
+            android:id="@+id/rb_bottomLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="左下" />
+
+        <RadioButton
+            android:id="@+id/rb_bottomRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="右下" />
+
+        <RadioButton
+            android:id="@+id/rb_center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="居中" />
+    </RadioGroup>
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:max="100" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+
+</LinearLayout>
+
+

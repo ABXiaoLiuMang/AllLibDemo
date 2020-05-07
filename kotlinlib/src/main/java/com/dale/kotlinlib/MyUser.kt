@@ -9,4 +9,8 @@ package com.dale.kotlinlib
  * 3.data 修饰的类是final修饰不可继承的
  * 4.private修饰后，不会生成get和set方法
  */
-data class MyUser(val name : String, var age :Int,var eat : Eat? = null)
+data class MyUser(val name : String, var age :Int,var eat : Eat? = null){
+    override fun toString(): String {
+        return "MyUser(name='$name', age=$age, eat=$eat)"
+    }
+}

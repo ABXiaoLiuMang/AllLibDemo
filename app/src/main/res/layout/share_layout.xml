@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dale.view.DragShareView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mDragShareView"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dp_300"
+    tools:background="@color/black">
+
+
+    <ImageView
+        android:id="@+id/contentView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/codeImageView"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="100dp"
+        android:background="#cef" />
+
+    <Button
+        android:id="@+id/codeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="http://01.minipic.eastday.com/20161229/20161229105231_a71df75a6b5be4281151b54b2bbd7362_4.jpeg"
+        android:gravity="left"
+        />
+
+    <TextView
+        android:id="@+id/tipTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:gravity="center_vertical"
+        android:maxWidth="@dimen/dp_200"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:text="艹，可以的"
+        android:textColor="@color/white" />
+
+    <View
+        android:layout_width="@dimen/dp_360"
+        android:layout_height="@dimen/dp_1"/>
+
+</com.dale.view.DragShareView>

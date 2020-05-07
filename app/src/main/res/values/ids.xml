@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="contentView" type="id" />
+    <item name="codeImageView" type="id" />
+    <item name="codeTextView" type="id" />
+    <item name="tipTextView" type="id" />
+</resources>

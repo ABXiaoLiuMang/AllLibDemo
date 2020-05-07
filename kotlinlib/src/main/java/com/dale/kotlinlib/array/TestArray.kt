@@ -1,6 +1,7 @@
 package com.dale.kotlinlib.array
 
 import com.dale.utils.LogUtils
+import com.dale.utils.StringUtils
 
 /**
  * 1.mutable 创建的可以继续读写（添加、删除），但不能重复创建，
@@ -67,5 +68,11 @@ open class TestArray {
         it2.remove()
 
 
+        val filterResult = list2.filter(this::testFilter)
+
+    }
+
+    private fun testFilter( s : String ):Boolean{
+        return StringUtils.isEmpty(s)
     }
 }

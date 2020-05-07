@@ -14,6 +14,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import com.dale.framework.R;
 import com.lxj.xpopup.widget.LoadingView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -40,6 +42,7 @@ public class StateLayout extends FrameLayout implements View.OnClickListener {
     private TextView x_state_tv;
     private Button x_state_btn;
     private LoadingView x_state_loading;
+    private View contentView;
     private OnRetryListener onRetryListener;
 
     public StateLayout(Context context) {
@@ -100,6 +103,11 @@ public class StateLayout extends FrameLayout implements View.OnClickListener {
         return this;
     }
 
+    public StateLayout contentView(View contentView) {
+        this.contentView = contentView;
+        return this;
+    }
+
 
 
     public StateLayout desc(CharSequence text) {
@@ -127,12 +135,27 @@ public class StateLayout extends FrameLayout implements View.OnClickListener {
                 setVisibility(state);
                 break;
             case STATE_LOADING:
+                if(contentView != null && contentView instanceof SmartRefreshLayout){
+                    SmartRefreshLayout refreshLayout = (SmartRefreshLayout) contentView;
+                    refreshLayout.setEnableRefresh(false);
+                    refreshLayout.setEnableLoadMore(false);
+                }
                 showLoading();
                 break;
             case STATE_EMPTY:
+                if(contentView != null && contentView instanceof SmartRefreshLayout){
+                    SmartRefreshLayout refreshLayout = (SmartRefreshLayout) contentView;
+                    refreshLayout.setEnableRefresh(true);
+                    refreshLayout.setEnableLoadMore(false);
+                }
                 showEmpty();
                 break;
             case STATE_NET_ERROR:
+                if(contentView != null && contentView instanceof SmartRefreshLayout){
+                    SmartRefreshLayout refreshLayout = (SmartRefreshLayout) contentView;
+                    refreshLayout.setEnableRefresh(false);
+                    refreshLayout.setEnableLoadMore(false);
+                }
                 showNetError();
                 break;
         }

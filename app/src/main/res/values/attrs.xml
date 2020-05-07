@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="codeColor" format="color|reference"/>
 
     <declare-styleable name="ExpandableLayout">
         <attr name="el_duration" format="integer" />
@@ -9,6 +10,60 @@
         <attr name="android:orientation"/>
     </declare-styleable>
 
+    <declare-styleable name="ShareView">
+        <attr name="ImgGravity">
+            <enum name="TopLeft" value="0" />
+            <enum name="TopRight" value="1" />
+            <enum name="BottomLeft" value="2" />
+            <enum name="BottomRight" value="3" />
+            <enum name="Center" value="4" />
+        </attr>
+        <attr name="UrlGravity">
+            <enum name="TopLeft" value="0" />
+            <enum name="TopRight" value="1" />
+            <enum name="BottomLeft" value="2" />
+            <enum name="BottomRight" value="3" />
+            <enum name="Center" value="4" />
+        </attr>
+        <attr name="TextGravity">
+            <enum name="TopLeft" value="0" />
+            <enum name="TopRight" value="1" />
+            <enum name="BottomLeft" value="2" />
+            <enum name="BottomRight" value="3" />
+            <enum name="Center" value="4" />
+        </attr>
+        <attr name="ImgMinSize" format="dimension|reference"/>
+        <attr name="ImgMaxSize" format="dimension|reference"/>
+        <attr name="imaColor"/>
+        <attr name="urlColor"/>
+        <attr name="tipsColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="ShareImageView">
+        <attr name="textGravity">
+            <enum name="TopLeft" value="0" />
+            <enum name="TopRight" value="1" />
+            <enum name="BottomLeft" value="2" />
+            <enum name="BottomRight" value="3" />
+            <enum name="Center" value="4" />
+        </attr>
+        <attr name="codeGravity">
+            <enum name="TopLeft" value="0" />
+            <enum name="TopRight" value="1" />
+            <enum name="BottomLeft" value="2" />
+            <enum name="BottomRight" value="3" />
+            <enum name="Center" value="4" />
+        </attr>
+        <attr name="urlColor" format="color|reference"/>
+        <attr name="urlSize" format="dimension|reference"/>
+        <attr name="textColor" format="color|reference"/>
+        <attr name="textSize" format="dimension|reference"/>
+        <attr name="codeColor"/>
+        <attr name="codeMinSize" format="dimension|reference"/>
+        <attr name="codeMaxSize" format="dimension|reference"/>
+        <attr name="sharePadding" format="dimension|reference"/>
+
+    </declare-styleable>
 
 
     <declare-styleable name="BGAFlowLayout">
