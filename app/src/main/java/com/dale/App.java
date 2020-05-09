@@ -148,7 +148,16 @@ public class App extends ABApplication {
 //                .setMigration(MIGRATION_2_3)
                 .initSDK(this,AppDatabase.class);
     }
-
+/****
+ * https://pan.baidu.com/s/1YsosjGjup4CgM9McTwLVFg#list/path=%2F&parentPath=%2Fsharelink3232509500-50774254064225  百度网盘kotlin 教程
+ *
+ * https://www.jb51.net/books/695216.html
+ * https://www.jb51.net/books/681218.html
+ * https://www.jb51.net/books/list572_1.html
+ * https://www.jb51.net/books/634928.html
+ * https://www.jb51.net/books/638342.html
+ * https://www.jb51.net/
+ */
 }
 
 
