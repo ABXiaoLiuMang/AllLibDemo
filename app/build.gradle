@@ -111,6 +111,7 @@ dependencies {
     implementation rootDependencies["butterknife"]
     annotationProcessor rootDependencies["butterknife_compiler"]
 
+    annotationProcessor rootDependencies["glide_compiler"] //glide
 
     implementation rootDependencies["appcompat"]
     implementation rootDependencies["recyclerview"]
@@ -204,4 +205,6 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0-rc03"
    //融云
     implementation 'cn.rongcloud.sdk:im_lib:2.10.3'
+//    implementation project(path: ':glidelib')
+
 }

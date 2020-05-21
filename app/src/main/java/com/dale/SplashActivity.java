@@ -45,7 +45,7 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
 //       goActivity(GuideActivity.class);
 //       goActivity(KotlinActivity.class);
        goActivity(DemoActivity.class);
-       finish();
+//       finish();
     }
 
     private void startAnim() {

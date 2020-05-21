@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_45"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary"
-    >
+    android:layout_height="@dimen/dp_80"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary">
 
+    <ImageView
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:id="@+id/image"
+        tools:background="@color/black"
+        />
 
     <TextView
         android:id="@+id/tv_mudule"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="@dimen/dp_80"
         android:gravity="center"
         android:textColor="@color/white"
         android:text="Hello World!" />

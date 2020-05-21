@@ -3,6 +3,7 @@ package com.dale.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -15,6 +16,7 @@ import android.view.ViewConfiguration;
 
 import androidx.core.content.ContextCompat;
 
+import com.dale.utils.ResUtils;
 import com.dale.utils.SizeUtils;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class SegmentView extends View {
     private Rect mRect;
     private RectF mRectF;
     private Paint mPaintA;
+    private Paint mPaintL;
+    private Paint mPaintT;
     private Paint mPaintB;
     private int mColorA;
     private int mColorB;
@@ -91,6 +95,16 @@ public class SegmentView extends View {
         mPaintA.setTextSize(mTextSize);
         mPaintA.setTextAlign(Paint.Align.CENTER);
 
+        mPaintL = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintL.setColor(Color.BLACK);
+        mPaintL.setTextSize(mTextSize);
+        mPaintL.setTextAlign(Paint.Align.CENTER);
+
+        mPaintT = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintT.setColor(Color.BLACK);
+        mPaintT.setTextSize(mTextSize);
+        mPaintT.setTextAlign(Paint.Align.CENTER);
+
         mPaintB = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintB.setColor(mColorB);
         mPaintB.setTextSize(mTextSize);
@@ -126,7 +140,7 @@ public class SegmentView extends View {
         // Background
         mRect.set(0, 0, mWidth, mHeight);
         mRectF.set(mRect);
-        canvas.drawRoundRect(mRectF, mRectRadius, mRectRadius, mPaintA);
+        canvas.drawRoundRect(mRectF, mRectRadius, mRectRadius, mPaintL);
 
         mRect.set((int) mPadding, (int) mPadding, (int) (mWidth - mPadding), (int) (mHeight - mPadding));
         mRectF.set(mRect);
@@ -152,10 +166,10 @@ public class SegmentView extends View {
             if (i != 0) {
                 // Draw divide line
                 canvas.drawRect(space * 2 * i - mDivideWidth / 2, 0,
-                        space * 2 * i + mDivideWidth / 2, mHeight, mPaintA);
+                        space * 2 * i + mDivideWidth / 2, mHeight, mPaintL);
             }
             // Draw title
-            canvas.drawText(mTitles.get(i), space * 2 * i + space, starty, mCurIndex == i ? mPaintB : mPaintA);
+            canvas.drawText(mTitles.get(i), space * 2 * i + space, starty, mCurIndex == i ? mPaintB : mPaintT);
         }
     }
 

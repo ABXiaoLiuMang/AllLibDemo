@@ -43,7 +43,6 @@ import com.dale.utils.ToastUtils;
 import com.dale.utils.UiMessageUtils;
 import com.dale.utils.WeakHandler;
 import com.dale.view.RecyclerViewDivider;
-import com.dale.view.TestShareViewActivity;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
 import com.dale.zxing_demo.ZxingActivity;
@@ -52,7 +51,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-//510000100941  12位太阳码
+
 
 //import com.dale.kotlinlib.simple.ObjectUtilKt;
 //import static com.dale.kotlinlib.simple.ObjectUtilKt.lastChar;
@@ -227,7 +226,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(MyTestModelActivity.class);
                     break;
                 case 18:
-                    goActivity(TestShareViewActivity.class);
+//                    goActivity(TestShareViewActivity.class);
                     break;
             }
     }

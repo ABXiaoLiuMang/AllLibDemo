@@ -69,8 +69,6 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name="com.dale.view.TestShareViewActivity" />
         <activity android:name="com.dale.kotlin.KotlinActivity" />
         <activity android:name="com.dale.worker_demo.WorkActivity" />
         <activity android:name="com.dale.push_demo.PushActivity" />

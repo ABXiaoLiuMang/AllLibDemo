@@ -42,7 +42,7 @@ public class ScrollActivity extends ABBaseActivity {
         scrollView = findViewById(R.id.scrollView);
         titleBar = findViewById(R.id.titleBar);
         new ScrollChangeHelper.Builder().scrollHeight(SizeUtils.dp2px(200)).setAlphaView(titleBar).setNestedScrollView(scrollView).build();
-        otherPresenter.getHome();
+//        otherPresenter.getHome();
         LiveDataManager.getInstance().testPrice.observe(this,new NetObserver<String>(){
 
             @Override

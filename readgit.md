@@ -1,5 +1,6 @@
 csdn账号：woaiqin2004
 qq：2814373873 admin123456
+//510000100941  12位太阳码
 
 keytool -list -printcert -jarfile
 

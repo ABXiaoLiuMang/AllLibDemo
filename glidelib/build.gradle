@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
+android {
+    compileSdkVersion customizeConfig.compileSdkVersion
+    buildToolsVersion customizeConfig.androidLibVersion
+
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+        disable 'PrivateResource'
+    }
+
+    defaultConfig {
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        versionCode appVersionCode as int
+        versionName appVersionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootDependencies["junit"]
+    androidTestImplementation rootDependencies["test_runner"]
+    androidTestImplementation rootDependencies["espresso_core"]
+
+    annotationProcessor rootDependencies["glide_compiler"]
+    compileOnly rootDependencies["okhttp"]
+    compileOnly rootDependencies["glide"]
+    compileOnly project(path: ':utilslib')
+
+    compileOnly rootDependencies["appcompat"]
+    compileOnly rootDependencies["Gson"]
+    compileOnly rootDependencies["mmkv"]
+}

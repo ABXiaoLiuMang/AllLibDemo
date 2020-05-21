@@ -1,4 +1,4 @@
-package com.dale.framework.glide;
+package com.dale.glides;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,8 +17,6 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.request.RequestOptions;
-import com.dale.framework.R;
 import com.dale.utils.FileUtils;
 import com.dale.utils.StringUtils;
 
