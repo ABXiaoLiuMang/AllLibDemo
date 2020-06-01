@@ -3,10 +3,10 @@ package com.dale.room;
 public class RoomSdk {
 
     private static class RoomHolder {
-        private static IDBConfig isdkConfig = new DBConfig();
+        private static IDBConfig dbConfig = new DBConfig();
     }
 
     public static IDBConfig ins() {
-        return RoomHolder.isdkConfig;
+        return RoomHolder.dbConfig;
     }
 }

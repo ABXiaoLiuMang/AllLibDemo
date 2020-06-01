@@ -27,4 +27,6 @@
 
 https://juejin.im/post/5e78473df265da57201811e4(面试)
 https://github.com/Blankj/Android_QA(面试)
+https://developer.android.google.cn/training/constraint-layout/motion-layout-examples 动画布局
 
+typora 看文档的编辑器

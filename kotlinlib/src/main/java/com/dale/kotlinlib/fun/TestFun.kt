@@ -42,6 +42,10 @@ class TestFun {
             }
         }
 
+        run {
+
+        }
+
         with(myUser.eat){
             LogUtils.d(this?.food)
             this?.testPrint()

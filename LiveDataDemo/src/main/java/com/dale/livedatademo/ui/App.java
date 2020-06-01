@@ -22,6 +22,10 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 public class App extends ABApplication {
 
+        public static SingleLiveData<String> netLiveData = new SingleLiveData<>(true);
+//    public static MutableLiveData<String> netLiveData = new MutableLiveData<>();
+
+
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {

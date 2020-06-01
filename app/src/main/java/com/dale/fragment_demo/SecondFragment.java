@@ -3,8 +3,11 @@ package com.dale.fragment_demo;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.dale.framework.ui.ABBaseFragment;
@@ -92,4 +95,36 @@ public class SecondFragment extends ABBaseFragment<OtherPresenter> implements Ot
             return mList == null ? null : mList.get((int) obj);
         }
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("haha","SecondFragment onResume");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("haha","SecondFragment onStart");
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Log.d("haha","SecondFragment 懒加载");
+    }
+
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        Log.d("haha","SecondFragment 可见了");
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        Log.d("haha","SecondFragment 不可见呀");
+    }
+
 }

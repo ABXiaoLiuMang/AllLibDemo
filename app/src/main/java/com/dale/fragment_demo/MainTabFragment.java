@@ -1,9 +1,15 @@
 package com.dale.fragment_demo;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
 import com.dale.framework.tab.ABMainTabFragment;
 import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework.tab.MainTab;
 import com.dale.libdemo.R;
+import com.dale.log.LogUtils;
 
 public class MainTabFragment extends ABMainTabFragment {
 
@@ -28,4 +34,37 @@ public class MainTabFragment extends ABMainTabFragment {
         fragments[2] = new Tab3Fragment();
         return fragments;
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("haha","MainTabFragment onResume");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("haha","MainTabFragment onStart");
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        Log.d("haha","MainTabFragment 懒加载");
+    }
+
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        Log.d("haha","MainTabFragment 可见了");
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        super.onSupportInvisible();
+        Log.d("haha","MainTabFragment 不可见呀");
+    }
+
+
 }

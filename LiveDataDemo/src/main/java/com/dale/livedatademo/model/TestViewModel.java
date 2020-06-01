@@ -2,18 +2,12 @@ package com.dale.livedatademo.model;
 
 import androidx.lifecycle.ViewModel;
 
-import com.dale.livedatademo.api.Api;
-import com.dale.net.NetSdk;
-import com.dale.net.bean.NetLiveData;
+import com.dale.livedatademo.ui.App;
 
 public class TestViewModel extends ViewModel {
 
-    public NetLiveData<String> netLiveData = new NetLiveData<>();
-
     public void getTestNetLiveData(){
-         NetSdk.create(Api.class)
-                 .getTestString()
-                 .send(netLiveData);
+        App.netLiveData.postValue("我艹你妹");
     }
 
 }

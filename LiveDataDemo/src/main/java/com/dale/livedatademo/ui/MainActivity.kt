@@ -1,20 +1,19 @@
 package com.dale.livedatademo.ui
 
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.dale.framework.ui.ABBaseActivity
 import com.dale.livedatademo.R
 import com.dale.livedatademo.model.TestViewModel
-import com.dale.livedatademo.model.TestViewModel2
-import com.dale.net.callback.NetObserver
-import com.dale.net.exception.ErrorMessage
-import com.dale.utils.ToastUtils
+import com.dale.livedatademo.ui.App.netLiveData
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : ABBaseActivity() {
 
+
+
     private var testViewModel: TestViewModel? = null
-    private lateinit var testViewMode2: TestViewModel2
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -22,46 +21,16 @@ class MainActivity : ABBaseActivity() {
 
     override fun createProvider() {
         testViewModel = ViewModelProvider(this).get(TestViewModel::class.java)
-        testViewMode2 = ViewModelProvider(this).get(TestViewModel2::class.java)
-        ViewModelProviders.of(this)
     }
 
     override fun initViewsAndEvents() {
-        testViewModel?.netLiveData?.observe(this, object : NetObserver<String>() {
-            override fun onLoading(show: Boolean) {
-                if (show) showProgressDialog() else dismissProgressDialog()
-            }
+        netLiveData?.observe(this,
+            Observer<String> { t -> Log.d("Dream", "11->$t") })
+        testViewModel?.getTestNetLiveData()
 
-            override fun onSuccess(t: String?) {
-                ToastUtils.showLong(t)
-            }
-
-            override fun onError(errorMessage: ErrorMessage?) {
-                ToastUtils.showLong(errorMessage?.message)
-            }
-
-        })
-
-        testViewMode2.netLiveData.observe(this, object : NetObserver<String>() {
-            override fun onLoading(show: Boolean) {
-                if (show) showProgressDialog() else dismissProgressDialog()
-            }
-
-            override fun onSuccess(t: String?) {
-                ToastUtils.showLong(t)
-            }
-
-            override fun onError(errorMessage: ErrorMessage?) {
-                ToastUtils.showLong(errorMessage?.message)
-            }
-
-        })
-
-//        tv_test.setOnClickListener{
-//            testViewModel?.getTestNetLiveData()
-//
-//            testViewMode2.getNetLiveData()
-//        }
+        tv_test.setOnClickListener{
+            goActivity(TestJavaActivity::class.java)
+        }
     }
 
 }
