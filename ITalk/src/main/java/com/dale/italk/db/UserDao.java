@@ -27,4 +27,7 @@ public interface UserDao extends BaseDao<User> {
 //
 //    @Query("SELECT * FROM user WHERE age > :minAge LIMIT 5")
 //    Cursor loadRawUsersOlderThan(int minAge);
+
+//    @Query("SELECT * FROM user WHERE userId = :userId")
+//    DataSource.Factory<Integer, User> sourceFactory(int userId);
 }

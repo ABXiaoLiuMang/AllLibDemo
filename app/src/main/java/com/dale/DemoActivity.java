@@ -334,7 +334,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         user.setName("辣妹子");
 
         UserDao dao = AppDatabase.get().userDao();
-        dao.insertItem(user);
+        dao.insert(user);
 
         List<User> users = dao.getItems();
         for (User u : users){
@@ -346,7 +346,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         phone.setPhone("13554254582");
 
         PhoneDao phoneDao = AppDatabase.get().phoneDao();
-        phoneDao.insertItem(phone);
+        phoneDao.insert(phone);
 
         List<Phone> phones = phoneDao.getItems();
         for (Phone p : phones){

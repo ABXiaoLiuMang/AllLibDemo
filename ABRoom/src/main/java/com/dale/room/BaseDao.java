@@ -3,21 +3,31 @@ package com.dale.room;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
+import java.util.Collection;
 import java.util.List;
 
 @Dao
 public interface BaseDao<T> {
-    @Insert
-    void insertItem(T item);//插入单条数据
+//    onConflict = OnConflictStrategy.REPLACE指定主键冲突时候的解决方式。直接替换。
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(T item);//插入单条数据
 
-    @Insert
-    void insertItems(List<T> items);//插入list数据
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(Collection<T> items);//插入list数据
 
     @Delete
-    void deleteItem(T item);//删除item
+    void delete(T item);//删除item
+
+    void delete(Collection<T> items);//删除item
 
     @Update
-    void updateItem(T item);//更新item
+    void update(T item);//更新item
+
+    @Update
+    void update(Collection<T> items);
 }
