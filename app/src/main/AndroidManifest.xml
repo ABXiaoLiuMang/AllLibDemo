@@ -69,7 +69,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.dale.kotlin.KotlinActivity" />
         <activity android:name="com.dale.worker_demo.WorkActivity" />
         <activity android:name="com.dale.push_demo.PushActivity" />
 
@@ -82,6 +81,7 @@
         <activity android:name="com.dale.emotion.AudioActivity" />
 
         <activity android:name="com.dale.net_demo.NetActivity" />
+        <activity android:name="com.dale.xweb.H5Activity" />
 
 
         <activity android:name="com.dale.zxing_demo.ZxingActivity" />

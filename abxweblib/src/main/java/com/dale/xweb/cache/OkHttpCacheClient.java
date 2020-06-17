@@ -4,9 +4,10 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.webkit.WebResourceResponse;
 
-import com.ty.xweb.interceptor.HttpCacheInterceptor;
-import com.ty.xweb.util.MimeTypeMapUtils;
-import com.ty.xweb.util.NetUtils;
+
+import com.dale.xweb.interceptor.HttpCacheInterceptor;
+import com.dale.xweb.util.MimeTypeMapUtils;
+import com.dale.xweb.util.NetUtils;
 
 import java.io.BufferedReader;
 import java.io.File;

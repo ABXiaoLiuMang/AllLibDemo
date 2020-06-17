@@ -5,7 +5,6 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.MutableContextWrapper;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.TextUtils;
@@ -25,6 +24,7 @@ import com.dale.xweb.webview.XWebViewCacheSDK;
 import com.dale.xweb.webview.XWebViewDefaultClient;
 import com.dale.xweb.webview.XWebViewPool;
 import com.just.agentweb.AgentWeb;
+import com.just.agentweb.WebChromeClient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -101,7 +101,9 @@ public class XWebDelegateImpl implements XWebDelegate {
     @Override
     public void onDestroy() {
         if (mAgentWeb != null) {
+            xWebChromeDefaultClient = null;
             mAgentWeb.getWebLifeCycle().onDestroy();
+            mAgentWeb = null;
         }
     }
 
@@ -113,21 +115,21 @@ public class XWebDelegateImpl implements XWebDelegate {
         //从缓存池中获取WebView 然后设置WebView，有复用
         //如果不调用setWebView就是用AgentWeb内部的 没有复用
 //        final XWebView webView = XWebViewPool.getInstance().getWebView();
-        final XWebView webView = new XWebView(new MutableContextWrapper(activity.getApplication()));
-//        final XWebView webView = new XWebView(activity);
-
+//        final XWebView webView = new XWebView(new MutableContextWrapper(activity.getApplication()));
+        XWebView webView = new XWebView(activity);
         webView.setOverScrollMode(OVER_SCROLL_NEVER);
         webView.setVerticalFadingEdgeEnabled(false);
         webView.setHorizontalFadingEdgeEnabled(false);
-        xWebChromeDefaultClient = new XWebChromeDefaultClient(activity) {
+        xWebChromeDefaultClient = new XWebChromeDefaultClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
             }
         };
+
         mAgentWeb = AgentWeb.with(activity)//传入Activity
                 .setAgentWebParent(viewGroup, 0, lp)
-                .setCustomIndicator(new XLoading(activity)) // 使用默认进度条
+                .closeIndicator()
                 .setWebView(webView) // 传入自己构造的webview比如说webview复用池里面的对象
                 .setWebChromeClient(xWebChromeDefaultClient)
                 .setMainFrameErrorView(errorLayout)
@@ -143,12 +145,14 @@ public class XWebDelegateImpl implements XWebDelegate {
                         loadingView.setVisibility(View.VISIBLE);
                     }
                 })
+
 //                .defaultProgressBarColor() // 使用默认进度条颜色
 //                .setReceivedTitleCallback(null) // 设置 Web 页面的 title 回调
                 .createAgentWeb()
                 .ready()
                 .go(url);
         return webView;
+
     }
 
 
@@ -159,7 +163,7 @@ public class XWebDelegateImpl implements XWebDelegate {
         webView.setHorizontalFadingEdgeEnabled(false);
         //index为0
 
-        xWebChromeDefaultClient = new XWebChromeDefaultClient(activity) {
+        xWebChromeDefaultClient = new XWebChromeDefaultClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
@@ -202,7 +206,7 @@ public class XWebDelegateImpl implements XWebDelegate {
         webView.setHorizontalFadingEdgeEnabled(false);
         //index为0 首次进来 重置
         isFirstLoading = true;
-        xWebChromeDefaultClient = new XWebChromeDefaultClient(activity) {
+        xWebChromeDefaultClient = new XWebChromeDefaultClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
@@ -240,8 +244,6 @@ public class XWebDelegateImpl implements XWebDelegate {
                 .ready().go(html);
 
         mAgentWeb.getUrlLoader().loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
-
-
         return webView;
     }
 
@@ -317,5 +319,23 @@ public class XWebDelegateImpl implements XWebDelegate {
 
         XWebViewCacheSDK.init(cacheConfig);
     }
+
+
+    private WebChromeClient mWebChromeClient = new WebChromeClient() {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (newProgress > 90) {
+//                mWebViewClient.onPageFinished(view, view.getUrl());
+//                xLoadingView.stop();
+            }
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            //设置标题
+        }
+    };
 }
 

@@ -1,14 +1,13 @@
 package com.dale.xweb.webview;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,10 +16,13 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.dale.constant.LibApplication;
+import com.dale.constant.PermissionConstants;
+import com.dale.utils.PermissionUtils;
+import com.dale.utils.ToastUtils;
+import com.dale.utils.TopActivityManager;
 import com.just.agentweb.WebChromeClient;
 
 import java.io.File;
@@ -41,14 +43,6 @@ public class XWebChromeDefaultClient extends WebChromeClient {
      * 相机request code
      */
     private static final int REQ_CAMERA = FILE_CHOOSER_RESULT_CODE + 2;
-    /**
-     * 相机权限request code
-     */
-    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = FILE_CHOOSER_RESULT_CODE + 4;
-    /**
-     * 存储卡权限request code
-     */
-    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = FILE_CHOOSER_RESULT_CODE + 5;
 
     /**
      * 图片路径
@@ -65,10 +59,10 @@ public class XWebChromeDefaultClient extends WebChromeClient {
      */
     private String compressPath = "";
 
-    private Activity mContext;
+    private Context mContext;
 
-    public XWebChromeDefaultClient(Activity context) {
-        mContext = context;
+    public XWebChromeDefaultClient() {
+        mContext = LibApplication.getApp();
     }
 
     // For Android 3.0+
@@ -103,7 +97,8 @@ public class XWebChromeDefaultClient extends WebChromeClient {
         if (!checkSdCard())
             return;
         String[] selectPicTypeStr = {"相机", "图库"};
-        new AlertDialog.Builder(mContext)
+        Activity activity =  TopActivityManager.getInstance().getCurActivity();
+        new AlertDialog.Builder(activity)
                 .setItems(selectPicTypeStr,
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -137,30 +132,36 @@ public class XWebChromeDefaultClient extends WebChromeClient {
      * 获取相机权限
      */
     private void obtainCameraPermission() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        PermissionUtils.permission(PermissionConstants.STORAGE, PermissionConstants.CAMERA)
+                .callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        openCamera();
+                    }
 
-            if (ActivityCompat.shouldShowRequestPermissionRationale(mContext, Manifest.permission.CAMERA)) {
-
-                Toast.makeText(mContext, "您已经拒绝过一次", Toast.LENGTH_SHORT).show();
-            }
-            ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE
-                    , Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
-        } else {//有权限直接调用系统相机拍照
-            openCamera();
-        }
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.showLong("请打开存储和相机权限");
+                    }
+                }).request();
     }
 
     /**
      * 获取存储权限
      */
     private void obtainStoragePermission() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSIONS_REQUEST_CODE);
-        } else {
-            openImageChooserActivity();
-        }
+        PermissionUtils.permission(PermissionConstants.STORAGE)
+                .callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        openImageChooserActivity();
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.showLong("请打开存储");
+                    }
+                }).request();
     }
 
     /**
@@ -170,8 +171,9 @@ public class XWebChromeDefaultClient extends WebChromeClient {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("image/*");
-        if (mContext != null) {
-            mContext.startActivityForResult(Intent.createChooser(i, "Image Chooser"), FILE_CHOOSER_RESULT_CODE);
+        Activity activity = TopActivityManager.getInstance().getCurActivity();
+        if (activity != null) {
+            activity.startActivityForResult(Intent.createChooser(i, "Image Chooser"), FILE_CHOOSER_RESULT_CODE);
         }
     }
 
@@ -187,7 +189,7 @@ public class XWebChromeDefaultClient extends WebChromeClient {
             file.mkdirs();
         }
         String imageName = System.currentTimeMillis() + ".jpg";
-        File imageFile = null;
+        File imageFile;
         try {
             imageFile = File.createTempFile(imageName, ".jpg", file);
         } catch (IOException e) {
@@ -198,16 +200,16 @@ public class XWebChromeDefaultClient extends WebChromeClient {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
-            String packageName = mContext.getPackageName();
-
-            cameraUri = FileProvider.getUriForFile(mContext, packageName + ".fileProvider", imageFile);
+            String authority = LibApplication.getApp().getPackageName() + ".utilcode.provider";
+            cameraUri = FileProvider.getUriForFile(mContext, authority, imageFile);
         } else {
             cameraUri = Uri.fromFile(imageFile);
         }
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
-        if (mContext != null) {
-            mContext.startActivityForResult(intent, REQ_CAMERA);
+        Activity activity = TopActivityManager.getInstance().getCurActivity();
+        if (activity != null) {
+            activity.startActivityForResult(intent, REQ_CAMERA);
         }
     }
 

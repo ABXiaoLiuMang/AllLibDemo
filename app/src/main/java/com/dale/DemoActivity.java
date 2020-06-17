@@ -31,11 +31,6 @@ import com.dale.location_demo.LocationActivity;
 import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
-import com.dale.room_demo.AppDatabase;
-import com.dale.room_demo.entity.Phone;
-import com.dale.room_demo.entity.PhoneDao;
-import com.dale.room_demo.entity.User;
-import com.dale.room_demo.entity.UserDao;
 import com.dale.stateview_demo.StateTestActivity;
 import com.dale.utils.LogUtils;
 import com.dale.utils.MMKVUtil;
@@ -45,6 +40,7 @@ import com.dale.utils.WeakHandler;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
+import com.dale.xweb.H5Activity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -141,6 +137,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("录音 实例");
         list.add("17 viewModel");
         list.add("TestShare");
+        list.add("H5Activity");
         listAdapter.setNewData(list);
     }
 
@@ -227,6 +224,9 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 18:
 //                    goActivity(TestShareViewActivity.class);
+                    break;
+                case 19:
+                    goActivity(H5Activity.class);
                     break;
             }
     }
@@ -329,28 +329,28 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
     }
 
     private void test(){
-        User user = new User();
-        user.setUserId("1000");
-        user.setName("辣妹子");
-
-        UserDao dao = AppDatabase.get().userDao();
-        dao.insert(user);
-
-        List<User> users = dao.getItems();
-        for (User u : users){
-            LogUtils.d("---------room--------------:" + u.toString());
-        }
-
-        Phone phone = new Phone();
-        phone.setName("罗纳尔多");
-        phone.setPhone("13554254582");
-
-        PhoneDao phoneDao = AppDatabase.get().phoneDao();
-        phoneDao.insert(phone);
-
-        List<Phone> phones = phoneDao.getItems();
-        for (Phone p : phones){
-            LogUtils.d("---------room--------------:" + p.toString());
-        }
+//        User user = new User();
+//        user.setUserId("1000");
+//        user.setName("辣妹子");
+//
+//        UserDao dao = AppDatabase.get().userDao();
+//        dao.insert(user);
+//
+//        List<User> users = dao.getItems();
+//        for (User u : users){
+//            LogUtils.d("---------room--------------:" + u.toString());
+//        }
+//
+//        Phone phone = new Phone();
+//        phone.setName("罗纳尔多");
+//        phone.setPhone("13554254582");
+//
+//        PhoneDao phoneDao = AppDatabase.get().phoneDao();
+//        phoneDao.insert(phone);
+//
+//        List<Phone> phones = phoneDao.getItems();
+//        for (Phone p : phones){
+//            LogUtils.d("---------room--------------:" + p.toString());
+//        }
     }
 }

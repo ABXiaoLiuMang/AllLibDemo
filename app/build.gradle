@@ -99,7 +99,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'net.jodah:typetools:0.4.0'
 
@@ -145,6 +145,7 @@ dependencies {
 
     implementation project(path: ':XFragmentLib')
     implementation project(path: ':xframework')
+    implementation project(path: ':abxweblib')
 
 
 
@@ -157,7 +158,7 @@ dependencies {
     implementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     implementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 
-    implementation 'com.airbnb.android:lottie:2.7.0'
+    implementation 'com.airbnb.android:lottie:3.0.0'
     implementation project(path: ':tasklib')
     implementation project(path: ':ABVideoPlayer')
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
@@ -165,32 +166,20 @@ dependencies {
 
 
     //数据库
-    implementation project(path: ':ABRoom')
-    implementation rootDependencies["room_runtime"]
-    implementation rootDependencies["room_rxjava2"]
-    annotationProcessor rootDependencies["room_compiler"]
+//    implementation project(path: ':ABRoom')
+//    implementation rootDependencies["room_runtime"]
+//    implementation rootDependencies["room_rxjava2"]
+//    annotationProcessor rootDependencies["room_compiler"]
 
-//    implementation rootDependencies["AB_Adapter"]
-//    implementation rootDependencies["AB_FrameWork"]
-//    implementation rootDependencies["AB_Location"]
-//    implementation rootDependencies["AB_NetX"]
-//    implementation rootDependencies["AB_Push"]
-//    implementation rootDependencies["AB_RefreshView"]
-//    implementation rootDependencies["AB_View"]
-//    implementation rootDependencies["AB_Zxing"]
-//    implementation rootDependencies["AB_ImagePicker"]
-//    implementation rootDependencies["AB_Pickerview"]
-//    implementation rootDependencies["AB_Xpopup"]
-//    implementation rootDependencies["AB_UtilsX"]
-//    implementation rootDependencies["AB_WebView"]
 
-    implementation "androidx.work:work-runtime:2.2.0"
+
+    implementation "androidx.work:work-runtime:2.3.4"
     implementation project(path: ':kotlinlib')
 
     //协程库
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'
 
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-rc01'
     implementation project(path: ':ABChat')
 
 //    implementation 'com.lovedise:permissiongen:0.0.6'

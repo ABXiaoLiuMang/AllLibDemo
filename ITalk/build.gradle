@@ -2,23 +2,38 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def customizeConfig = rootProject.ext.android //android配置
+def rootDependencies = rootProject.ext.dependencies //库依赖
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
+        signingConfigs {
+            config {
+                storeFile file("appkey.jks")
+                storePassword KEY_PASS
+                keyAlias ALIAS_NAME
+                keyPassword ALIAS_PASS
+            }
+        }
 
-    lintOptions {
-        abortOnError false
-        warning 'InvalidPackage'
-    }
+        compileSdkVersion customizeConfig.compileSdkVersion
+        buildToolsVersion customizeConfig.androidLibVersion
+
+        lintOptions {
+            abortOnError false
+            warning 'InvalidPackage'
+        }
+
 
     defaultConfig {
         applicationId "com.dale.italk"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion customizeConfig.minSdkVersion
+        targetSdkVersion customizeConfig.targetSdkVersion
+        multiDexEnabled true
+        versionCode appVersionCode as int
+        versionName appVersionName
         flavorDimensions "versionCode"
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {

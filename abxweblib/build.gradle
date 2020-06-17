@@ -1,10 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
-if ("true" == viewLib){
-    apply plugin: 'com.novoda.bintray-release'
-}
+//if ("true" == viewLib){
+//    apply plugin: 'com.novoda.bintray-release'
+//}
 
 def customizeConfig = rootProject.ext.android //android配置
 def rootDependencies = rootProject.ext.dependencies //库依赖
@@ -26,6 +24,12 @@ android {
         versionName appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
 
     }
 
@@ -53,19 +57,20 @@ dependencies {
     compileOnly rootDependencies["appcompat"]
     compileOnly rootDependencies["okhttp"]
     compileOnly project(path: ':XWebView')
+    compileOnly project(path: ':utilslib')
 
 }
 
 
-if ("true" == viewLib){
-    publish {
-        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
-        groupId = 'com.dale.x'  //jcenter上的路径
-        artifactId = 'xweb'  //项目名称
-        publishVersion = viewLib_version    //版本号
-        desc = 'AB_View'
-        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABView'
-        licences = 'Apache-2.0'
-    }
-}
+//if ("true" == viewLib){
+//    publish {
+//        userOrg = 'abxingxing'   //组织名称 organization 建议写用户名（bintray.com用户名）
+//        groupId = 'com.dale.x'  //jcenter上的路径
+//        artifactId = 'xweb'  //项目名称
+//        publishVersion = viewLib_version    //版本号
+//        desc = 'AB_View'
+//        website = 'https://github.com/ABXiaoLiuMang/AllLibDemo/tree/master/ABView'
+//        licences = 'Apache-2.0'
+//    }
+//}
 

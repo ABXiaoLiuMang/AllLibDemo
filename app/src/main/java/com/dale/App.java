@@ -5,35 +5,20 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;
 
-import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.bumptech.glide.Glide;
-import com.dale.emoji.LQREmotionKit;
 import com.dale.framework.util.ABApplication;
 import com.dale.location.LocationSdk;
 import com.dale.location_demo.MyOnLocationListener;
-import com.dale.net.NetSdk;
-import com.dale.push.PushSdk;
-import com.dale.room.IDBConfig;
-import com.dale.room.RoomSdk;
-import com.dale.room_demo.AppDatabase;
 import com.dale.stateview_demo.custom.GlobalAdapter;
 import com.dale.stateview_demo.state.Gloading;
-import com.dale.utils.AppUtil;
-import com.dale.utils.FileUtils;
 import com.dale.utils.LogUtils;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.dale.xweb.XWebViewManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.squareup.leakcanary.LeakCanary;
 import com.zbj.videoplayer.utils.VideoLogUtil;
-
-import org.xutils.x;
 
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
@@ -78,7 +63,8 @@ public class App extends ABApplication {
             LocationSdk.ins().setAllowFirst(true).setOnLocationListener(new MyOnLocationListener()).initSDK(this);
             InitializeService.start(this,"初始化放在线程中");
                       //xUtils3初始化
-            initDb();
+//            initDb();
+            initXWeb();
         }
 
 
@@ -123,31 +109,38 @@ public class App extends ABApplication {
     }
 
 
-    private void initDb(){
-//        数据库版本 1->2 user表格新增了age列
-        Migration migration_1_2 = new Migration(1,2) {
-            @Override
-            public void migrate(@NonNull SupportSQLiteDatabase database) {
-                database.execSQL("ALTER TABLE User ADD COLUMN age integer");
-            }
-        };
-
-        /**
-         * 数据库版本 2->3 新增book表格
-         */
-         Migration MIGRATION_2_3 = new Migration(2, 3) {
-            @Override
-            public void migrate(SupportSQLiteDatabase database) {
-                database.execSQL(
-                        "CREATE TABLE IF NOT EXISTS `book` (`uid` INTEGER PRIMARY KEY autoincrement, `name` TEXT , `userId` INTEGER, 'time' INTEGER)");
-            }
-        };
-
-        RoomSdk.ins()
-//                .setMigration(migration_1_2)
-//                .setMigration(MIGRATION_2_3)
-                .initSDK(this,AppDatabase.class);
+    //初始化XWeb
+    private void initXWeb() {
+        XWebViewManager.getInstance()
+                .setWebProcessName(this.getPackageName() + ":xweb")
+                .init(this);
     }
+
+//    private void initDb(){
+////        数据库版本 1->2 user表格新增了age列
+//        Migration migration_1_2 = new Migration(1,2) {
+//            @Override
+//            public void migrate(@NonNull SupportSQLiteDatabase database) {
+//                database.execSQL("ALTER TABLE User ADD COLUMN age integer");
+//            }
+//        };
+//
+//        /**
+//         * 数据库版本 2->3 新增book表格
+//         */
+//         Migration MIGRATION_2_3 = new Migration(2, 3) {
+//            @Override
+//            public void migrate(SupportSQLiteDatabase database) {
+//                database.execSQL(
+//                        "CREATE TABLE IF NOT EXISTS `book` (`uid` INTEGER PRIMARY KEY autoincrement, `name` TEXT , `userId` INTEGER, 'time' INTEGER)");
+//            }
+//        };
+//
+//        RoomSdk.ins()
+////                .setMigration(migration_1_2)
+////                .setMigration(MIGRATION_2_3)
+//                .initSDK(this,AppDatabase.class);
+//    }
 /****
  * https://pan.baidu.com/s/1YsosjGjup4CgM9McTwLVFg#list/path=%2F&parentPath=%2Fsharelink3232509500-50774254064225  百度网盘kotlin 教程
  *
