@@ -17,14 +17,12 @@ import com.dale.xweb.XWebViewManager;
 import com.dale.xweb.cache.CacheConfig;
 import com.dale.xweb.cache.CacheExtConfig;
 import com.dale.xweb.cache.CacheType;
-import com.dale.xweb.ui.XLoading;
 import com.dale.xweb.webview.XWebChromeDefaultClient;
 import com.dale.xweb.webview.XWebView;
 import com.dale.xweb.webview.XWebViewCacheSDK;
 import com.dale.xweb.webview.XWebViewDefaultClient;
 import com.dale.xweb.webview.XWebViewPool;
 import com.just.agentweb.AgentWeb;
-import com.just.agentweb.WebChromeClient;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -172,7 +170,7 @@ public class XWebDelegateImpl implements XWebDelegate {
 
         mAgentWeb = AgentWeb.with(activity)//传入Activity
                 .setAgentWebParent(viewGroup, 0, lp)
-                .setCustomIndicator(new XLoading(activity)) // 使用默认进度条
+                .closeIndicator()
                 .setWebView(webView) // 传入自己构造的webview比如说webview复用池里面的对象
                 .setMainFrameErrorView(errorLayout)
                 .setWebChromeClient(xWebChromeDefaultClient)
@@ -215,7 +213,7 @@ public class XWebDelegateImpl implements XWebDelegate {
 
         mAgentWeb = AgentWeb.with(activity)//传入Activity
                 .setAgentWebParent(viewGroup, 0, lp)
-                .setCustomIndicator(new XLoading(activity)) // 使用默认进度条
+                .closeIndicator()
                 .setWebView(webView) // 传入自己构造的webview比如说webview复用池里面的对象
                 .setWebChromeClient(xWebChromeDefaultClient)
                 .setWebViewClient(new XWebViewDefaultClient() {
@@ -319,23 +317,5 @@ public class XWebDelegateImpl implements XWebDelegate {
 
         XWebViewCacheSDK.init(cacheConfig);
     }
-
-
-    private WebChromeClient mWebChromeClient = new WebChromeClient() {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            super.onProgressChanged(view, newProgress);
-            if (newProgress > 90) {
-//                mWebViewClient.onPageFinished(view, view.getUrl());
-//                xLoadingView.stop();
-            }
-        }
-
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
-            super.onReceivedTitle(view, title);
-            //设置标题
-        }
-    };
 }
 

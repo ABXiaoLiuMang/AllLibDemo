@@ -25,7 +25,7 @@ public abstract class BaseAgentWebActivity extends ABBaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_h5;
+        return R.layout.activity_h5;
     }
 
 

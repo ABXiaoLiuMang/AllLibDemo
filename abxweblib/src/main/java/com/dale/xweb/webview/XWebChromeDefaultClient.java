@@ -159,7 +159,7 @@ public class XWebChromeDefaultClient extends WebChromeClient {
 
                     @Override
                     public void onDenied() {
-                        ToastUtils.showLong("请打开存储");
+                        ToastUtils.showLong("请打开存储权限");
                     }
                 }).request();
     }
@@ -222,8 +222,7 @@ public class XWebChromeDefaultClient extends WebChromeClient {
         boolean flag = Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED);
         if (!flag) {
-//            ToastUtil.showToast("请插入手机存储卡再使用本功能！");
-            Toast.makeText(mContext, "请插入手机存储卡再使用本功能！", Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast("请插入手机存储卡再使用本功能！");
         }
         return flag;
     }
