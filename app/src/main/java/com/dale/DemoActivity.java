@@ -1,6 +1,8 @@
 package com.dale;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -139,6 +141,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("TestShare");
         list.add("H5Activity");
         listAdapter.setNewData(list);
+
+
     }
 
     @Override
@@ -226,9 +230,19 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //                    goActivity(TestShareViewActivity.class);
                     break;
                 case 19:
-                    goActivity(H5Activity.class);
+//                    goActivity(H5Activity.class);
+                    gotest();
                     break;
             }
+    }
+
+    private void gotest(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("content://" + "tblccn"));
+        startActivity(intent);
     }
 
     @Override
