@@ -13,13 +13,13 @@ import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.request.RequestOptions;
-import com.dale.framework.R;
-import com.dale.utils.FileUtils;
-import com.dale.utils.StringUtils;
+import com.ty.utils.FileUtils;
+import com.ty.utils.StringUtils;
 
 import java.io.File;
 import java.io.InputStream;
+
+import okhttp3.OkHttpClient;
 
 @GlideModule
 public class ABGlideModule extends AppGlideModule {
@@ -59,6 +59,9 @@ public class ABGlideModule extends AppGlideModule {
 
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new ProgressInterceptor())
+                .build();
+        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(okHttpClient));
     }
 }

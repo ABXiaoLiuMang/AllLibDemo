@@ -30,4 +30,24 @@ public interface UserDao extends BaseDao<User> {
 
 //    @Query("SELECT * FROM user WHERE userId = :userId")
 //    DataSource.Factory<Integer, User> sourceFactory(int userId);
+
+
+
+
+
+
+//    @Query("SELECT * FROM message")
+//    List<Message> getMessage();
+//
+//    @Query("SELECT * FROM message WHERE sessionId = :sessionId")
+//    List<Message> getMessageBySessionId(String sessionId);
+//
+//    @Query("SELECT * FROM message WHERE sessionId = :sessionId")
+//    DataSource.Factory<Integer, Message> sourceFactory(int sessionId);
+//
+//    @Query("DELETE FROM message WHERE sessionId = :sessionId")
+//    void deleteBySessionId(String sessionId);
+//
+//    @Query("UPDATE message SET msgData = :msgData WHERE sessionId = :sessionId")
+//    void updateBySessionId(String msgData,String sessionId);
 }

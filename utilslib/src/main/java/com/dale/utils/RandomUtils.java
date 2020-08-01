@@ -202,7 +202,7 @@ public final class RandomUtils {
      * 获取两个数之间的随机数 ( 不含最大随机数, 需要 + 1)
      * @param min 最小随机数
      * @param max 最大随机数
-     * @return 随机介于 [min, max) 的区间值
+     * @return 随机介于 [min, mHax) 的区间值
      */
     public static int getRandom(final int min, final int max) {
         if (min > max) {

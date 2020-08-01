@@ -1,11 +1,15 @@
 package com.dale;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +17,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
@@ -46,6 +53,7 @@ import com.dale.xweb.H5Activity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +150,6 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         list.add("H5Activity");
         listAdapter.setNewData(list);
 
-
     }
 
     @Override
@@ -231,7 +238,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     break;
                 case 19:
 //                    goActivity(H5Activity.class);
-                    gotest();
+//                    gotest();
+                    test1();
                     break;
             }
     }
@@ -367,4 +375,75 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //            LogUtils.d("---------room--------------:" + p.toString());
 //        }
     }
+
+
+
+
+    private void test1(){
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+// intent.setType("image/*");//选择图片
+//intent.setType(“audio/*”); //选择音频
+//intent.setType("video/*"); //选择视频 （mp4 3gp 是android支持的视频格式）
+//intent.setType(“video/*;image/*”);//同时选择视频和图片
+//intent.setType("video/mp4");//仅仅mp4
+
+//intent.setType("*/*");//无类型限制
+//intent.addCategory(Intent.CATEGORY_OPENABLE);
+//startActivityForResult(intent, 1);
+
+
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.putExtra("oneshot", 0);
+//        intent.putExtra("configchange", 0);
+//        intent.setDataAndType(uri, "video/*");
+
+
+
+
+
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        //intent.setType(“image/*”);//选择图片
+        //intent.setType(“audio/*”); //选择音频
+        //intent.setType(“video/*”); //选择视频 （mp4 3gp 是android支持的视频格式）
+        //intent.setType(“video/*;image/*”);//同时选择视频和图片
+        intent.setType("*/*");//无类型限制
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, 1);
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (resultCode == Activity.RESULT_OK) {//是否选择，没选择就不会继续
+            Uri uri = data.getData();//得到uri，后面就是将uri转化成file的过程。
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
+//            Cursor actualimagecursor = getContentResolver().query(uri,proj,null,null,null);
+            int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            actualimagecursor.moveToFirst();
+            String img_path = actualimagecursor.getString(actual_image_column_index);
+            File file = new File(img_path);
+            Toast.makeText(DemoActivity.this, file.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    private void tesst(){
+//        Glide.with(view.context.applicationContext)
+//                .load(url)
+//                .apply(RequestOptions.bitmapTransform(CircleCrop()))
+//                .transition(DrawableTransitionOptions.withCrossFade(500))
+//                .into(view)
+//
+//        Glide.with(view.context.applicationContext)
+//                .load(url)
+//                .transition(DrawableTransitionOptions.withCrossFade(500))
+//                .into(view)
+    }
+
 }

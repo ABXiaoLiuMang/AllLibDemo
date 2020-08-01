@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.dale.framework.ui.ABBaseActivity;
-import com.dale.framework.view.StateLayout;
+import com.dale.framework.view.state.StateLayout;
 import com.dale.libdemo.R;
 import com.dale.utils.RandomUtils;
 import com.dale.utils.ToastUtils;

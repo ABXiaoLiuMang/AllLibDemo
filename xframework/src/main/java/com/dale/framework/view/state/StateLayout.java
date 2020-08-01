@@ -1,4 +1,4 @@
-package com.dale.framework.view;
+package com.dale.framework.view.state;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,8 +10,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+
 import com.dale.framework.R;
 import com.lxj.xpopup.widget.LoadingView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

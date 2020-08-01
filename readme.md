@@ -30,3 +30,65 @@ https://github.com/Blankj/Android_QA(面试)
 https://developer.android.google.cn/training/constraint-layout/motion-layout-examples 动画布局
 
 typora 看文档的编辑器
+
+
+
+
+
+
+
+- 图片下载进度监听
+
+        ProgressInterceptor.addListener(data.getImageUrl(), progress -> mProgressBar.setProgress(progress));
+
+
+
+        Glide.with(mContext).load(data.getImageUrl()).into(new CustomTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                mProgressBar.setVisibility(View.GONE);
+                ProgressInterceptor.removeListener(data.getImageUrl());
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) wechat_receiver_imgage.getLayoutParams();
+                int width;
+                int height;
+                if(resource.getIntrinsicWidth() * 4 <  resource.getIntrinsicHeight() * 3){
+                    width = SizeUtils.dp2px(120);
+                    height = width * resource.getIntrinsicHeight() / resource.getIntrinsicWidth();
+                }else {
+                    height =  SizeUtils.dp2px(160);
+                    width = height * resource.getIntrinsicWidth() / resource.getIntrinsicHeight();
+                }
+
+                lp.height = height;
+
+                if(width > ScreenUtils.getScreenWidth() * 0.65){
+                    width = (int) (ScreenUtils.getScreenWidth() * 0.65);
+                    lp.width = width;
+                    wechat_receiver_imgage.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                }else {
+                    wechat_receiver_imgage.setScaleType(ImageView.ScaleType.CENTER);
+                    lp.width = width;
+                }
+
+                wechat_receiver_imgage.setLayoutParams(lp);
+                wechat_receiver_imgage.setImageDrawable(resource);
+            }
+
+            @Override
+            public void onLoadCleared(@Nullable Drawable placeholder) {
+            }
+
+            @Override
+            public void onDestroy() {
+                super.onDestroy();
+                ProgressInterceptor.removeListener(data.getImageUrl());
+                mProgressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                super.onLoadFailed(errorDrawable);
+                ProgressInterceptor.removeListener(data.getImageUrl());
+            }
+
+        });

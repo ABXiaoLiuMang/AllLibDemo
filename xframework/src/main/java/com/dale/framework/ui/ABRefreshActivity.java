@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 import com.dale.framework.R;
 import com.dale.framework.util.GridItemDecoration;
-import com.dale.framework.view.StateLayout;
+import com.dale.framework.view.state.StateLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 

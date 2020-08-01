@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-/**
+/** 2002
  * create by Dale
  * create on 2019/5/17
  * description: IView  MVP 的 V 层
