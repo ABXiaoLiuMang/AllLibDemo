@@ -33,11 +33,11 @@ git clone ssh://software@172.16.0.30/~/yafeng/.git
 
 - 查看自己的用户名和邮箱地址：
 　　$ git config user.name
-　　$ git config user.emailcd..
+　　$ git config user.email
 - 修改自己的用户名和邮箱地址：
 　　$ git config --global user.name "xxx"
 　　$ git config --global user.email "xxx"
-
+admin-dale
 git branch -r       #查看远程所有分支
 git branch           #查看本地所有分支
 git branch -a       #查看本地及远程的所有分支，如下图
@@ -85,3 +85,6 @@ https://blog.csdn.net/xiaxiayige/article/details/80636091  nexus aar
 　　$ git config --global user.email "xxx"
 
 https://www.jianshu.com/p/cdd80dd15593  tag
+
+login and download:441623442@qq.com  admin@*@123456
+
