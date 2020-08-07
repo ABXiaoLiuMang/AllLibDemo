@@ -1,2 +1,3 @@
+include ':KT_FrameWork'
 include ':app', ':ABNetLib', ':ABFrameWork', ':ABLocation', ':ABPush', ':ABView', ':XWebView', ':PopupLib', ':imagelib', ':PickerviewLib', ':utilslib', ':ABBaseAdapter', ':ABRefreshView', ':ABZxing', ':xframework', ':XFragmentLib', ':tasklib', ':ABVideoPlayer', ':kotlinlib', ':abemoji', ':ABAudio', ':ABChat', ':ABRoom', ':ABTalk', ':ITalk', ':LiveDataNet', ':LiveDataFrameWork', ':LiveDataDemo', ':glidelib', ':abxweblib', ':IUtils'
 rootProject.name='AllLibDemo'

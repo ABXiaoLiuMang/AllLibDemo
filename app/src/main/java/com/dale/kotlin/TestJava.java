@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class TestJava {
 
+
     private void test() {
         TestArray testArray = new TestArray();
         List<String> list1 = testArray.getList1();
