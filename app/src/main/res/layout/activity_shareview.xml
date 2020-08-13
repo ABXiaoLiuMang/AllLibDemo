@@ -13,21 +13,6 @@
         app:rightTitle="删除"
         app:showRight="true" />
 
-    <com.dale.view.ShareView
-        android:id="@+id/shareView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:id="@+id/test"
-        />
-    <com.dale.view.XRTextView
-        android:id="@+id/codeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="http://01.minipic.eastday.com/20161229/20161229105231_a71df75a6b5be4281151b54b2bbd7362_4.jpeg"
-        />
 
 
 <!--    <com.dale.view.ShareImageView-->
