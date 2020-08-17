@@ -88,3 +88,30 @@ https://www.jianshu.com/p/cdd80dd15593  tag
 
 login and download:441623442@qq.com  admin@*@123456
 
+重复输入用户名解决方法： git config --global credential.helper store  然后第一次提交会输入，之后在提交就不会在输入了
+
++项目迁移
+我们的目标是把代码整体从Coding迁移到自建的Gitlab服务器，并保留所有分支和Tags记录。
+
+1. clone旧项目到本地目录
+git clone git@git.coding.net:username/x-server.git
+2. 本地目录添加新的远程主机地址
+git remote add gitlab git@gitlab.bmkp.xx:xx_200/x-server.git
+上面的命令添加了一个名为gitlab的主机地址。
+
+3. 推送master到新的仓库
+git push -u gitlab master
+上面命令将本地的master分支推送到gitlab主机，同时指定gitlab为默认主机，后面就可以不加任何参数使用git push了。
+
+4. 推送所有分支
+推送前先用git branch -a查看所有远程分支，然后分别checkout到本地。
+
+git checkout -b dev origin/dev
+上述命令是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支。
+
+最后执行命令推送全部分支。
+
+git push --all gitlab
+5. 推送所有Tag
+
+git push gitlab --tags
