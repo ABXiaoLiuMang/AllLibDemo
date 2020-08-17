@@ -26,6 +26,11 @@ public class MarqueAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         TextView scrollView = helper.getView(R.id.tv_scroll_content);
         scrollView.setText((helper.getLayoutPosition()%originList.size() + 1) +"、" +item);
         scrollView.setPadding(ScreenUtils.getScreenWidth() / 4, 0, 0, 0);
+//        test
+//        test
+//        test
+//        test
+
     }
 
     @Override
