@@ -272,6 +272,12 @@ public class SupportFragment extends Fragment implements ISupportFragment {
      * @param containerId 容器id
      * @param toFragment  目标Fragment
      */
+    /**
+     * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
+     *
+     * @param containerId 容器id
+     * @param toFragment  目标Fragment
+     */
     public void loadRootFragment(int containerId, ISupportFragment toFragment) {
         mDelegate.loadRootFragment(containerId, toFragment);
     }
@@ -306,59 +312,60 @@ public class SupportFragment extends Fragment implements ISupportFragment {
         mDelegate.showHideFragment(showFragment, hideFragment);
     }
 
-    /**
-     * 启动新的Fragment，并能接收到新Fragment的数据返回
-     * @param toClass
-     */
-    public void start(Class<? extends ISupportFragment> toClass) {
-        mDelegate.start(getFragmentByCls(toClass));
-    }
-
-    public void start(Class<? extends ISupportFragment> toClass, Bundle bundle) {
-        mDelegate.start(getFragmentByCls(toClass,bundle));
+    public void start(ISupportFragment toFragment) {
+        mDelegate.start(toFragment);
     }
 
     /**
-     * 启动新的Fragment，并能接收到新Fragment的数据返回
      * @param launchMode Similar to Activity's LaunchMode.
      */
-    public void start(Class<? extends ISupportFragment> toClass, @LaunchMode int launchMode) {
-        mDelegate.start(getFragmentByCls(toClass), launchMode);
-    }
-
-    public void start(Class<? extends ISupportFragment> toClass,  Bundle bundle,@LaunchMode int launchMode) {
-        mDelegate.start(getFragmentByCls(toClass,bundle), launchMode);
+    public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
+        mDelegate.start(toFragment, launchMode);
     }
 
     /**
-     * 启动新的Fragment，并能接收到新Fragment的数据返回
+     * Launch an fragment for which you would like a result when it poped.
      */
-    public void startForResult(Class<? extends ISupportFragment> toClass, int requestCode) {
-        mDelegate.startForResult(getFragmentByCls(toClass), requestCode);
-    }
-    public void startForResult(Class<? extends ISupportFragment> toClass,Bundle bundle, int requestCode) {
-        mDelegate.startForResult(getFragmentByCls(toClass,bundle), requestCode);
+    public void startForResult(ISupportFragment toFragment, int requestCode) {
+        mDelegate.startForResult(toFragment, requestCode);
     }
 
     /**
-     * 启动目标Fragment，并关闭当前Fragment；不要尝试pop()+start()，动画会有问题
+     * Start the target Fragment and pop itself
      */
-    public void startWithPop(Class<? extends ISupportFragment> toClass) {
-        mDelegate.startWithPop(getFragmentByCls(toClass));
-    }
-    public void startWithPop(Class<? extends ISupportFragment> toClass,Bundle bundle) {
-        mDelegate.startWithPop(getFragmentByCls(toClass,bundle));
+    public void startWithPop(ISupportFragment toFragment) {
+        mDelegate.startWithPop(toFragment);
     }
 
     /**
-     * 当前Fragment出栈(在当前Fragment所在栈内pop)
+     * @see #popTo(Class, boolean)
+     * +
+     * @see #start(ISupportFragment)
      */
+    public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
+    }
+
+
+    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
+        mDelegate.replaceFragment(toFragment, addToBackStack);
+    }
+
     public void pop() {
         mDelegate.pop();
     }
 
+    /**
+     * Pop the child fragment.
+     */
+    public void popChild() {
+        mDelegate.popChild();
+    }
 
     /**
+     * Pop the last fragment transition from the manager's fragment
+     * back stack.
+     * <p>
      * 出栈到目标fragment
      *
      * @param targetFragmentClass   目标fragment
@@ -369,31 +376,58 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     }
 
     /**
+     * If you want to begin another FragmentTransaction immediately after popTo(), use this method.
+     * 如果你想在出栈后, 立刻进行FragmentTransaction操作，请使用该方法
+     */
+    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        mDelegate.popToChild(targetFragmentClass, includeTargetFragment);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+    public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    /**
+     * 得到位于栈顶Fragment
+     */
+    public ISupportFragment getTopFragment() {
+        return SupportHelper.getTopFragment(getFragmentManager());
+    }
+
+    public ISupportFragment getTopChildFragment() {
+        return SupportHelper.getTopFragment(getChildFragmentManager());
+    }
+
+    /**
+     * @return 位于当前Fragment的前一个Fragment
+     */
+    public ISupportFragment getPreFragment() {
+        return SupportHelper.getPreFragment(this);
+    }
+
+    /**
      * 获取栈内的fragment对象
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getFragmentManager(), fragmentClass);
     }
 
-    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass,Bundle bundle){
-        try{
-            String stringClass = toClass.getCanonicalName();
-            Class<?> fClass = Class.forName(stringClass);
-            Object instance = fClass.newInstance();
-            if (instance instanceof ISupportFragment){
-                Fragment fragment = (Fragment)instance;
-                if (bundle != null){
-                    fragment.setArguments(bundle);
-                }
-                return (ISupportFragment) fragment;
-            }
-        }catch (Exception e){
-            Log.e("Dream","跳转Fragment获取错误");
-        }
-       return null;
-    }
-
-    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass){
-         return getFragmentByCls(toClass,null);
+    /**
+     * 获取栈内的fragment对象
+     */
+    public <T extends ISupportFragment> T findChildFragment(Class<T> fragmentClass) {
+        return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
     }
 }

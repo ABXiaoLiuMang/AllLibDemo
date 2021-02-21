@@ -1,19 +1,12 @@
 package com.dale.net;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.collection.ArrayMap;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
-import com.dale.net.bean.DataType;
-import com.dale.net.bean.LiveResult;
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.callback.OnCallBack;
-import com.dale.net.exception.ErrorMessage;
 
 import java.io.File;
 
@@ -31,7 +24,6 @@ public class RequestBuilder<T> implements NetCall<T> {
     public String baseUrl;
     public MutableLiveData<Integer> netLiveData;
     MediaType mMediaType;
-    LifecycleOwner owner;
 
 
     RequestBuilder(ServiceMethod<T, ?> serviceMethod) {
@@ -72,6 +64,11 @@ public class RequestBuilder<T> implements NetCall<T> {
         allStringParams.put(key, value);
         return this;
     }
+    @Override
+    public NetCall<T> params(String key, int value) {
+        allStringParams.put(key, String.valueOf(value));
+        return this;
+    }
 
 
     @Override
@@ -93,40 +90,21 @@ public class RequestBuilder<T> implements NetCall<T> {
         return this;
     }
 
+
     @Override
-    public NetCall<T> send(final OnCallBack<T> baseCallBack) {
-        final NetLiveData<T> netLiveData = new NetLiveData<>();
-        Observer<LiveResult<T>> observer = new Observer<LiveResult<T>>() {
-            @Override
-            public void onChanged(LiveResult<T> t) {
-                if(t.type == DataType.SUCCESS){
-                    baseCallBack.onSuccess(t.data);
-                }else {
-                    baseCallBack.onError(new ErrorMessage(t.getErrorCode(),t.getErrorMessage()));
-                }
-            }
-        };
-        if(owner == null){
-            netLiveData.observeForever(observer);
-            Log.w(Constant.LOG_TAG,"请调用addLifecycleOwner以便生命周期监听");
-        }else{
-            netLiveData.observe(owner,observer);
-        }
-        send(netLiveData);
+    public NetCall<T> asJSONType() {
+        mMediaType = MediaType.parse("application/json; charset=utf-8");
+        operas = allStringParams;
         return this;
     }
 
     @Override
     public NetCall<T> send(NetLiveData<T> netLiveData) {
+        netLiveData.postLoading();
         new Request<>(this).send(netLiveData);
         return this;
     }
 
-    @Override
-    public NetCall<T> asLife(LifecycleOwner owner) {
-        this.owner = owner;
-        return this;
-    }
 
     @Override
     public RequestBuilder<T> addUploadListener( @NonNull final MutableLiveData<Integer> netLiveData) {

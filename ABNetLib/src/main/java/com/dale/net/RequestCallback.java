@@ -1,8 +1,9 @@
 package com.dale.net;
 
+import android.util.Log;
+
 import com.dale.net.bean.NetLiveData;
 import com.dale.net.callback.XEntity;
-import com.dale.net.exception.ErrorMessage;
 import com.dale.net.utils.JsonUtils;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class RequestCallback<T> implements Callback {
 
     @Override
     public void onFailure(Call call, IOException e) {
+        Log.d(Constant.LOG_TAG,e.getMessage());
         createErrorMessage(REQUEST_ERROR_CODE,e.getMessage());
     }
 
@@ -70,14 +72,16 @@ public class RequestCallback<T> implements Callback {
                 }
 
             }else{
+                Log.d(Constant.LOG_TAG,"请求失败 : code:" + response.code());
                 createErrorMessage(response.code(), "请求失败");
             }
         }else{
+            Log.d(Constant.LOG_TAG,"请求失败 :response body 为空");
             createErrorMessage(Constant.RESPONSE_BODY_EMPTY,"response body 为空");
         }
     }
 
     private void createErrorMessage(int code, String message) {
-        netLiveData.postError(new ErrorMessage(code, message));
+        netLiveData.postError(code, message);
     }
 }

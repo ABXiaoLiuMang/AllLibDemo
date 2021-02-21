@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.dale.net.bean.NetLiveData;
 import com.dale.net.callback.ProgressListener;
-import com.dale.net.exception.ErrorMessage;
 import com.dale.net.manager.RequestManager;
 import com.dale.net.request.UploadRequestBody;
 import com.dale.net.utils.JsonUtils;
@@ -37,8 +36,7 @@ public class Request<T> {
 
     public void send(NetLiveData<T> netLiveData) {
         if (!Utils.isAvailable(NetSdk.getContext())) {
-            ErrorMessage errorMessage = new ErrorMessage(Constant.NET_ERROR_CODE, "网络异常");
-            netLiveData.postError(errorMessage);
+            netLiveData.postError(Constant.NET_ERROR_CODE, "网络异常");
             return;
         }
 
@@ -75,7 +73,6 @@ public class Request<T> {
 
     }
 
-
     private String getUrl() {
         if (requestBuilder.url == null) {
             requestBuilder.url = "";
@@ -86,16 +83,13 @@ public class Request<T> {
 
     private String getBaseUrl(NetLiveData<T> netLiveData) {
         String baseUrl = requestBuilder.baseUrl;
-        ErrorMessage errorMessage;
         if (TextUtils.isEmpty(baseUrl)) {
-            errorMessage = new ErrorMessage(Constant.REQUEST_ERROR_CODE, "baseUrl为空");
-            netLiveData.postError(errorMessage);
+            netLiveData.postError(Constant.REQUEST_ERROR_CODE, "baseUrl为空");
             return "";
         }
 
         if (TextUtils.isEmpty(baseUrl) || !baseUrl.startsWith("http")) {
-            errorMessage = new ErrorMessage(Constant.REQUEST_ERROR_CODE, "不支持非http协议请求");
-            netLiveData.postError(errorMessage);
+            netLiveData.postError(Constant.REQUEST_ERROR_CODE, "不支持非http协议请求");
             return "";
         }
         return baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";

@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer;
 
 import com.dale.net.bean.DataType;
 import com.dale.net.bean.LiveResult;
-import com.dale.net.exception.ErrorMessage;
 
 public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
     @Override
@@ -14,10 +13,15 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
         }
         switch (result.type) {
             case DataType.SUCCESS:
+                onLoading(false);
                 onSuccess(result.data);
                 break;
+            case DataType.LOADING:
+                onLoading(true);
+                break;
             case DataType.ERROR:
-                onError(result.errorMessage);
+                onLoading(false);
+                onError(result.code,result.message);
                 break;
             default:
                 throw new NullPointerException("事件类型找不到");
@@ -26,5 +30,8 @@ public abstract class NetObserver<T> implements Observer<LiveResult<T>> {
 
     protected abstract void onSuccess(T t);
 
-    protected abstract void onError(ErrorMessage errorMessage);
+    protected void onLoading(boolean show){
+    }
+
+    protected abstract void onError(int code,String message);
 }

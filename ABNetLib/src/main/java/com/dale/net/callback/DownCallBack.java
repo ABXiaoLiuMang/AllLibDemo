@@ -7,8 +7,11 @@ import java.io.File;
  * create on 2019/7/14
  * description: 文件下载回调
  */
-public interface DownCallBack extends OnCallBack<File> {
+public interface DownCallBack{
+
+     void onSuccess(File file);
 
      void onProgress(Integer integer);
 
+     void onError(String errorMessage);
 }

@@ -3,8 +3,6 @@ package com.dale.net.bean;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
-import com.dale.net.exception.ErrorMessage;
-
 public class NetLiveData<T> extends LiveData<LiveResult<T>> {
     /**
      * 请求成功的设值
@@ -32,6 +30,7 @@ public class NetLiveData<T> extends LiveData<LiveResult<T>> {
         result.setData(value);
         super.setValue(result);
     }
+
 
     /**
      * loading
@@ -64,12 +63,12 @@ public class NetLiveData<T> extends LiveData<LiveResult<T>> {
      * 请求异常的设值
      * 子线程时调用 此方法
      */
-    public void postError(ErrorMessage errorMessage) {
+    public void postError(int code,String message) {
         LiveResult<T> result = getValue();
         if (result == null) {
             result = new LiveResult<>();
         }
-        result.setError(errorMessage);
+        result.setError(code,message);
         super.postValue(result);
     }
 
@@ -79,12 +78,12 @@ public class NetLiveData<T> extends LiveData<LiveResult<T>> {
      * 请求异常的设值
      * 主线程时调用此方法
      */
-    public void setError(ErrorMessage errorMessage) {
+    public void setError(int code,String message) {
         LiveResult<T> result = getValue();
         if (result == null) {
             result = new LiveResult<>();
         }
-        result.setError(errorMessage);
+        result.setError(code,message);
         super.setValue(result);
     }
 

@@ -11,6 +11,7 @@ android签名 ->SHA256就是
 
 
 - 注册地址https://bintray.com/signup/oss
+- 登陆地址https://bintray.com/login?forwardedFrom=%2Fsignup%2Foss  name:daleyangbo  pass:woaiqin2004
 - git 代码管理邮箱：441623442@qq.com （密码：441623442@qq.com）
 - 邮箱登录：abxingxing@gmail.com（上传代码用这个->谷歌登录）
 - key:dd9580acfcc6ff298afedc55df7c06123e3eaadc

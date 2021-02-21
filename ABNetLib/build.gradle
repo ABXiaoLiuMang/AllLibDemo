@@ -47,6 +47,7 @@ dependencies {
     compileOnly rootDependencies["appcompat"]
     compileOnly rootDependencies["okhttp"]
     compileOnly rootDependencies["Gson"]
+    compileOnly project(path: ':utilslib')
 
 }
 

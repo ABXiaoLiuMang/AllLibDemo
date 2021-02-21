@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer;
 
 import com.dale.net.bean.DownloadRequestBuilder;
 import com.dale.net.callback.DownCallBack;
-import com.dale.net.exception.ErrorMessage;
 import com.dale.net.utils.HttpLogger;
 import com.dale.net.utils.Utils;
 
@@ -62,7 +61,7 @@ public class DownloadRequest {
     public void send(final DownCallBack downCallBack) {
         final MutableLiveData<File> succLiveData = new MutableLiveData<>();
         final MutableLiveData<Integer> progressLiveData = new MutableLiveData<>();
-        final MutableLiveData<ErrorMessage> errLiveData = new MutableLiveData<>();
+        final MutableLiveData<String> errLiveData = new MutableLiveData<>();
         Observer<File> succObserver = new Observer<File>() {
             @Override
             public void onChanged(File t) {
@@ -75,9 +74,9 @@ public class DownloadRequest {
                 downCallBack.onProgress(integer);
             }
         };
-        Observer<ErrorMessage> errObserver = new Observer<ErrorMessage>() {
+        Observer<String> errObserver = new Observer<String>() {
             @Override
-            public void onChanged(ErrorMessage errorMessage) {
+            public void onChanged(String errorMessage) {
                 downCallBack.onError(errorMessage);
             }
         };
@@ -85,8 +84,7 @@ public class DownloadRequest {
         progressLiveData.observeForever(progressObserver);
         errLiveData.observeForever(errObserver);
         if (!Utils.isAvailable(NetSdk.getContext())) {
-            ErrorMessage errorMessage = new ErrorMessage(Constant.NET_ERROR_CODE, "网络异常");
-            errLiveData.postValue(errorMessage);
+            errLiveData.postValue("网络异常");
             return;
         }
         if (TextUtils.isEmpty(savePath)) {
@@ -118,23 +116,23 @@ public class DownloadRequest {
         mCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                errLiveData.postValue(new ErrorMessage(REQUEST_ERROR_CODE, e.getMessage()));
+                errLiveData.postValue(e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                if(response == null){
-                   errLiveData.postValue(new ErrorMessage(REQUEST_ERROR_CODE, "请求异常"));
+                   errLiveData.postValue("请求异常");
                }else{
                    if(!response.isSuccessful()){
-                       errLiveData.postValue(new ErrorMessage(response.code(), "请求异常"));
+                       errLiveData.postValue("请求异常");
                    }else {
                        File dir = new File(savePath);
                        if (!dir.exists()) {
                            boolean mkdirs = dir.mkdirs();
                            if (!mkdirs) {
                                String errMsg = String.format("创建%s文件失败", savePath);
-                               errLiveData.postValue(new ErrorMessage(REQUEST_FILE_CODE, errMsg));
+                               errLiveData.postValue(errMsg);
                            }
                        }
                        File file = new File(dir, fileName);

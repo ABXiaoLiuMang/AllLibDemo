@@ -17,7 +17,6 @@ import com.dale.net.bean.DownloadRequestBuilder;
 import com.dale.net.bean.NetLiveData;
 import com.dale.net.callback.DownCallBack;
 import com.dale.net.callback.NetObserver;
-import com.dale.net.callback.OnCallBack;
 import com.dale.net.exception.ErrorMessage;
 import com.dale.net.utils.JsonUtils;
 import com.dale.net_demo.bean.BaseEntity;

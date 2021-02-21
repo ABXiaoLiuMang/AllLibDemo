@@ -168,55 +168,66 @@ public class SupportActivity extends AppCompatActivity implements ISupportActivi
     }
 
     /**
-     * 启动新的Fragment
+     * It is recommended to use {@link SupportFragment(ISupportFragment)}.
      */
-    public void start(Class<? extends ISupportFragment> toClass) {
-        mDelegate.start(getFragmentByCls(toClass));
-    }
-    public void start(Class<? extends ISupportFragment> toClass, Bundle bundle) {
-        mDelegate.start(getFragmentByCls(toClass,bundle));
+    public void start(ISupportFragment toFragment) {
+        mDelegate.start(toFragment);
     }
 
     /**
-     * 以某种启动模式，启动新的Fragment
+     * It is recommended to use {@link SupportFragment(ISupportFragment, int)}.
      *
      * @param launchMode Similar to Activity's LaunchMode.
      */
-    public void start(Class<? extends ISupportFragment> toClass, @ISupportFragment.LaunchMode int launchMode) {
-        mDelegate.start(getFragmentByCls(toClass), launchMode);
-    }
-    public void start(Class<? extends ISupportFragment> toClass, Bundle bundle, @ISupportFragment.LaunchMode int launchMode) {
-        mDelegate.start(getFragmentByCls(toClass,bundle), launchMode);
+    public void start(ISupportFragment toFragment, @ISupportFragment.LaunchMode int launchMode) {
+        mDelegate.start(toFragment, launchMode);
     }
 
     /**
-     * 启动新的Fragment，并能接收到新Fragment的数据返回
+     * It is recommended to use {@link SupportFragment(ISupportFragment, int)}.
+     * Launch an fragment for which you would like a result when it poped.
      */
-    public void startForResult(Class<? extends ISupportFragment> toClass, int requestCode) {
-        mDelegate.startForResult(getFragmentByCls(toClass), requestCode);
-    }
-    public void startForResult(Class<? extends ISupportFragment> toClass, Bundle bundle, int requestCode) {
-        mDelegate.startForResult(getFragmentByCls(toClass,bundle), requestCode);
+    public void startForResult(ISupportFragment toFragment, int requestCode) {
+        mDelegate.startForResult(toFragment, requestCode);
     }
 
     /**
-     * 启动目标Fragment，并关闭当前Fragment；不要尝试pop()+start()，动画会有问题
+     * It is recommended to use {@link SupportFragment(ISupportFragment)}.
+     * Start the target Fragment and pop itself
      */
-    public void startWithPop(Class<? extends ISupportFragment> toClass) {
-        mDelegate.startWithPop(getFragmentByCls(toClass));
-    }
-    public void startWithPop(Class<? extends ISupportFragment> toClass, Bundle bundle) {
-        mDelegate.startWithPop(getFragmentByCls(toClass,bundle));
+    public void startWithPop(ISupportFragment toFragment) {
+        mDelegate.startWithPop(toFragment);
     }
 
     /**
-     * 当前Fragment出栈(在当前Fragment所在栈内pop)
+     * It is recommended to use {@link SupportFragment(ISupportFragment, Class, boolean)}.
+     *
+     * @see #popTo(Class, boolean)
+     * +
+     * @see #start(ISupportFragment)
+     */
+    public void startWithPopTo(ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
+    }
+
+    /**
+     * It is recommended to use {@link SupportFragment(ISupportFragment, boolean)}.
+     */
+    public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
+        mDelegate.replaceFragment(toFragment, addToBackStack);
+    }
+
+    /**
+     * Pop the fragment.
      */
     public void pop() {
         mDelegate.pop();
     }
 
     /**
+     * Pop the last fragment transition from the manager's fragment
+     * back stack.
+     * <p>
      * 出栈到目标fragment
      *
      * @param targetFragmentClass   目标fragment
@@ -227,32 +238,37 @@ public class SupportActivity extends AppCompatActivity implements ISupportActivi
     }
 
     /**
+     * If you want to begin another FragmentTransaction immediately after popTo(), use this method.
+     * 如果你想在出栈后, 立刻进行FragmentTransaction操作，请使用该方法
+     */
+    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
+    public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    /**
+     * 当Fragment根布局 没有 设定background属性时,
+     * Fragmentation默认使用Theme的android:windowbackground作为Fragment的背景,
+     * 可以通过该方法改变其内所有Fragment的默认背景。
+     */
+    public void setDefaultFragmentBackground(@DrawableRes int backgroundRes) {
+        mDelegate.setDefaultFragmentBackground(backgroundRes);
+    }
+
+    /**
+     * 得到位于栈顶Fragment
+     */
+    public ISupportFragment getTopFragment() {
+        return SupportHelper.getTopFragment(getSupportFragmentManager());
+    }
+
+    /**
      * 获取栈内的fragment对象
      */
     public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
         return SupportHelper.findFragment(getSupportFragmentManager(), fragmentClass);
-    }
-
-
-    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass,Bundle bundle){
-        try{
-            String stringClass = toClass.getCanonicalName();
-            Class<?> fClass = Class.forName(stringClass);
-            Object instance = fClass.newInstance();
-            if (instance instanceof ISupportFragment){
-                Fragment fragment = (Fragment)instance;
-                if (bundle != null){
-                    fragment.setArguments(bundle);
-                }
-                return (ISupportFragment) fragment;
-            }
-        }catch (Exception e){
-            Log.e("Dream","跳转Fragment获取错误");
-        }
-        return null;
-    }
-
-    private ISupportFragment getFragmentByCls(Class<? extends ISupportFragment> toClass){
-        return getFragmentByCls(toClass,null);
     }
 }

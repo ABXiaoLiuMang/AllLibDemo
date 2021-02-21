@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.dale.net.Constant;
-import com.dale.net.NetSdk;
 
 import org.json.JSONArray;
 import org.json.JSONException;

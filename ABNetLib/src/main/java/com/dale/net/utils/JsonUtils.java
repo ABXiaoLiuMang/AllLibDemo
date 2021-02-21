@@ -2,6 +2,7 @@ package com.dale.net.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -15,12 +16,13 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JsonUtils {
 
-    static class Json{
-        static final Gson GSON = new GsonBuilder()
+    public static class Json{
+        public static final Gson GSON = new GsonBuilder()
                 .registerTypeAdapter(String.class, new StringAdapter())
                 .registerTypeAdapter(Integer.class, new IntegerDefault0Adapter())
                 .registerTypeAdapter(Double.class, new DoubleDefault0Adapter())
@@ -89,6 +91,8 @@ public class JsonUtils {
             return null;
         }
     }
+
+
 
     /**
      * 当Json数据不只包含数组还存在其他参数时，如果只需要json中的某一段数据，需要借助TypeToken将期望解析成的数据类型传入到fromJson()方法中.

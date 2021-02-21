@@ -1,12 +1,9 @@
 package com.dale.net;
 
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.dale.net.bean.NetLiveData;
-import com.dale.net.callback.OnCallBack;
 
 import java.io.File;
 
@@ -39,6 +36,13 @@ public interface NetCall<T> {
      */
     NetCall<T> params(String key, String value);
 
+    /**
+     * 使用key-value的方式请求网络数据,可以重读调用继续添加数据
+     * @param key 请求的key
+     * @param value 请求的value
+     */
+    NetCall<T> params(String key, int value);
+
 
     /**
      * 为这个请求单独配置baseUrl.
@@ -58,15 +62,9 @@ public interface NetCall<T> {
     NetCall<T> mediaType(MediaType mediaType);
 
     /**
-     * 为请求设置生命周期
-     * @param owner owner
+     * 设置为object参数,并且将params的参数添加到 params中
      */
-    NetCall<T> asLife(LifecycleOwner owner);
-
-    /**
-     * @param baseCallBack baseCallBack
-     */
-    NetCall<T> send(OnCallBack<T> baseCallBack);
+    NetCall<T> asJSONType();
 
     /**
      * @param netLiveData netLiveData

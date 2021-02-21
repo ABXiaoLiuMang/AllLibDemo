@@ -4,7 +4,6 @@ import com.dale.net.NetCall;
 import com.dale.net.utils.Utils;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 
