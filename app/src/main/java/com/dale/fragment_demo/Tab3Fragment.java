@@ -3,7 +3,6 @@ package com.dale.fragment_demo;
 import android.view.View;
 import android.widget.TextView;
 
-import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework.view.TitleBar;
 import com.dale.libdemo.R;
 import com.dale.utils.ToastUtils;

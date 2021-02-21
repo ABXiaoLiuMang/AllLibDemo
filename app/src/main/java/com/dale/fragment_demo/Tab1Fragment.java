@@ -3,7 +3,6 @@ package com.dale.fragment_demo;
 import android.os.Bundle;
 import android.view.View;
 
-import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework.view.TitleBar;
 import com.dale.framework_demo.LiveDataManager;
 import com.dale.framework_demo.ui.OtherContract;

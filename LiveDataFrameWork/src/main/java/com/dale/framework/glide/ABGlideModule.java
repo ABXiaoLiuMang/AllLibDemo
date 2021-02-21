@@ -13,8 +13,8 @@ import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.module.AppGlideModule;
-import com.ty.utils.FileUtils;
-import com.ty.utils.StringUtils;
+import com.dale.utils.FileUtils;
+import com.dale.utils.StringUtils;
 
 import java.io.File;
 import java.io.InputStream;

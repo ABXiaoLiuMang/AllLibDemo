@@ -6,10 +6,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.dale.framework.tab.ABMainTabFragment;
-import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework.tab.MainTab;
 import com.dale.libdemo.R;
-import com.dale.log.LogUtils;
 
 public class MainTabFragment extends ABMainTabFragment {
 

@@ -2,7 +2,6 @@ package com.dale.fragment_demo;
 
 import android.widget.TextView;
 
-import com.dale.framework.tab.ABTabFragment;
 import com.dale.framework_demo.LiveDataManager;
 import com.dale.framework_demo.ui.OtherContract;
 import com.dale.framework_demo.ui.OtherPresenter;

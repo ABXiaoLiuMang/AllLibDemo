@@ -24,13 +24,13 @@ public abstract class ABMainTabFragment extends ABBaseFragment implements TabAda
     FragmentContainerHelper tabHelper = new FragmentContainerHelper();
     MagicIndicator mainTabView;
     MainTab[] mainTabs;
-    ABTabFragment[] fragments;
-    ArrayMap<Integer, ABTabFragment> supportFragments;
+    ABBaseFragment[] fragments;
+    ArrayMap<Integer, ABBaseFragment> supportFragments;
     int currentIndex = 0;
 
     protected abstract MainTab[] getMainTabs();
 
-    protected abstract ABTabFragment[] getFragments();
+    protected abstract ABBaseFragment[] getFragments();
 
     protected @ColorRes int getTextColor(){
         return R.color.x_tab_color;
@@ -68,8 +68,8 @@ public abstract class ABMainTabFragment extends ABBaseFragment implements TabAda
         if (postion == currentIndex) {
             return;
         }
-        ABTabFragment tabFragment =  fragments[postion];
-        ABTabFragment preTabFragment = fragments[currentIndex];
+        ABBaseFragment tabFragment =  fragments[postion];
+        ABBaseFragment preTabFragment = fragments[currentIndex];
         showHideFragment(tabFragment, preTabFragment);
         currentIndex = postion;
         tabHelper.handlePageSelected(currentIndex, false);
