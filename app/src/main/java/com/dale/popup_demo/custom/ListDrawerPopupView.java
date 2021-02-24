@@ -1,11 +1,10 @@
 package com.dale.popup_demo.custom;
 
 import android.content.Context;
-import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -15,7 +14,7 @@ import com.lxj.xpopup.core.DrawerPopupView;
 import java.util.ArrayList;
 
 /**
- * Description:
+ * Description: 自定义带列表的Drawer弹窗
  * Create by dance, at 2019/1/9
  */
 public class ListDrawerPopupView extends DrawerPopupView {
@@ -38,7 +37,6 @@ public class ListDrawerPopupView extends DrawerPopupView {
             data.add(""+i);
         }
 
-
         BaseQuickAdapter<String, BaseViewHolder> commonAdapter = new BaseQuickAdapter<String, BaseViewHolder>(android.R.layout.simple_list_item_1, data) {
             @Override
             protected void convert(BaseViewHolder holder, String s) {
@@ -49,8 +47,10 @@ public class ListDrawerPopupView extends DrawerPopupView {
         findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.remove(0);
-                commonAdapter.notifyDataSetChanged();
+//                if(data.size()==0)return;
+//                data.remove(0);
+//                commonAdapter.notifyDataSetChanged();
+                dismiss();
             }
         });
 

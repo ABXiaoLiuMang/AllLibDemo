@@ -57,7 +57,6 @@
         android:color="@color/colorPrimary"
         android:layout_gravity="center"
         android:visibility="gone"
-        app:loading_view_size="@dimen/dp_40"
         tools:visibility="visible"
         />
 </FrameLayout>

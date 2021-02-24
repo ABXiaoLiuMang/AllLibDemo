@@ -1,10 +1,8 @@
 package com.lxj.xpopup.animator;
 
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
-
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
-
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.enums.PopupAnimation;
 
@@ -17,10 +15,11 @@ public class ScaleAlphaAnimator extends PopupAnimator {
         super(target, popupAnimation);
     }
 
+    float startScale = .75f;
     @Override
     public void initAnimator() {
-        targetView.setScaleX(0f);
-        targetView.setScaleY(0f);
+        targetView.setScaleX(startScale);
+        targetView.setScaleY(startScale);
         targetView.setAlpha(0);
 
         // 设置动画参考点
@@ -63,16 +62,24 @@ public class ScaleAlphaAnimator extends PopupAnimator {
 
     @Override
     public void animateShow() {
-        targetView.animate().scaleX(1f).scaleY(1f).alpha(1f)
-                .setDuration(XPopup.getAnimationDuration())
-                .setInterpolator(new OvershootInterpolator(1f))
-                .start();
+        targetView.post(new Runnable() {
+            @Override
+            public void run() {
+                targetView.animate().scaleX(1f).scaleY(1f).alpha(1f)
+                        .setDuration(XPopup.getAnimationDuration())
+                        .setInterpolator(new OvershootInterpolator(1f))
+//                .withLayer() 在部分6.0系统会引起crash
+                        .start();
+            }
+        });
     }
 
     @Override
     public void animateDismiss() {
-        targetView.animate().scaleX(0f).scaleY(0f).alpha(0f).setDuration(XPopup.getAnimationDuration())
-                .setInterpolator(new FastOutSlowInInterpolator()).start();
+        targetView.animate().scaleX(startScale).scaleY(startScale).alpha(0f).setDuration(XPopup.getAnimationDuration())
+                .setInterpolator(new FastOutSlowInInterpolator())
+//                .withLayer() 在部分6.0系统会引起crash
+                .start();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.dale.popup_demo.custom;
 
-import android.content.Context;
+import android.content.Context;;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +15,12 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.dale.libdemo.R;
-import com.dale.utils.ScreenUtils;
 import com.lxj.xpopup.core.BottomPopupView;
+import com.lxj.xpopup.util.XPopupUtils;
 
 
 /**
- * Description:
+ * Description: 自定义带有ViewPager的Bottom弹窗
  * Create by dance, at 2019/5/5
  */
 public class PagerBottomPopup extends BottomPopupView {
@@ -54,7 +54,7 @@ public class PagerBottomPopup extends BottomPopupView {
 
     @Override
     protected int getMaxHeight() {
-        return (int) (ScreenUtils.getScreenHeight() *.85f);
+        return (int) (XPopupUtils.getScreenHeight(getContext())*.85f);
     }
 
     class PAdapter extends PagerAdapter {

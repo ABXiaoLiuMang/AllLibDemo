@@ -20,11 +20,9 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
-
-import androidx.appcompat.widget.AppCompatImageView;
-
 ;
 
 /**

@@ -1,152 +1,100 @@
 package com.lxj.xpopup.widget;
 
-import android.animation.ValueAnimator;
+import android.animation.ArgbEvaluator;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
-
-import com.lxj.xpopup.R;
-import com.dale.utils.SizeUtils;
+import com.lxj.xpopup.util.XPopupUtils;
 
 /**
  * Description: 加载View
  * Create by dance, at 2018/12/18
  */
 public class LoadingView extends View {
-    private int mSize;
-    private int mPaintColor;
-    private int mAnimateValue = 0;
-    private ValueAnimator mAnimator;
-    private Paint mPaint;
-    private static final int LINE_COUNT = 12;
-    private static final int DEGREE_PER_LINE = 360 / LINE_COUNT;
+    private Paint paint;
+    private float radius;
+    private float radiusOffset;
+    // 不是固定不变的，当width为30dp时，它为2dp，当宽度变大，这个也会相应的变大
+    private float stokeWidth = 2f;
+    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private int startColor = Color.parseColor("#EEEEEE");
+    private int endColor = Color.parseColor("#111111");
+    int lineCount = 10; // 线的数量
+    float avgAngle = 360f / lineCount;
+    int time = 0; // 重复次数
+    float centerX, centerY; // 中心x，y
 
     public LoadingView(Context context) {
         this(context, null);
     }
 
     public LoadingView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.LoadingStyle);
+        this(context, attrs, 0);
     }
 
     public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.TipsLoadingView, defStyleAttr, 0);
-        mSize = array.getDimensionPixelSize(R.styleable.TipsLoadingView_loading_view_size, SizeUtils.dp2px(33));
-        mPaintColor = array.getInt(R.styleable.TipsLoadingView_android_color, Color.WHITE);
-        array.recycle();
-        initPaint();
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        stokeWidth = XPopupUtils.dp2px(context, stokeWidth);
+        paint.setStrokeWidth(stokeWidth);
     }
 
-    public LoadingView(Context context, int size, int color) {
-        super(context);
-        mSize = size;
-        mPaintColor = color;
-        initPaint();
+    float startX, endX;
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        radius = getMeasuredWidth() / 2;
+        radiusOffset = radius / 2.5f;
+
+        centerX = getMeasuredWidth() / 2;
+        centerY = getMeasuredHeight() / 2;
+
+        stokeWidth = XPopupUtils.dp2px(getContext(), 2);
+//        stokeWidth *= getMeasuredWidth() * 1f / XPopupUtils.dp2px(getContext(), 40);
+        paint.setStrokeWidth(stokeWidth);
+        startX = centerX + radiusOffset;
+        endX = startX + radius / 3f;
+        removeCallbacks(increaseTask);
+        postDelayed(increaseTask, 80);
     }
 
-    private void initPaint() {
-        mPaint = new Paint();
-        mPaint.setColor(mPaintColor);
-        mPaint.setAntiAlias(true);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
+    @Override
+    protected void onDraw(final Canvas canvas) {
+        super.onDraw(canvas);
+        // 1 2 3 4 5
+        // 2 3 4 5 1
+        // 3 4 5 1 2
+        // ...
+        for (int i = lineCount - 1; i >= 0; i--) {
+            int temp = Math.abs(i + time) % lineCount;
+            float fraction = (temp + 1) * 1f / lineCount;
+            int color = (int) argbEvaluator.evaluate(fraction, startColor, endColor);
+            paint.setColor(color);
+
+            canvas.drawLine(startX, centerY, endX, centerY, paint);
+            // 线的两端画个点，看着圆滑
+            canvas.drawCircle(startX, centerY, stokeWidth / 2, paint);
+            canvas.drawCircle(endX, centerY, stokeWidth / 2, paint);
+            canvas.rotate(avgAngle, centerX, centerY);
+        }
     }
 
-    public void setColor(int color) {
-        mPaintColor = color;
-        mPaint.setColor(color);
-        invalidate();
-    }
-
-    public void setSize(int size) {
-        mSize = size;
-        requestLayout();
-    }
-
-    private ValueAnimator.AnimatorUpdateListener mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+    private Runnable increaseTask = new Runnable() {
         @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            mAnimateValue = (int) animation.getAnimatedValue();
-            invalidate();
+        public void run() {
+            time++;
+            postInvalidate(0,0,getMeasuredWidth(), getMeasuredHeight());
+            postDelayed(increaseTask, 80);
         }
     };
-
-    public void start() {
-        if (mAnimator == null) {
-            mAnimator = ValueAnimator.ofInt(0, LINE_COUNT - 1);
-            mAnimator.addUpdateListener(mUpdateListener);
-            mAnimator.setDuration(900);
-            mAnimator.setRepeatMode(ValueAnimator.RESTART);
-            mAnimator.setRepeatCount(ValueAnimator.INFINITE);
-            mAnimator.setInterpolator(new LinearInterpolator());
-            mAnimator.start();
-        } else if (!mAnimator.isStarted()) {
-            mAnimator.start();
-        }
-    }
-
-    public void stop() {
-        if (mAnimator != null) {
-            mAnimator.removeUpdateListener(mUpdateListener);
-            mAnimator.removeAllUpdateListeners();
-            mAnimator.cancel();
-            mAnimator = null;
-        }
-    }
-
-    private void drawLoading(Canvas canvas, int rotateDegrees) {
-        int width = mSize / 12, height = mSize / 6;
-        mPaint.setStrokeWidth(width);
-
-        canvas.rotate(rotateDegrees, mSize / 2, mSize / 2);
-        canvas.translate(mSize / 2, mSize / 2);
-
-        for (int i = 0; i < LINE_COUNT; i++) {
-            canvas.rotate(DEGREE_PER_LINE);
-            mPaint.setAlpha((int) (255f * (i + 1) / LINE_COUNT));
-            canvas.translate(0, -mSize / 2 + width / 2);
-            canvas.drawLine(0, 0, 0, height, mPaint);
-            canvas.translate(0, mSize / 2 - width / 2);
-        }
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(mSize, mSize);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
-        drawLoading(canvas, mAnimateValue * DEGREE_PER_LINE);
-        canvas.restoreToCount(saveCount);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        start();
-    }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stop();
+        removeCallbacks(increaseTask);
     }
 
-    @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-        if (visibility == VISIBLE) {
-            start();
-        } else {
-            stop();
-        }
-    }
 }

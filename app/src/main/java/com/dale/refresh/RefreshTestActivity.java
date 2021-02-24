@@ -25,6 +25,11 @@ public class RefreshTestActivity extends ABBaseFragment {
         return R.layout.activity_test_refresh;
     }
 
+    @Override
+    protected void createProvider() {
+
+    }
+
     TestAdapter testAdapter;
     @Override
     protected void initViewsAndEvents() {

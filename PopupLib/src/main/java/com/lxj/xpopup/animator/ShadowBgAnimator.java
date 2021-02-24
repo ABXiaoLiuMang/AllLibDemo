@@ -3,9 +3,8 @@ package com.lxj.xpopup.animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.view.View;
-
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+import android.view.View;
 
 import com.lxj.xpopup.XPopup;
 
@@ -37,7 +36,7 @@ public class ShadowBgAnimator extends PopupAnimator {
             }
         });
         animator.setInterpolator(new FastOutSlowInInterpolator());
-        animator.setDuration(isZeroDuration?0: XPopup.getAnimationDuration()).start();
+        animator.setDuration(isZeroDuration?0:XPopup.getAnimationDuration()).start();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class ShadowBgAnimator extends PopupAnimator {
             }
         });
         animator.setInterpolator(new FastOutSlowInInterpolator());
-        animator.setDuration(isZeroDuration?0: XPopup.getAnimationDuration()).start();
+        animator.setDuration(isZeroDuration?0:XPopup.getAnimationDuration()).start();
     }
 
     public int calculateBgColor(float fraction){

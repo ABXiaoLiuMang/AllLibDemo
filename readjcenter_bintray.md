@@ -16,7 +16,7 @@ android签名 ->SHA256就是
 - 邮箱登录：abxingxing@gmail.com（上传代码用这个->谷歌登录）
 - key:dd9580acfcc6ff298afedc55df7c06123e3eaadc
 
-- gradlew clean build bintrayUpload -PbintrayUser=abxingxing  -PbintrayKey=dd9580acfcc6ff298afedc55df7c06123e3eaadc  -PdryRun=false
+- gradlew clean build bintrayUpload -PbintrayUser=daleyangbo  -PbintrayKey=1b5de92c9156d894149a71d7fde0522bad17995c  -PdryRun=false
 
 
 - 1.根目录添加（查看最新对应版本号：https://bintray.com/novoda/maven/bintray-release）

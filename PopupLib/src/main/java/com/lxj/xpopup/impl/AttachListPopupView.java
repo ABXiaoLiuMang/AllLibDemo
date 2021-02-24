@@ -2,11 +2,10 @@ package com.lxj.xpopup.impl;
 
 import android.content.Context;
 import android.view.View;
-
-import androidx.annotation.LayoutRes;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -14,43 +13,28 @@ import com.lxj.xpopup.R;
 import com.lxj.xpopup.core.AttachPopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.lxj.xpopup.widget.VerticalRecyclerView;
-
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Description: Attach类型的列表弹窗
  * Create by dance, at 2018/12/12
  */
 public class AttachListPopupView extends AttachPopupView {
-    VerticalRecyclerView recyclerView;
+    RecyclerView recyclerView;
     protected int bindLayoutId;
-    protected @LayoutRes int bindItemLayoutId;
+    protected int bindItemLayoutId;
 
-    public AttachListPopupView(@NonNull Context context) {
+    /**
+     *
+     * @param context
+     * @param bindLayoutId layoutId 要求layoutId中必须有一个id为recyclerView的RecyclerView
+     * @param bindItemLayoutId itemLayoutId 条目的布局id，要求布局中必须有id为iv_image的ImageView，和id为tv_text的TextView
+     */
+    public AttachListPopupView(@NonNull Context context, int bindLayoutId, int bindItemLayoutId) {
         super(context);
-    }
-
-    /**
-     * 传入自定义的布局，对布局中的id有要求
-     *
-     * @param layoutId 要求layoutId中必须有一个id为recyclerView的RecyclerView，如果你需要显示标题，则必须有一个id为tv_title的TextView
-     * @return
-     */
-    public AttachListPopupView bindLayout(int layoutId) {
-        this.bindLayoutId = layoutId;
-        return this;
-    }
-
-    /**
-     * 传入自定义的 item布局
-     *
-     * @param itemLayoutId 条目的布局id，要求布局中必须有id为iv_image的ImageView，和id为tv_text的TextView
-     * @return
-     */
-    public AttachListPopupView bindItemLayout(@LayoutRes int itemLayoutId) {
-        this.bindItemLayoutId = itemLayoutId;
-        return this;
+        this.bindLayoutId = bindLayoutId;
+        this.bindItemLayoutId = bindItemLayoutId;
+        addInnerContent();
     }
 
     @Override
@@ -59,11 +43,13 @@ public class AttachListPopupView extends AttachPopupView {
     }
 
     @Override
-    protected void initPopupContent() {
-        super.initPopupContent();
+    protected void onCreate() {
+        super.onCreate();
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setupDivider();
-        BaseQuickAdapter<String,BaseViewHolder> adapter = new BaseQuickAdapter<String, BaseViewHolder>(bindItemLayoutId == 0 ? R.layout._xpopup_adapter_text : bindItemLayoutId,Arrays.asList(data)) {
+        if(bindLayoutId!=0){
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+        BaseQuickAdapter<String, BaseViewHolder> adapter = new BaseQuickAdapter<String, BaseViewHolder>(bindItemLayoutId == 0 ? R.layout._xpopup_adapter_text : bindItemLayoutId,Arrays.asList(data)) {
             @Override
             protected void convert(BaseViewHolder holder, String s) {
                 int position = holder.getLayoutPosition();
@@ -74,7 +60,14 @@ public class AttachListPopupView extends AttachPopupView {
                 } else {
                     holder.getView(R.id.iv_image).setVisibility(GONE);
                 }
-                holder.getView(R.id.xpopup_divider).setVisibility(GONE);
+
+                if(bindItemLayoutId==0 ){
+                    if(popupInfo.isDarkTheme){
+                        holder.<TextView>getView(R.id.tv_text).setTextColor(getResources().getColor(R.color._xpopup_white_color));
+                    }else {
+                        holder.<TextView>getView(R.id.tv_text).setTextColor(getResources().getColor(R.color._xpopup_dark_color));
+                    }
+                }
             }
         };
 
@@ -89,6 +82,31 @@ public class AttachListPopupView extends AttachPopupView {
         });
 
         recyclerView.setAdapter(adapter);
+
+
+        applyTheme();
+    }
+
+    protected void applyTheme(){
+        if(bindLayoutId==0) {
+            if(popupInfo.isDarkTheme){
+                applyDarkTheme();
+            }else {
+                applyLightTheme();
+            }
+        }
+    }
+
+    @Override
+    protected void applyDarkTheme() {
+        super.applyDarkTheme();
+        ((VerticalRecyclerView)recyclerView).setupDivider(true);
+    }
+
+    @Override
+    protected void applyLightTheme() {
+        super.applyLightTheme();
+        ((VerticalRecyclerView)recyclerView).setupDivider(false);
     }
 
     String[] data;
@@ -100,11 +118,11 @@ public class AttachListPopupView extends AttachPopupView {
         return this;
     }
 
-    public AttachListPopupView setOffsetXAndY(int offsetX, int offsetY) {
-        this.defaultOffsetX += offsetX;
-        this.defaultOffsetY += offsetY;
-        return this;
-    }
+//    public AttachListPopupView setOffsetXAndY(int offsetX, int offsetY) {
+//        this.defaultOffsetX += offsetX;
+//        this.defaultOffsetY += offsetY;
+//        return this;
+//    }
 
     private OnSelectListener selectListener;
 

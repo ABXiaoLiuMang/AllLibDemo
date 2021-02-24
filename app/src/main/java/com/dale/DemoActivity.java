@@ -17,27 +17,15 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.agentweb_demo.AgentMainActivity;
 import com.dale.automore.AutoLoadActivity;
-import com.dale.chat.ui.ChatActivity;
-import com.dale.dialog.XDialogManager;
-import com.dale.emotion.AudioActivity;
-import com.dale.emotion.SimpleSessionActivity;
-import com.dale.emotion.WxSessionActivity;
-import com.dale.fragment_demo.MainFragmentActivity;
 import com.dale.framework.ui.ABRefreshActivity;
-import com.dale.framework.ui.BasePresenter;
 import com.dale.framework.ui.Mode;
-import com.dale.framework_demo.MainActivity;
 import com.dale.image_demo.lzy.ImagePickerActivity;
 import com.dale.libdemo.R;
 import com.dale.location_demo.LocationActivity;
-import com.dale.net_demo.NetActivity;
 import com.dale.popup_demo.PopupMainActivity;
 import com.dale.push_demo.PushActivity;
 import com.dale.stateview_demo.StateTestActivity;
@@ -49,7 +37,6 @@ import com.dale.utils.WeakHandler;
 import com.dale.view.RecyclerViewDivider;
 import com.dale.view.XMarqueView;
 import com.dale.viewmodel.MyTestModelActivity;
-import com.dale.xweb.H5Activity;
 import com.dale.zxing_demo.ZxingActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -63,14 +50,13 @@ import java.util.List;
 //import static com.dale.kotlinlib.simple.ObjectUtilKt.lastChar;
 //import static com.dale.kotlinlib.simple.ObjectUtilKt.toast;
 
-public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
+public class DemoActivity extends ABRefreshActivity<String> {
 //    @Override
 //    protected void initPresenters() {
 ////        https://download.csdn.net/download/xiaoyu5256/9809854 设计模式下载 （设计模式之禅）
 //    }
 
 
-    XDialogManager xDialogManager = new XDialogManager();
 
     @SuppressLint("CheckResult")
     @Override
@@ -101,6 +87,11 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
 //        lastChar("");
 //        ObjectUtilKt.toast(this,"");
 //        ObjectUtilKt.lastChar("");
+
+    }
+
+    @Override
+    protected void createProvider() {
 
     }
 
@@ -172,13 +163,13 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
             switch (position){
                 case 0:
-                    goActivity(MainActivity.class);
+//                    goActivity(MainActivity.class);
                     break;
                 case 1:
                     goActivity(LocationActivity.class);
                     break;
                 case 2:
-                    goActivity(NetActivity.class);
+//                    goActivity(NetActivity.class);
                     break;
                 case 3:
                     goActivity(PushActivity.class);
@@ -196,7 +187,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(AgentMainActivity.class);
                     break;
                 case 8:
-                    goActivity(MainFragmentActivity.class);
+//                    goActivity(MainFragmentActivity.class);
                     break;
                 case 9:
 //                    goActivity(ThreadActivity.class);
@@ -209,7 +200,7 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(com.dale.video_demo.MainActivity.class);
                     break;
                 case 12:
-                    goActivity(ChatActivity.class);
+//                    goActivity(ChatActivity.class);
 //                    goActivity(WorkActivity.class);
                     break;
                 case 13:
@@ -219,16 +210,8 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
                     goActivity(AutoLoadActivity.class);
                     break;
                 case 15:
-                    if(isWeiXin){
-                        isWeiXin = false;
-                        goActivity(WxSessionActivity.class);
-                    }else {
-                        isWeiXin = true;
-                        goActivity(SimpleSessionActivity.class);
-                    }
                     break;
                 case 16:
-                    goActivity(AudioActivity.class);
                     break;
                 case 17:
                     goActivity(MyTestModelActivity.class);
@@ -258,7 +241,6 @@ public class DemoActivity extends ABRefreshActivity<String, BasePresenter> {
         new WeakHandler().postDelayed(() -> {
             initTestData();
             refreshLayout.finishLoadMore();
-            refreshDelegate.setRefreshMode(refreshLayout,getMode());
         },1000);
     }
 

@@ -1,17 +1,17 @@
 package com.lxj.xpopup.util;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.lxj.xpopup.core.BasePopupView;
 
 import java.util.HashMap;
-
-import static com.dale.utils.StatusBarUtil.getNavBarHeight;
 
 /**
  * Description:
@@ -28,13 +28,13 @@ public final class KeyboardUtils {
 
     private static int sDecorViewDelta = 0;
 
-    private static int getDecorViewInvisibleHeight(final Activity activity) {
-        final View decorView = activity.getWindow().getDecorView();
+    private static int getDecorViewInvisibleHeight(final Window window) {
+        final View decorView = window.getDecorView();
         if (decorView == null) return sDecorViewInvisibleHeightPre;
         final Rect outRect = new Rect();
         decorView.getWindowVisibleDisplayFrame(outRect);
         int delta = Math.abs(decorView.getBottom() - outRect.bottom);
-        if (delta <= getNavBarHeight()) {
+        if (delta <= XPopupUtils.getNavBarHeight() + XPopupUtils.getStatusBarHeight()) {
             sDecorViewDelta = delta;
             return 0;
         }
@@ -44,21 +44,21 @@ public final class KeyboardUtils {
     /**
      * Register soft input changed listener.
      *
-     * @param activity The activity.
+     * @param window The activity.
      * @param listener The soft input changed listener.
      */
-    public static void registerSoftInputChangedListener(final Activity activity, final BasePopupView popupView, final OnSoftInputChangedListener listener) {
-        final int flags = activity.getWindow().getAttributes().flags;
+    public static void registerSoftInputChangedListener(final Window window, final BasePopupView popupView, final OnSoftInputChangedListener listener) {
+        final int flags = window.getAttributes().flags;
         if ((flags & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) != 0) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-        final FrameLayout contentView = activity.findViewById(android.R.id.content);
-        sDecorViewInvisibleHeightPre = getDecorViewInvisibleHeight(activity);
+        final FrameLayout contentView = window.findViewById(android.R.id.content);
+        sDecorViewInvisibleHeightPre = getDecorViewInvisibleHeight(window);
         listenerMap.put(popupView, listener);
         ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                    int height = getDecorViewInvisibleHeight(activity);
+                    int height = getDecorViewInvisibleHeight(window);
                     if (sDecorViewInvisibleHeightPre != height) {
                         //通知所有弹窗的监听器输入法高度变化了
                         for (OnSoftInputChangedListener  changedListener: listenerMap.values()) {
@@ -81,7 +81,15 @@ public final class KeyboardUtils {
         listenerMap.remove(popupView);
     }
 
+    public static void showSoftInput(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
 
+    public static void hideSoftInput(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
     public interface OnSoftInputChangedListener {
         void onSoftInputChanged(int height);

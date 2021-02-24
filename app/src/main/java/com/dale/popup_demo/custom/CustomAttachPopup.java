@@ -1,17 +1,17 @@
 package com.dale.popup_demo.custom;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
 import com.dale.libdemo.R;
+import com.dale.popup_demo.XPopupApp;
 import com.dale.utils.ToastUtils;
 import com.lxj.xpopup.core.HorizontalAttachPopupView;
 
 /**
- * Description:
+ * Description: 自定义Attach弹窗，水平方向的
  * Create by lxj, at 2019/3/13
  */
 public class CustomAttachPopup extends HorizontalAttachPopupView {
@@ -42,4 +42,5 @@ public class CustomAttachPopup extends HorizontalAttachPopupView {
             }
         });
     }
+
 }

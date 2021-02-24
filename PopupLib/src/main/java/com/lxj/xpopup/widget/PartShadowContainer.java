@@ -2,14 +2,13 @@ package com.lxj.xpopup.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.lxj.xpopup.interfaces.OnClickOutsideListener;
 import com.lxj.xpopup.util.XPopupUtils;

@@ -22,7 +22,7 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 public class App extends ABApplication {
 
-        public static SingleLiveData<String> netLiveData = new SingleLiveData<>(true);
+        public static SingleLiveData<String> netLiveData = new SingleLiveData<>();
 //    public static MutableLiveData<String> netLiveData = new MutableLiveData<>();
 
 

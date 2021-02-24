@@ -12,6 +12,10 @@ public class AgentMainActivity extends BaseAgentWebActivity {
         return "https://chat.5b3x6.com/chat/chatClient/chatbox.jsp?companyID=5889092&configID=3";
     }
 
+    @Override
+    protected void createProvider() {
+
+    }
 
 
 //    @Override

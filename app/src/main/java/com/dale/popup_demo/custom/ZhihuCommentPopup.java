@@ -2,18 +2,21 @@ package com.dale.popup_demo.custom;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.libdemo.R;
-import com.dale.popup_demo.PopupDemoActivity;
-import com.dale.utils.ScreenUtils;
+import com.dale.popup_demo.DemoActivity;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.core.BottomPopupView;
 import com.lxj.xpopup.interfaces.SimpleCallback;
+import com.lxj.xpopup.util.XPopupUtils;
 import com.lxj.xpopup.widget.VerticalRecyclerView;
 
 import java.util.ArrayList;
@@ -50,11 +53,11 @@ public class ZhihuCommentPopup extends BottomPopupView {
 //                        .hasShadowBg(false)
                         .setPopupCallback(new SimpleCallback() {
                             @Override
-                            public void onShow() {
+                            public void onShow(BasePopupView popupView) {
                             }
 
                             @Override
-                            public void onDismiss() {
+                            public void onDismiss(BasePopupView popupView) {
                                 String comment = textBottomPopup.getComment();
                                 if (!comment.isEmpty()) {
                                     data.add(0, comment);
@@ -100,7 +103,7 @@ public class ZhihuCommentPopup extends BottomPopupView {
                 dismissWith(new Runnable() {
                     @Override
                     public void run() {
-                        getContext().startActivity(new Intent(getContext(), PopupDemoActivity.class));
+                        getContext().startActivity(new Intent(getContext(), DemoActivity.class));
                     }
                 });
             }
@@ -115,16 +118,17 @@ public class ZhihuCommentPopup extends BottomPopupView {
     @Override
     protected void onShow() {
         super.onShow();
+        Log.e("tag", "知乎评论 onShow");
     }
 
     //完全消失执行
     @Override
     protected void onDismiss() {
-
+        Log.e("tag", "知乎评论 onDismiss");
     }
 
     @Override
     protected int getMaxHeight() {
-        return (int) (ScreenUtils.getScreenHeight() * .85f);
+        return (int) (XPopupUtils.getScreenHeight(getContext()) * .7f);
     }
 }

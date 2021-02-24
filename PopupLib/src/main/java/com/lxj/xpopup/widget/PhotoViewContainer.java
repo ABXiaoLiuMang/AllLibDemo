@@ -2,17 +2,15 @@ package com.lxj.xpopup.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.customview.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.customview.widget.ViewDragHelper;
-import androidx.viewpager.widget.ViewPager;
-
 import com.lxj.xpopup.interfaces.OnDragChangeListener;
 import com.lxj.xpopup.photoview.PhotoView;
 
@@ -20,6 +18,7 @@ import com.lxj.xpopup.photoview.PhotoView;
  * wrap ViewPager, process drag event.
  */
 public class PhotoViewContainer extends FrameLayout {
+    private static final String TAG = "PhotoViewContainer";
     private ViewDragHelper dragHelper;
     public ViewPager viewPager;
     private int HideTopThreshold = 80;
@@ -60,26 +59,29 @@ public class PhotoViewContainer extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                touchX = ev.getX();
-                touchY = ev.getY();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float dx = ev.getX() - touchX;
-                float dy = ev.getY() - touchY;
-                viewPager.dispatchTouchEvent(ev);
-                isVertical = (Math.abs(dy) > Math.abs(dx));
-                touchX = ev.getX();
-                touchY = ev.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                touchX = 0;
-                touchY = 0;
-                isVertical = false;
-                break;
-        }
+        if (ev.getPointerCount() > 1 ) return super.dispatchTouchEvent(ev);
+        try {
+            switch (ev.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    touchX = ev.getX();
+                    touchY = ev.getY();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    float dx = ev.getX() - touchX;
+                    float dy = ev.getY() - touchY;
+                    viewPager.dispatchTouchEvent(ev);
+                    isVertical = (Math.abs(dy) > Math.abs(dx));
+                    touchX = ev.getX();
+                    touchY = ev.getY();
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    touchX = 0;
+                    touchY = 0;
+                    isVertical = false;
+                    break;
+            }
+        }catch (Exception e){ }
         return super.dispatchTouchEvent(ev);
     }
 
@@ -95,7 +97,7 @@ public class PhotoViewContainer extends FrameLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         boolean result = dragHelper.shouldInterceptTouchEvent(ev);
-        if (ev.getPointerCount() > 1 && ev.getAction()== MotionEvent.ACTION_MOVE) return false;
+        if (ev.getPointerCount() > 1 && ev.getAction()==MotionEvent.ACTION_MOVE) return false;
         if (isTopOrBottomEnd()  && isVertical)return true;
         return result && isVertical;
     }

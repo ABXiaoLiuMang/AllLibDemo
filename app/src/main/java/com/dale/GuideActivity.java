@@ -31,6 +31,11 @@ public class GuideActivity extends ABBaseActivity {
     }
 
     @Override
+    protected void createProvider() {
+
+    }
+
+    @Override
     protected void initViewsAndEvents() {
         //test
         goActivity(DemoActivity.class);

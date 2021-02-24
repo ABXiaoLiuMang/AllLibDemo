@@ -8,7 +8,7 @@ import com.dale.libdemo.R;
 import com.lxj.xpopup.impl.FullScreenPopupView;
 
 /**
- * Description:
+ * Description: 自定义全屏弹窗
  * Create by lxj, at 2019/3/12
  */
 public class CustomFullScreenPopup extends FullScreenPopupView {

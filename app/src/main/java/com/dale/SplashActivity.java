@@ -25,6 +25,11 @@ public class SplashActivity extends ABBaseActivity implements SplashTextView.onF
     }
 
     @Override
+    protected void createProvider() {
+
+    }
+
+    @Override
     protected void initViewsAndEvents() {
         bg = findViewById(R.id.bg);
         splashTextView = findViewById(R.id.splashTextView);

@@ -4,10 +4,18 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
+
+        <EditText
+            android:hint="测试输入框交互"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btnShowConfirm"
@@ -39,7 +47,7 @@
                 android:id="@+id/btnShowCenterList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:text="显示Center类型的List弹窗"
                 android:textAllCaps="false" />
@@ -69,7 +77,7 @@
                 android:id="@+id/btnShowBottomList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:text="显示Bottom类型的List弹窗"
                 android:textAllCaps="false" />
@@ -118,7 +126,7 @@
             android:id="@+id/tv3"
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="点我看看"
@@ -136,6 +144,30 @@
             android:textColor="#fff"
             android:textSize="22sp" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnAttachPopup1"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="55dp"
+                android:layout_height="wrap_content"
+                android:text="横向Attach弹窗1"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnAttachPopup2"
+                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="自定义Attach弹窗"
+                android:textAllCaps="false" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +179,7 @@
                 android:id="@+id/btnShowDrawerLeft"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:text="显示左边Drawer弹窗"
                 android:textAllCaps="false" />
@@ -170,30 +202,6 @@
             android:text="自定义全屏弹窗"
             android:textAllCaps="false" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnAttachPopup1"
-                android:layout_marginTop="10dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginRight="55dp"
-                android:layout_height="wrap_content"
-                android:text="横向Attach弹窗1"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btnAttachPopup2"
-                android:layout_marginTop="10dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="横向Attach弹窗2"
-                android:textAllCaps="false" />
-        </LinearLayout>
         <Button
             android:id="@+id/btnCustomEditPopup"
             android:layout_marginTop="10dp"
@@ -215,22 +223,18 @@
             android:layout_height="wrap_content"
             android:text="水平居中的自由定位Position弹窗"
             android:textAllCaps="false" />
+
         <Button
-            android:id="@+id/btn_area"
+            android:text="测试多弹窗同时展示"
+            android:id="@+id/btnMultiPopup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="地区选择"
-            android:textAllCaps="false" />
+            android:layout_height="wrap_content"/>
         <Button
-            android:id="@+id/btn_date"
+            android:text="在应用后台弹出XPopup"
+            android:id="@+id/btnShowInBackground"
+            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="时间选择"
-            android:layout_marginBottom="180dp"
-            android:textAllCaps="false" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

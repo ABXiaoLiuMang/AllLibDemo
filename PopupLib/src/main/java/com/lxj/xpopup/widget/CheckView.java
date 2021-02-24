@@ -8,7 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.dale.utils.SizeUtils;
+import com.lxj.xpopup.util.XPopupUtils;
 
 /**
  * Description: 对勾View
@@ -28,7 +28,7 @@ public class CheckView extends View {
     public CheckView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStrokeWidth(SizeUtils.dp2px(2));
+        paint.setStrokeWidth(XPopupUtils.dp2px(context, 2));
         paint.setStyle(Paint.Style.STROKE);
     }
 
@@ -46,7 +46,7 @@ public class CheckView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(color== Color.TRANSPARENT)return;
+        if(color==Color.TRANSPARENT)return;
         // first part
         path.moveTo(getMeasuredWidth()/4, getMeasuredHeight()/2);
         path.lineTo(getMeasuredWidth()/2 , getMeasuredHeight()*3/4);

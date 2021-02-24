@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import androidx.transition.ChangeBounds;
@@ -28,21 +29,20 @@ import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import com.lxj.xpopup.R;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.enums.PopupStatus;
 import com.lxj.xpopup.interfaces.OnDragChangeListener;
 import com.lxj.xpopup.interfaces.OnSrcViewUpdateListener;
 import com.lxj.xpopup.interfaces.XPopupImageLoader;
+import com.lxj.xpopup.photoview.OnMatrixChangedListener;
 import com.lxj.xpopup.photoview.PhotoView;
+import com.lxj.xpopup.util.PermissionConstants;
+import com.lxj.xpopup.util.XPermission;
 import com.lxj.xpopup.util.XPopupUtils;
 import com.lxj.xpopup.widget.BlankView;
 import com.lxj.xpopup.widget.HackyViewPager;
 import com.lxj.xpopup.widget.PhotoViewContainer;
-import com.dale.constant.PermissionConstants;
-import com.dale.utils.PermissionUtils;
-import com.dale.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +66,8 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
     protected Rect rect = null;
     protected ImageView srcView; //动画起始的View，如果为null，移动和过渡动画效果会没有，只有弹窗的缩放功能
     protected PhotoView snapshotView;
-    protected boolean isShowPlaceholder = false; //是否显示占位白色，当图片切换为大图时，原来的地方会有一个白色块
-    protected int placeholderColor = -1; //占位View的颜色
+    protected boolean isShowPlaceholder = true; //是否显示占位白色，当图片切换为大图时，原来的地方会有一个白色块
+    protected int placeholderColor = Color.parseColor("#f1f1f1"); //占位View的颜色
     protected int placeholderStrokeColor = -1; // 占位View的边框色
     protected int placeholderRadius = -1; // 占位View的圆角
     protected boolean isShowSaveBtn = true; //是否显示保存按钮
@@ -102,22 +102,12 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
         photoViewContainer.setOnDragChangeListener(this);
         pager = findViewById(R.id.pager);
         pager.setAdapter(new PhotoViewAdapter());
-        pager.setOffscreenPageLimit(urls.size());
+//        pager.setOffscreenPageLimit(urls.size());
         pager.setCurrentItem(position);
         pager.setVisibility(INVISIBLE);
         addOrUpdateSnapshot();
         if (isInfinite) pager.setOffscreenPageLimit(urls.size() / 2);
-        pager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int i) {
-                position = i;
-                showPagerIndicator();
-                //更新srcView
-                if (srcViewUpdateListener != null) {
-                    srcViewUpdateListener.onSrcViewUpdate(ImageViewerPopupView.this, i);
-                }
-            }
-        });
+        pager.addOnPageChangeListener(onPageChangeListener);
         if (!isShowIndicator) tv_pager_indicator.setVisibility(GONE);
         if (!isShowSaveBtn) {
             tv_save.setVisibility(GONE);
@@ -125,6 +115,18 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
             tv_save.setOnClickListener(this);
         }
     }
+
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+        @Override
+        public void onPageSelected(int i) {
+            position = i;
+            showPagerIndicator();
+            //更新srcView
+            if (srcViewUpdateListener != null) {
+                srcViewUpdateListener.onSrcViewUpdate(ImageViewerPopupView.this, i);
+            }
+        }
+    };
 
     private void setupPlaceholder() {
         placeholderView.setVisibility(isShowPlaceholder ? VISIBLE : INVISIBLE);
@@ -164,7 +166,8 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
             XPopupUtils.setWidthHeight(snapshotView, rect.width(), rect.height());
         }
         setupPlaceholder();
-        snapshotView.setImageDrawable(srcView.getDrawable());
+//        snapshotView.setImageDrawable(srcView.getDrawable());
+        if(imageLoader!=null) imageLoader.loadImage(position, urls.get(position), snapshotView);
     }
 
     @Override
@@ -183,13 +186,13 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
             return;
         }
         photoViewContainer.isReleasing = true;
-        snapshotView.setVisibility(VISIBLE);
         if (customView != null) customView.setVisibility(VISIBLE);
+        snapshotView.setVisibility(VISIBLE);
         snapshotView.post(new Runnable() {
             @Override
             public void run() {
                 TransitionManager.beginDelayedTransition((ViewGroup) snapshotView.getParent(), new TransitionSet()
-                        .setDuration(XPopup.getAnimationDuration())
+                        .setDuration(getDuration())
                         .addTransition(new ChangeBounds())
                         .addTransition(new ChangeTransform())
                         .addTransition(new ChangeImageTransform())
@@ -212,7 +215,7 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
                 // do shadow anim.
                 animateShadowBg(bgColor);
                 if (customView != null)
-                    customView.animate().alpha(1f).setDuration(XPopup.getAnimationDuration()).start();
+                    customView.animate().alpha(1f).setDuration(getDuration()).start();
             }
         });
 
@@ -228,11 +231,15 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
                         start, endColor));
             }
         });
-        animator.setDuration(XPopup.getAnimationDuration())
+        animator.setDuration(getDuration())
                 .setInterpolator(new LinearInterpolator());
         animator.start();
     }
 
+    private int getDuration(){
+        return XPopup.getAnimationDuration() + 60;
+    } 
+    
     @Override
     public void doDismissAnimation() {
         if (srcView == null) {
@@ -245,47 +252,53 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
         tv_pager_indicator.setVisibility(INVISIBLE);
         tv_save.setVisibility(INVISIBLE);
         pager.setVisibility(INVISIBLE);
-        snapshotView.setVisibility(VISIBLE);
         photoViewContainer.isReleasing = true;
-        TransitionManager.beginDelayedTransition((ViewGroup) snapshotView.getParent(), new TransitionSet()
-                .setDuration(XPopup.getAnimationDuration())
-                .addTransition(new ChangeBounds())
-                .addTransition(new ChangeTransform())
-                .addTransition(new ChangeImageTransform())
-                .setInterpolator(new FastOutSlowInInterpolator())
-                .addListener(new TransitionListenerAdapter() {
-                    @Override
-                    public void onTransitionEnd(@NonNull Transition transition) {
-                        doAfterDismiss();
-                        pager.setVisibility(INVISIBLE);
-                        snapshotView.setVisibility(VISIBLE);
-                        pager.setScaleX(1f);
-                        pager.setScaleY(1f);
-                        snapshotView.setScaleX(1f);
-                        snapshotView.setScaleY(1f);
-                        placeholderView.setVisibility(INVISIBLE);
-                    }
-                }));
+        snapshotView.setVisibility(VISIBLE);
+        snapshotView.post(new Runnable() {
+            @Override
+            public void run() {
+                TransitionManager.beginDelayedTransition((ViewGroup) snapshotView.getParent(), new TransitionSet()
+                        .setDuration(getDuration())
+                        .addTransition(new ChangeBounds())
+                        .addTransition(new ChangeTransform())
+                        .addTransition(new ChangeImageTransform())
+                        .setInterpolator(new FastOutSlowInInterpolator())
+                        .addListener(new TransitionListenerAdapter() {
+                            @Override
+                            public void onTransitionEnd(@NonNull Transition transition) {
+                                doAfterDismiss();
+                                pager.setVisibility(INVISIBLE);
+                                snapshotView.setVisibility(VISIBLE);
+                                pager.setScaleX(1f);
+                                pager.setScaleY(1f);
+                                snapshotView.setScaleX(1f);
+                                snapshotView.setScaleY(1f);
+                                placeholderView.setVisibility(INVISIBLE);
+                            }
+                        }));
 
-        snapshotView.setTranslationY(rect.top);
-        snapshotView.setTranslationX(rect.left);
-        snapshotView.setScaleX(1f);
-        snapshotView.setScaleY(1f);
-        snapshotView.setScaleType(srcView.getScaleType());
-        XPopupUtils.setWidthHeight(snapshotView, rect.width(), rect.height());
+                snapshotView.setScaleX(1f);
+                snapshotView.setScaleY(1f);
+                snapshotView.setTranslationY(rect.top);
+                snapshotView.setTranslationX(rect.left);
+                snapshotView.setScaleType(srcView.getScaleType());
+                XPopupUtils.setWidthHeight(snapshotView, rect.width(), rect.height());
 
-        // do shadow anim.
-        animateShadowBg(Color.TRANSPARENT);
-        if (customView != null)
-            customView.animate().alpha(0f).setDuration(XPopup.getAnimationDuration())
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            if (customView != null) customView.setVisibility(INVISIBLE);
-                        }
-                    })
-                    .start();
+                // do shadow anim.
+                animateShadowBg(Color.TRANSPARENT);
+                if (customView != null)
+                    customView.animate().alpha(0f).setDuration(getDuration())
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    if (customView != null) customView.setVisibility(INVISIBLE);
+                                }
+                            })
+                            .start();
+            }
+        });
+
     }
 
     @Override
@@ -297,15 +310,6 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
     public void dismiss() {
         if (popupStatus != PopupStatus.Show) return;
         popupStatus = PopupStatus.Dismissing;
-        if (srcView != null) {
-            //snapshotView拥有当前pager中photoView的样子(matrix)
-            PhotoView current = (PhotoView) pager.getChildAt(pager.getCurrentItem());
-            if (current != null) {
-                Matrix matrix = new Matrix();
-                current.getSuppMatrix(matrix);
-                snapshotView.setSuppMatrix(matrix);
-            }
-        }
         doDismissAnimation();
     }
 
@@ -399,7 +403,12 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
         if (srcView != null) {
             int[] locations = new int[2];
             this.srcView.getLocationInWindow(locations);
-            rect = new Rect(locations[0], locations[1], locations[0] + srcView.getWidth(), locations[1] + srcView.getHeight());
+            if(XPopupUtils.isLayoutRtl(getContext())){
+                int left = -(XPopupUtils.getWindowWidth(getContext()) - locations[0] - srcView.getWidth());
+                rect = new Rect(left, locations[1], left + srcView.getWidth(), locations[1] + srcView.getHeight());
+            }else {
+                rect = new Rect(locations[0], locations[1], locations[0] + srcView.getWidth(), locations[1] + srcView.getHeight());
+            }
         }
         return this;
     }
@@ -426,6 +435,7 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
     protected void onDismiss() {
         super.onDismiss();
         srcView = null;
+        srcViewUpdateListener = null;
     }
 
     @Override
@@ -433,24 +443,29 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
         if (v == tv_save) save();
     }
 
+    @Override
+    public void destroy() {
+        super.destroy();
+        pager.removeOnPageChangeListener(onPageChangeListener);
+        imageLoader = null;
+    }
+
     /**
      * 保存图片到相册，会自动检查是否有保存权限
      */
     protected void save() {
         //check permission
-        PermissionUtils.permission(PermissionConstants.STORAGE).
-                callback(new PermissionUtils.SimpleCallback() {
+        XPermission.create(getContext(), PermissionConstants.STORAGE)
+                .callback(new XPermission.SimpleCallback() {
                     @Override
                     public void onGranted() {
                         XPopupUtils.saveBmpToAlbum(getContext(), imageLoader, urls.get(isInfinite ? position % urls.size() : position));
                     }
-
                     @Override
                     public void onDenied() {
-                        ToastUtils.showLong("没有保存权限，保存功能无法使用!");
+                        Toast.makeText(getContext(), "没有保存权限，保存功能无法使用！", Toast.LENGTH_SHORT).show();
                     }
-                }).
-                request();
+                }).request();
     }
 
     public class PhotoViewAdapter extends PagerAdapter {
@@ -472,8 +487,18 @@ public class ImageViewerPopupView extends BasePopupView implements OnDragChangeL
             if (imageLoader != null)
                 imageLoader.loadImage(position, urls.get(isInfinite ? position % urls.size() : position), photoView);
 
+            photoView.setOnMatrixChangeListener(new OnMatrixChangedListener() {
+                @Override
+                public void onMatrixChanged(RectF rect) {
+                    if(snapshotView!=null){
+                        Matrix matrix = new Matrix();
+                        photoView.getSuppMatrix(matrix);
+                        snapshotView.setSuppMatrix(matrix);
+                    }
+                }
+            });
             container.addView(photoView);
-            photoView.setOnClickListener(new View.OnClickListener() {
+            photoView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dismiss();

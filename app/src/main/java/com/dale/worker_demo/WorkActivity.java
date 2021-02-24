@@ -35,6 +35,11 @@ public class WorkActivity extends ABBaseActivity {
     }
 
     @Override
+    protected void createProvider() {
+
+    }
+
+    @Override
     protected void initViewsAndEvents() {
         tv_worker_result = findViewById(R.id.tv_worker_result);
 

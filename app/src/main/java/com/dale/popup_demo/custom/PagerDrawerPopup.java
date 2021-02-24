@@ -6,7 +6,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
@@ -18,7 +17,7 @@ import com.lxj.xpopup.core.DrawerPopupView;
 
 
 /**
- * Description:
+ * Description: 自定义带有ViewPager的Drawer弹窗
  * Create by dance, at 2019/5/5
  */
 public class PagerDrawerPopup extends DrawerPopupView {

@@ -18,6 +18,11 @@ public class TypeResolverActivity extends ABBaseActivity {
         return R.layout.activity_type_resolver;
     }
 
+    @Override
+    protected void createProvider() {
+
+    }
+
 //    @Override
 //    protected void initPresenters() {
 //        Class<?>[] typeArgs = TypeResolver.resolveRawArguments(Foo.class, Bar.class);

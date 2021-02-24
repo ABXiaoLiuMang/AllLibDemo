@@ -26,7 +26,6 @@
     <!-- 个推3.0电子围栏功能所需权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
 
@@ -52,7 +51,6 @@
     <!--    <activity android:name="com.dale.framework_demo.ui.TabMYBaseActivity" />-->
    <!--     <activity android:name="com.dale.fragment_demo.XTabActivity" />-->
 
-        <activity android:name="com.dale.framework_demo.MainActivity" />
         <activity android:name="com.dale.worker_demo.ChartDemoActivity" />
         <activity android:name="com.dale.refresh.RefreshTestActivity" />
 
@@ -77,10 +75,9 @@
         <activity android:name="com.dale.chat.ui.ChatActivity" />
 
         <activity android:name="com.dale.location_demo.LocationActivity" />
-
+        <activity android:name="com.dale.popup_demo.DemoActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.dale.emotion.AudioActivity" />
 
-        <activity android:name="com.dale.net_demo.NetActivity" />
         <activity android:name="com.dale.xweb.H5Activity" />
 
 

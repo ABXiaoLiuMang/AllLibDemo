@@ -2,6 +2,9 @@ package com.dale.popup_demo.fragment;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.dale.libdemo.R;
@@ -9,6 +12,7 @@ import com.dale.popup_demo.custom.CustomDrawerPopupView;
 import com.dale.popup_demo.custom.CustomPartShadowPopupView;
 import com.dale.popup_demo.custom.CustomPartShadowPopupView2;
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.enums.PopupPosition;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.lxj.xpopup.interfaces.SimpleCallback;
@@ -55,14 +59,14 @@ public class PartShadowDemo extends BaseFragment implements View.OnClickListener
         BaseQuickAdapter<String, BaseViewHolder> adapter = new BaseQuickAdapter<String, BaseViewHolder>(android.R.layout.simple_list_item_1,data) {
             @Override
             protected void convert(BaseViewHolder holder, String s) {
-                int position = holder.getLayoutPosition();
-                holder.setText(android.R.id.text1, "长按我试试 - " + position);
+                holder.setText(android.R.id.text1, "长按我试试 - " + holder.getLayoutPosition());
                 //必须要在事件发生之前就watch
-                final XPopup.Builder builder = new XPopup.Builder(getContext()).watchView(holder.itemView);
+                final XPopup.Builder builder = new XPopup.Builder(getContext())
+                        .hasShadowBg(false).watchView(holder.itemView);
                 holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        builder.asAttachList(new String[]{"置顶", "编辑", "删除"}, null,0,10, new OnSelectListener() {
+                        builder.asAttachList(new String[]{"置顶", "编辑", "删除"}, null, new OnSelectListener() {
                             @Override
                             public void onSelect(int position, String text) {
                                 toast(text);
@@ -74,6 +78,7 @@ public class PartShadowDemo extends BaseFragment implements View.OnClickListener
             }
         };
 
+
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -84,28 +89,29 @@ public class PartShadowDemo extends BaseFragment implements View.OnClickListener
     }
 
     private void showPartShadow(final View v){
-//        if(popupView!=null && popupView.isShow())return;
         if(popupView==null){
             popupView = (CustomPartShadowPopupView) new XPopup.Builder(getContext())
                     .atView(v)
+                    .isClickThrough(true)
+//                    .dismissOnTouchOutside(false)
 //                    .isCenterHorizontal(true)
-//                    .autoOpenSoftInput(true)
-//                    .offsetX(200)
+                    .autoOpenSoftInput(true)
+//                    .offsetY(-150)
+//                    .offsetX(100)
 //                .dismissOnTouchOutside(false)
                     .setPopupCallback(new SimpleCallback() {
                         @Override
-                        public void onShow() {
+                        public void onShow(BasePopupView popupView) {
                             toast("显示了");
                         }
                         @Override
-                        public void onDismiss() {
-//                            popupView = null;
+                        public void onDismiss(BasePopupView popupView) {
                         }
                     })
                     .asCustom(new CustomPartShadowPopupView(getContext()));
         }
 
-        popupView.show();
+        popupView.toggle();
     }
 
     @Override

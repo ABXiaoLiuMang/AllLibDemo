@@ -27,6 +27,11 @@ public class AutoLoadActivity extends ABBaseActivity {
     }
 
     @Override
+    protected void createProvider() {
+
+    }
+
+    @Override
     protected void initViewsAndEvents() {
         mRecyclerView = findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh);

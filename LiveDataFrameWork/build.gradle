@@ -62,8 +62,8 @@ dependencies {
     annotationProcessor rootDependencies["glide_compiler"]
     compileOnly rootDependencies["okhttp"]
 
-    compileOnly 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-    compileOnly 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    api 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    api 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 //    compileOnly 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     compileOnly rootDependencies["appcompat"]
@@ -79,17 +79,17 @@ dependencies {
     compileOnly project(path: ':ABPush') //非必须
     compileOnly project(path: ':ABLocation') //非必须
 
-    compileOnly project(path: ':ABBaseAdapter')
-    compileOnly project(path: ':imagelib')
-    compileOnly project(path: ':utilslib')
-    compileOnly project(path: ':ABView')
-    compileOnly project(path: ':PickerviewLib')
-    compileOnly project(path: ':LiveDataNet')
-    compileOnly project(path: ':PopupLib')
-    compileOnly project(path: ':XWebView')
-    compileOnly project(path: ':ABRefreshView')
-    compileOnly project(path: ':ABZxing')
-    compileOnly project(path: ':XFragmentLib')
+    api project(path: ':ABBaseAdapter')
+    api project(path: ':imagelib')
+    api project(path: ':utilslib')
+    api project(path: ':ABView')
+    api project(path: ':PickerviewLib')
+    api project(path: ':LiveDataNet')
+    api project(path: ':PopupLib')
+    api project(path: ':XWebView')
+    api project(path: ':ABRefreshView')
+    api project(path: ':ABZxing')
+    api project(path: ':XFragmentLib')
 }
 
 //if ("true" == xframeLib){

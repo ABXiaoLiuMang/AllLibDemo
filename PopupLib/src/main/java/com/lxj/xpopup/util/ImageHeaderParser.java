@@ -4,7 +4,6 @@ import com.lxj.xpopup.enums.ImageType;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import static com.lxj.xpopup.enums.ImageType.GIF;
 import static com.lxj.xpopup.enums.ImageType.JPEG;
 import static com.lxj.xpopup.enums.ImageType.PNG;
@@ -35,7 +34,7 @@ public class ImageHeaderParser {
     private static final int WEBP_EXTENDED_ALPHA_FLAG = 1 << 4;
     private static final int WEBP_LOSSLESS_ALPHA_FLAG = 1 << 3;
 
-    static ImageType getImageType(InputStream is) throws IOException {
+    static ImageType getImageType(InputStream is) throws IOException{
         Reader reader = new StreamReader(is);
         final int firstTwoBytes = reader.getUInt16();
 

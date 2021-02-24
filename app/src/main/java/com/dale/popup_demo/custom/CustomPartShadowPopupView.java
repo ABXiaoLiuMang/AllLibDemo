@@ -4,14 +4,13 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 
 import com.dale.libdemo.R;
 import com.lxj.xpopup.impl.PartShadowPopupView;
 
 /**
- * Description:
+ * Description: 自定义局部阴影弹窗
  * Create by dance, at 2018/12/21
  */
 public class CustomPartShadowPopupView extends PartShadowPopupView {
